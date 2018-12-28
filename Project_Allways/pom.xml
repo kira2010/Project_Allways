@@ -110,7 +110,7 @@
 			<version>${jackson-databind.version}</version>
 		</dependency>
 
-		<!-- Oracle JDBC, MyBatis, MyBatis-Spring, Spring-JDBC -->
+		<!-- mysql JDBC, MyBatis, MyBatis-Spring, Spring-JDBC -->
 		<dependency>
     		<groupId>mysql</groupId>
     		<artifactId>mysql-connector-java</artifactId>
