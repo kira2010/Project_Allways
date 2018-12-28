@@ -48,7 +48,7 @@ public class DatabaseTest {
 	        String userpwd = rs.getString("USERPWD");
 	        String username = rs.getString("USERNAME");
 	 
-	        System.out.println("result: "+userid + userpwd + username);
+	        System.out.println("result: "+userid + ", "+ userpwd + ", " + username);
 	    
 	        }
 	    }catch (Exception ex) {
