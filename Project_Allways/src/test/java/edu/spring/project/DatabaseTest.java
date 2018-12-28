@@ -49,7 +49,7 @@ public class DatabaseTest {
 	        String username = rs.getString("USERNAME");
 	 
 	        System.out.println("result: "+userid + ", "+ userpwd + ", " + username);
-	    
+	        System.out.println("TEST 종료!!");
 	        }
 	    }catch (Exception ex) {
 	    	ex.printStackTrace();
