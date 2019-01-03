@@ -12,7 +12,7 @@ public interface BoardService {
 	 * @return
 	 */
 	List<Board> select(int service_bounds);
-	Board selectOne();
+	Board selectOne(int bno);
 	int insert(Board board);
 	int update(Board board);
 	int delete(int bno);
