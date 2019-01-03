@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- MyBatis 프레임워크에서 사용할 환경 설정(DB와 관련된 설정) -->
+	<properties>
+		<!-- 상수 정의 : 테이블 이름, 컬럼 이름 -->
+		<property name="tbl_board" value="TBL_BOARD" />
+		<property name="board.bno" value="BNO" />
+		<property name="board.uno" value="UNO" />
+		<property name="board.userid" value="USERID" />
+		<property name="board.content" value="CONTENT" />
+		<property name="board.regdate" value="REGDATE" />
+		<property name="board.privacy_bounds" value="PRIVACY_BOUNDS" />
+		<property name="board.photo" value="PHOTO" />
+		<property name="board.hashtag" value="HASHTAG"/>
+		
+		<property name="tbl_reply" value="TBL_REPLY" />
+		<property name="reply.rno" value="RNO"/>
+		<property name="reply.bno" value="BNO"/>
+		<property name="reply.uno" value="UNO"/>
+		<property name="reply.userid" value="USERID"/>
+		<property name="reply.reply_content" value="REPLY_CONTENT"/>
+		<property name="reply.regdate" value="REGDATE"/>
+		
+		<property name="tbl_user" value="TBL_USER" />
+		<property name="user.uno" value="UNO" />
+		<property name="user.userid" value="USERID" />
+		<property name="user.userpwd" value="USERPWD" />
+		<property name="user.username" value="USERNAME" />
+		<property name="user.useremail" value="USEREMAIL" />
+		<property name="user.birthday" value="BIRTHDAY" />
+		<property name="user.graduation" value="GRADUATION" />
+		<property name="user.bg_photo" value="BG_PHOTO" />
+		<property name="user.pf_photo" value="PF_PHOTO" />
+		<property name="user.emotion" value="EMOTION" />
+		
+		<property name="tbl_allwaiser" value="TBL_ALLWAISER" />
+		<property name="allwaiser.uno" value="UNO" />
+		<property name="allwaiser.allwaiserid" value="ALLWAISER_ID" />
+		<property name="allwaiser.allwaisername" value="ALLWAISER_NAME" />
+		
+		<property name="tbl_favorite" value="TBL_FAVORITE" />
+		<property name="favorite.itr_no" value="ITR_NO" />
+		<property name="favorite.bno" value="BNO" />
+		<property name="favorite.uno" value="UNO" />
+		
+	</properties>
+	
+	<typeAliases>
+		<package name="edu.spring.project.domain"/>
+	</typeAliases>
+	
+	
+</configuration>
