@@ -3,5 +3,13 @@ package edu.spring.project.persistence;
 import edu.spring.project.domain.User;
 
 public interface UserDao {
-	User checkUser();
+	User loginCheck(User user);
+	
+	boolean checkUser(User user);
+	
+	int insertUser(User user);
+	
+	int updateUser(User user);
+	
+	int deleteUser(int uno);
 }
