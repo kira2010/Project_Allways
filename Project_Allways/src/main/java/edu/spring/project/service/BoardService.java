@@ -4,6 +4,7 @@ import java.util.List;
 
 import edu.spring.project.domain.Board;
 
+
 public interface BoardService {
 	
 	/**
