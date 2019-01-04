@@ -7,6 +7,8 @@ public interface UserDao {
 	
 	boolean checkUser(String userId);
 	
+	int findUno(User user);
+	
 	int insertUser(User user);
 	
 	int updateUser(User user);

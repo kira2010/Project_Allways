@@ -13,7 +13,26 @@
 		WHERE ${user.userid} = #{userId}
 	</select>
 	
+	<select id="findUno" resultType="java.lang.Integer">
+		SELECT ${user.uno} FROM ${tbl_user} 
+		WHERE ${user.userid} = #{userId}
+	</select>
 	
+	<insert id="registUser">
+		INSERT INTO ${tbl_user} (${user.userid}, ${user.userpwd}, ${user.username}, 
+		${user.useremail}, ${user.birthday}, ${user.graduation}) 
+		VALUES (#{userId}, #{userPwd}, #{userName}, #{userEmail}, #{birthDay}, #{graduation})
+	</insert>
 	
+	<update id="updateUser">
+		UPDATE ${tbl_user} 
+		SET ${user.userpwd} = #{userPwd}, ${user.useremail} = #{userEmail}, 
+		${user.graduation} = #{graduation} 
+		WHERE ${user.userid} = #{userId}
+	</update>
 	
+	<delete id="quitUser">
+		DELETE FROM ${tbl_user} 
+		WHERE ${user.uno} = #{uno}
+	</delete>
 </mapper>
