@@ -9,7 +9,7 @@ public interface UserDao {
 	
 	int findUno(User user);
 	
-	int insertUser(User user);
+	int createUser(User user);
 	
 	int updateUser(User user);
 	

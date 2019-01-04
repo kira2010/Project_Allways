@@ -54,7 +54,7 @@ public class UserDaoImple implements UserDao {
 	}
 
 	// 신규 회원가입
-	public int insertUser(User user) {	
+	public int createUser(User user) {	
 		logger.info("insertUser({}) 호출", user);
 		
 		return session.insert(USER_MAPPER + ".registUser", user);
