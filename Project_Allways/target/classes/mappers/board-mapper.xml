@@ -3,6 +3,22 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="edu.spring.project.mappers.BoardMapper">
+	<select id="selectMyAll" resultType="Board">
+		SELECT * FROM ${tbl_board} 
+		WHERE ${board.userid} = #{userId} 
+		ORDER BY ${board.bno} DESC
+	</select>
 	
-
+	<select id="selectMyFav" resultType="Board">
+		SELECT * FROM ${tbl_board} 
+		WHERE ${board.bno} = #{bno}
+		ORDER BY ${board.bno} DESC
+	</select>
+	
+	<!-- 
+	<select id="" resultType="">
+		
+	</select>
+	 -->
+	
 </mapper>

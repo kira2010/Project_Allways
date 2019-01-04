@@ -3,6 +3,24 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="edu.spring.project.mappers.FavoriteMapper">
+	<select id="selectFavUno" resultSets="java.lang.Integer">
+		SELECT ${favorite.bno} FROM ${tbl_favorite} 
+		WHERE ${favorite.uno} = #{uno}
+	</select>
 	
-
+	<select id="selectItrNo" resultSets="java.lang.Integer">
+		SELECT ${favorite.itr_no} FROM ${tbl_favorite} 
+		WHERE ${favorite.uno} = #{uno}
+	</select>
+	
+	<insert id="insertItr">
+		INSERT INTO ${tbl_favorite} 
+		(${favorite.uno}, ${favorite.bno}) 
+		VALUES (#{uno}, #{bno})
+	</insert>
+	
+	<delete id="deleteItr">
+		DELETE FROM ${tbl_favorite} 
+		WHERE ${favorite.itr_no} = #{itr_no}
+	</delete>
 </mapper>
