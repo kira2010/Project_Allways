@@ -15,7 +15,7 @@ public class FileUploadService {
   private static final String SAVE_PATH = "/upload";
   private static final String PREFIX_URL = "/upload/";
    
-  public String restore(MultipartFile multipartFile, User user) {
+  public String restore(MultipartFile multipartFile, int uno) {
     String url = null;
      
     try {
@@ -23,14 +23,12 @@ public class FileUploadService {
       String originFilename = multipartFile.getOriginalFilename();
       String extName
         = originFilename.substring(originFilename.lastIndexOf("."), originFilename.length());
-      Long size = multipartFile.getSize();
        
       // 서버에서 저장 할 파일 이름
-      String saveFileName = genSaveFileName(Integer.toString(user.getUno()));
+      String saveFileName = genSaveFileName(Integer.toString(uno)+extName);
        
       System.out.println("originFilename : " + originFilename);
       System.out.println("saveFileName : " + saveFileName);
-      System.out.println("size : " + size);
        
       writeFile(multipartFile, saveFileName);
       url = PREFIX_URL + saveFileName;
@@ -54,7 +52,7 @@ public class FileUploadService {
     fileName += calendar.get(Calendar.MINUTE);
     fileName += calendar.get(Calendar.SECOND);
     fileName += calendar.get(Calendar.MILLISECOND);
-    fileName += unoString+".png";
+    fileName += unoString;
      
     return fileName;
   }

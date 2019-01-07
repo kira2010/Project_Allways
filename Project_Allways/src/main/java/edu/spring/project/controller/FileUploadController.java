@@ -1,11 +1,14 @@
 package edu.spring.project.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,36 +27,29 @@ public class FileUploadController {
   @Autowired
   FileUploadService fileUploadService;
    
-  
-  @RequestMapping("/2")
-  public String form2() {
-	  return "fileUp";
-  }
-  
   @RequestMapping("/1")
   public String form1() {
 	  return "fileUpload";
   }
   
   @RequestMapping(value = "/upload", method = RequestMethod.POST )
-  public String upload(MultipartHttpServletRequest req) {
+  public ResponseEntity<List<String>> upload(MultipartHttpServletRequest req) {
     
 	List<MultipartFile> mf = req.getFiles("uploadfile");
-	System.out.println("aaaaaaaa" + mf.size());
 	
-	int k = 0;
-	for(MultipartFile m : mf) { 
-		//System.out.println("aaaaaaaa" + m.get);
-		User user = new User();
-		user.setUno(k);
-		k++;
-		String url = fileUploadService.restore(m, user);
-		//model.addAttribute("url", url);
+	// 로그인 UNO
+	int uno = 0;
+	List<String> imageUrls = new ArrayList<String>();
+	
+	for(MultipartFile m : mf) {		
+		String url = fileUploadService.restore(m, uno);
+		imageUrls.add(url);
 	}
-	
 
+	ResponseEntity<List<String>> entity=
+			new ResponseEntity<List<String>>(imageUrls, HttpStatus.OK); 
 	
-    return "aa";
+    return entity;
   
   }
 }
