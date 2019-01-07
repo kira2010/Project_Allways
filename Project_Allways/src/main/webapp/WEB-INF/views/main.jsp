@@ -83,7 +83,8 @@ footer {
 		<div class="container">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="main.jsp"><img
-					src="/resources/images/allways.png" class="center-block" id="mainLogo"></a>
+					src="/allways/resources/images/allways.png" id="mainLogo"
+					height="30px" width="30px"></a>
 				<button type="button" class="navbar-toggle" data-toggle="collapse"
 					data-target="#myNavbar">
 					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
@@ -92,9 +93,9 @@ footer {
 			</div>
 			<div class="navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav">
-					<li class="d-flex justify-content-center bg-secondary mb-3">
+					<li>
 						<form action="/action_page.php">
-							<div class="input-group" id="text">
+							<div class="input-group" id="text" >
 								<input type="text" class="form-control" placeholder="Search"
 									name="search">
 								<div class="input-group-btn">
@@ -185,9 +186,11 @@ footer {
 										required class="form-control"/> <br/>
 										<input type="text" name="userName" required class="form-control"/><br/>
 										<input type="email" name="userEmail" required class="form-control"/><br/>
-										<input type="submit" value="취소" class="btn btn-danger" style="margin-left: 435px"/>
+										<input type="submit" value="취소" class="btn btn-danger" style="margin-left: 435px"
+										data-dismiss="modal"/>
 
-										<input type="submit" value="확인" class="btn btn-danger" style="margin-left: 15px"/>
+										<input type="submit" value="확인" class="btn btn-danger" style="margin-left: 15px"
+										data-dismiss="modal"/>
 									</div>
 								</div>
 							</div>
@@ -199,7 +202,6 @@ footer {
 									<!-- Modal Header -->
 									<div class="modal-header">
 										<h4 class="modal-title">회원탈퇴</h4>
-										<button type="button" class="close" data-dismiss="modal">×</button>
 									</div>
 
 									<!-- Modal body -->
@@ -215,14 +217,24 @@ footer {
 											>취소</button>
 										<button type="button" class="btn btn-danger"
 											data-dismiss="modal" style="margin-left: 20px"
-											data-toggle="modal" data-target="#update">획인</button>
+											data-toggle="modal" data-target="#withdrawal">획인</button>
 									</div>
 								</div>
 							</div>
 						</div>
-						<div class="modal fade" id="memberWithdrawal">
+						<div class="modal fade" id="withdrawal">
 							<div class="modal-dialog">
-								<div class="modal-content"></div>
+								<div class="modal-content">
+									<div class="modal-header">
+										<h4 class="modal-body">Allways를 탈퇴하시겠습니까?</h4>
+										<br/>
+										<br/>
+										<input type="submit" value="취소" class="btn btn-danger" style="margin-left: 435px"
+										data-dismiss="modal"/>
+										<input type="submit" value="확인" class="btn btn-danger" style="margin-left: 15px"
+										data-dismiss="modal" onclick="location.href='login.jsp'"/>
+									</div>
+								</div>
 							</div>
 						</div>
 					</li>
