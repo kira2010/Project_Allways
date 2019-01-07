@@ -83,7 +83,7 @@ footer {
 		<div class="container">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="main.jsp"><img
-					src="images/allways.png" class="center-block" id="mainLogo"></a>
+					src="/resources/images/allways.png" class="center-block" id="mainLogo"></a>
 				<button type="button" class="navbar-toggle" data-toggle="collapse"
 					data-target="#myNavbar">
 					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
@@ -138,7 +138,7 @@ footer {
 									<!-- Modal footer -->
 									<div class="modal-footer">
 										<button type="button" class="btn" data-dismiss="modal"
-											onclick="location.href='main.jsp'">아니오</button>
+											>아니오</button>
 										<button type="button" class="btn" data-dismiss="modal"
 											onclick="location.href='login.jsp'">예</button>
 									</div>
@@ -164,21 +164,30 @@ footer {
 											placeholder="비밀번호 확인" required /> <br />
 										<button type="button" class="btn btn-danger"
 											data-dismiss="modal" style="margin-left: 435px"
-											onclick="location.href='main.jsp'">취소</button>
+											>취소</button>
 										<button type="button" class="btn btn-danger"
-											data-dismiss="modal" style="margin-left: 20px"
-											data-toggle="modal" data-target="#update">
-											확인
-										</button>
+											data-dismiss="modal" style="margin-left: 15px"
+											data-toggle="modal" data-target="#update">확인</button>
 									</div>
 								</div>
 							</div>
-						</div>
+						</div> <!-- 로그인정보 확인 후 정보수정 창 -->
 						<div class="modal fade" id="update">
 							<div class="modal-dialog">
 								<div class="modal-content">
 									<div class="modal-header">
 										<h4 class="modal-title">개인정보 수정</h4>
+									</div>
+									<div class="modal-body">
+										<input type="password" name="userPwd" placeholder="새 비밀번호 입력"
+											required class="form-control"/> <br/>
+										<input type="password" name="userPwds" placeholder="새 비밀번호 확인"
+										required class="form-control"/> <br/>
+										<input type="text" name="userName" required class="form-control"/><br/>
+										<input type="email" name="userEmail" required class="form-control"/><br/>
+										<input type="submit" value="취소" class="btn btn-danger" style="margin-left: 435px"/>
+
+										<input type="submit" value="확인" class="btn btn-danger" style="margin-left: 15px"/>
 									</div>
 								</div>
 							</div>
@@ -202,11 +211,18 @@ footer {
 											class="form-control" type="password" name="userPwds"
 											placeholder="비밀번호 확인" required /> <br />
 										<button type="button" class="btn btn-danger"
-											data-dismiss="modal" style="margin-left: 435px">취소</button>
+											data-dismiss="modal" style="margin-left: 435px"
+											>취소</button>
 										<button type="button" class="btn btn-danger"
-											data-dismiss="modal" style="margin-left: 20px">획인</button>
+											data-dismiss="modal" style="margin-left: 20px"
+											data-toggle="modal" data-target="#update">획인</button>
 									</div>
 								</div>
+							</div>
+						</div>
+						<div class="modal fade" id="memberWithdrawal">
+							<div class="modal-dialog">
+								<div class="modal-content"></div>
 							</div>
 						</div>
 					</li>
