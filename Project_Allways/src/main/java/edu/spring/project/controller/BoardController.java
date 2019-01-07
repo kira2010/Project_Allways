@@ -19,5 +19,10 @@ public class BoardController {
 		
 	}
 	
-	
+	@RequestMapping(value = "boardTest", method = RequestMethod.GET)
+	public String test() {
+		
+		
+		return "boardTest";
+	}
 }
