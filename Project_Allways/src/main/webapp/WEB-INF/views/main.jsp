@@ -1,11 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <title>Main Page</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
@@ -259,7 +262,9 @@ footer {
 				<div id="boardMake">
 					<div>
 						게시물 만들기
-						<div></div>
+						<div id ="boards">
+							
+						</div>
 					</div>
 				</div>
 			</div>
@@ -298,6 +303,34 @@ footer {
 
 
 </body>
+
+<script id ="" type = "text/x-handlebars-template">
+<div class="boardItem">
+
+<div>
+	
+	<img id = "profileImg" src="/allways/resources/images/default_profile_img.jpg" style="border-radius: 30px; float: left;
+					 padding: 8px" onclick="location.href='/'>
+	<div style="display: inline-block;">
+		<label style="font-size: small;">{{userId}}</label><br />
+		<span style="font-size: x-small; color: gray;">0000년 00월 00일</span>	
+	</div>
+
+</div>
+	
+<details>
+	<summary>진달래꽃 - 엄마야 누나야 (김소월)</summary>
+	<p>엄마야 누나야, 강변 살자.<br />
+	뜰에는 반짝이는 금모래 빛<br />
+	뒷문 밖에는 갈잎의 노래<br />
+	엄마야 누나야, 강변 살자.</p>
+</details>
+
+</script>
+
+
+
+
 </html>
 
 

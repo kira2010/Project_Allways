@@ -28,10 +28,10 @@
 <div class="boardItem">
 		
 	<div>
-		<img src="/allways/resources/images/default_profile_img.jpg"
-			style="border-radius: 30px; float: left; padding: 8px">
+		<a href="/allways"><img id = "profileImg" src="/allways/resources/images/default_profile_img.jpg"
+			style="border-radius: 30px; float: left; padding: 8px"></a>
 		<div style="display: inline-block;">
-			<a style="font-size: small;">아이디</a><br />
+			<label for = "profileImg" style="font-size: small;">아이디</label><br />
 			<span style="font-size: x-small; color: gray;">0000년 00월 00일</span>
 		</div>
 	</div>
