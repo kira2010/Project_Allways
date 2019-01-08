@@ -11,22 +11,15 @@ import javax.sql.DataSource;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import edu.spring.project.domain.Board;
-import edu.spring.project.persistence.BoardDao;
-import edu.spring.project.persistence.UserDao;
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(
 		locations = {
-				"file:src/main/webapp/WEB-INF/spring/root-context.xml",
-				"file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml"
+				"file:src/main/webapp/WEB-INF/spring/**/*.xml"
 		}
 )
 @WebAppConfiguration
@@ -36,22 +29,14 @@ public class DatabaseTest {
 //	static final String USERNAME = "scott";
 //	static final String PASSWORD = "tiger";
 	
-	private final Logger logger = LoggerFactory.getLogger(DatabaseTest.class);
-	
 	@Autowired DataSource ds;
-	
-	@Autowired UserDao userDao;
-	@Autowired BoardDao boardDao;
 	
 	@Test
 	public void getMySQLConnectionTest() {
 		//conTest();
-		//exiTest();
-		boardInsertTest();
-		
+		exiTest();
 	}
 	
-	/*
 	private void conTest() {
 		Connection conn = null;
 		Statement stmt = null;
@@ -90,7 +75,6 @@ public class DatabaseTest {
 			System.out.println("==================== MySQL Connection END ====================");
 		}
 	}
-	*/
 	
 	private void exiTest() {
 		Connection conn = null;
@@ -102,7 +86,7 @@ public class DatabaseTest {
 			String sql = "select USERID from TBL_USER where USERID=?";
 			
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, "abcd");
+			pstmt.setString(1, "admin");
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
@@ -125,15 +109,4 @@ public class DatabaseTest {
 		}
 	}
 	
-	private void userRegTest() {
-		
-	}
-	
-	private void boardInsertTest() {
-		Board board = new Board(0, 6, "kira2010", "board 새글 작성 TEST 입니다!!", null, 0, null, null);
-		
-		int result = boardDao.createBoard(board);
-		
-		logger.info("결과 : {}", result);
-	}
 }
