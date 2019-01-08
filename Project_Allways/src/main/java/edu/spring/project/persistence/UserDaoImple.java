@@ -43,18 +43,10 @@ public class UserDaoImple implements UserDao {
 	}
 	
 	// 회원번호 찾기
-	public int findUno(User user) {
-		int uno = 0;
-		
+	public int findUno(User user) {		
 		logger.info("findUno({}) 호출", user);
 		
-		int result = session.selectOne(USER_MAPPER + ".findUno", user);
-		
-		if (result != 0) {
-			uno = result;
-		}
-		
-		return uno;
+		return session.selectOne(USER_MAPPER + ".findUno", user);
 	}
 	
 	// 이름으로 회원 찾기
