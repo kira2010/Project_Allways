@@ -1,12 +1,16 @@
 package edu.spring.project.persistence;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import edu.spring.project.domain.User;
 
+@Repository
 public class UserDaoImple implements UserDao {
 
 	private static final String USER_MAPPER =
@@ -51,6 +55,20 @@ public class UserDaoImple implements UserDao {
 		}
 		
 		return uno;
+	}
+	
+	// 이름으로 회원 찾기
+	public List<User> findUserByName(String userName) {
+		logger.info("findUserByName({}) 호출", userName);
+		
+		return session.selectList(USER_MAPPER + ".findUserByName", userName);
+	}
+	
+	// 출신학교로 회원 찾기
+	public List<User> findUserByGraduation(String graduation) {
+		logger.info("findUserByGraduation({}) 호출", graduation);
+		
+		return session.selectList(USER_MAPPER + ".findUserByGraduation", graduation);
 	}
 
 	// 신규 회원가입

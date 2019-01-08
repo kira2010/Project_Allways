@@ -5,20 +5,37 @@
 <mapper namespace="edu.spring.project.mappers.BoardMapper">
 	<select id="selectMyAll" resultType="Board">
 		SELECT * FROM ${tbl_board} 
-		WHERE ${board.userid} = #{userId} 
+		WHERE ${board.uno} = #{uno} 
 		ORDER BY ${board.bno} DESC
 	</select>
 	
 	<select id="selectMyFav" resultType="Board">
 		SELECT * FROM ${tbl_board} 
-		WHERE ${board.bno} = #{bno}
+		WHERE ${board.bno} IN (SELECT ${favorite.bno} FROM ${tbl_favorite} WHERE ${favorite.uno} = #{uno}) AND 
+		(${board.privacy_bounds} = 0 OR ${board.privacy_bounds} = 1)
 		ORDER BY ${board.bno} DESC
 	</select>
 	
-	<!-- 
-	<select id="" resultType="">
-		
+	<select id="selectPbAll" resultType="Board">
+		SELECT * FROME ${tbl_board} 
+		WHERE ${board.uno} = #{uno} AND (${board.privacy_bounds} = 0 OR ${board.privacy_bounds} = 1)
 	</select>
-	 -->
 	
+	<select id="selectByBno" resultType="Board">
+		SELECT * FROM ${tbl_board} WHERE ${board.bno} = #{bno}
+	</select>
+	
+	<insert id="createBoard">
+		INSERT INTO ${tbl_board} (${board.uno}, ${board.userid}, ${board.content}, ${board.privacy_bounds}) 
+		VALUES (#{uno}, #{userId}, #{content}, #{privacy_bounds})
+	</insert>
+	
+	<update id="updateBoard">
+		UPDATE ${tbl_board} 
+		SET ${board.content} = #{content}, ${board.privacy_bounds} = #{privacy_bounds} WHERE ${board.bno} = #{bno}
+	</update>
+	
+	<delete id="deleteBoard">
+		DELETE FROM ${tbl_board} WHERE ${board.bno} = #{bno}
+	</delete>
 </mapper>

@@ -39,8 +39,8 @@
 		<mybatis-spring.version>1.3.2</mybatis-spring.version>
 		
 		<!-- fileUpload -->
-		<commons-fileupload.version>1.2.1</commons-fileupload.version>
-		<commons-io.version>1.4</commons-io.version>
+		<commons-fileupload.version>1.4</commons-fileupload.version>
+		<commons-io.version>2.5</commons-io.version>
 		
 	</properties>
 
@@ -148,8 +148,6 @@
 			<artifactId>commons-io</artifactId>
 			<version>${commons-io.version}</version>
 		</dependency>
-
-
 	</dependencies>
 </project>
 

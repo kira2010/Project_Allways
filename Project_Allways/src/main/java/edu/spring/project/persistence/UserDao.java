@@ -1,5 +1,7 @@
 package edu.spring.project.persistence;
 
+import java.util.List;
+
 import edu.spring.project.domain.User;
 
 public interface UserDao {
@@ -8,6 +10,10 @@ public interface UserDao {
 	boolean checkUser(String userId);
 	
 	int findUno(User user);
+	
+	List<User> findUserByName(String userName);
+	
+	List<User> findUserByGraduation(String graduation);
 	
 	int createUser(User user);
 	
