@@ -7,7 +7,7 @@ public class Board {
 	private int uno;
 	private String userId;
 	private String content;
-	private Date wr_time;
+	private Date regDate;
 	private int privacy_bounds;
 	private String photo;
 	private String hashTag;
@@ -19,7 +19,7 @@ public class Board {
 			int uno, 
 			String userId, 
 			String content, 
-			Date wr_time, 
+			Date regDate, 
 			int privacy_bounds, 
 			String photo,
 			String hashTag) {
@@ -27,7 +27,7 @@ public class Board {
 		this.uno = uno;
 		this.userId = userId;
 		this.content = content;
-		this.wr_time = wr_time;
+		this.regDate = regDate;
 		this.privacy_bounds = privacy_bounds;
 		this.photo = photo;
 		this.hashTag = hashTag;
@@ -65,12 +65,12 @@ public class Board {
 		this.content = content;
 	}
 
-	public Date getWr_time() {
-		return wr_time;
+	public Date getRegDate() {
+		return regDate;
 	}
 
-	public void setWr_time(Date wr_time) {
-		this.wr_time = wr_time;
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
 	}
 
 	public int getPrivacy_bounds() {
@@ -101,8 +101,8 @@ public class Board {
 	public String toString() {
 		String board = String.format(
 				"BOARD:{bno : %d, uno : %d, userId : %s, content : %s, "
-				+ "Wr_Time : %s, privacy_bounds : %d}", 
-				bno, uno, userId, content, wr_time, privacy_bounds);
+				+ "regDate : %s, privacy_bounds : %d}", 
+				bno, uno, userId, content, regDate, privacy_bounds);
 		
 		return board;
 	}

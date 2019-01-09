@@ -11,14 +11,16 @@
 	
 	<select id="selectMyFav" resultType="Board">
 		SELECT * FROM ${tbl_board} 
-		WHERE ${board.bno} IN (SELECT ${favorite.bno} FROM ${tbl_favorite} WHERE ${favorite.uno} = #{uno}) AND 
-		(${board.privacy_bounds} = 0 OR ${board.privacy_bounds} = 1)
+		WHERE ${board.bno} IN 
+		(SELECT ${favorite.bno} FROM ${tbl_favorite} WHERE ${favorite.uno} = #{uno}) 
+		AND (${board.privacy_bounds} = 0 OR ${board.privacy_bounds} = 1) 
 		ORDER BY ${board.bno} DESC
 	</select>
 	
 	<select id="selectPbAll" resultType="Board">
 		SELECT * FROME ${tbl_board} 
-		WHERE ${board.uno} = #{uno} AND (${board.privacy_bounds} = 0 OR ${board.privacy_bounds} = 1)
+		WHERE ${board.uno} = #{uno} 
+		AND (${board.privacy_bounds} = 0 OR ${board.privacy_bounds} = 1)
 	</select>
 	
 	<select id="selectByBno" resultType="Board">
