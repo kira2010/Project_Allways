@@ -27,9 +27,13 @@
 		SELECT * FROM ${tbl_board} WHERE ${board.bno} = #{bno}
 	</select>
 	
+	<select id="searchByContent" resultType="Board">
+		SELECT * FROM ${tbl_board} WHERE INSTR(${board.content}, #{searchKeyword}); 
+	</select>
+	
 	<insert id="createBoard">
-		INSERT INTO ${tbl_board} (${board.uno}, ${board.userid}, ${board.content}, ${board.privacy_bounds}) 
-		VALUES (#{uno}, #{userId}, #{content}, #{privacy_bounds})
+		INSERT INTO ${tbl_board} (${board.uno}, ${board.userid}, ${board.content}, ${board.privacy_bounds}, ${board.photo}) 
+		VALUES (#{uno}, #{userId}, #{content}, #{privacy_bounds}, #{photo})
 	</insert>
 	
 	<update id="updateBoard">

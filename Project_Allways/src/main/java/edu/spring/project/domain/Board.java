@@ -101,8 +101,8 @@ public class Board {
 	public String toString() {
 		String board = String.format(
 				"BOARD:{bno : %d, uno : %d, userId : %s, content : %s, "
-				+ "regDate : %s, privacy_bounds : %d}", 
-				bno, uno, userId, content, regDate, privacy_bounds);
+				+ "regDate : %s, privacy_bounds : %d, photo : %s}", 
+				bno, uno, userId, content, regDate, privacy_bounds, photo);
 		
 		return board;
 	}

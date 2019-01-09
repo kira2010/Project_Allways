@@ -51,6 +51,4 @@
 	<typeAliases>
 		<package name="edu.spring.project.domain"/>
 	</typeAliases>
-	
-	
 </configuration>
