@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class UserPageController {
 
-	@RequestMapping(value = "/mypage", method = RequestMethod.GET)
+	@RequestMapping(value = "/my_page", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 	
 		
-		return "mypage.jsp";
+		return "my_page";
 	}
 	
 }
