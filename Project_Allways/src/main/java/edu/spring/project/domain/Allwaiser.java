@@ -3,16 +3,14 @@ package edu.spring.project.domain;
 public class Allwaiser {
 	private int f_no;
 	private int uno;
-	private String allwaiser_id;
-	private String allwaiser_name;
+	private int allwaiser_uno;
 	
 	public Allwaiser() {}
 
-	public Allwaiser(int f_no, int uno, String allwaiser_id, String allwaiser_name) {
+	public Allwaiser(int f_no, int uno, int allwaiser_uno) {
 		this.f_no = f_no;
 		this.uno = uno;
-		this.allwaiser_id = allwaiser_id;
-		this.allwaiser_name = allwaiser_name;
+		this.allwaiser_uno = allwaiser_uno;
 	}
 
 	public int getF_no() {
@@ -31,27 +29,19 @@ public class Allwaiser {
 		this.uno = uno;
 	}
 
-	public String getAllwaiser_id() {
-		return allwaiser_id;
+	public int getAllwaiser_uno() {
+		return allwaiser_uno;
 	}
 
-	public void setAllwaiser_id(String allwaiser_id) {
-		this.allwaiser_id = allwaiser_id;
-	}
-
-	public String getAllwaiser_name() {
-		return allwaiser_name;
-	}
-
-	public void setAllwaiser_name(String allwaiser_name) {
-		this.allwaiser_name = allwaiser_name;
+	public void setAllwaiser_uno(int allwaiser_uno) {
+		this.allwaiser_uno = allwaiser_uno;
 	}
 	
 	@Override
 	public String toString() {
 		String friend = String.format(
-				"FRIEND:{f_no : %d, uno : %d, allwaiser_id : %s, allwaiser_name : %s}",
-				f_no, uno, allwaiser_id, allwaiser_name);
+				"FRIEND:{f_no : %d, uno : %d, allwaiser_uno : %d}",
+				f_no, uno, allwaiser_uno);
 		
 		return friend;
 	}

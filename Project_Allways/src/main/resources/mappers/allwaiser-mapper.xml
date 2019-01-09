@@ -8,8 +8,14 @@
 		WHERE ${allwaiser.uno} = #{uno}
 	</select>
 	
+	<insert id="insertAllwaiser">
+		INSERT INTO ${tbl_allwaiser} (${allwaiser.uno}, ${allwaiser.allwaiseruno}) 
+		VALUES (#{uno}, #{allwaiser_uno})
+	</insert>
 	
-	
-	
+	<delete id="deleteAllwaiser">
+		DELETE FROM ${tbl_allwaiser} 
+		WHERE ${allwaiser.allwaiseruno} = #{allwaiser_uno}
+	</delete>
 
 </mapper>
