@@ -407,8 +407,8 @@ $(document).ready(function(){
 					};
 					
 					
-					btn ='<a class="left carousel-control" href="#20Carousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a> '
-					+'<a class="right carousel-control" href="#20Carousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>'
+					btn ='<a class="left carousel-control" href="#'+this.bno+'Carousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a> '
+					+'<a class="right carousel-control" href="#'+this.bno+'Carousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>'
 					
 					$('#'+this.bno+'Carousel').append(btn);
 					
