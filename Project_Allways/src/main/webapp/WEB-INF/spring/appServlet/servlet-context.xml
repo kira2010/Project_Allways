@@ -32,5 +32,12 @@
 	<context:component-scan
 		base-package="edu.spring.project" />
 
+	<beans:beans>
+		<beans:bean id="loginIntercepter"
+			class="edu.spring.project.interceptor.LoginInterceptor">
+		</beans:bean>
+			
+	</beans:beans>
+
 
 </beans:beans>
