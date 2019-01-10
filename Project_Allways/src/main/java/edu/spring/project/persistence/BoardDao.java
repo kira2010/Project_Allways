@@ -11,6 +11,12 @@ public interface BoardDao {
 	
 	List<Board> searchByKeyword(int type, String keyword);
 	
+	List<Board> readMyFavorite(int uno);
+	
+	List<Board> readMyAllwaisersPost(int uno);
+	
+	int countMyAllwaisersPost(int uno);
+	
 	int createBoard(Board board);
 	
 	int updateBoard(Board board);

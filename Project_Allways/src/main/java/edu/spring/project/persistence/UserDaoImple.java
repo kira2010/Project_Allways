@@ -73,11 +73,13 @@ public class UserDaoImple implements UserDao {
 	// 회원 정보 수정
 	public int updateUser(User user) {
 		logger.info("updateUser({}) 호출", user);
+		
 		return session.update(USER_MAPPER + ".updateUser", user);
 	}
 
 	// 회원 탈퇴
 	public int deleteUser(int uno) {
+		logger.info("deleteUser({}) 호출", uno);
 		
 		return session.delete(USER_MAPPER + ".quitUser", uno);
 	}
