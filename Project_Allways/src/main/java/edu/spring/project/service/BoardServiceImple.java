@@ -2,16 +2,22 @@ package edu.spring.project.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import edu.spring.project.domain.Board;
+import edu.spring.project.persistence.BoardDao;
 
 @Service
 public class BoardServiceImple implements BoardService {
 
+	@Autowired private BoardDao boardDao;
+	
 	public List<Board> select(int service_bounds) {
-		// TODO Auto-generated method stub
-		return null;
+		// test
+		int uno = 2;
+		
+		return boardDao.readAll(uno);
 	}
 
 	public Board selectOne(int bno) {
@@ -21,7 +27,7 @@ public class BoardServiceImple implements BoardService {
 
 	public int insert(Board board) {
 		// TODO Auto-generated method stub
-		return 0;
+		return boardDao.createBoard(board);
 	}
 
 	public int update(Board board) {
