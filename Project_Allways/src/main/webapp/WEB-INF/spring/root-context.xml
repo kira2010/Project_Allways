@@ -8,8 +8,11 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+	<!-- 주석 삭제 금지!! -->
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
+	
+	<!-- MySql JDBC Connection POOL(DatgSource) 객체 생성 -->
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
@@ -47,7 +50,9 @@
 		<property name="defaultEncoding" value="utf-8" />
 	</bean>
 	
+	<!-- DAO Component 추가 -->
 	<context:component-scan base-package="edu.spring.project.persistence" />
+	<!-- Service Component 추가 -->
 	<context:component-scan base-package="edu.spring.project.service" />
 	
 </beans>
