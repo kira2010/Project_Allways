@@ -1,0 +1,74 @@
+@charset "UTF-8";
+
+
+.boardInsertForm{
+	border: solid 1px gray;
+}
+
+.boardItem{
+	border: solid 1px gray;
+}
+
+/* main
+
+/* Remove the navbar's default margin-bottom and rounded borders */
+.navbar {
+	margin-bottom: 0;
+	border-radius: 0;
+}
+
+/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+.row.content {
+	height: 450px
+}
+
+/* Set gray background color and 100% height */
+.sidenav {
+	padding-top: 20px;
+	background-color: #f1f1f1;
+	height: 100%;
+}
+
+/* Set black background color, white text and some padding */
+footer {
+	background-color: #555;
+	color: white;
+	padding: 15px;
+}
+
+/* On small screens, set height to 'auto' for sidenav and grid */
+@media screen and (max-width: 767px) {
+	.sidenav {
+		height: auto;
+		padding: 15px;
+	}
+	.row.content {
+		height: auto;
+	}
+}
+
+#drop {
+	margin-top: 9px;
+}
+
+#text {
+	width: 400px;
+	margin-top: 9px;
+	max-width: 400px;
+}
+
+#rightlist {
+	margin-top: 30px;
+}
+
+#leftlist {
+	margin-top: 20px;
+}
+
+#l1 {
+	margin-bottom: 30px;
+}
+
+#l2, #l3 {
+	margin-top: 20px;
+}

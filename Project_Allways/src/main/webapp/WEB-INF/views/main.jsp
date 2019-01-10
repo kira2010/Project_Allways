@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,73 +15,18 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="/allways/resources/css/board.css">
+
 <style>
 
-/* Remove the navbar's default margin-bottom and rounded borders */
-.navbar {
-	margin-bottom: 0;
-	border-radius: 0;
-}
 
-/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-.row.content {
-	height: 450px
-}
-
-/* Set gray background color and 100% height */
-.sidenav {
-	padding-top: 20px;
-	background-color: #f1f1f1;
-	height: 100%;
-}
-
-/* Set black background color, white text and some padding */
-footer {
-	background-color: #555;
-	color: white;
-	padding: 15px;
-}
-
-/* On small screens, set height to 'auto' for sidenav and grid */
-@media screen and (max-width: 767px) {
-	.sidenav {
-		height: auto;
-		padding: 15px;
-	}
-	.row.content {
-		height: auto;
-	}
-}
-
-#drop {
-	margin-top: 9px;
-}
-
-#text {
-	width: 450px;
-	margin-top: 9px;
-	max-width: 450px;
-}
-
-#rightlist {
-	margin-top: 30px;
-}
-
-#leftlist {
-	margin-top: 20px;
-}
-
-#l1 {
-	margin-bottom: 30px;
-}
-
-#l2, #l3 {
-	margin-top: 20px;
-}
 </style>
+
 </head>
+
 <body>
-	<!-- header -->
+
 	<nav class="navbar navbar-inverse" id="header">
 		<div class="container">
 			<div class="navbar-header">
@@ -94,26 +39,17 @@ footer {
 						class="icon-bar"></span>
 				</button>
 			</div>
-			<!-- 글 내용, Allwaiser, 학교 검색  -->
 			<div class="navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav">
 					<li>
 						<form action="/action_page.php">
-							<div class="input-group" id="text">
+							<div class="input-group" id="text" >
 								<input type="text" class="form-control" placeholder="Search"
 									name="search">
 								<div class="input-group-btn">
 									<button class="btn btn-default" type="submit">
 										<i class="glyphicon glyphicon-search"></i>
 									</button>
-									<button type="button"
-										class="btn btn-outline-secondary dropdown-toggle"
-										data-toggle="dropdown">검색 메뉴</button>
-									<div class="dropdown-menu">
-										<a class="dropdown-item" href="#">글 내용</a> <br /> <a
-											class="dropdown-item" href="#">Allwaiser</a> <br /> <a
-											class="dropdown-item" href="#">학교</a> <br />
-									</div>
 								</div>
 							</div>
 						</form>
@@ -150,7 +86,8 @@ footer {
 
 									<!-- Modal footer -->
 									<div class="modal-footer">
-										<button type="button" class="btn" data-dismiss="modal">아니오</button>
+										<button type="button" class="btn" data-dismiss="modal"
+											>아니오</button>
 										<button type="button" class="btn" data-dismiss="modal"
 											onclick="location.href='login.jsp'">예</button>
 									</div>
@@ -175,7 +112,8 @@ footer {
 											class="form-control" type="password" name="userPwds"
 											placeholder="비밀번호 확인" required /> <br />
 										<button type="button" class="btn btn-danger"
-											data-dismiss="modal" style="margin-left: 435px">취소</button>
+											data-dismiss="modal" style="margin-left: 435px"
+											>취소</button>
 										<button type="button" class="btn btn-danger"
 											data-dismiss="modal" style="margin-left: 15px"
 											data-toggle="modal" data-target="#update">확인</button>
@@ -191,15 +129,16 @@ footer {
 									</div>
 									<div class="modal-body">
 										<input type="password" name="userPwd" placeholder="새 비밀번호 입력"
-											required class="form-control" /> <br /> <input
-											type="password" name="userPwds" placeholder="새 비밀번호 확인"
-											required class="form-control" /> <br /> <input type="text"
-											name="userName" required class="form-control" /><br /> <input
-											type="email" name="userEmail" required class="form-control" /><br />
-										<input type="submit" value="취소" class="btn btn-danger"
-											style="margin-left: 435px" data-dismiss="modal" /> <input
-											type="submit" value="확인" class="btn btn-danger"
-											style="margin-left: 15px" data-dismiss="modal" />
+											required class="form-control"/> <br/>
+										<input type="password" name="userPwds" placeholder="새 비밀번호 확인"
+										required class="form-control"/> <br/>
+										<input type="text" name="userName" required class="form-control"/><br/>
+										<input type="email" name="userEmail" required class="form-control"/><br/>
+										<input type="submit" value="취소" class="btn btn-danger" style="margin-left: 435px"
+										data-dismiss="modal"/>
+
+										<input type="submit" value="확인" class="btn btn-danger" style="margin-left: 15px"
+										data-dismiss="modal"/>
 									</div>
 								</div>
 							</div>
@@ -222,7 +161,8 @@ footer {
 											class="form-control" type="password" name="userPwds"
 											placeholder="비밀번호 확인" required /> <br />
 										<button type="button" class="btn btn-danger"
-											data-dismiss="modal" style="margin-left: 435px">취소</button>
+											data-dismiss="modal" style="margin-left: 435px"
+											>취소</button>
 										<button type="button" class="btn btn-danger"
 											data-dismiss="modal" style="margin-left: 20px"
 											data-toggle="modal" data-target="#withdrawal">획인</button>
@@ -235,11 +175,12 @@ footer {
 								<div class="modal-content">
 									<div class="modal-header">
 										<h4 class="modal-body">Allways를 탈퇴하시겠습니까?</h4>
-										<br /> <br /> <input type="submit" value="취소"
-											class="btn btn-danger" style="margin-left: 435px"
-											data-dismiss="modal" /> <input type="submit" value="확인"
-											class="btn btn-danger" style="margin-left: 15px"
-											data-dismiss="modal" onclick="location.href='login.jsp'" />
+										<br/>
+										<br/>
+										<input type="submit" value="취소" class="btn btn-danger" style="margin-left: 435px"
+										data-dismiss="modal"/>
+										<input type="submit" value="확인" class="btn btn-danger" style="margin-left: 15px"
+										data-dismiss="modal" onclick="location.href='login.jsp'"/>
 									</div>
 								</div>
 							</div>
@@ -255,29 +196,31 @@ footer {
 			<!-- 왼 쪽 메뉴바 -->
 			<div class="col-sm-2 sidenav">
 				<ul id="leftlist">
-					<li id="l1"><a href="/allways/my_page"><img alt="프로필"
+					<li id="l1"><a href="mypage.jsp"><img alt="프로필"
 							src="images/allways.png"></a></li>
-					<li id="l2"><a href="/allways/allways_page">Allwaiser 찾기</a></li>
+					<li id="l2"><a href="allwaiser.jsp">Allwaiser 찾기</a></li>
 					<li id="l3"><a href="">날씨</a></li>
 				</ul>
 			</div>
 			<!-- 가운데 메뉴바 -->
-			<div class="col-sm-8 text-left">
-				<div id="boardMake">
-					<div>
-						게시물 만들기
-						<div id="boards"></div>
+			<div class="col-sm-7 text-left">
+				<div>
+					<div id="boardMake">
+					게시물 만들기
+						
+					</div>
+					<div id ="boards">		
 					</div>
 				</div>
 			</div>
 			<!-- 오른쪽 메뉴바 -->
-			<div class="col-sm-2 sidenav">
+			<div class="col-sm-3 sidenav">
 				<form action="/action_page.php">
 					<div class="input-group">
 						<input type="text" class="form-control" placeholder="Search"
-							name="search" value="">
+							name="search">
 						<div class="input-group-btn">
-							<button class="btn btn-default" id="btnAsearch" type="submit">
+							<button class="btn btn-default" type="submit">
 								<i class="glyphicon glyphicon-search"></i>
 							</button>
 						</div>
@@ -286,53 +229,223 @@ footer {
 				<table class="table table-hover" id="rightlist">
 					<tbody>
 						<tr>
-							<td><a href="#"><label>John</label></a></td>
+							<td><a href="#">John</a></td>
 						</tr>
 						<tr>
-							<td><a href="#"><label>Mary</label></a></td>
+							<td><a href="#">Mary</a></td>
 						</tr>
 						<tr>
-							<td><a href="#"><label>July</label></a></td>
+							<td><a href="#">July</a></td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
 		</div>
 	</div>
-	<footer class="container-fluid text-center">
-		<p>Footer Text</p>
-	</footer>
+	
+<footer class="container-fluid text-center">
+	<p>Footer Text</p>
+</footer>
 
 
-</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.min.js"></script>
 
+<script  id="boardInsert" type="text/x-handlebars-template">
 
-<script id="" type="text/x-handlebars-template">
-<div class="boardItem">
+<div class = "boardInsertForm" style = "margin: 8px">
+<img id = "profileImg" src="/allways/resources/images/default_profile_img.jpg"
+		style="border-radius: 30px; float: left; padding: 4px"
+		onclick="location.href='/allways'">
+
+<div style="margin-left: 40px">
+<textarea id="content" class="autosize" placeholder="내용 입력" style="resize: none; border: 0; width: 100%;"></textarea>
+</div>
+
+<div id="fileList">
+</div>
 
 <div>
+<form id="uploadForm" method="post" enctype="multipart/form-data">
+	<label for="files" style="margin: 8px;">사진</label>
 	
-	<img id = "profileImg" src="/allways/resources/images/default_profile_img.jpg" style="border-radius: 30px; float: left;
-					 padding: 8px" onclick="location.href='/'>
-	<div style="display: inline-block;">
-		<label style="font-size: small;">{{userId}}</label><br />
-		<span style="font-size: x-small; color: gray;">0000년 00월 00일</span>	
-	</div>
+	<input id="files" type="file" style="display: none" />	
 
+	<select id= privacyBounds>
+		<option value="0">전체 공개</option>
+		<option value="1">친구 공개</option>
+		<option value="2">나만 보기</option>
+	</select>	
+
+	<span id="fileUploadBtn" style=" float:right; margin: 8px;">올리기</span>			
+</form>
 </div>
 	
-<details>
-	<summary>진달래꽃 - 엄마야 누나야 (김소월)</summary>
-	<p>엄마야 누나야, 강변 살자.<br />
-	뜰에는 반짝이는 금모래 빛<br />
-	뒷문 밖에는 갈잎의 노래<br />
-	엄마야 누나야, 강변 살자.</p>
-</details>
+</div>
+
+</script>
+
+<script  id="boardItem" type="text/x-handlebars-template">
+<div class="boardItem" style="border: solid 1px gray; margin: 8px">
+
+	<div>
+		<form>
+		<img id = "profileImg" src="/allways/resources/images/default_profile_img.jpg"
+			style="border-radius: 30px; float: left; padding: 8px"
+			onclick="location.href='/allways'">
+		<div style="display: inline-block;">
+			<a href = "/allways">{{userId}}</a><br />
+			<span style="font-size: x-small; color: gray;">{{regDate}}</span>
+		</div>
+		</form>
+	</div>
+
+	<details>
+    	<summary>{{content_T}}</summary>
+    	<p>{{content}}</p>
+	</details>
+
+
+	<div class="imageArea" >
+
+		<div id={{carousel}} class="carousel slide" data-ride="carousel"> 
+
+			<ol class="carousel-indicators" id = {{uno_ol}}>
+			</ol>
+
+			<div class="carousel-inner" id = {{uno_div}}>
+			</div>
+ 
+		</div>
+		
+	</div>
+	
+<div class="container-fluid" style="margin: 8px">
+	<div class="row">
+		<div class="col-xs-6" style="text-align: center;" ><a>북마크</a></div>
+		<div class="col-xs-6 " style="text-align: center;" ><a>댓글</a></div>
+	</div>
+</div>
 
 </script>
 
 
+<script>
 
+$(document).ready(function(){
+	
+	
+	var boardinsertsource = $('#boardInsert').html();
+	var boardInsertTemplate = Handlebars.compile(boardinsertsource);
+
+	function drowBoardInsert(){
+		var boardInsertForm = boardInsertTemplate();
+		$('#boardMake').append(boardInsertForm);
+	};
+
+	drowBoardInsert();
+
+	
+	var boardItemSource = $('#boardItem').html();
+	console.log(boardItemSource);
+	
+	var boardItemTem = Handlebars.compile(boardItemSource);
+
+	function getBoard(){	
+	};
+
+	function drowBoardItems(){
+			
+		$.getJSON('/allways/board/selectBoard', function(data){
+			console.log(data);
+			
+			$(data).each(function(){
+				var date = new Date(this.regDate);
+				var dateString = date.toLocaleDateString();
+				var topContent;
+				var subContent;
+		
+				if(this.content.length >= 14){
+					topContent = this.content.substr(0,15)+"...";
+					subContent = this.content.substr(15, this.content.length);
+				}else{
+					topContent = this.content
+				}
+
+				var content = {
+					userId: this.userId,	
+					regDate: dateString,
+					content_T: topContent,
+					content: subContent,
+					carousel: this.bno+"Carousel",
+					uno_ol: this.bno+"ol",
+					uno_div: this.bno+"div"
+				};
+				
+				var boardItem = boardItemTem(content);
+				$('#boards').append(boardItem);
+				
+				if(this.photo !== null ){
+					var photoList = this.photo.split(',');
+					
+					for(i = 0; i < photoList.length; i++){
+					
+					if(i == 0){
+					loList = '<li data-target="#myCarousel" data-slide-to='+i+' class="active"></li>';
+					divList = '<div class="item active">'	
+							+'<img src="/allways'+photoList[i]+'" style="width: 100%" alt="First slide">'
+							+'</div>'
+					}else{
+						loList = '<li data-target="#myCarousel" data-slide-to='+i+'></li>';
+						divList = '<div class="item">'	
+								+'<img src="/allways'+photoList[i]+'" style="width: 100%" alt="First slide">'
+								+'</div>'
+					}
+							
+							
+						$('#'+this.bno+'ol').append(loList);
+						$('#'+this.bno+'div').append(divList);
+					};
+					
+					
+					btn ='<a class="left carousel-control" href="#20Carousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a> '
+					+'<a class="right carousel-control" href="#20Carousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>'
+					
+					$('#'+this.bno+'Carousel').append(btn);
+					
+					
+				};
+				
+				
+			});
+			
+		});
+			
+	
+	};
+
+	drowBoardItems();
+	
+	$('#fileUploadBtn').click(function () {
+		
+		var content = $("#content").val();
+		var privacyBounds = $("#privacyBounds").val();
+		
+		boardUpload(content, privacyBounds);
+			
+	});
+
+	
+	function drowAllwaiser(){
+		
+	}
+	
+});
+
+</script>
+
+<script type="text/javascript" src="/allways/resources/js/board.js"></script>
+
+</body>
 
 </html>
 
