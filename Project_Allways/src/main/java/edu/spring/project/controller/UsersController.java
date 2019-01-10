@@ -26,7 +26,10 @@ public class UsersController {
 	
 	@RequestMapping(value="/signUp", method=RequestMethod.POST)
 	public String signUp(User user) throws Exception {
+		
 		userService.insert(user);
+		
+		
 		return "users/welcome";
 	}
 	
@@ -37,7 +40,10 @@ public class UsersController {
 
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String login(User user, HttpSession session) throws Exception {
-		User loginUser = userService.login(user);
+		User checkUser = userService.login(user);
+		User loginUser = new User();
+		loginUser.setUno(checkUser.getUno());
+		loginUser.setUserId(checkUser.getUserId());
 		if (loginUser != null) {
 			session.setAttribute("check", loginUser);
 			return "main";
