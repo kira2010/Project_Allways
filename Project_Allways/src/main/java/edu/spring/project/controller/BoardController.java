@@ -1,28 +1,47 @@
 package edu.spring.project.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import edu.spring.project.domain.Board;
+import edu.spring.project.service.BoardService;
 
-@Controller
+@RestController
 @RequestMapping(value = "board")
 public class BoardController {
 
+	@Autowired public BoardService boardService;
+	
 	
 	@RequestMapping(value = "insert", method = RequestMethod.POST)
 	public void insert(@RequestBody Board board) {
+		System.out.println(board);
 		
+		board.setUno(2);
+		board.setUserId("test");
+		
+		boardService.insert(board);
 		
 	}
 	
-	@RequestMapping(value = "boardTest", method = RequestMethod.GET)
-	public String test() {
+	@RequestMapping(value = "selectBoard", method = RequestMethod.GET)
+	public ResponseEntity<List<Board>> select() {
 		
+		List<Board> list = boardService.select(1);
 		
-		return "boardTest";
+		ResponseEntity<List<Board>> entity = 
+						new ResponseEntity<List<Board>>(list , HttpStatus.OK);
+		
+		return  entity;
 	}
+	
 }

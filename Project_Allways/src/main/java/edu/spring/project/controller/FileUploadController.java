@@ -28,7 +28,7 @@ public class FileUploadController {
   FileUploadService fileUploadService;
    
   @RequestMapping("/1")
-  public String form1() {
+  public String testform1() {
 	  return "fileUpload";
   }
   
@@ -36,7 +36,8 @@ public class FileUploadController {
   public ResponseEntity<List<String>> upload(MultipartHttpServletRequest req) {
     
 	List<MultipartFile> mf = req.getFiles("uploadfile");
-	
+	String s = req.getParameter("Str1"); 
+	System.out.println(s);
 	// 로그인 UNO
 	int uno = 0;
 	List<String> imageUrls = new ArrayList<String>();
