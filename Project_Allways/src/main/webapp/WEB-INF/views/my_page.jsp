@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Main Page</title>
+<title>My Page</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -32,7 +32,7 @@
 .sidenav {
 	padding-top: 20px;
 	background-color: #f1f1f1;
-	height: 100%;
+	padding: 15px;
 }
 
 /* Set black background color, white text and some padding */
@@ -44,10 +44,6 @@ footer {
 
 /* On small screens, set height to 'auto' for sidenav and grid */
 @media screen and (max-width: 767px) {
-	.sidenav {
-		height: auto;
-		padding: 15px;
-	}
 	.row.content {
 		height: auto;
 	}
@@ -78,10 +74,38 @@ footer {
 #l2, #l3 {
 	margin-top: 20px;
 }
+
+#backImg {
+	width: 100%;
+	position: relative;
+}
+
+#profile {
+	position: relative;
+	left: 10px;
+	top: -100px;
+	border-radius: 60px;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+}
+
+#menubar {
+	border: solid 1px grey;
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+#userInfo {
+	border: solid 1px grey;
+	margin-bottom: 15px;
+}
 </style>
 </head>
 <body>
-	<!-- header -->
+
 	<nav class="navbar navbar-inverse" id="header">
 		<div class="container">
 			<div class="navbar-header">
@@ -94,7 +118,6 @@ footer {
 						class="icon-bar"></span>
 				</button>
 			</div>
-			<!-- 글 내용, Allwaiser, 학교 검색  -->
 			<div class="navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav">
 					<li>
@@ -252,32 +275,77 @@ footer {
 
 	<div class="container">
 		<div class="row content">
-			<!-- 왼 쪽 메뉴바 -->
-			<div class="col-sm-2 sidenav">
-				<ul id="leftlist">
-					<li id="l1"><a href="/allways/my_page"><img alt="프로필"
-							src="images/allways.png"></a></li>
-					<li id="l2"><a href="/allways/allways_page">Allwaiser 찾기</a></li>
-					<li id="l3"><a href="">날씨</a></li>
-				</ul>
-			</div>
-			<!-- 가운데 메뉴바 -->
-			<div class="col-sm-8 text-left">
-				<div id="boardMake">
+			<div class="col-sm-10">
+				<div class="row content">
+					<!-- 배경사진 -->
 					<div>
-						게시물 만들기
-						<div id="boards"></div>
+						<img id="backImg"
+							src="/allways/resources/images/background_pro.jpg"
+							onclick="location.href='#'">
+					</div>
+					<div class="btn-group btn-group-toggle" data-toggle="buttons"
+						id="menubar">
+						<label class="btn btn-secondary active"> <input
+							type="radio" name="options" id="option1" autocomplete="off"
+							checked />타임라인
+						</label> <label class="btn btn-secondary"> <input type="radio"
+							name="options" id="option2" autocomplete="off" />포스팅
+						</label> <label class="btn btn-secondary"> <input type="radio"
+							name="options" id="option3" autocomplete="off" />즐겨찾기
+						</label>
+					</div>
+					<!-- 헤더 밑 프로필사진 -->
+					<div>
+						<img id="profile"
+							src="/allways/resources/images/default_profile_img.jpg"
+							width="120px" height="120px">
+					</div>
+					<div class="col-sm-4" style="padding: 0px;">
+						<!-- 왼쪽 정보 및 상태 -->
+						<div id="userInfo">
+							<label style="margin-top: 5px;">생년 월일 :</label> <br /> <label>이메일
+								:</label> <br /> <label>학교 :</label> <br />
+							<div class="dropdown" id="drop"
+								style="text-align: right; margin: 5px;">
+								<button class="btn btn-default dropdown-toggle" type="button"
+									id="menu1" data-toggle="dropdown">
+									내 상태 <span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu" role="menu" aria-labelledby="menu1"
+									style="float: right;">
+									<li role="presentation"><img
+										src="/allways/resources/images/happy.jpg"></li>
+									<li role="presentation"><img
+										src="/allways/resources/images/soso.jpg"></li>
+									<li role="presentation"><img
+										src="/allways/resources/images/sentimental.jpg"></li>
+									<li role="presentation"><img
+										src="/allways/resources/images/sad.jpg"></li>
+									<li role="presentation"><img
+										src="/allways/resources/images/dangerous.jpg"></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+
+					<!-- 가운데 메뉴바 -->
+					<div class="col-sm-6 text-left">
+						<div id="boardMake">
+							<div>
+								<div id="boards"></div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 			<!-- 오른쪽 메뉴바 -->
-			<div class="col-sm-2 sidenav">
+			<div class="col-sm-2 sidenav" style="height: 100%;">
 				<form action="/action_page.php">
 					<div class="input-group">
 						<input type="text" class="form-control" placeholder="Search"
-							name="search" value="">
+							name="search">
 						<div class="input-group-btn">
-							<button class="btn btn-default" id="btnAsearch" type="submit">
+							<button class="btn btn-default" type="submit">
 								<i class="glyphicon glyphicon-search"></i>
 							</button>
 						</div>
@@ -286,13 +354,13 @@ footer {
 				<table class="table table-hover" id="rightlist">
 					<tbody>
 						<tr>
-							<td><a href="#"><label>John</label></a></td>
+							<td><a href="#">John</a></td>
 						</tr>
 						<tr>
-							<td><a href="#"><label>Mary</label></a></td>
+							<td><a href="#">Mary</a></td>
 						</tr>
 						<tr>
-							<td><a href="#"><label>July</label></a></td>
+							<td><a href="#">July</a></td>
 						</tr>
 					</tbody>
 				</table>
@@ -307,28 +375,36 @@ footer {
 </body>
 
 
-<script id="" type="text/x-handlebars-template">
-<div class="boardItem">
-
-<div>
-	
-	<img id = "profileImg" src="/allways/resources/images/default_profile_img.jpg" style="border-radius: 30px; float: left;
-					 padding: 8px" onclick="location.href='/'>
-	<div style="display: inline-block;">
-		<label style="font-size: small;">{{userId}}</label><br />
-		<span style="font-size: x-small; color: gray;">0000년 00월 00일</span>	
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.min.js"></script>
+<script id="allwaiser-list" type="text/x-handlebars-template">
+	<div class="allwaiser-item">
+		<table class="table table-hover" id="rightlist">
+			<tbody>
+				<tr>
+					<td><a href="#"><label></label></a></td>
+				</tr>
+				<tr>
+					<td><a href="#"><label></label></a></td>
+				</tr>
+				<tr>
+					<td><a href="#"><label></label></a></td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
-
-</div>
-	
-<details>
-	<summary>진달래꽃 - 엄마야 누나야 (김소월)</summary>
-	<p>엄마야 누나야, 강변 살자.<br />
-	뜰에는 반짝이는 금모래 빛<br />
-	뒷문 밖에는 갈잎의 노래<br />
-	엄마야 누나야, 강변 살자.</p>
-</details>
-
+</script>
+<script>
+	$(document).ready(function() {
+		var division = $('#')
+		
+		var source = $('#allwaiser-list').html();
+		
+		var template = Handlebars.compile(source);
+		
+		function getAllAllwaiser() {
+			$.getJSON('/Project_Always/')
+		}
+	});
 </script>
 
 

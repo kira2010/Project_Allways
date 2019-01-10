@@ -19,5 +19,11 @@ public class UserPageController {
 		return "my_page";
 	}
 	
+	@RequestMapping(value = "/allways_page", method = RequestMethod.GET)
+	public String allways(Model model) {
+		
+		return "home";
+	}
+	
 }
 
