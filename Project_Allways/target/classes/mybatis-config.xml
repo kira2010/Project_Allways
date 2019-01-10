@@ -38,19 +38,15 @@
 		
 		<property name="tbl_allwaiser" value="TBL_ALLWAISER" />
 		<property name="allwaiser.uno" value="UNO" />
-		<property name="allwaiser.allwaiserid" value="ALLWAISER_ID" />
-		<property name="allwaiser.allwaisername" value="ALLWAISER_NAME" />
+		<property name="allwaiser.allwaiseruno" value="ALLWAISER_UNO" />
 		
 		<property name="tbl_favorite" value="TBL_FAVORITE" />
 		<property name="favorite.itr_no" value="ITR_NO" />
 		<property name="favorite.bno" value="BNO" />
 		<property name="favorite.uno" value="UNO" />
-		
 	</properties>
 	
 	<typeAliases>
 		<package name="edu.spring.project.domain"/>
 	</typeAliases>
-	
-	
 </configuration>

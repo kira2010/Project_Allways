@@ -9,7 +9,7 @@
 		ORDER BY ${board.bno} DESC
 	</select>
 	
-	<select id="selectMyFav" resultType="Board">
+	<select id="selectMyFavorite" resultType="Board">
 		SELECT * FROM ${tbl_board} 
 		WHERE ${board.bno} IN 
 		(SELECT ${favorite.bno} FROM ${tbl_favorite} WHERE ${favorite.uno} = #{uno}) 

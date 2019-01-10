@@ -3,10 +3,19 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="edu.spring.project.mappers.AllwaiserMapper">
-	<!-- 
-	<select id="" resultType="">
-		
+	<select id="selectMylist" resultType="java.lang.Integer">
+		SELECT ${allwaiser.allwaiseruno} FROM ${tbl_allwaiser} 
+		WHERE ${allwaiser.uno} = #{uno}
 	</select>
-	 -->
+	
+	<insert id="insertAllwaiser">
+		INSERT INTO ${tbl_allwaiser} (${allwaiser.uno}, ${allwaiser.allwaiseruno}) 
+		VALUES (#{uno}, #{allwaiser_uno})
+	</insert>
+	
+	<delete id="deleteAllwaiser">
+		DELETE FROM ${tbl_allwaiser} 
+		WHERE ${allwaiser.allwaiseruno} = #{allwaiser_uno}
+	</delete>
 
 </mapper>

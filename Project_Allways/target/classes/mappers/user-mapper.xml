@@ -18,6 +18,14 @@
 		WHERE ${user.userid} = #{userId}
 	</select>
 	
+	<select id="findUserByName" resultType="User">
+		SELECT * FROM ${tbl_user} WHERE ${user.username} = #{userName}
+	</select>
+	
+	<select id="findUserByGraduation" resultType="User">
+		SELECT * FROM ${tbl_user} WHERE ${user.graduation} LIKE #{graduation} 
+	</select>
+	
 	<insert id="registUser">
 		INSERT INTO ${tbl_user} (${user.userid}, ${user.userpwd}, ${user.username}, 
 		${user.useremail}, ${user.birthday}, ${user.graduation}) 
@@ -28,7 +36,7 @@
 		UPDATE ${tbl_user} 
 		SET ${user.userpwd} = #{userPwd}, ${user.useremail} = #{userEmail}, 
 		${user.graduation} = #{graduation} 
-		WHERE ${user.userid} = #{userId}
+		WHERE ${user.uno} = #{uno}
 	</update>
 	
 	<delete id="quitUser">

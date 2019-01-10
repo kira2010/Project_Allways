@@ -5,20 +5,57 @@
 <mapper namespace="edu.spring.project.mappers.BoardMapper">
 	<select id="selectMyAll" resultType="Board">
 		SELECT * FROM ${tbl_board} 
-		WHERE ${board.userid} = #{userId} 
+		WHERE ${board.uno} = #{uno} 
 		ORDER BY ${board.bno} DESC
 	</select>
 	
-	<select id="selectMyFav" resultType="Board">
+	<select id="selectMyFavorite" resultType="Board">
 		SELECT * FROM ${tbl_board} 
-		WHERE ${board.bno} = #{bno}
+		WHERE ${board.bno} IN 
+		(SELECT ${favorite.bno} FROM ${tbl_favorite} WHERE ${favorite.uno} = #{uno}) 
+		AND (${board.privacy_bounds} = 0 OR ${board.privacy_bounds} = 1) 
 		ORDER BY ${board.bno} DESC
 	</select>
 	
-	<!-- 
-	<select id="" resultType="">
-		
+	<select id="selectMyAllwaisersPost" resultType="Board">
+		SELECT * FROM ${tbl_board} 
+		WHERE ${board.uno} IN (
+			SELECT ${allwaiser.allwaiseruno} 
+			FROM ${tbl_allwaiser} 
+			WHERE ${allwaiser.uno} = #{uno}) 
+		AND (${board.privacy_bounds} = 0 OR ${board.privacy_bounds} = 1)
+		ORDER BY ${board.bno} DESC 
+		LIMIT 0, 10
 	</select>
-	 -->
 	
+	<select id="countMyALlwaisersPost" resultType="java.lang.Integer">
+		SELECT COUNT(*) AS COUNT FROM ${tbl_board} 
+		WHERE ${board.uno} IN (
+			SELECT ${allwaiser.allwaiseruno} 
+			FROM ${tbl_allwaiser} 
+			WHERE ${allwaiser.uno} = #{uno}) 
+		AND (${board.privacy_bounds} = 0 OR ${board.privacy_bounds} = 1)
+	</select>
+	
+	<select id="selectByBno" resultType="Board">
+		SELECT * FROM ${tbl_board} WHERE ${board.bno} = #{bno}
+	</select>
+	
+	<select id="searchByContent" resultType="Board">
+		SELECT * FROM ${tbl_board} WHERE INSTR(${board.content}, #{searchKeyword}); 
+	</select>
+		
+	<insert id="createBoard">
+		INSERT INTO ${tbl_board} (${board.uno}, ${board.userid}, ${board.content}, ${board.privacy_bounds}, ${board.photo}) 
+		VALUES (#{uno}, #{userId}, #{content}, #{privacy_bounds}, #{photo})
+	</insert>
+	
+	<update id="updateBoard">
+		UPDATE ${tbl_board} 
+		SET ${board.content} = #{content}, ${board.privacy_bounds} = #{privacy_bounds} WHERE ${board.bno} = #{bno}
+	</update>
+	
+	<delete id="deleteBoard">
+		DELETE FROM ${tbl_board} WHERE ${board.bno} = #{bno}
+	</delete>
 </mapper>
