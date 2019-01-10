@@ -6,8 +6,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="Keywords" content="로그인페이지" />
 <meta name="Description" content="로그인페이지" />
-<link rel="stylesheet" href="resources/css/screen.css" type="text/css"
-	media="screen" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -16,11 +14,95 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+<style>
+html, body {
+    margin: 0;
+    padding: 0;
+    background-color: #FFF;
+    font-family: "Noto Sans KR", "Liberation Sans", Helvetica, "돋움", dotum, sans-serif;
+    font-size: 1em;
+}
+#wrap {
+    margin: 0 auto;
+    padding: 0;
+    width: 1000px;
+}
+#header {
+    width: 1000px;
+    height: 48px;
+    margin-top: 120px;
+}
+#container {
+	float: center;
+    width: 100%;
+    border-top: 1px solid #DAEAAA;
+}
+#content {
+	font-size: large;
+    text-align: center;
+    background: #DDD;
+    height: 300px;     
+}
+#footer {
+	clear: both;
+    width: 1000px;
+    height: 70px;
+    font-size: 9px;
+    color: #8d8d8d;
+    letter-spacing: -1px;
+    border-top: 1px solid #DAEAAA;
+    position: relative;
+    top: 7px;
+}
+
+#header h1{
+	margin: 0;
+	padding: 0;
+	position: relative;
+	top: 12px;
+}
+
+#footer > ul {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	position: relative;
+	left: 8px;
+}
+
+#footer > ul > li {
+	float: left;
+	padding: 6px 12px 6px 8px;
+}
+
+#footer > ul > li > a {
+    color: #8D8D8D;
+    text-decoration: none;
+}
+
+#footer > ul > li > a:hover {
+    text-decoration: underline;
+}
+
+#footer > ul > li#company-info {
+    margin-left: 350px;
+    letter-spacing: 0;
+    background: none;
+}
+
+</style>
+
 <title>로그인</title>
 </head>
 <body>
 
 	<div id="wrap">
+	
+		<!--div id="header">
+			<h1 style="float: center; width: 150px;">
+				<a href="/allways"><img src="/allways/resources/images/allways.png" /></a>
+			</h1>
+		</div -->
 	
 		<div id="container">
 
