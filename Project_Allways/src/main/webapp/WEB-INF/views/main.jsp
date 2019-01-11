@@ -196,7 +196,7 @@
 			<!-- 왼 쪽 메뉴바 -->
 			<div class="col-sm-2 sidenav">
 				<ul id="leftlist">
-					<li id="l1"><a href="userPage/?uno=${check.uno}"><img alt="프로필"
+					<li id="l1"><a href="/allways/userPage/?uno=${check.uno}"><img alt="프로필"
 							src="images/allways.png"></a></li>
 					<li id="l2"><a href="allwaiser.jsp">Allwaiser 찾기</a></li>
 					<li id="l3"><a href="">날씨</a></li>
