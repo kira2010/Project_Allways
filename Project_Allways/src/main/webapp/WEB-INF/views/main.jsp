@@ -267,6 +267,7 @@
 		<option value="0">전체 공개</option>
 		<option value="1">친구 공개</option>
 		<option value="2">나만 보기</option>
+
 	</select>	
 
 	<span id="fileUploadBtn" style=" float:right; margin: 8px;">올리기</span>			
