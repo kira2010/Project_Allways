@@ -121,14 +121,10 @@ public class User {
 
 	@Override
 	public String toString() {
-		String user = String.format(
-				"USER:{uno : %d, userId : %s, "
-				+ "userName : %s, userEmail : %s, "
-				+ "birthDay : %s, graduation : %s, bg_photo : %s, "
-				+ "pf_photo : %s, emotion : %d}",
-				uno, userId, userName, userEmail, birthDay.toString(),
-				graduation, bg_photo, pf_photo, emotion);
-		
-		return user;
+		return "User [uno=" + uno + ", userId=" + userId + ", userName=" + userName + ", userEmail=" + userEmail
+				+ ", birthDay=" + birthDay + ", graduation=" + graduation + ", bg_photo=" + bg_photo + ", pf_photo="
+				+ pf_photo + ", emotion=" + emotion + "]";
 	}
+
+	
 }
