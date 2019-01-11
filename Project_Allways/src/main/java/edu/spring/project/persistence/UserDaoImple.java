@@ -50,7 +50,7 @@ public class UserDaoImple implements UserDao {
 	}
 	
 	// 회원번호로 정보 찾기
-	public String findUserByUno(int uno) {
+	public User findUserByUno(int uno) {
 		logger.info("findIdFromUno({}) 호출", uno);
 		
 		return session.selectOne(USER_MAPPER + ".findUserByUno", uno);
