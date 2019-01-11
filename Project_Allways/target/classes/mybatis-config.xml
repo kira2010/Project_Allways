@@ -42,8 +42,8 @@
 		
 		<property name="tbl_favorite" value="TBL_FAVORITE" />
 		<property name="favorite.itr_no" value="ITR_NO" />
-		<property name="favorite.bno" value="BNO" />
 		<property name="favorite.uno" value="UNO" />
+		<property name="favorite.bno" value="BNO" />
 	</properties>
 	
 	<typeAliases>

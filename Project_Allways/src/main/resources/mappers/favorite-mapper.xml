@@ -3,23 +3,29 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="edu.spring.project.mappers.FavoriteMapper">
-	<select id="selectFavUno" resultSets="java.lang.Integer">
-		SELECT ${favorite.bno} FROM ${tbl_favorite} 
-		WHERE ${favorite.uno} = #{uno}
+	<select id="selectMyFavorite" resultType="Board">
+		SELECT * FROM ${tbl_board} 
+		WHERE ${board.bno} 
+		IN (SELECT ${favorite.bno} FROM ${tbl_favorite} WHERE ${favorite.uno} = #{uno}) 
+		AND (${board.privacy_bounds} = 0 OR ${board.privacy_bounds} = 1) 
+		ORDER BY ${board.bno} DESC 
+		LIMIT 0, 10
 	</select>
 	
-	<select id="selectItrNo" resultSets="java.lang.Integer">
-		SELECT ${favorite.itr_no} FROM ${tbl_favorite} 
-		WHERE ${favorite.uno} = #{uno}
+	<select id="countMyFavorite" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM ${tbl_board} 
+		WHERE ${board.bno} 
+		IN (SELECT ${favorite.bno} FROM ${tbl_favorite} WHERE ${favorite.uno} = #{uno}) 
+		AND (${board.privacy_bounds} = 0 OR ${board.privacy_bounds} = 1)
 	</select>
 	
-	<insert id="insertItr">
+	<insert id="registFavorite">
 		INSERT INTO ${tbl_favorite} 
 		(${favorite.uno}, ${favorite.bno}) 
 		VALUES (#{uno}, #{bno})
 	</insert>
 	
-	<delete id="deleteItr">
+	<delete id="deleteFavorite">
 		DELETE FROM ${tbl_favorite} 
 		WHERE ${favorite.itr_no} = #{itr_no}
 	</delete>
