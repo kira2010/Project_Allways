@@ -12,7 +12,7 @@ public class User {
 	private String graduation;
 	private String bg_photo;
 	private String pf_photo;
-	private String emotion;
+	private int emotion;
 	
 	public User() {}
 
@@ -26,7 +26,7 @@ public class User {
 			String graduation,
 			String bg_photo,
 			String pf_photo,
-			String emotion) {
+			int emotion) {
 		this.uno = uno;
 		this.userId = userId;
 		this.userPwd = userPwd;
@@ -111,11 +111,11 @@ public class User {
 		this.pf_photo = pf_photo;
 	}
 
-	public String getEmotion() {
+	public int getEmotion() {
 		return emotion;
 	}
 
-	public void setEmotion(String emotion) {
+	public void setEmotion(int emotion) {
 		this.emotion = emotion;
 	}
 
@@ -123,8 +123,11 @@ public class User {
 	public String toString() {
 		String user = String.format(
 				"USER:{uno : %d, userId : %s, "
-				+ "userPwd : %s, userName : %s, userEmail : %s}",
-				uno, userId, userPwd, userName, userEmail);
+				+ "userName : %s, userEmail : %s, "
+				+ "birthDay : %s, graduation : %s, bg_photo : %s, "
+				+ "pf_photo : %s, emotion : %d}",
+				uno, userId, userName, userEmail, birthDay.toString(),
+				graduation, bg_photo, pf_photo, emotion);
 		
 		return user;
 	}

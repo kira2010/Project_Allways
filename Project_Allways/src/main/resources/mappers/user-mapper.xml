@@ -13,17 +13,42 @@
 		WHERE ${user.userid} = #{userId}
 	</select>
 	
-	<select id="findUno" resultType="java.lang.Integer">
+	<select id="findUnoFromId" resultType="java.lang.Integer">
 		SELECT ${user.uno} FROM ${tbl_user} 
 		WHERE ${user.userid} = #{userId}
 	</select>
 	
+	<select id="findUserByUno" resultType="User">
+		SELECT ${user.uno}, ${user.userid}, ${user.username}, 
+		${user.useremail}, ${user.birthday}, ${user.graduation}, 
+		${user.bg_photo}, ${user.pf_photo}, ${user.emotion} 
+		FROM ${tbl_user} 
+		WHERE ${user.uno} = #{uno}
+	</select>
+	
 	<select id="findUserByName" resultType="User">
-		SELECT * FROM ${tbl_user} WHERE ${user.username} = #{userName}
+		SELECT ${user.uno}, ${user.userid}, ${user.username}, 
+		${user.useremail}, ${user.birthday}, ${user.graduation}, 
+		${user.bg_photo}, ${user.pf_photo}, ${user.emotion} 
+		FROM ${tbl_user} WHERE INSTR(${user.username}, #{userName}) > 0
 	</select>
 	
 	<select id="findUserByGraduation" resultType="User">
-		SELECT * FROM ${tbl_user} WHERE ${user.graduation} LIKE #{graduation} 
+		SELECT ${user.uno}, ${user.userid}, ${user.username}, 
+		${user.useremail}, ${user.birthday}, ${user.graduation}, 
+		${user.bg_photo}, ${user.pf_photo}, ${user.emotion} 
+		FROM ${tbl_user} WHERE INSTR(${user.graduation}, #{graduation}) > 0
+	</select>
+	
+	<select id="findUserByNameAndGraduation" resultType="User">
+		SELECT ${user.uno}, ${user.userid}, ${user.username}, 
+		${user.useremail}, ${user.birthday}, ${user.graduation}, 
+		${user.bg_photo}, ${user.pf_photo}, ${user.emotion} 
+		FROM ${tbl_user} 
+		WHERE 
+		INSTR(${user.username}, #{userName}) > 0 
+		OR 
+		INSTR(${user.graduation}, #{graduation}) > 0
 	</select>
 	
 	<insert id="registUser">
@@ -37,6 +62,10 @@
 		SET ${user.userpwd} = #{userPwd}, ${user.useremail} = #{userEmail}, 
 		${user.graduation} = #{graduation} 
 		WHERE ${user.uno} = #{uno}
+	</update>
+	
+	<update id="updateEmotion">
+		UPDATE ${tbl_user} SET ${user.emotion} = #{emotion} WHERE ${user.uno} = #{uno}
 	</update>
 	
 	<delete id="quitUser">

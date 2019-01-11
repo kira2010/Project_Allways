@@ -25,6 +25,13 @@ public class BoardDaoImple implements BoardDao {
 		
 		return session.selectList(BOARD_MAPPER + ".selectMyAll", uno);
 	}
+	
+	// 내가 작성한 모든 게시글 수 count
+	public int countMyAll(int uno) {
+		logger.info("countMyAll() 호출");
+		
+		return session.selectOne(BOARD_MAPPER + ".countMyAll", uno);
+	}
 
 	// 게시글 자세히 보기
 	public Board read(int bno) {
@@ -46,6 +53,13 @@ public class BoardDaoImple implements BoardDao {
 		logger.info("readMyFavorite(uno : {}) 호출", uno);
 		
 		return session.selectList(BOARD_MAPPER + ".selectMyFavorite", uno);
+	}
+	
+	// 내가 저정한 즐겨찾기 목록 중 공개범위 0/1 인 모든 게시글 count
+	public int countMyFavorite(int uno) {
+		logger.info("countMyFavorite(uno : {}) 호출", uno);
+		
+		return session.selectOne(BOARD_MAPPER + ".countMyFavorite", uno);
 	}
 	
 	// 내가 등록한 Allwaiser가 작성한 게시글 목록 중 공개범위 0/1인 모든 게시글 가져오기

@@ -7,6 +7,11 @@
 		SELECT * FROM ${tbl_board} 
 		WHERE ${board.uno} = #{uno} 
 		ORDER BY ${board.bno} DESC
+		LIMIT 0, 10
+	</select>
+	
+	<select id="countMyAll" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM ${tbl_board} WHERE ${board.uno} = #{uno}
 	</select>
 	
 	<select id="selectMyFavorite" resultType="Board">
@@ -14,7 +19,15 @@
 		WHERE ${board.bno} IN 
 		(SELECT ${favorite.bno} FROM ${tbl_favorite} WHERE ${favorite.uno} = #{uno}) 
 		AND (${board.privacy_bounds} = 0 OR ${board.privacy_bounds} = 1) 
-		ORDER BY ${board.bno} DESC
+		ORDER BY ${board.bno} DESC 
+		LIMIT 0, 10
+	</select>
+	
+	<select id="countMyFavorite" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM ${tbl_board} 
+		WHERE ${board.bno} IN 
+		(SELECT ${favorite.bno} FROM ${tbl_favorite} WHERE ${favorite.uno} = #{uno}) 
+		AND (${board.privacy_bounds} = 0 OR ${board.privacy_bounds} = 1)
 	</select>
 	
 	<select id="selectMyAllwaisersPost" resultType="Board">

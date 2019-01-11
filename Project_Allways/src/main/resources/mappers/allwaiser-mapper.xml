@@ -3,19 +3,30 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="edu.spring.project.mappers.AllwaiserMapper">
-	<select id="selectMylist" resultType="java.lang.Integer">
-		SELECT ${allwaiser.allwaiseruno} FROM ${tbl_allwaiser} 
-		WHERE ${allwaiser.uno} = #{uno}
+	<select id="selectMylist" resultType="User">
+		SELECT ${user.userid}, ${user.username}, ${user.pf_photo} FROM ${tbl_user} 
+		WHERE ${user.uno} IN (
+			SELECT ${allwaiser.allwaiseruno} FROM ${tbl_allwaiser} 
+			WHERE ${allwaiser.uno} = #{uno})
 	</select>
 	
-	<insert id="insertAllwaiser">
+	<select id="selectMyOne" resultType="User">
+		SELECT ${user.userid}, ${user.username}, ${user.pf_photo} FROM ${tbl_user} 
+		WHERE INSTR(${user.username}, #{userName}) > 0 
+		AND 
+		${user.uno} IN (
+			SELECT ${allwaiser.allwaiseruno} FROM ${tbl_allwaiser} 
+			WHERE ${allwaiser.uno} = #{uno})
+	</select>
+	
+	<insert id="followAllwaiser">
 		INSERT INTO ${tbl_allwaiser} (${allwaiser.uno}, ${allwaiser.allwaiseruno}) 
 		VALUES (#{uno}, #{allwaiser_uno})
 	</insert>
 	
-	<delete id="deleteAllwaiser">
+	<delete id="unfollowAllwaiser">
 		DELETE FROM ${tbl_allwaiser} 
-		WHERE ${allwaiser.allwaiseruno} = #{allwaiser_uno}
+		WHERE ${allwaiser.uno} = #{uno} AND ${allwaiser.allwaiseruno} = #{allwaiser_uno}
 	</delete>
 
 </mapper>

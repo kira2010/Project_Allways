@@ -42,11 +42,18 @@ public class UserDaoImple implements UserDao {
 		return result;
 	}
 	
-	// 회원번호 찾기
-	public int findUno(User user) {		
-		logger.info("findUno({}) 호출", user);
+	// ID로 회원번호 찾기
+	public int findUnoFromId(String userId) {
+		logger.info("findUnoFromId({}) 호출", userId);
 		
-		return session.selectOne(USER_MAPPER + ".findUno", user);
+		return session.selectOne(USER_MAPPER + ".findUnoFromId", userId);
+	}
+	
+	// 회원번호로 정보 찾기
+	public String findUserByUno(int uno) {
+		logger.info("findIdFromUno({}) 호출", uno);
+		
+		return session.selectOne(USER_MAPPER + ".findUserByUno", uno);
 	}
 	
 	// 이름으로 회원 찾기
@@ -62,6 +69,12 @@ public class UserDaoImple implements UserDao {
 		
 		return session.selectList(USER_MAPPER + ".findUserByGraduation", graduation);
 	}
+	
+	public List<User> findUserByNameAndGraduation(User user) {
+		logger.info("findUserByNameAndGraudation(user : {}) 호출", user);
+				
+		return session.selectList(USER_MAPPER + ".findUserByNameAndGraduation", user);
+	}
 
 	// 신규 회원가입
 	public int createUser(User user) {	
@@ -75,6 +88,13 @@ public class UserDaoImple implements UserDao {
 		logger.info("updateUser({}) 호출", user);
 		
 		return session.update(USER_MAPPER + ".updateUser", user);
+	}
+	
+	// 감정 표현 수정
+	public int updateEmotion(User user) {
+		logger.info("updateEmotion({}) 호출", user);
+		
+		return session.update(USER_MAPPER + ".updateEmotion", user);
 	}
 
 	// 회원 탈퇴

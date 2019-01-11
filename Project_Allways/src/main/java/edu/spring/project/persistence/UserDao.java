@@ -9,15 +9,21 @@ public interface UserDao {
 	
 	boolean checkUser(String userId);
 	
-	int findUno(User user);
+	int findUnoFromId(String userId);
+	
+	String findUserByUno(int uno);
 	
 	List<User> findUserByName(String userName);
 	
 	List<User> findUserByGraduation(String graduation);
 	
+	List<User> findUserByNameAndGraduation(User user);
+	
 	int createUser(User user);
 	
 	int updateUser(User user);
+	
+	int updateEmotion(User user);
 	
 	int deleteUser(int uno);
 }
