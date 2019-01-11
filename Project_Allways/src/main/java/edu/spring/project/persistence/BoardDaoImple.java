@@ -50,7 +50,6 @@ public class BoardDaoImple implements BoardDao {
 		params.put("type", type);
 		params.put("keyword", keyword);
 		
-		// TODO : 쿼리 작성 후 수정 예정!!!!
 		return session.selectList(BOARD_MAPPER + ".searchByKeyword", params);
 	}
 	
