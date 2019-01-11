@@ -27,9 +27,11 @@
 
 <body>
 
-	<nav class="navbar navbar-inverse" id="header">
+<nav class="navbar navbar-inverse" id="header">
 		<div class="container">
-			<div class="navbar-header">
+			<div class="content">
+			
+			<div class="navbar-header col-sm-3">
 				<a class="navbar-brand" href="main.jsp"><img
 					src="/allways/resources/images/allways.png" id="mainLogo"
 					height="30px" width="30px"></a>
@@ -39,39 +41,50 @@
 						class="icon-bar"></span>
 				</button>
 			</div>
-			<div class="navbar-collapse" id="myNavbar">
-				<ul class="nav navbar-nav">
-					<li>
-						<form action="/action_page.php">
-							<div class="input-group" id="text" >
-								<input type="text" class="form-control" placeholder="Search"
-									name="search">
-								<div class="input-group-btn">
-									<button class="btn btn-default" type="submit">
-										<i class="glyphicon glyphicon-search"></i>
-									</button>
-								</div>
-							</div>
-						</form>
-					</li>
-				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<li><a>${check.userId} 님 안녕하세요!</a></li>
-					<li>
-						<div class="dropdown" id="drop">
-							<button class="btn btn-default dropdown-toggle" type="button"
-								id="menu1" data-toggle="dropdown">
-								회원정보 <span class="caret"></span>
+			
+			<div class="navbar-collapse col-sm-6" id="myNavbar">
+				<form action="/action_page.php">
+					<div class="input-group" id="text" >
+							<input type="text" class="form-control" placeholder="Search"
+								name="search">
+						<div class="input-group-btn">
+							<button class="btn btn-default" type="submit">
+							<i class="glyphicon glyphicon-search"></i>
 							</button>
-							<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-								<li role="presentation"><a role="menuitem" tabindex="-1"
-									data-toggle="modal" data-target="#logout">로그아웃</a></li>
-								<li role="presentation"><a role="menuitem" tabindex="-1"
-									data-toggle="modal" data-target="#updateInfo">개인정보 수정</a></li>
-								<li role="presentation"><a role="menuitem" tabindex="-1"
-									data-toggle="modal" data-target="#memberWithdrawal">회원탈퇴</a></li>
-							</ul>
-						</div> <!-- dropDown아이템 다이얼로그 -->
+						</div>
+					</div>
+				</form>
+			</div>		
+			
+			<div class = "nav navbar-nav navbar-right col-sm-3 container">
+				
+					
+				<div class="dropdown input-group" id="drop">
+					<input type="text" class="form-control" value="${check.userId} 님 안녕하세요!" readonly>
+					<div class="input-group-btn">
+					<button class="btn btn-default dropdown-toggle" type="button"
+								id="menu1" data-toggle="dropdown">
+					<span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+						<li role="presentation"><a role="menuitem" tabindex="-1"
+							data-toggle="modal" data-target="#logout">로그아웃</a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1"
+							data-toggle="modal" data-target="#updateInfo">개인정보 수정</a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1"
+							data-toggle="modal" data-target="#memberWithdrawal">회원탈퇴</a></li>
+					</ul>
+
+					</div>
+					
+				</div>	
+			
+			</div>
+			
+			</div>
+		</div>
+</nav>				
+						 <!-- dropDown아이템 다이얼로그 -->
 						<div class="modal fade" id="logout">
 							<div class="modal-dialog">
 								<div class="modal-content">
@@ -185,20 +198,16 @@
 								</div>
 							</div>
 						</div>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</nav>
+					
 
 	<div class="container">
-		<div class="row content">
+		<div class="row content ">
 			<!-- 왼 쪽 메뉴바 -->
 			<div class="col-sm-2 sidenav">
 				<ul id="leftlist">
 					<li id="l1"><a href="/allways/userPage/?uno=${check.uno}"><img alt="프로필"
-							src="images/allways.png"></a></li>
-					<li id="l2"><a href="allwaiser.jsp">Allwaiser 찾기</a></li>
+							src="/allways+${check.pf_photo}"></a></li>
+					<li id="l2"><a id ="allwaiserSearchForm" >Allwaiser 찾기</a></li>
 					<li id="l3"><a href="">날씨</a></li>
 				</ul>
 			</div>
