@@ -28,13 +28,13 @@
 <body>
 
 <nav class="navbar navbar-inverse" id="header">
-		<div class="container">
+		<div class="container-fluid">
 			<div class="content">
 			
 			<div class="navbar-header col-sm-3">
 				<a class="navbar-brand" href="main.jsp"><img
 					src="/allways/resources/images/allways.png" id="mainLogo"
-					height="30px" width="30px"></a>
+					height="px" width="140px"></a>
 				<button type="button" class="navbar-toggle" data-toggle="collapse"
 					data-target="#myNavbar">
 					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
@@ -42,7 +42,8 @@
 				</button>
 			</div>
 			
-			<div class="navbar-collapse col-sm-6" id="myNavbar">
+			<div id="myNavbar">
+			<div class="navbar-collapse col-sm-6">
 				<form action="/action_page.php">
 					<div class="input-group" id="text" >
 							<input type="text" class="form-control" placeholder="Search"
@@ -81,6 +82,7 @@
 			
 			</div>
 			
+			</div>
 			</div>
 		</div>
 </nav>				
@@ -204,18 +206,22 @@
 		<div class="row content ">
 			<!-- 왼 쪽 메뉴바 -->
 			<div class="col-sm-2 sidenav">
-				<ul id="leftlist">
-					<li id="l1"><a href="/allways/userPage/?uno=${check.uno}"><img alt="프로필"
-							src="/allways+${check.pf_photo}"></a></li>
-					<li id="l2"><a id ="allwaiserSearchForm" >Allwaiser 찾기</a></li>
-					<li id="l3"><a href="">날씨</a></li>
-				</ul>
+				<div class="left-menu">
+					<a class="btn btn-default form-control" href="/allways/userPage/?uno=${check.uno}">
+					<img alt="프로필"src="/allways+${check.pf_photo}"></a>
+				</div>
+				<div class="left-menu">
+					<a class="btn btn-default form-control" id ="allwaiserSearchForm" >Allwaiser 찾기</a>
+				</div>
+				<div class="left-menu">
+					<a class="btn btn-default form-control" href="">날씨</a>
+				</div>
+				
 			</div>
 			<!-- 가운데 메뉴바 -->
 			<div class="col-sm-7 text-left">
 				<div>
 					<div id="boardMake">
-					게시물 만들기
 						
 					</div>
 					<div id ="boards">		
@@ -255,6 +261,7 @@
 <script  id="boardInsert" type="text/x-handlebars-template">
 
 <div class = "boardInsertForm" style = "margin: 8px">
+<span>게시물 작성하기</span></br>
 <img id = "profileImg" src="/allways/resources/images/default_profile_img.jpg"
 		style="border-radius: 30px; float: left; padding: 4px"
 		onclick="location.href='/allways'">
@@ -308,7 +315,7 @@
 	</details>
 
 
-	<div class="imageArea" >
+	<div class="imageArea" style= "">
 
 		<div id={{carousel}} class="carousel slide" data-ride="carousel"> 
 
