@@ -8,6 +8,16 @@
 		WHERE ${user.uno} IN (
 			SELECT ${allwaiser.allwaiseruno} FROM ${tbl_allwaiser} 
 			WHERE ${allwaiser.uno} = #{uno})
+		ORDER BY ${user.username} 
+		LIMIT 0, 5
+	</select>
+	
+	<select id="countMyList" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM ${tbl_user} 
+		WHERE ${user.uno} IN (
+			SELECT ${allwaiser.allwaiseruno} FROM ${tbl_allwaiser} 
+			WHERE ${allwaiser.uno} = #{uno}
+		)
 	</select>
 	
 	<select id="selectMyOne" resultType="User">

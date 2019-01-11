@@ -10,6 +10,8 @@ public interface AllwaiserDao {
 	// 친구목록 불러오기
 	List<User> readMyAllwaisers(int uno);
 	
+	int countMyAllwaisers(int uno);
+	
 	// 친구 추가
 	int followAllwaiser(int uno);
 	

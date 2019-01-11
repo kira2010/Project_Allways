@@ -28,6 +28,13 @@ public class AllwaiserDaoImple implements AllwaiserDao {
 		
 		return session.selectList(ALLWAISER_MAPPER + ".selectMylist", uno);
 	}
+	
+	// 내가 구독하는 모든 Allwaiser List size 구하기
+	public int countMyAllwaisers(int uno) {
+		logger.info("countMyAllwaisers() 호출"); 
+		
+		return session.selectOne(ALLWAISER_MAPPER + ".countMyList", uno);
+	}
 
 	// 새로운 following 추가하기
 	public int followAllwaiser(int uno) {
