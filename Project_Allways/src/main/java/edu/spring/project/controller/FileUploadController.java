@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import edu.spring.project.domain.Board;
 import edu.spring.project.domain.User;
 import edu.spring.project.service.FileUploadService;
 
@@ -37,8 +38,6 @@ public class FileUploadController {
   public ResponseEntity<List<String>> upload(MultipartHttpServletRequest req) {
     
 	List<MultipartFile> mf = req.getFiles("uploadfile");
-	String s = req.getParameter("Str1"); 
-	System.out.println(s);
 	// 로그인 UNO
 	int uno = 0;
 	List<String> imageUrls = new ArrayList<String>();

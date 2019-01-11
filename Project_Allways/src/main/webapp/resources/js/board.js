@@ -52,9 +52,6 @@ $(document).on('click', '#removeImg', function() {
 var fileBuffer = [];/*파일 리스트*/
 
 function boardUpload(content, privacyBounds) {
-
-	console.log(content);
-	console.log(privacyBounds);
 	
 	var form = new FormData();
 
@@ -63,6 +60,9 @@ function boardUpload(content, privacyBounds) {
 		console.log(form.length);
 	};
 		
+	form.append("content", content);
+	form.append("privacy_bounds", privacyBounds);
+	
 	var url;
 	
 	$.ajax({
@@ -87,7 +87,6 @@ function boardUpload(content, privacyBounds) {
 function boardAjax(content, privacyBounds, data) {
 	
 	console.log(data);
-	
 	$.ajax({
 		type: 'post',
 		url: '/allways/board/insert',

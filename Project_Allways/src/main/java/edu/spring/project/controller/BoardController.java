@@ -2,6 +2,8 @@ package edu.spring.project.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.spring.project.domain.Board;
+import edu.spring.project.domain.User;
 import edu.spring.project.service.BoardService;
 
 @RestController
@@ -23,11 +26,13 @@ public class BoardController {
 	
 	
 	@RequestMapping(value = "insert", method = RequestMethod.POST)
-	public void insert(@RequestBody Board board) {
-		System.out.println(board);
+	public void insert(@RequestBody Board board, HttpSession session) {
 		
-		board.setUno(2);
-		board.setUserId("test");
+		User loginUser =  (User) session.getAttribute("check");
+		board.setUno(loginUser.getUno());
+		board.setUserId(loginUser.getUserId());
+		
+		System.out.println("session input: " + board);
 		
 		boardService.insert(board);
 		

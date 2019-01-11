@@ -7,11 +7,13 @@ import org.springframework.stereotype.Service;
 
 import edu.spring.project.domain.Board;
 import edu.spring.project.persistence.BoardDao;
+import edu.spring.project.persistence.UserDao;
 
 @Service
 public class BoardServiceImple implements BoardService {
 
 	@Autowired private BoardDao boardDao;
+	@Autowired private UserDao userDao;
 	
 	public List<Board> select(int service_bounds) {
 		// test
@@ -26,7 +28,7 @@ public class BoardServiceImple implements BoardService {
 	}
 
 	public int insert(Board board) {
-		// TODO Auto-generated method stub
+		
 		return boardDao.createBoard(board);
 	}
 

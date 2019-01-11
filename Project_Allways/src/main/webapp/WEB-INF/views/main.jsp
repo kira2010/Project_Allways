@@ -56,7 +56,7 @@
 					</li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a>딴따라님 안녕하세요!</a></li>
+					<li><a>${check.userId} 님 안녕하세요!</a></li>
 					<li>
 						<div class="dropdown" id="drop">
 							<button class="btn btn-default dropdown-toggle" type="button"
@@ -196,7 +196,7 @@
 			<!-- 왼 쪽 메뉴바 -->
 			<div class="col-sm-2 sidenav">
 				<ul id="leftlist">
-					<li id="l1"><a href="mypage.jsp"><img alt="프로필"
+					<li id="l1"><a href="userPage/?uno=${check.uno}"><img alt="프로필"
 							src="images/allways.png"></a></li>
 					<li id="l2"><a href="allwaiser.jsp">Allwaiser 찾기</a></li>
 					<li id="l3"><a href="">날씨</a></li>
@@ -226,19 +226,12 @@
 						</div>
 					</div>
 				</form>
-				<table class="table table-hover" id="rightlist">
-					<tbody>
-						<tr>
-							<td><a href="#">John</a></td>
-						</tr>
-						<tr>
-							<td><a href="#">Mary</a></td>
-						</tr>
-						<tr>
-							<td><a href="#">July</a></td>
-						</tr>
-					</tbody>
-				</table>
+				
+				<div id="myAllwayiserList">
+				
+				
+				</div>
+				
 			</div>
 		</div>
 	</div>
@@ -384,7 +377,7 @@ $(document).ready(function(){
 				var boardItem = boardItemTem(content);
 				$('#boards').append(boardItem);
 				
-				if(this.photo !== null ){
+				if(this.photo){
 					var photoList = this.photo.split(',');
 					
 					for(i = 0; i < photoList.length; i++){
