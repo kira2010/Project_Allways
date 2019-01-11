@@ -58,7 +58,7 @@
 		SELECT * FROM ${tbl_board} WHERE INSTR(${board.content}, #{searchKeyword})
 	</select>
 	
-	<!-- 작성중인 코드, 담당 외 Do not touch!!!!!!! 
+	<!-- 작성중인 코드, 담당 외 Do not touch!!!!!!! -->
 	<select id="searchByKeyword" resultType="Board">
 		SELECT * FROM ${tbl_board} WHERE 
 		<if test="searchType==1">
@@ -71,7 +71,6 @@
 			INSTR(${board.hashtag}, #{searchKeyword}) > 0
 		</if>
 	</select>
-	-->
 		
 	<insert id="createBoard">
 		INSERT INTO ${tbl_board} (${board.uno}, ${board.userid}, ${board.content}, ${board.privacy_bounds}, ${board.photo}) 

@@ -1,6 +1,8 @@
 package edu.spring.project.persistence;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
@@ -40,12 +42,16 @@ public class BoardDaoImple implements BoardDao {
 		return session.selectOne(BOARD_MAPPER + ".selectByBno", bno);
 	}
 	
-	// 내용 기반 검색
+	// 내용/작성자ID/hashTag 검색
 	public List<Board> searchByKeyword(int type, String keyword) {
 		logger.info("searchByKeyword(type : {}, keyword : {}) 호출", type, keyword);
 		
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("type", type);
+		params.put("keyword", keyword);
+		
 		// TODO : 쿼리 작성 후 수정 예정!!!!
-		return null;
+		return session.selectList(BOARD_MAPPER + ".searchByKeyword", params);
 	}
 	
 	// 내가 저정한 즐겨찾기 목록 중 공개범위 0/1 인 모든 게시글 가져오기
