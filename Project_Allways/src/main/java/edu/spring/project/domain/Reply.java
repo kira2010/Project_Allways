@@ -8,7 +8,7 @@ public class Reply {
 	private int uno;
 	private String userId;
 	private String reply_content;
-	private Date wr_time;
+	private Date regDate;
 	
 	public Reply() {}
 	
@@ -18,13 +18,13 @@ public class Reply {
 			int uno, 
 			String userId, 
 			String reply_content, 
-			Date wr_time) {
+			Date regDate) {
 		this.rno = rno;
 		this.bno = bno;
 		this.uno = uno;
 		this.userId = userId;
 		this.reply_content = reply_content;
-		this.wr_time = wr_time;
+		this.regDate = regDate;
 	}
 
 	public int getRno() {
@@ -66,21 +66,21 @@ public class Reply {
 	public void setReply_content(String reply_content) {
 		this.reply_content = reply_content;
 	}
-
-	public Date getWr_time() {
-		return wr_time;
-	}
-
-	public void setWr_time(Date wr_time) {
-		this.wr_time = wr_time;
-	}
 	
+	public Date getRegDate() {
+		return regDate;
+	}
+
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
+	}
+
 	@Override
 	public String toString() {
 		String reply = String.format(
 				"REPLY:{rno : %d, bno : %d, uno : %d, "
 				+ "userId : %s, reply_content : %s, wr_time : %s}",
-				rno, bno, uno, userId, reply_content, wr_time);
+				rno, bno, uno, userId, reply_content, regDate);
 		
 		return reply;
 	}
