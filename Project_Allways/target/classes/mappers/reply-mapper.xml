@@ -6,7 +6,7 @@
 	<select id="selectReplyByBno" resultType="Reply">
 		SELECT * FROM ${tbl_reply} 
 		WHERE ${reply.bno} = #{bno} 
-		ORDER BY ${reply.rno} 
+		ORDER BY ${reply.rno} DESC
 		LIMIT 0, 10
 	</select>
 
