@@ -47,7 +47,7 @@
 		FROM ${tbl_user} 
 		WHERE 
 		INSTR(${user.username}, #{userName}) > 0 
-		OR 
+		AND 
 		INSTR(${user.graduation}, #{graduation}) > 0
 	</select>
 	
