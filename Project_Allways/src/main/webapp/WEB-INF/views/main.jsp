@@ -49,7 +49,7 @@
 							<input type="text" class="form-control" placeholder="Search"
 								name="search">
 						<div class="input-group-btn">
-							<button class="btn btn-default" type="submit">
+							<button class="btn btn-default">
 							<i class="glyphicon glyphicon-search"></i>
 							</button>
 						</div>
@@ -292,7 +292,7 @@
 
 </script>
 
-<script  id="boardItem" type="text/x-handlebars-template">
+<script id="boardItem" type="text/x-handlebars-template">
 <div class="boardItem" style="border: solid 1px gray; margin: 8px">
 
 	<div>
@@ -329,40 +329,69 @@
 	
 <div class="container-fluid" style="margin: 8px">
 	<div class="row">
-		<div class="col-xs-6" style="text-align: center;" ><a>북마크</a></div>
-		<div class="col-xs-6 " style="text-align: center;" ><a>댓글</a></div>
+		<div class="col-xs-6" style="text-align: center;" >
+			<a id={{bookMark}} >북마크</a>
+		</div>
+		<div class="col-xs-6 " style="text-align: center;" >
+			<a id={{reply}} class="reply" >댓글</a>
+		</div>
 	</div>
 
 </div>
 
-<div = replies style="border-top: 1px solid gray;>
+<div id= {{replyArea}} style="border: 1px solid grey;">
+</div>	
+
+</div>
+
+
+</script>
+
+<script id="replyInsert" type="text/x-handlebars-template">
+
+<div id="replyInsertForm">
+	<div class="row">
+		<div class="col-xs-1  clearfix">
+		<img id = "profileImg" src="/allways/resources/images/default_profile_img.jpg"
+			style="border-radius: 30px; float: left; padding: 8px"
+			onclick="location.href='/allways'">
+		</div>
+		<div class="col-xs-11">			
+		<form class="input-group">
+			<textarea id="{{replyText}}" class="autosize form-control" rows="1" placeholder="내용 입력" style="resize: none; margin: 8px; width = 100%"></textarea>
 	
-	<div id="replyInsert">
-		<div class="row">
-			<div class="col-xs-1  clearfix">
-			<img id = "profileImg" src="/allways/resources/images/default_profile_img.jpg"
-				style="border-radius: 30px; float: left; padding: 8px"
-				onclick="location.href='/allways'">
+			<div class="input-group-btn">
+				<button id= {{replyInsertBtn}} class="replyInsertBtn btn btn-default ">
+				<i class="glyphicon glyphicon-edit"></i>
+				</button>
 			</div>
-			<div class="col-xs-11">			
-			<form class="input-group">
-			
-				<textarea id="content" class="autosize form-control" rows="1" placeholder="내용 입력" style="resize: none; margin: 8px; width = 100%"></textarea>
-		
-				<div class="input-group-btn">
-					<button class="btn btn-default">
-					<i class="glyphicon glyphicon-edit"></i>
-					</button>
-				</div>
-			</form>
-			</div>
-		</div>	
+		</form>
+		</div>
+	</div>	
 </div>
 	
-	<hr style="width: 95%; color: grey; height: 1px; background-color:grey; margin-bottom: 5px; margin-top: 5px" />
-	
-	</div>
+<hr style="width: 95%; color: grey; height: 1px; background-color:grey; margin-bottom: 5px; margin-top: 5px" />
 
+</script>
+
+<script id="replyItem" type="text/x-handlebars-template">
+
+<div class="container" style="margin-bottom: 8px;">
+<div class="row">
+	<div class="col-xs-1  clearfix">
+	<img id = "profileImg" src="/allways/resources/images/default_profile_img.jpg"
+		style="border-radius: 30px; float: left; padding: 8px"
+		onclick="location.href='/allways'">
+	</div>
+	<div class="col-xs-11">			
+		<div style="display: inline-block; margin-left: 8px">
+			<a href = "/allways">{{userId}}</a>
+			<span style="font-size: x-small; color: gray;">{{regDate}}</span>
+		</div>
+	<textarea id="{{replyText}}" class="autosize form-control" rows="1" placeholder="댓글 내용....." style="resize: none; margin-right: 8px; margin-left: 8px"></textarea>
+	</div>
+</div>
+</div>
 
 </script>
 
@@ -372,8 +401,8 @@
 $(document).ready(function(){
 	
 	
-	var boardinsertsource = $('#boardInsert').html();
-	var boardInsertTemplate = Handlebars.compile(boardinsertsource);
+	var boardInsertSource = $('#boardInsert').html();
+	var boardInsertTemplate = Handlebars.compile(boardInsertSource);
 
 	function drowBoardInsert(){
 		var boardInsertForm = boardInsertTemplate();
@@ -384,7 +413,6 @@ $(document).ready(function(){
 
 	
 	var boardItemSource = $('#boardItem').html();
-	console.log(boardItemSource);
 	
 	var boardItemTem = Handlebars.compile(boardItemSource);
 
@@ -416,7 +444,10 @@ $(document).ready(function(){
 					content: subContent,
 					carousel: this.bno+"Carousel",
 					uno_ol: this.bno+"ol",
-					uno_div: this.bno+"div"
+					uno_div: this.bno+"div",
+					bookMark:this.bno+",bookMark",
+					reply: this.bno+",reply",
+					replyArea: this.bno+"replyArea"
 				};
 				
 				var boardItem = boardItemTem(content);
@@ -450,7 +481,7 @@ $(document).ready(function(){
 					
 					$('#'+this.bno+'Carousel').append(btn);
 					
-					
+						
 				};
 				
 				
@@ -472,10 +503,74 @@ $(document).ready(function(){
 			
 	});
 
+	var replyInsertSource = $('#replyInsert').html();
+	var replyInsertTemplate = Handlebars.compile(replyInsertSource);
 	
-	function drowAllwaiser(){
+	var replyItemSource = $('#replyItem').html();
+	var replyItemTemplate = Handlebars.compile(replyItemSource);
+
+	
+	$(document).on("click",'.reply',function(event){
+		var bno = (this.id).split(',')[0];
 		
-	}
+		var content = {
+			replyText: bno + ",replyText",
+			replyInsertBtn: bno + ",replyInsertBtn"
+		}
+		
+		var replyInsert = replyInsertTemplate(content);
+		console.log(replyInsert);
+		
+		$('#'+bno+'replyArea').empty(); 
+		
+		$('#'+bno+'replyArea').append(replyInsert);
+		
+		$.getJSON('/allways/replies/all/' + bno, function(data) {
+			
+			$(data).each(function() {
+				var date = new Date(this.regDate);
+				var dateString = date.toLocaleDateString()
+				
+				var content = {
+						rno: this.rno,
+						replyText: reply_content,
+						userId: this.userId,
+						regDate: dateString
+				};
+				var replyItem = template(content);
+				$('#'+bno+'replyArea').append(replyItem);
+
+			});
+		
+		});	
+		
+   	});
+
+	$(document).on("click",'.replyInsertBtn',function(event){
+		var bno = (this.id).split(',')[0];
+		var content = $('#'+bno+'replyText').val();
+		
+		$.ajax({
+			type: 'post',
+			url: '/allways/replies',
+			headers: {
+				'Content-Type': 'application/json',
+				'X-HTTP-Method-Override': 'post'
+			},
+			data: JSON.stringify({
+				'bno': bno,
+				'reply_content': content,
+				
+			}),
+			success: function(result) {
+				alert('댓글 추가 결과: ' + result);
+			}
+		});
+	
+	});
+	
+
+		
 	
 });
 
