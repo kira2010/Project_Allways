@@ -18,8 +18,8 @@ public class ReplyServiceImple implements ReplyService {
 	}
 
 	public List<Reply> selectByBno(int bno) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return replyDao.readReplyList(bno);
 	}
 
 	public List<Reply> selectByUno(int uno) {

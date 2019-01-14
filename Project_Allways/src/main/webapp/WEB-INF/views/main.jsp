@@ -339,9 +339,10 @@
 
 </div>
 
-<div id= {{replyArea}} style="border: 1px solid grey;">
-</div>	
 
+</div>
+
+<div id= {{replyArea}} style="border: 1px solid grey; margin-left: 8px; margin-right: 8px; margin-top: -8px; ">
 </div>
 
 
@@ -357,7 +358,7 @@
 			onclick="location.href='/allways'">
 		</div>
 		<div class="col-xs-11">			
-		<form class="input-group">
+		<div class="input-group">
 			<textarea id="{{replyText}}" class="autosize form-control" rows="1" placeholder="내용 입력" style="resize: none; margin: 8px; width = 100%"></textarea>
 	
 			<div class="input-group-btn">
@@ -365,7 +366,7 @@
 				<i class="glyphicon glyphicon-edit"></i>
 				</button>
 			</div>
-		</form>
+		</div>
 		</div>
 	</div>	
 </div>
@@ -376,7 +377,7 @@
 
 <script id="replyItem" type="text/x-handlebars-template">
 
-<div class="container" style="margin-bottom: 8px;">
+<div style="margin-bottom: 8px;">
 <div class="row">
 	<div class="col-xs-1  clearfix">
 	<img id = "profileImg" src="/allways/resources/images/default_profile_img.jpg"
@@ -384,11 +385,11 @@
 		onclick="location.href='/allways'">
 	</div>
 	<div class="col-xs-11">			
-		<div style="display: inline-block; margin-left: 8px">
+		<div style="display: inline-block;">
 			<a href = "/allways">{{userId}}</a>
 			<span style="font-size: x-small; color: gray;">{{regDate}}</span>
 		</div>
-	<textarea id="{{replyText}}" class="autosize form-control" rows="1" placeholder="댓글 내용....." style="resize: none; margin-right: 8px; margin-left: 8px"></textarea>
+	<textarea id="{{replyText}}" class="autosize form-control" rows="1" readonly style="resize: none; ">{{replyContent}}</textarea>
 	</div>
 </div>
 </div>
@@ -445,8 +446,8 @@ $(document).ready(function(){
 					carousel: this.bno+"Carousel",
 					uno_ol: this.bno+"ol",
 					uno_div: this.bno+"div",
-					bookMark:this.bno+",bookMark",
-					reply: this.bno+",reply",
+					bookMark:this.bno+"-bookMark",
+					reply: this.bno+"-reply",
 					replyArea: this.bno+"replyArea"
 				};
 				
@@ -511,21 +512,20 @@ $(document).ready(function(){
 
 	
 	$(document).on("click",'.reply',function(event){
-		var bno = (this.id).split(',')[0];
+		var bno = (this.id).split('-')[0];
 		
 		var content = {
-			replyText: bno + ",replyText",
-			replyInsertBtn: bno + ",replyInsertBtn"
+			replyText: bno + "-replyText",
+			replyInsertBtn: bno + "-replyInsertBtn"
 		}
 		
 		var replyInsert = replyInsertTemplate(content);
-		console.log(replyInsert);
 		
 		$('#'+bno+'replyArea').empty(); 
 		
 		$('#'+bno+'replyArea').append(replyInsert);
-		
-		$.getJSON('/allways/replies/all/' + bno, function(data) {
+	
+ 		$.getJSON('/allways/replies/all/' + bno, function(data) {
 			
 			$(data).each(function() {
 				var date = new Date(this.regDate);
@@ -533,22 +533,26 @@ $(document).ready(function(){
 				
 				var content = {
 						rno: this.rno,
-						replyText: reply_content,
+						replyContent: this.reply_content,
 						userId: this.userId,
 						regDate: dateString
 				};
-				var replyItem = template(content);
+				var replyItem = replyItemTemplate(content);
 				$('#'+bno+'replyArea').append(replyItem);
 
 			});
-		
+		 
 		});	
 		
    	});
 
 	$(document).on("click",'.replyInsertBtn',function(event){
-		var bno = (this.id).split(',')[0];
-		var content = $('#'+bno+'replyText').val();
+		var bno = (this.id).split('-')[0];
+		
+		console.log(bno);
+		var content = $('#'+bno+'-replyText').val();
+		
+		console.log(content);
 		
 		$.ajax({
 			type: 'post',

@@ -33,6 +33,8 @@ public class ReplyRestController {
 		reply.setUno(loginUser.getUno());
 		reply.setUserId(loginUser.getUserId());
 		
+		System.out.println(reply);
+		
 		int result = replyService.insert(reply);
 		
 		ResponseEntity<Integer> entity = null;
