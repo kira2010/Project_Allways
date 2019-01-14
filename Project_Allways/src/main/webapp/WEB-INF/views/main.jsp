@@ -31,7 +31,7 @@
 		<div class="container-fluid">
 			<div class="content">
 			
-			<div class="navbar-header col-sm-3">
+			<div class="navbar-header col-sm-4">
 				<a class="navbar-brand" href="main.jsp"><img
 					src="/allways/resources/images/allways.png" id="mainLogo"
 					height="px" width="140px"></a>
@@ -43,7 +43,7 @@
 			</div>
 			
 			<div id="myNavbar">
-			<div class="navbar-collapse col-sm-6">
+			<div class="navbar-collapse col-sm-5">
 				<form action="/action_page.php">
 					<div class="input-group" id="text" >
 							<input type="text" class="form-control" placeholder="Search"
@@ -57,9 +57,7 @@
 				</form>
 			</div>		
 			
-			<div class = "nav navbar-nav navbar-right col-sm-3 container">
-				
-					
+			<div class = "nav navbar-nav navbar-right col-sm-3">				
 				<div class="dropdown input-group" id="drop">
 					<input type="text" class="form-control" value="${check.userId} 님 안녕하세요!" readonly>
 					<div class="input-group-btn">
@@ -207,7 +205,7 @@
 			<!-- 왼 쪽 메뉴바 -->
 			<div class="col-sm-2 sidenav">
 				<div class="left-menu">
-					<a class="btn btn-default form-control" href="/allways/userPage/?uno=${check.uno}">
+					<a class="btn btn-default form-control" href="/allways/userPage?uno=${check.uno}">
 					<img alt="프로필"src="/allways+${check.pf_photo}"></a>
 				</div>
 				<div class="left-menu">
@@ -334,7 +332,37 @@
 		<div class="col-xs-6" style="text-align: center;" ><a>북마크</a></div>
 		<div class="col-xs-6 " style="text-align: center;" ><a>댓글</a></div>
 	</div>
+
 </div>
+
+<div = replies style="border-top: 1px solid gray;>
+	
+	<div id="replyInsert">
+		<div class="row">
+			<div class="col-xs-1  clearfix">
+			<img id = "profileImg" src="/allways/resources/images/default_profile_img.jpg"
+				style="border-radius: 30px; float: left; padding: 8px"
+				onclick="location.href='/allways'">
+			</div>
+			<div class="col-xs-11">			
+			<form class="input-group">
+			
+				<textarea id="content" class="autosize form-control" rows="1" placeholder="내용 입력" style="resize: none; margin: 8px; width = 100%"></textarea>
+		
+				<div class="input-group-btn">
+					<button class="btn btn-default">
+					<i class="glyphicon glyphicon-edit"></i>
+					</button>
+				</div>
+			</form>
+			</div>
+		</div>	
+</div>
+	
+	<hr style="width: 95%; color: grey; height: 1px; background-color:grey; margin-bottom: 5px; margin-top: 5px" />
+	
+	</div>
+
 
 </script>
 

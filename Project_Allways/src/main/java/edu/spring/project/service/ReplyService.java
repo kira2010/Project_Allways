@@ -8,7 +8,7 @@ public interface ReplyService {
 
 	int insert(Reply reply);
 	
-	List<Reply> selectByRno(int rno);
+	List<Reply> selectByBno(int Bno);
 	List<Reply> selectByUno(int uno);
 	
 	int update(Reply reply);

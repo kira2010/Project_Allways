@@ -36,4 +36,10 @@ public class MainController {
 		return "main";
 	}
 	
+	@RequestMapping(value = "replies/test", method = RequestMethod.GET)
+	public String replyTest() {
+		return "replyTest";
+	}
+	
+	
 }
