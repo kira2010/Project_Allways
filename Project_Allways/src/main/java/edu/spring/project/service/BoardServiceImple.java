@@ -38,8 +38,8 @@ public class BoardServiceImple implements BoardService {
 	}
 
 	public int delete(int bno) {
-		// TODO Auto-generated method stub
-		return 0;
+
+		return boardDao.deleteBoard(bno);
 	}
 
 }

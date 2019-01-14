@@ -296,7 +296,7 @@
 <div class="boardItem" style="border: solid 1px gray; margin: 8px">
 
 	<div>
-		<form>
+
 		<img id = "profileImg" src="/allways/resources/images/default_profile_img.jpg"
 			style="border-radius: 30px; float: left; padding: 8px"
 			onclick="location.href='/allways'">
@@ -304,8 +304,26 @@
 			<a href = "/allways">{{userId}}</a><br />
 			<span style="font-size: x-small; color: gray;">{{regDate}}</span>
 		</div>
-		</form>
+
+	
+	<div class="dropdown" style="float: right;">
+    	<button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
+   	 	<span class="glyphicon glyphicon-align-justify"></span>
+		</button>
+
+    	<ul class="dropdown-menu" role="menu" aria-labelledby="menu1" style="right: 0; left: auto;">
+    	  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">북마크</a></li>
+      	<li role="presentation"><a role="menuitem" tabindex="-1" href="#">수정</a></li>
+      	<li role="presentation" class="divider"></li>
+      	<li role="presentation"><a role="menuitem" tabindex="-1"  id="{{boardDeleteBtn}}" class="boardDeleteBtn">삭제</a></li>
+    	</ul>
 	</div>
+
+
+	</div> <!--  -->
+
+
+
 
 	<details>
     	<summary>{{content_T}}</summary>
@@ -313,7 +331,7 @@
 	</details>
 
 
-	<div class="imageArea" style= "">
+	<div class="imageArea" style= "margin: 8px">
 
 		<div id={{carousel}} class="carousel slide" data-ride="carousel"> 
 
@@ -389,7 +407,7 @@
 			<a href = "/allways">{{userId}}</a>
 			<span style="font-size: x-small; color: gray;">{{regDate}}</span>
 		</div>
-	<textarea id="{{replyText}}" class="autosize form-control" rows="1" readonly style="resize: none; ">{{replyContent}}</textarea>
+	<textarea id="{{replyText}}" class="autosize form-control" rows="1" readonly style="resize: none; margin-right: 8px"">{{replyContent}}</textarea>
 	</div>
 </div>
 </div>
@@ -417,13 +435,12 @@ $(document).ready(function(){
 	
 	var boardItemTem = Handlebars.compile(boardItemSource);
 
-	function getBoard(){	
-	};
-
 	function drowBoardItems(){
 			
 		$.getJSON('/allways/board/selectBoard', function(data){
 			console.log(data);
+			
+			$('#boards').empty();
 			
 			$(data).each(function(){
 				var date = new Date(this.regDate);
@@ -448,7 +465,8 @@ $(document).ready(function(){
 					uno_div: this.bno+"div",
 					bookMark:this.bno+"-bookMark",
 					reply: this.bno+"-reply",
-					replyArea: this.bno+"replyArea"
+					replyArea: this.bno+"replyArea",
+					boardDeleteBtn: this.bno+"-boardDeleteBtn"
 				};
 				
 				var boardItem = boardItemTem(content);
@@ -574,6 +592,26 @@ $(document).ready(function(){
 	});
 	
 
+	$(document).on("click",'.boardDeleteBtn',function(event){
+
+		var bno = this.id.split('-')[0];	
+
+		console.log(bno);
+		
+ 		$.ajax({
+			type: 'delete',
+			url: '/allways/board/' + bno,
+			headers: {
+				'Content-Type': 'application/json',
+				'X-HTTP-Method-Override': 'delete'
+			},
+			success: function(result) {
+				alert('보드 삭제 결과: ' + result);
+				drowBoardItems();
+			}
+		});
+ 	
+	});
 		
 	
 });

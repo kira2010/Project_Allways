@@ -36,9 +36,9 @@ public class MainController {
 		return "main";
 	}
 	
-	@RequestMapping(value = "replies/test", method = RequestMethod.GET)
+	@RequestMapping(value = "board/test", method = RequestMethod.GET)
 	public String replyTest() {
-		return "replyTest";
+		return "boardTest";
 	}
 	
 	

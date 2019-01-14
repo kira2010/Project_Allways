@@ -34,6 +34,20 @@
 			<label for = "profileImg" style="font-size: small;">아이디</label><br />
 			<span style="font-size: x-small; color: gray;">0000년 00월 00일</span>
 		</div>
+		
+<div class="dropdown" style="float: right;">
+    <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
+    <span class="glyphicon glyphicon-align-justify"></span>
+	</button>
+
+    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1" style="right: 0; left: auto;">
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">북마크</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">수정</a></li>
+      <li role="presentation" class="divider"></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">삭제</a></li>
+    </ul>
+</div>
+			
 	</div>
 		
 	<details>
