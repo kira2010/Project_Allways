@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -204,20 +203,23 @@ label {
 						'userName': userName,
 						'graduation': graduation
 					}),
-					success: function(user) {
+					success: function(users) {
 						
-						console.log(user);
-						$(user).each(function(){
-							
+						console.log(users);
+						$(users).each(function(index, value){
+							console.log(index, value);
 							var content = {
-									userName: user,
-									graduation: user
+									userName: value.userName,
+									graduation: value.graduation
 							}
+							console.log(content);
+							
+							var searchItem = template(content);
+							
+							division.append(searchItem);
 						});
 						
-						var searchItem = template(content);
 						
-						division.append(searchItem);
 					}
 					
 				});
@@ -264,3 +266,6 @@ label {
 	</script>
 </body>
 </html>
+
+
+

@@ -16,14 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 import edu.spring.project.domain.User;
 import edu.spring.project.persistence.UserDao;
 
-
-
 @RestController
 @RequestMapping(value = "search")
 public class AllwaiserController {
-	
-	private final Logger logger = 
-			LoggerFactory.getLogger(AllwaiserController.class);
+
+	private final Logger logger = LoggerFactory.getLogger(AllwaiserController.class);
 
 	@Autowired
 	private UserDao dao;
@@ -45,54 +42,54 @@ public class AllwaiserController {
 //		return entity;
 //		
 //	}
-	
-	@RequestMapping(value="/{uno}", method=RequestMethod.PUT)
-	public ResponseEntity<Integer> friendInsert(
-			@PathVariable(name="uno") int uno) {
-			logger.info("friendInsert(uno={})",uno);
-		
-			int result = 1;
-			
-			ResponseEntity<Integer> entity = null;
-			if(result == 1) {
-				entity = new ResponseEntity<Integer>(result, HttpStatus.OK);
-			} else {
-				entity = new ResponseEntity<Integer>(result, HttpStatus.BAD_REQUEST);
-			}
-			return entity;
-	}
-	
-	@RequestMapping(value="/user", method=RequestMethod.POST)
-	public ResponseEntity<List<User>> searchUsers(@RequestBody User user) {
-		
-		String name = user.getUserName();
-		
-		String graduation = user.getGraduation();
-		
-		List<User> list = null;
-		if (name == "" && graduation == "") {
-		
-		if(name != "") {
-			list = dao.findUserByName(name);
 
-		}
-		
-		if(graduation != "") {
-			list = dao.findUserByGraduation(graduation);
+	@RequestMapping(value = "/{uno}", method = RequestMethod.PUT)
+	public ResponseEntity<Integer> friendInsert(@PathVariable(name = "uno") int uno) {
+		logger.info("friendInsert(uno={})", uno);
 
-		}
-		
+		int result = 1;
+
+		ResponseEntity<Integer> entity = null;
+		if (result == 1) {
+			entity = new ResponseEntity<Integer>(result, HttpStatus.OK);
 		} else {
-			list = dao.findUserByNameAndGraduation(user); 
-					
+			entity = new ResponseEntity<Integer>(result, HttpStatus.BAD_REQUEST);
 		}
-		
-		ResponseEntity<List<User>> entity = 
-			new ResponseEntity<List<User>>(list, HttpStatus.OK);
-		 
 		return entity;
 	}
-	
+
+	@RequestMapping(value = "/user", method = RequestMethod.POST)
+	public ResponseEntity<List<User>> searchUsers(@RequestBody User user) {
+
+		String name = user.getUserName();
+
+		String graduation = user.getGraduation();
+
+		List<User> list = null;
+		
+//		if (name == "" && graduation == "") {
+//			if (name != "") {
+//				list = dao.findUserByName(name);
+//			}
+//			if (graduation != "") {
+//				list = dao.findUserByGraduation(graduation);
+//			}
+//		} else {
+//			list = dao.findUserByNameAndGraduation(user);
+//		}
+		
+		if (!name.isEmpty() && name != null && !graduation.isEmpty() && graduation != null) {
+			list = dao.findUserByNameAndGraduation(user);
+		} else if (!name.isEmpty() && name != null) {
+			list = dao.findUserByName(name);
+		} else if (!graduation.isEmpty() && graduation != null) {
+			list = dao.findUserByGraduation(graduation);
+		} 
+		
+
+		ResponseEntity<List<User>> entity = new ResponseEntity<List<User>>(list, HttpStatus.OK);
+
+		return entity;
+	}
+
 }
-
-

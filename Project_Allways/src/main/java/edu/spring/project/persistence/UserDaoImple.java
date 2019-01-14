@@ -76,6 +76,20 @@ public class UserDaoImple implements UserDao {
 				
 		return session.selectList(USER_MAPPER + ".findUserByNameAndGraduation", user);
 	}
+	
+	// 이름 + Email 로 ID 찾기
+	public String findUserId(User user) {
+		logger.info("findUserId({}) 호출", user);
+		
+		return session.selectOne(USER_MAPPER + ".findUserId", user);
+	}
+	
+	// ID + 이름 + Email 로 uno 찾기 
+	public int findUserPwd(User user) {
+		logger.info("findUserPwd({}) 호출", user);
+		
+		return session.selectOne(USER_MAPPER + ".findUserPwd" + user);
+	}
 
 	// 신규 회원가입
 	public int createUser(User user) {	
@@ -96,6 +110,13 @@ public class UserDaoImple implements UserDao {
 		logger.info("updateEmotion({}) 호출", user);
 		
 		return session.update(USER_MAPPER + ".updateEmotion", user);
+	}
+	
+	// 비밀번호 reset
+	public int resetUserPwd(int uno) {
+		logger.info("resetUserPwd({}) 호출", uno);
+		
+		return session.update(USER_MAPPER + ".resetPassword", uno);
 	}
 
 	// 회원 탈퇴

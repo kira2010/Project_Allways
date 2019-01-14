@@ -2,6 +2,7 @@ package edu.spring.project.persistence;
 
 import java.util.List;
 
+import edu.spring.project.domain.Allwaiser;
 import edu.spring.project.domain.User;
 
 public interface AllwaiserDao {
@@ -13,7 +14,7 @@ public interface AllwaiserDao {
 	int countMyAllwaisers(int uno);
 	
 	// 친구 추가
-	int followAllwaiser(int uno);
+	int followAllwaiser(Allwaiser allwaiser);
 	
 	// 친구 이름으로 검색
 	List<User> searchByName(String userName, int uno);
