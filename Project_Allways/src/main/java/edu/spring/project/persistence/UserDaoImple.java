@@ -70,6 +70,7 @@ public class UserDaoImple implements UserDao {
 		return session.selectList(USER_MAPPER + ".findUserByGraduation", graduation);
 	}
 	
+	// 이름 + 출신학교로 회원 찾기
 	public List<User> findUserByNameAndGraduation(User user) {
 		logger.info("findUserByNameAndGraudation(user : {}) 호출", user);
 				
