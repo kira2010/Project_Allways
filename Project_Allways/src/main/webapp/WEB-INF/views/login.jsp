@@ -112,7 +112,7 @@ html, body {
 				<form action="/allways/users/login" method="post">
 					<input style="width: 50%;" type="text" name="userId" placeholder="아이디 입력" required /> <br /> 
 					<input style="width: 50%" type="password" name="userPwd" placeholder="비밀번호 입력" required /> <br /> 
-					<input style="width: 50%" type="submit" value="로그인" "/> 
+					<input style="width: 50%" type="submit" value="로그인" /> 
 					<input type="hidden" name="queryString" value="${targetUrl}" />
 				</form>
 				<!--본문끝  -->
