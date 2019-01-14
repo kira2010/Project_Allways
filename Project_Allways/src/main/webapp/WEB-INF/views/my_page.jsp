@@ -98,10 +98,16 @@ footer {
 	justify-content: center;
 }
 
-#userInfo {
+#user-Info {
 	border: solid 1px grey;
 	margin-bottom: 15px;
 }
+
+.emotion {
+	width: 40px;
+	height: 40px;
+}
+
 </style>
 </head>
 <body>
@@ -299,12 +305,16 @@ footer {
 						<img id="profile"
 							src="/allways/resources/images/default_profile_img.jpg"
 							width="120px" height="120px">
+						<label id="name"></label>
 					</div>
 					<div class="col-sm-4" style="padding: 0px;">
 						<!-- 왼쪽 정보 및 상태 -->
-						<div id="userInfo">
-							<label style="margin-top: 5px;">생년 월일 :</label> <br /> <label>이메일
-								:</label> <br /> <label>학교 :</label> <br />
+						<div id="user-Info">
+							<label style="margin-top: 5px;">생년 월일 :</label> 
+							<fmt:formatDate value="${userInfo.birthDay}" pattern="yyyy년 MM월 dd일" var="birthDay"/>
+							<label id="birth"></label> <br /> 
+							<label id="email">이메일:</label> <label></label><br />
+							<label id="school">학교 :</label> <label></label><br />
 							<div class="dropdown" id="drop"
 								style="text-align: right; margin: 5px;">
 								<button class="btn btn-default dropdown-toggle" type="button"
@@ -313,17 +323,20 @@ footer {
 								</button>
 								<ul class="dropdown-menu" role="menu" aria-labelledby="menu1"
 									style="float: right;">
-									<li role="presentation"><img
+									<li role="presentation" id="img1"><img
 										src="/allways/resources/images/happy.jpg"></li>
-									<li role="presentation"><img
+									<li role="presentation" id="img2"><img
 										src="/allways/resources/images/soso.jpg"></li>
-									<li role="presentation"><img
+									<li role="presentation" id="img3"><img
 										src="/allways/resources/images/sentimental.jpg"></li>
-									<li role="presentation"><img
+									<li role="presentation" id="img4"><img
 										src="/allways/resources/images/sad.jpg"></li>
-									<li role="presentation"><img
+									<li role="presentation" id="img5"><img
 										src="/allways/resources/images/dangerous.jpg"></li>
 								</ul>
+							</div>
+							<div>
+								<img class="emotion" src="/allways/resources/images/happy.jpg">
 							</div>
 						</div>
 					</div>
@@ -378,33 +391,42 @@ footer {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.min.js"></script>
 <script id="allwaiser-list" type="text/x-handlebars-template">
 	<div class="allwaiser-item">
-		<table class="table table-hover" id="rightlist">
-			<tbody>
-				<tr>
-					<td><a href="#"><label></label></a></td>
-				</tr>
-				<tr>
-					<td><a href="#"><label></label></a></td>
-				</tr>
-				<tr>
-					<td><a href="#"><label></label></a></td>
-				</tr>
-			</tbody>
-		</table>
+		
 	</div>
 </script>
 <script>
-	$(document).ready(function() {
-		var division = $('#')
-		
-		var source = $('#allwaiser-list').html();
-		
-		var template = Handlebars.compile(source);
-		
-		function getAllAllwaiser() {
-			$.getJSON('/Project_Always/')
-		}
+$(document).ready(function() {
+	
+	$('#img1').click(function() {
+		$('.emotion').attr("src", "/allways/resources/images/happy.jpg");
 	});
+	$('#img2').click(function() {
+		$('.emotion').attr("src", "/allways/resources/images/soso.jpg");
+	});
+	$('#img3').click(function() {
+		$('.emotion').attr("src", "/allways/resources/images/sentimental.jpg");
+	});
+	$('#img4').click(function() {
+		$('.emotion').attr("src", "/allways/resources/images/sad.jpg");
+	});
+	$('#img5').click(function() {
+		$('.emotion').attr("src", "/allways/resources/images/dangerous.jpg");
+	});
+	
+	
+	if (${userInfo.uno} == ${check.uno}) {
+		$('#name').append(${userInfo.userId});
+		$('#birth').append(${userInfo.birthDay});
+		$('#email').append(${userInfo.userEmail});
+		
+		if(${userInfo.graduation}) {
+			$('#school'),append(${userInfo.graduation});
+		}
+	} else {
+		
+	}
+});
+
 </script>
 
 
