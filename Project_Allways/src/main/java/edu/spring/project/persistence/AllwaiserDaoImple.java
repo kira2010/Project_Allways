@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import edu.spring.project.domain.Allwaiser;
 import edu.spring.project.domain.User;
 
 @Repository
@@ -37,10 +38,10 @@ public class AllwaiserDaoImple implements AllwaiserDao {
 	}
 
 	// 새로운 following 추가하기
-	public int followAllwaiser(int uno) {
-		logger.info("followAllwaiser(uno : {}) 호출", uno);
+	public int followAllwaiser(Allwaiser allwaiser) {
+		logger.info("followAllwaiser(uno : {}) 호출", allwaiser);
 		
-		return session.insert(ALLWAISER_MAPPER + ".followAllwaiser", uno);
+		return session.insert(ALLWAISER_MAPPER + ".followAllwaiser", allwaiser);
 	}
 	
 	// following List에서 이름으로 찾기
