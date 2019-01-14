@@ -23,7 +23,7 @@
 
 <style>
 #jb-container {
-	width: 940px;
+	width: 1000px;
 	margin: 0px auto;
 	padding: 20px;
 	border: 1px solid #bcbcbc;
@@ -53,7 +53,7 @@
 }
 
 #jb-sidebar-right {
-	width: 160px;
+	width: 300px;
 	padding: 20px;
 	margin-bottom: 20px;
 	float: right;
@@ -92,8 +92,8 @@ label {
 			<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 				<form class="form-inline">
 
-					<input id="name" class="form-control mr-sm-2" type="text" value="${user.userName}"
-						placeholder="이름,학교">
+					<input id="name" class="form-control mr-sm-2" type="text" placeholder="이름">
+					<input id="graduation" class="form-control mr-sm-2" type="text" placeholder="학교">
 					<button id="search" type="button"
 						class="btn btn-outline-light text-dark">
 						<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
@@ -102,26 +102,37 @@ label {
 			</nav>
 
 			<h2>검색 확인</h2>
-			<div id="replies">
+			<div id="searchs">
 			
 			</div>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.min.js">
 			</script>
-			<script id="reply-template" type="text/x-handlebars-template" >
-			<div class="reply-item">
+			<script id="search-template" type="text/x-handlebars-template" >
+			<div class="search-item">
 				<a id="userName" >{{userName}}</a>
 				<a id="graduation">{{graduation}}</a>
-				<button id="friendInsert">친구추가</button>
+				<button id="btnInsert">친구추가</button>
 			</div>
 			</script>
 		</div>
 		<div id="jb-sidebar-right">
-			<h2>Sidebar</h2>
-			<ul>
-				<li>Lorem</li>
-				<li>Ipsum</li>
-				<li>Dolor</li>
-			</ul>
+			<h2>친구</h2>
+				<form class="form-inline">
+
+					<input id="friendName" class="form-control mr-sm-2" type="text" placeholder="친구 이름">
+					<button id="btnFriendSearch" type="button"
+						class="btn btn-outline-light text-dark">
+						<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+					</button>
+				</form>
+				
+				<script id="friend-template" type="text/x-handlebars-template" >
+			<div class=friend-item">
+				<a id="userName" >{{userName}}</a>
+				<a id="graduation">{{graduation}}</a>
+				<button id="friendDelete">친구끊기</button>
+			</div>
+			</script>
 		</div>
 		<div id="jb-footer">
 			<p>Copyright</p>
@@ -131,18 +142,20 @@ label {
 	<script>
 		$(document).ready(function() {
 
-			var name = $('#name').val();
+			var userName = $('#name').val();
 			
-			var division = $('#replies');
+			var graduation = $('#graduation').val();
 			
-			var source = $('#reply-template').html();
+			var division = $('#searchs');
+			
+			var source = $('#search-template').html();
 			
 			var template = Handlebars.compile(source);
 			
-			function getAllSearch() {
-				console.log('/allways/replies/all/' + name);
+		/* 	// function getAllSearch() {
+				console.log('/allways/search/all/' + name);
 				
-				$.getJSON('/allways/replies/all/' + name, function(data) {
+				$.getJSON('/allways/search/all/' + name, function(data) {
 					
 					division.empty();
 					
@@ -164,22 +177,90 @@ label {
 					});
 				});
 
-			}
+			}  */
 
 			$('#search').click(function() {
-
-				name = $('#name').val();
 				
+				userName = $('#name').val();
 				
-				if (name == "") {
-					alert('이름이나 아이디를 입력하세요');
-				}
+				graduation = $('#graduation').val();
 				
-				getAllSearch();
+				division = $('#searchs');
 				
+				source = $('#search-template').html();
+				
+				template = Handlebars.compile(source);
+				
+				division.empty();
+				
+				$.ajax({
+					type: 'post',
+					url: '/allways/search/user',
+					headers: {
+						'Content-Type': 'application/json',
+						'X-HTTP-Method-Override': 'post'
+					},
+					data: JSON.stringify({
+						'userName': userName,
+						'graduation': graduation
+					}),
+					success: function(user) {
+						
+						console.log(user);
+						$(user).each(function(){
+							
+							var content = {
+									userName: user,
+									graduation: user
+							}
+						});
+						
+						var searchItem = template(content);
+						
+						division.append(searchItem);
+					}
+					
+				});
+		
 			});
 
+			
+			division.on('click', '.search-item .btnInsert', function() {
+
+				var uno = $(this).prevAll('#uno').val();
+
+				$.ajax({
+					type : 'put',
+					url : '/allways/search/' + uno,
+					headers : {
+						'Content-Type' : 'application/json',
+						'X-HTTP-Method-Override' : 'put'
+					},
+					success : function(data) {
+						if (data == 1) {
+							alert('친구 추가 성공');
+						} else {
+							alert('친구 추가 실패');
+						}
+
+					}
+				});
+
+			});
+
+			var friendDivision = $('#friend-searchs');
+
+			var friendSource = $('#friend-template').html();
+
+			var friendTemplate = Handlebars.compile(friendSource);
+
+			friendDivision.on('click', '.friend-item .btnFriendSearch',
+					function() {
+
+						var friendName = $('#friend-Name').val();
+					});
 		});
+	
 	</script>
 </body>
 </html>
