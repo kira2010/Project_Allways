@@ -19,11 +19,17 @@ public interface UserDao {
 	
 	List<User> findUserByNameAndGraduation(User user);
 	
+	String findUserId(User user);
+	
+	int findUserPwd(User user);
+	
 	int createUser(User user);
 	
 	int updateUser(User user);
 	
 	int updateEmotion(User user);
+	
+	int resetUserPwd(int uno);
 	
 	int deleteUser(int uno);
 }

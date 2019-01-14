@@ -13,6 +13,10 @@
 		WHERE ${user.userid} = #{userId}
 	</select>
 	
+	<select id="getEmotion" resultType="java.lang.Integer">
+		SELECT ${user.emotion} FROM ${tbl_user} WHERE ${user.uno} = #{uno} 
+	</select>
+	
 	<select id="findUnoFromId" resultType="java.lang.Integer">
 		SELECT ${user.uno} FROM ${tbl_user} 
 		WHERE ${user.userid} = #{userId}
@@ -51,6 +55,19 @@
 		INSTR(${user.graduation}, #{graduation}) > 0
 	</select>
 	
+	<select id="findUserId" resultType="java.lang.String">
+		SELECT ${user.userid} 
+		WHERE ${user.username} = #{userName} AND ${user.useremail} = #{userEmail}
+	</select>
+	
+	<select id="findUserPwd" resultType="java.lang.Integer">
+		SELECT ${user.uno} 
+		WHERE 
+		${user.userid} = #{userId} AND 
+		${user.userpwd} = #{userPwd} AND 
+		${user.useremail} = #{userEmail}
+	</select>
+	
 	<insert id="registUser">
 		INSERT INTO ${tbl_user} (${user.userid}, ${user.userpwd}, ${user.username}, 
 		${user.useremail}, ${user.birthday}, ${user.graduation}) 
@@ -66,6 +83,10 @@
 	
 	<update id="updateEmotion">
 		UPDATE ${tbl_user} SET ${user.emotion} = #{emotion} WHERE ${user.uno} = #{uno}
+	</update>
+	
+	<update id="resetPassword">
+		UPDATE ${tbl_user} SET ${user.userpwd} = #{userPwd} WHERE ${user.uno} = #{uno}
 	</update>
 	
 	<delete id="quitUser">
