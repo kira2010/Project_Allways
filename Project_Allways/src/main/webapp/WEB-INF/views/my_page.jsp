@@ -43,10 +43,14 @@ footer {
 }
 
 /* On small screens, set height to 'auto' for sidenav and grid */
-@media screen and (max-width: 767px) {
+@media screen and (min-width: 350px) and (max-width: 767px) {
 	.row.content {
 		height: auto;
 	}
+}
+#user {
+	color: white;
+	margin-top: 9px;
 }
 
 #drop {
@@ -81,13 +85,10 @@ footer {
 }
 
 #profile {
-	position: relative;
-	left: 10px;
-	top: -100px;
-	border-radius: 60px;
-	display: flex;
-	flex-direction: row;
-	justify-content: flex-start;
+	position: absolute;
+	left: 7%;
+	top: 40%;
+
 }
 
 #menubar {
@@ -101,211 +102,116 @@ footer {
 #user-Info {
 	border: solid 1px grey;
 	margin-bottom: 15px;
+	margin-top: 15px;
 }
 
-.emotion {
-	width: 40px;
-	height: 40px;
+#emotion {
+	width: 130px;
+	height: 130px;
+	margin-left: 60px;
+}
+
+.subscribe {
+	visibility: hidden;
+}
+
+.cancel {
+	visibility: hidden;
 }
 
 </style>
 </head>
 <body>
 
-	<nav class="navbar navbar-inverse" id="header">
-		<div class="container">
-			<div class="navbar-header">
+<nav class="navbar navbar-inverse" id="header">
+		<div class="container-fluid">
+			<div class="content">
+			
+			<div class="navbar-header col-sm-4">
 				<a class="navbar-brand" href="main.jsp"><img
 					src="/allways/resources/images/allways.png" id="mainLogo"
-					height="30px" width="30px"></a>
+					height="px" width="140px"></a>
 				<button type="button" class="navbar-toggle" data-toggle="collapse"
 					data-target="#myNavbar">
 					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
 			</div>
-			<div class="navbar-collapse" id="myNavbar">
-				<ul class="nav navbar-nav">
-					<li>
-						<form action="/action_page.php">
-							<div class="input-group" id="text">
-								<input type="text" class="form-control" placeholder="Search"
-									name="search">
-								<div class="input-group-btn">
-									<button class="btn btn-default" type="submit">
-										<i class="glyphicon glyphicon-search"></i>
-									</button>
-									<button type="button"
-										class="btn btn-outline-secondary dropdown-toggle"
-										data-toggle="dropdown">검색 메뉴</button>
-									<div class="dropdown-menu">
-										<a class="dropdown-item" href="#">글 내용</a> <br /> <a
-											class="dropdown-item" href="#">Allwaiser</a> <br /> <a
-											class="dropdown-item" href="#">학교</a> <br />
-									</div>
-								</div>
-							</div>
-						</form>
-					</li>
-				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<li><a>딴따라님 안녕하세요!</a></li>
-					<li>
-						<div class="dropdown" id="drop">
-							<button class="btn btn-default dropdown-toggle" type="button"
-								id="menu1" data-toggle="dropdown">
-								회원정보 <span class="caret"></span>
+			
+			<div id="myNavbar">
+			<div class="navbar-collapse col-sm-5">
+				<form action="/action_page.php">
+					<div class="input-group" id="text" >
+							<input type="text" class="form-control" placeholder="Search"
+								name="search">
+						<div class="input-group-btn">
+							<button class="btn btn-default" type="submit">
+							<i class="glyphicon glyphicon-search"></i>
 							</button>
-							<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-								<li role="presentation"><a role="menuitem" tabindex="-1"
-									data-toggle="modal" data-target="#logout">로그아웃</a></li>
-								<li role="presentation"><a role="menuitem" tabindex="-1"
-									data-toggle="modal" data-target="#updateInfo">개인정보 수정</a></li>
-								<li role="presentation"><a role="menuitem" tabindex="-1"
-									data-toggle="modal" data-target="#memberWithdrawal">회원탈퇴</a></li>
-							</ul>
-						</div> <!-- dropDown아이템 다이얼로그 -->
-						<div class="modal fade" id="logout">
-							<div class="modal-dialog">
-								<div class="modal-content">
-
-									<!-- Modal Header -->
-									<div class="modal-header">
-										<h4 class="modal-title">로그아웃</h4>
-									</div>
-
-									<!-- Modal body -->
-									<div class="modal-body">정말 로그아웃하시겠습니까?</div>
-
-									<!-- Modal footer -->
-									<div class="modal-footer">
-										<button type="button" class="btn" data-dismiss="modal">아니오</button>
-										<button type="button" class="btn" data-dismiss="modal"
-											onclick="location.href='login.jsp'">예</button>
-									</div>
-								</div>
-							</div>
 						</div>
-						<div class="modal fade" id="updateInfo">
-							<div class="modal-dialog">
-								<div class="modal-content">
+					</div>
+				</form>
+			</div>		
+			
+			<div class = "nav navbar-nav navbar-right col-sm-3">				
+				<div class="dropdown input-group" id="drop">
+					<input type="text" class="form-control" value="${check.userId} 님 안녕하세요!" readonly>
+					<div class="input-group-btn">
+					<button class="btn btn-default dropdown-toggle" type="button"
+								id="menu1" data-toggle="dropdown">
+					<span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+						<li role="presentation"><a role="menuitem" tabindex="-1"
+							data-toggle="modal" data-target="#logout">로그아웃</a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1"
+							data-toggle="modal" data-target="#updateInfo">개인정보 수정</a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1"
+							data-toggle="modal" data-target="#memberWithdrawal">회원탈퇴</a></li>
+					</ul>
 
-									<!-- Modal Header -->
-									<div class="modal-header">
-										<h4 class="modal-title">개인정보 수정</h4>
-									</div>
-
-									<!-- Modal body -->
-									<div class="modal-body">
-										<!-- 모델클래스에 저장된 아이디 불러오기 -->
-										<input class="form-control" type="text" name="userId" readonly />
-										<br /> <input class="form-control" type="password"
-											name="userPwd" placeholder="비밀번호" required /> <br /> <input
-											class="form-control" type="password" name="userPwds"
-											placeholder="비밀번호 확인" required /> <br />
-										<button type="button" class="btn btn-danger"
-											data-dismiss="modal" style="margin-left: 435px">취소</button>
-										<button type="button" class="btn btn-danger"
-											data-dismiss="modal" style="margin-left: 15px"
-											data-toggle="modal" data-target="#update">확인</button>
-									</div>
-								</div>
-							</div>
-						</div> <!-- 로그인정보 확인 후 정보수정 창 -->
-						<div class="modal fade" id="update">
-							<div class="modal-dialog">
-								<div class="modal-content">
-									<div class="modal-header">
-										<h4 class="modal-title">개인정보 수정</h4>
-									</div>
-									<div class="modal-body">
-										<input type="password" name="userPwd" placeholder="새 비밀번호 입력"
-											required class="form-control" /> <br /> <input
-											type="password" name="userPwds" placeholder="새 비밀번호 확인"
-											required class="form-control" /> <br /> <input type="text"
-											name="userName" required class="form-control" /><br /> <input
-											type="email" name="userEmail" required class="form-control" /><br />
-										<input type="submit" value="취소" class="btn btn-danger"
-											style="margin-left: 435px" data-dismiss="modal" /> <input
-											type="submit" value="확인" class="btn btn-danger"
-											style="margin-left: 15px" data-dismiss="modal" />
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="modal fade" id="memberWithdrawal">
-							<div class="modal-dialog">
-								<div class="modal-content">
-
-									<!-- Modal Header -->
-									<div class="modal-header">
-										<h4 class="modal-title">회원탈퇴</h4>
-									</div>
-
-									<!-- Modal body -->
-									<div class="modal-body">
-										<!-- 모델클래스에 저장된 아이디 불러오기 -->
-										<input class="form-control" type="text" name="userId" readonly />
-										<br /> <input class="form-control" type="password"
-											name="userPwd" placeholder="비밀번호" required /> <br /> <input
-											class="form-control" type="password" name="userPwds"
-											placeholder="비밀번호 확인" required /> <br />
-										<button type="button" class="btn btn-danger"
-											data-dismiss="modal" style="margin-left: 435px">취소</button>
-										<button type="button" class="btn btn-danger"
-											data-dismiss="modal" style="margin-left: 20px"
-											data-toggle="modal" data-target="#withdrawal">획인</button>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="modal fade" id="withdrawal">
-							<div class="modal-dialog">
-								<div class="modal-content">
-									<div class="modal-header">
-										<h4 class="modal-body">Allways를 탈퇴하시겠습니까?</h4>
-										<br /> <br /> <input type="submit" value="취소"
-											class="btn btn-danger" style="margin-left: 435px"
-											data-dismiss="modal" /> <input type="submit" value="확인"
-											class="btn btn-danger" style="margin-left: 15px"
-											data-dismiss="modal" onclick="location.href='login.jsp'" />
-									</div>
-								</div>
-							</div>
-						</div>
-					</li>
-				</ul>
+					</div>
+					
+				</div>	
+			
+			</div>
+			
+			</div>
 			</div>
 		</div>
-	</nav>
+</nav>
 
 	<div class="container">
 		<div class="row content">
 			<div class="col-sm-10">
-				<div class="row content">
+				<div class="content">				
+					<div>
 					<!-- 배경사진 -->
-					<div>
-						<img id="backImg"
-							src="/allways/resources/images/background_pro.jpg"
-							onclick="location.href='#'">
-					</div>
-					<div class="btn-group btn-group-toggle" data-toggle="buttons"
-						id="menubar">
-						<label class="btn btn-secondary active"> <input
-							type="radio" name="options" id="option1" autocomplete="off"
-							checked />타임라인
-						</label> <label class="btn btn-secondary"> <input type="radio"
-							name="options" id="option2" autocomplete="off" />포스팅
-						</label> <label class="btn btn-secondary"> <input type="radio"
-							name="options" id="option3" autocomplete="off" />즐겨찾기
-						</label>
-					</div>
-					<!-- 헤더 밑 프로필사진 -->
-					<div>
-						<img id="profile"
-							src="/allways/resources/images/default_profile_img.jpg"
-							width="120px" height="120px">
-						<label id="name"></label>
+						<div>
+							<img id="backImg"
+								src="/allways/resources/images/background_pro.jpg"
+								onclick="location.href='#'">
+						</div>
+						<div class="btn-group btn-group-toggle" data-toggle="buttons"
+							id="menubar">
+							<label class="btn btn-secondary active"> <input
+								type="radio" name="options" id="option1" autocomplete="off"
+								checked />타임라인
+							</label> <label class="btn btn-secondary"> <input type="radio"
+								name="options" id="option2" autocomplete="off" />포스팅
+							</label> <label class="btn btn-secondary"> <input type="radio"
+								name="options" id="option3" autocomplete="off" />즐겨찾기
+							</label>
+						</div>
+						<!-- 헤더 밑 프로필사진 -->
+						<div id="profile">
+							<img 
+								src="/allways/resources/images/default_profile_img.jpg"
+								width="120px" height="120px" style="border-radius: 60px;">
+							<label id="name"></label>
+							<input class="subscribe" type="submit" value="구독하기" />
+							<input class="cancel" type="submit" value="구독취소하기" />
+						</div>
 					</div>
 					<div class="col-sm-4" style="padding: 0px;">
 						<!-- 왼쪽 정보 및 상태 -->
@@ -313,8 +219,8 @@ footer {
 							<label style="margin-top: 5px;">생년 월일 :</label> 
 							<fmt:formatDate value="${userInfo.birthDay}" pattern="yyyy년 MM월 dd일" var="birthDay"/>
 							<label id="birth"></label> <br /> 
-							<label id="email">이메일:</label> <label></label><br />
-							<label id="school">학교 :</label> <label></label><br />
+							<label>이메일:</label> <label id="email"></label><br />
+							<label>학교 :</label> <label id="school"></label><br />
 							<div class="dropdown" id="drop"
 								style="text-align: right; margin: 5px;">
 								<button class="btn btn-default dropdown-toggle" type="button"
@@ -336,7 +242,7 @@ footer {
 								</ul>
 							</div>
 							<div>
-								<img class="emotion" src="/allways/resources/images/happy.jpg">
+								<img id="emotion" src="/allways/resources/images/happy.jpg">
 							</div>
 						</div>
 					</div>
@@ -388,43 +294,53 @@ footer {
 </body>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.min.js"></script>
-<script id="allwaiser-list" type="text/x-handlebars-template">
-	<div class="allwaiser-item">
-		
-	</div>
-</script>
+
 <script>
 $(document).ready(function() {
 	
 	$('#img1').click(function() {
-		$('.emotion').attr("src", "/allways/resources/images/happy.jpg");
+		$('#emotion').attr("src", "/allways/resources/images/happy.jpg");
 	});
 	$('#img2').click(function() {
-		$('.emotion').attr("src", "/allways/resources/images/soso.jpg");
+		$('#emotion').attr("src", "/allways/resources/images/soso.jpg");
 	});
 	$('#img3').click(function() {
-		$('.emotion').attr("src", "/allways/resources/images/sentimental.jpg");
+		$('#emotion').attr("src", "/allways/resources/images/sentimental.jpg");
 	});
 	$('#img4').click(function() {
-		$('.emotion').attr("src", "/allways/resources/images/sad.jpg");
+		$('#emotion').attr("src", "/allways/resources/images/sad.jpg");
 	});
 	$('#img5').click(function() {
-		$('.emotion').attr("src", "/allways/resources/images/dangerous.jpg");
+		$('#emotion').attr("src", "/allways/resources/images/dangerous.jpg");
 	});
 	
-	
-	if (${userInfo.uno} == ${check.uno}) {
-		$('#name').append(${userInfo.userId});
-		$('#birth').append(${userInfo.birthDay});
-		$('#email').append(${userInfo.userEmail});
+	// MyPage
+	if (${userInfo.uno} == ${check.uno} ) {
+		$('#user').append("${userInfo.userId}님 안녕하세요!");
+		$('#name').append("${userInfo.userId}");
+		$('#birth').append("${birthDay}");
+		$('#email').append("${userInfo.userEmail}");
 		
-		if(${userInfo.graduation}) {
-			$('#school'),append(${userInfo.graduation});
+		if(${userInfo.graduation} != null) {
+			$('#school').append("${userInfo.graduation}");
 		}
+	// AllwaiserPage
 	} else {
-		
-	}
+		$('#name').append("${userInfo.userId}");
+		$('#birth').append("${birthDay}");
+		$('#email').append("${userInfo.userEmail}");
+		$('#menu1').html("<label>Allwaiser 상태</label>");
+		$()
+		if(${userInfo.graduation}) {
+			$('#school').append("${userInfo.graduation}");
+		}
+		// 구독을 한 경우와 안한 경우
+	/* 	if () {
+			$('.subscribe').css("visibility", "visible");			
+		} else {
+			$('.cancel').css("visibility", "visible");
+		} */
+	} 
 });
 
 </script>
