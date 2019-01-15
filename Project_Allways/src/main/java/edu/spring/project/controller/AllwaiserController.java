@@ -33,7 +33,7 @@ public class AllwaiserController {
 	@RequestMapping(value = "/allwaysInsert", method = RequestMethod.POST)
 	public ResponseEntity<Integer> friendInsert(
 			@RequestBody Allwaiser allwaiser) {
-		logger.info("friendInsert(uno={})", allwaiser);
+		logger.info("allwaiserInsert(uno={})", allwaiser);
 		
 		
 		int result = allwaiserDao.followAllwaiser(allwaiser);
@@ -72,4 +72,36 @@ public class AllwaiserController {
 		return entity;
 	}
 
+	@RequestMapping(value = "/allwaysSearch" , method = RequestMethod.POST)
+	public ResponseEntity<List<User>> allwaysSearch(@RequestBody User user) {
+	
+	String userName = user.getUserName();
+	
+	int uno = user.getUno();
+		
+	List<User> list = allwaiserDao.searchByName(userName, uno);
+		
+	ResponseEntity<List<User>> entity = 
+			new ResponseEntity<List<User>>(list, HttpStatus.OK);
+	
+	return entity;
+	}
+	
+	@RequestMapping(value = "/allwaysDelete" , method = RequestMethod.POST)
+	public ResponseEntity<Integer> allwaysDelete(@RequestBody Allwaiser allwaiser) {
+		System.out.println("allwayser : " + allwaiser);
+	
+		int result = allwaiserDao.unfollowAllwaiser(allwaiser);
+		System.out.println("result : " + result);
+		ResponseEntity<Integer> entity = null; 
+		if (result == 1) {
+			entity = new ResponseEntity<Integer>(result, HttpStatus.OK);
+		} else {
+			entity = new ResponseEntity<Integer>(result, HttpStatus.BAD_REQUEST);
+		}
+		
+		return entity;
+	}
+	
+	
 }

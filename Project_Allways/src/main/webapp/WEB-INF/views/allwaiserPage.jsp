@@ -123,6 +123,10 @@ footer {
 	visibility: visible;
 }
 
+.dropdown-menu {
+	float: right;
+}
+
 </style>
 </head>
 <body>
@@ -184,6 +188,120 @@ footer {
 			</div>
 		</div>
 </nav>
+	 <!-- dropDown아이템 다이얼로그 -->
+						<div class="modal fade" id="logout">
+							<div class="modal-dialog">
+								<div class="modal-content">
+
+									<!-- Modal Header -->
+									<div class="modal-header">
+										<h4 class="modal-title">로그아웃</h4>
+									</div>
+
+									<!-- Modal body -->
+									<div class="modal-body">정말 로그아웃하시겠습니까?</div>
+
+									<!-- Modal footer -->
+									<div class="modal-footer">
+										<button type="button" class="btn" data-dismiss="modal"
+											>아니오</button>
+										<button type="button" class="btn" data-dismiss="modal"
+											onclick="location.href='login.jsp'">예</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="modal fade" id="updateInfo">
+							<div class="modal-dialog">
+								<div class="modal-content">
+
+									<!-- Modal Header -->
+									<div class="modal-header">
+										<h4 class="modal-title">개인정보 수정</h4>
+									</div>
+
+									<!-- Modal body -->
+									<div class="modal-body">
+										<!-- 모델클래스에 저장된 아이디 불러오기 -->
+										<input class="form-control" type="text" name="userId" value="${check.userId}" readonly />
+										<br /> <input class="form-control" type="password"
+											name="userPwd" placeholder="비밀번호" required /> <br /> <input
+											class="form-control" type="password" name="userPwds"
+											placeholder="비밀번호 확인" required /> <br />
+										<button type="button" class="btn btn-danger"
+											data-dismiss="modal" style="margin-left: 435px"
+											>취소</button>
+										<button type="button" class="btn btn-danger"
+											data-dismiss="modal" style="margin-left: 15px"
+											data-toggle="modal" data-target="#update">확인</button>
+									</div>
+								</div>
+							</div>
+						</div> <!-- 로그인정보 확인 후 정보수정 창 -->
+						<div class="modal fade" id="update">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h4 class="modal-title">개인정보 수정</h4>
+									</div>
+									<div class="modal-body">
+										<input type="password" name="userPwd" placeholder="새 비밀번호 입력"
+											required class="form-control"/> <br/>
+										<input type="password" name="userPwds" placeholder="새 비밀번호 확인"
+										required class="form-control"/> <br/>
+										<input type="text" name="userName" required class="form-control"/><br/>
+										<input type="email" name="userEmail" required class="form-control"/><br/>
+										<input type="submit" value="취소" class="btn btn-danger" style="margin-left: 435px"
+										data-dismiss="modal"/>
+
+										<input type="submit" value="확인" class="btn btn-danger" style="margin-left: 15px"
+										data-dismiss="modal"/>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="modal fade" id="memberWithdrawal">
+							<div class="modal-dialog">
+								<div class="modal-content">
+
+									<!-- Modal Header -->
+									<div class="modal-header">
+										<h4 class="modal-title">회원탈퇴</h4>
+									</div>
+
+									<!-- Modal body -->
+									<div class="modal-body">
+										<!-- 모델클래스에 저장된 아이디 불러오기 -->
+										<input class="form-control" type="text" name="userId" value="${check.userId}" readonly />
+										<br /> <input class="form-control" type="password"
+											name="userPwd" placeholder="비밀번호" required /> <br /> <input
+											class="form-control" type="password" name="userPwds"
+											placeholder="비밀번호 확인" required /> <br />
+										<button type="button" class="btn btn-danger"
+											data-dismiss="modal" style="margin-left: 435px"
+											>취소</button>
+										<button type="button" class="btn btn-danger"
+											data-dismiss="modal" style="margin-left: 20px"
+											data-toggle="modal" data-target="#withdrawal">획인</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="modal fade" id="withdrawal">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h4 class="modal-body">Allways를 탈퇴하시겠습니까?</h4>
+										<br/>
+										<br/>
+										<input type="submit" value="취소" class="btn btn-danger" style="margin-left: 435px"
+										data-dismiss="modal"/>
+										<input type="submit" value="확인" class="btn btn-danger" style="margin-left: 15px"
+										data-dismiss="modal" onclick="location.href='login.jsp'"/>
+									</div>
+								</div>
+							</div>
+						</div>
 
 	<div class="container">
 		<div class="row content">
@@ -200,11 +318,11 @@ footer {
 							id="menubar">
 							<label class="btn btn-secondary active"> <input
 								type="radio" name="options" id="option1" autocomplete="off"
-								checked />타임라인
-							</label> <label class="btn btn-secondary"> <input type="radio"
-								name="options" id="option2" autocomplete="off" />포스팅
-							</label> <label class="btn btn-secondary"> <input type="radio"
-								name="options" id="option3" autocomplete="off" />즐겨찾기
+								checked />타임라인	</label>
+								<label class="btn btn-secondary"> <input type="radio"
+								name="options" id="option2" autocomplete="off" />포스팅</label>
+								<label class="btn btn-secondary" id="option3"> <input type="radio"
+								name="options" autocomplete="off" />즐겨찾기
 							</label>
 						</div>
 						<!-- 헤더 밑 프로필사진 -->
@@ -227,8 +345,8 @@ footer {
 							<label>학교 :</label> <label id="school"></label><br />
 							<div class="dropdown" id="drop"
 								style="text-align: right; margin: 5px;">
-								<button class="btn btn-default dropdown-toggle" type="button"
-									id="menu1" data-toggle="dropdown">
+								<button class="btn btn-default dropdown-toggle"
+									id="menu2" data-toggle="dropdown">
 									내 상태 <span class="caret"></span>
 								</button>
 								<ul class="dropdown-menu" role="menu" aria-labelledby="menu1"
@@ -422,7 +540,7 @@ $(document).ready(function() {
 	
 	
 	// MyPage
-	if (${userInfo.uno} == ${check.uno} ) {
+	if (${userInfo.uno} == ${check.uno } ) {
 		$('#user').append("${userInfo.userId}님 안녕하세요!");
 		$('#name').append("${userInfo.userId}");
 		$('#birth').append("${birthDay}");
@@ -436,14 +554,15 @@ $(document).ready(function() {
 		$('#name').append("${userInfo.userId}");
 		$('#birth').append("${birthDay}");
 		$('#email').append("${userInfo.userEmail}");
-		$('#menu1').html("<label>Allwaiser 상태</label>");
-		$('#option3').css("visibility", "hidden");
-		if(${userInfo.graduation}) {
+		$('#menu2').html("<label>Allwaiser 상태</label>");
+		$('.dropdown-menu').css('display', 'none');
+		$('#option3').css("display", "none");
+		if("${userInfo.graduation}" !== null) {
 			$('#school').append("${userInfo.graduation}");
 		}
 		// 구독을 한 경우와 안한 경우
 	/* 	if () {
-			$('.subscribe').css("visibility", "visible");			
+			$('.subscribe').css("visibility", "visible");
 		} else {
 			$('.cancel').css("visibility", "visible");
 		} */

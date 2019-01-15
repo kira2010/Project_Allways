@@ -117,22 +117,27 @@ label {
 		</div>
 		<div id="jb-sidebar-right">
 			<h2>친구</h2>
+				
 				<form class="form-inline">
 
-					<input id="friendName" class="form-control mr-sm-2" type="text" placeholder="친구 이름">
-					<button id="btnFriendSearch" type="button"
+					<input id="allwaysName" class="form-control mr-sm-2" type="text" placeholder="친구 이름">
+					<button id="btnallwaysSearch" type="button"
 						class="btn btn-outline-light text-dark">
 						<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 					</button>
 				</form>
 				
-				<script id="friend-template" type="text/x-handlebars-template" >
-			<div class=friend-item">
-				<a id="userName" >{{userName}}</a>
-				<a id="graduation">{{graduation}}</a>
-				<button class="friendDelete">친구끊기</button>
+			<script id="allways-template" type="text/x-handlebars-template" >
+			<div class="allways-item">
+				<input id="allways-uno" value="{{uno}}" type="hidden"/>
+				<a id="allwaysName" >{{allwaysName}}</a>
+				<button class="allwaysDelete">친구끊기</button>
 			</div>
 			</script>
+			
+			<div id="allways-searchs" >
+				
+			</div>
 		</div>
 		<div id="jb-footer">
 			<p>Copyright</p>
@@ -185,6 +190,7 @@ label {
 						$(users).each(function(index, value){
 							console.log(index, value);
 							var content = {
+									uno : value.uno,
 									userName: value.userName,
 									graduation: value.graduation
 							}
@@ -207,8 +213,8 @@ label {
 				
 				var uno = 9;
 				
-				var f_no = $(this).prevAll('#uno').val();
-
+				var allwaiser_uno = $(this).prevAll('#uno').val();
+				console.log(allwaiser_uno);
 				$.ajax({
 					type : 'post',
 					url : '/allways/search/allwaysInsert/',
@@ -218,7 +224,7 @@ label {
 					},
 					data: JSON.stringify({
 						'uno' : uno,
-						'f_no' : f_no
+						'allwaiser_uno' : allwaiser_uno
 					}),
 					success : function(data) {
 						if (data == 1) {
@@ -232,41 +238,107 @@ label {
 
 			});
 
-			var friendDivision = $('#friend-searchs');
+			var allwaysDivision = $('#allways-searchs');
 
-			var friendSource = $('#friend-template').html();
+			var allwaysSource = $('#allways-template').html();
 
-			var friendTemplate = Handlebars.compile(friendSource);
+			var allwaysTemplate = Handlebars.compile(allwaysSource);
 
-			$('#btnFriendSearch').click(function() {
+			$('#btnallwaysSearch').click(function() {
 			
-				var friendName = $('#friendName').val();
+				var allwaysName = $('#allwaysName').val();
 				
 				var uno = 9;
 				
+				allwaysDivision = $('#allways-searchs');
+
+				allwaysSource = $('#allways-template').html();
+
+				allwaysTemplate = Handlebars.compile(allwaysSource);
+				
+				allwaysDivision.empty();
+				
 				$.ajax({
 					type: 'post',
-					url: '/allways/search/allwaysSeach',
+					url: '/allways/search/allwaysSearch',
 					headers: {
 						'Content-Type': 'application/json',
 						'X-HTTP-Method-Override': 'post'
 					},
 					data: JSON.stringify({
-						'uno' = uno,
-						'userName' = friendName
+						'uno' : uno,
+						'userName' : allwaysName
 					}),
 					success: function(data) {
-						
+						console.log(data)
+						if (data != null) {
+							alert('검색 성공');
+							
+							$(data).each(function(index, value) {
+								console.log(value.uno);
+								
+								var content = {
+										uno : value.uno,
+										allwaysName: value.userName
+								}
+								
+								console.log(content);
+								
+								var allwaysSearchItem = allwaysTemplate(content);
+								
+								allwaysDivision.append(allwaysSearchItem);
+								
+								
+							});
+							
+							
+						} else {
+							alert('검색 실패');
+						}
 					}
 					
 			
-				})
+				});
 				
 				
-			})
+			});
 			
 			
-			
+			allwaysDivision.on('click', '.allways-item .allwaysDelete', function() {
+				
+				var uno = 9;
+				
+				var allwaiser_uno = parseInt($(this).prevAll('#allways-uno').val());
+				
+				
+				console.log(allwaiser_uno);
+				var result = confirm('친구를 삭제 하시겠습니까?');
+				if (result == true) {
+					$.ajax({
+						type: 'post',
+						url: '/allways/search/allwaysDelete',
+						headers: {
+							'Content-Type': 'application/json',
+							'X-HTTP-Method-Override': 'post'
+						},
+						data: JSON.stringify({
+							'uno' : uno,
+							'allwaiser_uno' : allwaiser_uno
+						}),
+						success: function(data) {
+							
+							if (data == 1) {
+								alert('삭제 성공');
+							} else {
+								alert('삭제 실패');
+							}
+							
+						}
+					});
+				}
+				
+				
+			});
 			
 			
 		

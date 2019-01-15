@@ -35,7 +35,7 @@ public class UserPageController {
 		User user = userPageService.check(uno);
 		
 		session.setAttribute("userInfo", user);
-		return "my_page";
+		return "allwaiserPage";
 	}
 	
 	@RequestMapping(value = "/userPage", method = RequestMethod.POST)
