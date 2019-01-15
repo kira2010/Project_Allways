@@ -406,6 +406,11 @@
 		<div style="display: inline-block;">
 			<a href = "/allways">{{userId}}</a>
 			<span style="font-size: x-small; color: gray;">{{regDate}}</span>
+			<span class = "replayUpdate" id = {{BRno}}>
+			<span style="font-size: x-small">수정</span>
+			<span style="font-size: x-small"> | </span>
+			<span style="font-size: x-small">삭제</span>
+			</span>
 		</div>
 	<textarea id="{{replyText}}" class="autosize form-control" rows="1" readonly style="resize: none; margin-right: 8px"">{{replyContent}}</textarea>
 	</div>
@@ -553,11 +558,16 @@ $(document).ready(function(){
 						rno: this.rno,
 						replyContent: this.reply_content,
 						userId: this.userId,
-						regDate: dateString
+						regDate: dateString,
+						BRno : bno+this.rno+'-no'
 				};
 				var replyItem = replyItemTemplate(content);
 				$('#'+bno+'replyArea').append(replyItem);
-
+				if(this.userId == '${check.userId}'){
+					$('#'+bno+this.rno+'-no').show();
+				}else{
+					$('#'+bno+this.rno+'-no').hide();
+				}
 			});
 		 
 		});	
