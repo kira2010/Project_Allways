@@ -29,14 +29,15 @@ public class UserDaoImple implements UserDao {
 
 	// 회원가입시 ID 중복여부 확인
 	public boolean checkUser(String userId) {
-		boolean result = false;
+		boolean result = true;
 		
 		logger.info("checkUser({}) 호출", userId);
 		
 		String newId = session.selectOne(USER_MAPPER + ".existUserId", userId);
 		
-		if (newId != null && !newId.isEmpty()) {
-			result = true;
+		// ID 가 이미 있을 경우 false(중복되는 ID 존재) 반환!!
+		if (newId != null && !newId.isEmpty() && newId.equals(userId)) {
+			result = false;
 		}
 		
 		return result;
