@@ -18,4 +18,9 @@ public class UserPageServiceImple implements UserPageService {
 		return userDao.findUserByUno(uno);
 	}
 
+	public int updateEmo(User user) {
+		
+		return userDao.updateEmotion(user);
+	}
+
 }

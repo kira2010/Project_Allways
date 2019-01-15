@@ -6,4 +6,6 @@ public interface UserPageService {
 	
 	
 	public User check(int uno);
+	
+	public int updateEmo(User user);
 }

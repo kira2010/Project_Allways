@@ -119,6 +119,10 @@ footer {
 	visibility: hidden;
 }
 
+#option3 {
+	visibility: visible;
+}
+
 </style>
 </head>
 <body>
@@ -208,7 +212,7 @@ footer {
 							<img 
 								src="/allways/resources/images/default_profile_img.jpg"
 								width="120px" height="120px" style="border-radius: 60px;">
-							<label id="name"></label>
+							<label id="name" style="font-size: 30px;"></label>
 							<input class="subscribe" type="submit" value="구독하기" />
 							<input class="cancel" type="submit" value="구독취소하기" />
 						</div>
@@ -228,21 +232,21 @@ footer {
 									내 상태 <span class="caret"></span>
 								</button>
 								<ul class="dropdown-menu" role="menu" aria-labelledby="menu1"
-									style="float: right;">
-									<li role="presentation" id="img1"><img
+									style="float: right;" onselect="thisSelected()">
+									<li role="presentation" value="1" id="img1"><img
 										src="/allways/resources/images/happy.jpg"></li>
-									<li role="presentation" id="img2"><img
+									<li role="presentation" value="2" id="img2"><img
 										src="/allways/resources/images/soso.jpg"></li>
-									<li role="presentation" id="img3"><img
+									<li role="presentation" value="3" id="img3"><img
 										src="/allways/resources/images/sentimental.jpg"></li>
-									<li role="presentation" id="img4"><img
+									<li role="presentation" value="4" id="img4"><img
 										src="/allways/resources/images/sad.jpg"></li>
-									<li role="presentation" id="img5"><img
+									<li role="presentation" value="5" id="img5"><img
 										src="/allways/resources/images/dangerous.jpg"></li>
 								</ul>
 							</div>
-							<div>
-								<img id="emotion" src="/allways/resources/images/happy.jpg">
+							<div>								
+								<img id="emotion" src="${userInfo.emotion}">
 							</div>
 						</div>
 					</div>
@@ -298,21 +302,108 @@ footer {
 <script>
 $(document).ready(function() {
 	
+	var emotion = null;
+	var uno = ${userInfo.uno};
+	console.log(uno);
 	$('#img1').click(function() {
 		$('#emotion').attr("src", "/allways/resources/images/happy.jpg");
+		emotion = $('#img1').val();
+		$.ajax({
+			type: 'post',
+			url: '/allways/userPage',
+			headers: {
+				'Content-Type': 'application/json',
+				'X-HTTP-Method-Override': 'post'
+			},
+			data: JSON.stringify({
+				'uno': uno,
+				'emotion': emotion
+			}),
+			success: function(result) {
+				alert('성공');
+			}
+		}); 
 	});
 	$('#img2').click(function() {
 		$('#emotion').attr("src", "/allways/resources/images/soso.jpg");
+		emotion = $('#img2').val();
+		
+		$.ajax({
+			type: 'post',
+			url: '/allways/userPage',
+			headers: {
+				'Content-Type': 'application/json',
+				'X-HTTP-Method-Override': 'post'
+			},
+			data: JSON.stringify({
+				'uno': uno,
+				'emotion': emotion
+			}),
+			success: function(result) {
+				alert('성공');
+				$('#emotion').attr("src", "/allways/resources/images/soso.jpg");
+			}
+		}); 
 	});
 	$('#img3').click(function() {
 		$('#emotion').attr("src", "/allways/resources/images/sentimental.jpg");
+		emotion = $('#img3').val();
+		$.ajax({
+			type: 'post',
+			url: '/allways/userPage',
+			headers: {
+				'Content-Type': 'application/json',
+				'X-HTTP-Method-Override': 'post'
+			},
+			data: JSON.stringify({
+				'uno': uno,
+				'emotion': emotion
+			}),
+			success: function(result) {
+				alert('성공');
+			}
+		}); 
 	});
 	$('#img4').click(function() {
 		$('#emotion').attr("src", "/allways/resources/images/sad.jpg");
+		emotion = $('#img4').val();
+		$.ajax({
+			type: 'post',
+			url: '/allways/userPage',
+			headers: {
+				'Content-Type': 'application/json',
+				'X-HTTP-Method-Override': 'post'
+			},
+			data: JSON.stringify({
+				'uno': uno,
+				'emotion': emotion
+			}),
+			success: function(result) {
+				alert('성공');
+			}
+		}); 
 	});
 	$('#img5').click(function() {
 		$('#emotion').attr("src", "/allways/resources/images/dangerous.jpg");
+		emotion = $('#img5').val();
+		$.ajax({
+			type: 'post',
+			url: '/allways/userPage',
+			headers: {
+				'Content-Type': 'application/json',
+				'X-HTTP-Method-Override': 'post'
+			},
+			data: JSON.stringify({
+				'uno': uno,
+				'emotion': emotion
+			}),
+			success: function(result) {
+				alert('성공');
+			}
+		}); 
 	});
+
+	
 	
 	// MyPage
 	if (${userInfo.uno} == ${check.uno} ) {
@@ -321,7 +412,7 @@ $(document).ready(function() {
 		$('#birth').append("${birthDay}");
 		$('#email').append("${userInfo.userEmail}");
 		
-		if(${userInfo.graduation} != null) {
+		if("${userInfo.graduation}" != null) {
 			$('#school').append("${userInfo.graduation}");
 		}
 	// AllwaiserPage
@@ -330,7 +421,7 @@ $(document).ready(function() {
 		$('#birth').append("${birthDay}");
 		$('#email').append("${userInfo.userEmail}");
 		$('#menu1').html("<label>Allwaiser 상태</label>");
-		$()
+		$('#option3').css("visibility", "hidden");
 		if(${userInfo.graduation}) {
 			$('#school').append("${userInfo.graduation}");
 		}
