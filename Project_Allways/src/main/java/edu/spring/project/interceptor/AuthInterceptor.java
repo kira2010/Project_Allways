@@ -8,6 +8,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import edu.spring.project.domain.User;
+
 public class AuthInterceptor extends HandlerInterceptorAdapter {
 	
 	private final Logger logger = LoggerFactory.getLogger(AuthInterceptor.class);
@@ -19,8 +21,14 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 		
 		logger.info("AuthInterceptor");
 		
+		User loginId = null;
+		
 		HttpSession session = request.getSession();
-		Object loginId = session.getAttribute("cheak");
+		if(session.getAttribute("check") != null) {
+			loginId = (User) session.getAttribute("check");
+			System.out.println(loginId.toString());
+						
+		}
 		
 		if(loginId != null) {
 			return true;

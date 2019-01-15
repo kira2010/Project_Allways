@@ -351,7 +351,7 @@
 			<a id={{bookMark}} >북마크</a>
 		</div>
 		<div class="col-xs-6 " style="text-align: center;" >
-			<a id={{reply}} class="reply" >댓글</a>
+			<a data-bno="{{bno}}" class="reply" >댓글</a>
 		</div>
 	</div>
 
@@ -407,9 +407,9 @@
 			<a href = "/allways">{{userId}}</a>
 			<span style="font-size: x-small; color: gray;">{{regDate}}</span>
 			<span class = "replayUpdate" id = {{BRno}}>
-			<span style="font-size: x-small">수정</span>
-			<span style="font-size: x-small"> | </span>
-			<span style="font-size: x-small">삭제</span>
+			<span style="font-size: x-small" class="btn">수정</span>
+			<span style="font-size: x-small">|</span>
+			<span style="font-size: x-small" data-rno ="{{rno}}" data-bno ="{{bno}}" class="btn replyDelete" >삭제</span>
 			</span>
 		</div>
 	<textarea id="{{replyText}}" class="autosize form-control" rows="1" readonly style="resize: none; margin-right: 8px"">{{replyContent}}</textarea>
@@ -469,7 +469,7 @@ $(document).ready(function(){
 					uno_ol: this.bno+"ol",
 					uno_div: this.bno+"div",
 					bookMark:this.bno+"-bookMark",
-					reply: this.bno+"-reply",
+					bno: this.bno,
 					replyArea: this.bno+"replyArea",
 					boardDeleteBtn: this.bno+"-boardDeleteBtn"
 				};
@@ -527,81 +527,6 @@ $(document).ready(function(){
 			
 	});
 
-	var replyInsertSource = $('#replyInsert').html();
-	var replyInsertTemplate = Handlebars.compile(replyInsertSource);
-	
-	var replyItemSource = $('#replyItem').html();
-	var replyItemTemplate = Handlebars.compile(replyItemSource);
-
-	
-	$(document).on("click",'.reply',function(event){
-		var bno = (this.id).split('-')[0];
-		
-		var content = {
-			replyText: bno + "-replyText",
-			replyInsertBtn: bno + "-replyInsertBtn"
-		}
-		
-		var replyInsert = replyInsertTemplate(content);
-		
-		$('#'+bno+'replyArea').empty(); 
-		
-		$('#'+bno+'replyArea').append(replyInsert);
-	
- 		$.getJSON('/allways/replies/all/' + bno, function(data) {
-			
-			$(data).each(function() {
-				var date = new Date(this.regDate);
-				var dateString = date.toLocaleDateString()
-				
-				var content = {
-						rno: this.rno,
-						replyContent: this.reply_content,
-						userId: this.userId,
-						regDate: dateString,
-						BRno : bno+this.rno+'-no'
-				};
-				var replyItem = replyItemTemplate(content);
-				$('#'+bno+'replyArea').append(replyItem);
-				if(this.userId == '${check.userId}'){
-					$('#'+bno+this.rno+'-no').show();
-				}else{
-					$('#'+bno+this.rno+'-no').hide();
-				}
-			});
-		 
-		});	
-		
-   	});
-
-	$(document).on("click",'.replyInsertBtn',function(event){
-		var bno = (this.id).split('-')[0];
-		
-		console.log(bno);
-		var content = $('#'+bno+'-replyText').val();
-		
-		console.log(content);
-		
-		$.ajax({
-			type: 'post',
-			url: '/allways/replies',
-			headers: {
-				'Content-Type': 'application/json',
-				'X-HTTP-Method-Override': 'post'
-			},
-			data: JSON.stringify({
-				'bno': bno,
-				'reply_content': content,
-				
-			}),
-			success: function(result) {
-				alert('댓글 추가 결과: ' + result);
-			}
-		});
-	
-	});
-	
-
 	$(document).on("click",'.boardDeleteBtn',function(event){
 
 		var bno = this.id.split('-')[0];	
@@ -621,6 +546,104 @@ $(document).ready(function(){
 			}
 		});
  	
+	});
+	
+	var replyInsertSource = $('#replyInsert').html();
+	var replyInsertTemplate = Handlebars.compile(replyInsertSource);
+	
+	var replyItemSource = $('#replyItem').html();
+	var replyItemTemplate = Handlebars.compile(replyItemSource);
+	
+function drowReply(event, bno){
+	
+	if(bno == undefined){	
+		bno = $(this).data('bno');
+	}
+		
+	var content = {
+		replyText: bno + "-replyText",
+		replyInsertBtn: bno + "-replyInsertBtn"
+	}
+	
+	var replyInsert = replyInsertTemplate(content);
+		
+	$('#'+bno+'replyArea').empty(); 
+	
+	$('#'+bno+'replyArea').append(replyInsert);
+
+	$.getJSON('/allways/replies/all/' + bno, function(data) {
+		
+		$(data).each(function() {
+			var date = new Date(this.regDate);
+			var dateString = date.toLocaleDateString()
+				
+			var content = {
+				rno: this.rno,
+				bno: bno,
+				replyContent: this.reply_content,
+				userId: this.userId,
+				regDate: dateString,
+				BRno : bno+'-'+this.rno+'-no'
+			};
+			var replyItem = replyItemTemplate(content);
+			$('#'+bno+'replyArea').append(replyItem);
+			
+			if(this.userId == '${check.userId}'){
+				$('#'+bno+'-'+this.rno+'-no').show();
+			}else{
+				$('#'+bno+'-'+this.rno+'-no').hide();
+			}
+		});
+	 
+	});
+}
+	
+	
+	$(document).on("click",'.reply', drowReply);	
+		
+	$(document).on("click",'.replyInsertBtn',function(event){
+		var bno = (this.id).split('-')[0];
+
+		var content = $('#'+bno+'-replyText').val();
+			
+		$.ajax({
+			type: 'post',
+			url: '/allways/replies',
+			headers: {
+				'Content-Type': 'application/json',
+				'X-HTTP-Method-Override': 'post'
+			},
+			data: JSON.stringify({
+				'bno': bno,
+				'reply_content': content,
+				
+			}),
+			success: function(result) {
+				alert('댓글 추가 결과: ' + result +'bno :'+bno);
+				drowReply({}, bno);
+			}
+		});
+	
+	});
+		
+	$(document).on("click",'.replyDelete',function(event){
+
+		var rno = $(this).data('rno');
+		var bno = $(this).data('bno');
+		
+ 	 	$.ajax({
+			type: 'delete',
+			url: '/allways/replies/' + rno,
+			headers: {
+				'Content-Type': 'application/json',
+				'X-HTTP-Method-Override': 'delete'
+			},
+			success: function(result) {
+				alert('댓글 삭제 결과: ' + result);
+				drowReply({}, bno);
+			}
+		});
+ 	 
 	});
 		
 	

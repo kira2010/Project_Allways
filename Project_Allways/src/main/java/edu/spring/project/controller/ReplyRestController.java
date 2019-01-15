@@ -22,6 +22,8 @@ import edu.spring.project.service.ReplyService;
 @RequestMapping(value = "replies")
 public class ReplyRestController {
 		
+	
+	
 	@Autowired private ReplyService replyService;
 	
 	@RequestMapping(method = RequestMethod.POST)
