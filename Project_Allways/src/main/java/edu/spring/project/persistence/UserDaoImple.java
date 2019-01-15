@@ -109,14 +109,14 @@ public class UserDaoImple implements UserDao {
 	public int updateBGPhoto(User user) {
 		logger.info("updateBGPhoto() 호출");
 		
-		return 0;
+		return session.update(USER_MAPPER + ".registBackground", user);
 	}
 	
 	// Profile 사진 업데이트
 	public int updatePFPhoto(User user) {
 		logger.info("updatePFPhoto() 호출");
 		
-		return 0;
+		return session.update(USER_MAPPER + ".registProfile", user);
 	}
 	
 	// 감정 표현 수정
