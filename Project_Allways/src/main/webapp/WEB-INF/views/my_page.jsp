@@ -245,8 +245,24 @@ footer {
 										src="/allways/resources/images/dangerous.jpg"></li>
 								</ul>
 							</div>
-							<div>								
-								<img id="emotion" src="${userInfo.emotion}">
+							<div>
+								<c:choose>
+									<c:when test="${userInfo.emotion == '1'}">
+										<img id="emotion" src="/allways/resources/images/happy.jpg">
+									</c:when>
+									<c:when test="${userInfo.emotion == '2'}">
+										<img id="emotion" src="/allways/resources/images/soso.jpg">
+									</c:when>
+									<c:when test="${userInfo.emotion == '3'}">
+										<img id="emotion" src="/allways/resources/images/sentimental.jpg">
+									</c:when>
+									<c:when test="${userInfo.emotion == '4'}">
+										<img id="emotion" src="/allways/resources/images/sad.jpg">
+									</c:when>
+									<c:when test="${userInfo.emotion == '5'}">
+										<img id="emotion" src="/allways/resources/images/dangerous.jpg">
+									</c:when>
+								</c:choose>
 							</div>
 						</div>
 					</div>
