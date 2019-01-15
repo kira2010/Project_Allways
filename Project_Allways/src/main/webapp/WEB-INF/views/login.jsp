@@ -126,7 +126,7 @@ html, body {
 		<div id="footer">
 				<div style="text-align: center;;padding-bottom: 15px;">
 					<ul>
-						<a href="/allways/users/#" >아이디 찾기 |</a>
+						<a href="/allways/users/find_id_form" >아이디 찾기 |</a>
 						<a href="/allways/users/#">비밀번호 찾기 |</a>
 						<a href="/allways/users/signUp">회원가입</a>
 					</ul>	
