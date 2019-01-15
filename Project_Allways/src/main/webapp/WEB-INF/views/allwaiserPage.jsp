@@ -123,6 +123,10 @@ footer {
 	visibility: visible;
 }
 
+.dropdown-menu {
+	float: right;
+}
+
 </style>
 </head>
 <body>
@@ -200,11 +204,11 @@ footer {
 							id="menubar">
 							<label class="btn btn-secondary active"> <input
 								type="radio" name="options" id="option1" autocomplete="off"
-								checked />타임라인
-							</label> <label class="btn btn-secondary"> <input type="radio"
-								name="options" id="option2" autocomplete="off" />포스팅
-							</label> <label class="btn btn-secondary"> <input type="radio"
-								name="options" id="option3" autocomplete="off" />즐겨찾기
+								checked />타임라인	</label>
+								<label class="btn btn-secondary"> <input type="radio"
+								name="options" id="option2" autocomplete="off" />포스팅</label>
+								<label class="btn btn-secondary" id="option3"> <input type="radio"
+								name="options" autocomplete="off" />즐겨찾기
 							</label>
 						</div>
 						<!-- 헤더 밑 프로필사진 -->
@@ -227,8 +231,8 @@ footer {
 							<label>학교 :</label> <label id="school"></label><br />
 							<div class="dropdown" id="drop"
 								style="text-align: right; margin: 5px;">
-								<button class="btn btn-default dropdown-toggle" type="button"
-									id="menu1" data-toggle="dropdown">
+								<button class="btn btn-default dropdown-toggle"
+									id="menu2" data-toggle="dropdown">
 									내 상태 <span class="caret"></span>
 								</button>
 								<ul class="dropdown-menu" role="menu" aria-labelledby="menu1"
@@ -422,7 +426,7 @@ $(document).ready(function() {
 	
 	
 	// MyPage
-	if (${userInfo.uno} == ${check.uno} ) {
+	if (${userInfo.uno} == ${check.uno } ) {
 		$('#user').append("${userInfo.userId}님 안녕하세요!");
 		$('#name').append("${userInfo.userId}");
 		$('#birth').append("${birthDay}");
@@ -436,14 +440,15 @@ $(document).ready(function() {
 		$('#name').append("${userInfo.userId}");
 		$('#birth').append("${birthDay}");
 		$('#email').append("${userInfo.userEmail}");
-		$('#menu1').html("<label>Allwaiser 상태</label>");
-		$('#option3').css("visibility", "hidden");
-		if(${userInfo.graduation}) {
+		$('#menu2').html("<label>Allwaiser 상태</label>");
+		$('.dropdown-menu').css('display', 'none');
+		$('#option3').css("display", "none");
+		if("${userInfo.graduation}" !== null) {
 			$('#school').append("${userInfo.graduation}");
 		}
 		// 구독을 한 경우와 안한 경우
 	/* 	if () {
-			$('.subscribe').css("visibility", "visible");			
+			$('.subscribe').css("visibility", "visible");
 		} else {
 			$('.cancel').css("visibility", "visible");
 		} */
