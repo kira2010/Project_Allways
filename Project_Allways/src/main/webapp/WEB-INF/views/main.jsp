@@ -312,10 +312,10 @@
 		</button>
 
     	<ul class="dropdown-menu" role="menu" aria-labelledby="menu1" style="right: 0; left: auto;">
-    	  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">북마크</a></li>
-      	<li role="presentation"><a role="menuitem" tabindex="-1" href="#">수정</a></li>
+    	<li role="presentation"><a role="menuitem" tabindex="-1" href="#">북마크</a></li>
+      	<li role="presentation" id="{{boardUpdate}}"><a role="menuitem" tabindex="-1" href="#">수정</a></li>
       	<li role="presentation" class="divider"></li>
-      	<li role="presentation"><a role="menuitem" tabindex="-1"  id="{{boardDeleteBtn}}" class="boardDeleteBtn">삭제</a></li>
+      	<li role="presentation" id="{{boardDelete}}"><a role="menuitem" tabindex="-1"  id="{{boardDeleteBtn}}" class="boardDeleteBtn">삭제</a></li>
     	</ul>
 	</div>
 
@@ -430,22 +430,23 @@ $(document).ready(function(){
 
 	function drowBoardInsert(){
 		var boardInsertForm = boardInsertTemplate();
+		$('#boardMake').empty();
 		$('#boardMake').append(boardInsertForm);
 	};
 
 	drowBoardInsert();
 
-	
 	var boardItemSource = $('#boardItem').html();
 	
 	var boardItemTem = Handlebars.compile(boardItemSource);
 
+	var page = 0;
+
 	function drowBoardItems(){
 			
-		$.getJSON('/allways/board/selectBoard', function(data){
+		$.getJSON('/allways/board/selectBoard/'+page, function(data){
 			console.log(data);
 			
-			$('#boards').empty();
 			
 			$(data).each(function(){
 				var date = new Date(this.regDate);
@@ -471,11 +472,19 @@ $(document).ready(function(){
 					bookMark:this.bno+"-bookMark",
 					bno: this.bno,
 					replyArea: this.bno+"replyArea",
-					boardDeleteBtn: this.bno+"-boardDeleteBtn"
+					boardDeleteBtn: this.bno+"-boardDeleteBtn",
+					boardUpdate: this.bno+"boardUpdate",
+					boardDelete: this.bno+"boardDelete"
 				};
 				
 				var boardItem = boardItemTem(content);
 				$('#boards').append(boardItem);
+				
+				// 게시물 삭제 관련
+				if(this.userId != '${check.userId}'){
+					$('#'+this.bno+'boardDelete').hide();
+					$('#'+this.bno+'boardUpdate').hide();
+				}
 				
 				if(this.photo){
 					var photoList = this.photo.split(',');
@@ -505,7 +514,6 @@ $(document).ready(function(){
 					
 					$('#'+this.bno+'Carousel').append(btn);
 					
-						
 				};
 				
 				
@@ -516,15 +524,32 @@ $(document).ready(function(){
 	
 	};
 
+	$('#boards').empty();
 	drowBoardItems();
 	
+	$(window).scroll(function() { // 스크롤 이벤트가 발생할 때마다 인식
+		if ( $(window).scrollTop() == $(document).height() - $(window).height() ) { // 스크롤이 끝에 닿는걸 인식
+			console.log("스크롤 인식");
+			page++;
+			
+	        drowBoardItems();
+
+	        var height = $(document).scrollTop();
+			$('html, body').animate({scrollTop : height+400}, 600);
+			}
+	});//end of 무한스크롤
+	
+	//boardInsert
 	$('#fileUploadBtn').click(function () {
 		
 		var content = $("#content").val();
 		var privacyBounds = $("#privacyBounds").val();
 		
 		boardUpload(content, privacyBounds);
-			
+		
+		drowBoardInsert();
+		$('#boards').empty();
+		drowBoardItems();
 	});
 
 	$(document).on("click",'.boardDeleteBtn',function(event){
@@ -542,6 +567,7 @@ $(document).ready(function(){
 			},
 			success: function(result) {
 				alert('보드 삭제 결과: ' + result);
+				$('#boards').empty();
 				drowBoardItems();
 			}
 		});
@@ -645,7 +671,9 @@ function drowReply(event, bno){
 		});
  	 
 	});
-		
+
+
+	
 	
 });
 

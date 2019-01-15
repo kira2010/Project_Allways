@@ -1,5 +1,6 @@
 package edu.spring.project.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +18,13 @@ public class BoardServiceImple implements BoardService {
 	
 	public List<Board> select(int service_bounds) {
 		// test
-		int uno = 2;
+		List<Board> list1 = boardDao.readAll(2);
+		List<Board> list2 = boardDao.readAll(4);
 		
-		return boardDao.readAll(uno);
+		List<Board> newList = new ArrayList<Board>(list1);
+		newList.addAll(list2);
+
+		return newList;
 	}
 
 	public Board selectOne(int bno) {

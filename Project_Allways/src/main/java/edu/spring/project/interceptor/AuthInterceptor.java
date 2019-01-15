@@ -25,6 +25,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 		
 		HttpSession session = request.getSession();
 		if(session.getAttribute("check") != null) {
+			
 			loginId = (User) session.getAttribute("check");
 			System.out.println(loginId.toString());
 						
