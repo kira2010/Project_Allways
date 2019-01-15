@@ -39,10 +39,10 @@ public class Allwaiser {
 	
 	@Override
 	public String toString() {
-		String friend = String.format(
-				"FRIEND:{f_no : %d, uno : %d, allwaiser_uno : %d}",
+		String allwaiser = String.format(
+				"Allwaiser:{f_no : %d, uno : %d, allwaiser_uno : %d}",
 				f_no, uno, allwaiser_uno);
 		
-		return friend;
+		return allwaiser;
 	}
 }
