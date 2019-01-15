@@ -20,5 +20,5 @@ public interface AllwaiserDao {
 	List<User> searchByName(String userName, int uno);
 	
 	// 삭제
-	int unfollowAllwaiser(int uno);
+	int unfollowAllwaiser(Allwaiser allwaiser);
 }

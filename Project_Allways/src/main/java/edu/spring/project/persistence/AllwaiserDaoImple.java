@@ -56,10 +56,10 @@ public class AllwaiserDaoImple implements AllwaiserDao {
 	}
 	
 	// following 취소하기
-	public int unfollowAllwaiser(int uno) {
-		logger.info("unfollowAllwaiser(uno : {}) 호출", uno);
+	public int unfollowAllwaiser(Allwaiser allwaiser) {
+		logger.info("unfollowAllwaiser(uno : {}) 호출", allwaiser);
 		
-		return session.delete(ALLWAISER_MAPPER + ".unfollowAllwaiser", uno);
+		return session.delete(ALLWAISER_MAPPER + ".unfollowAllwaiser", allwaiser);
 	}
 
 }
