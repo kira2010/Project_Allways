@@ -19,6 +19,9 @@
 	<resources mapping="/resources/**" location="/resources/" />
 	
 	<resources location="file:///C:/upload/" mapping="/upload/**"/>
+
+	<context:component-scan
+		base-package="edu.spring.project.controller" />
 	
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
 		in the /WEB-INF/views directory -->
@@ -32,9 +35,6 @@
 
 	<beans:bean id="authIntercept" 
 	class="edu.spring.project.interceptor.AuthInterceptor"></beans:bean>
-
-	<context:component-scan
-		base-package="edu.spring.project" />
 
 	<interceptors>
 		<interceptor>

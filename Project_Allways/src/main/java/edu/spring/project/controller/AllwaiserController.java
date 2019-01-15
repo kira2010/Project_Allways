@@ -7,13 +7,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
+
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import edu.spring.project.domain.Allwaiser;
 import edu.spring.project.domain.User;
+import edu.spring.project.persistence.AllwaiserDao;
 import edu.spring.project.persistence.UserDao;
 
 @RestController
@@ -24,30 +26,17 @@ public class AllwaiserController {
 
 	@Autowired
 	private UserDao dao;
+	
+	@Autowired
+	private AllwaiserDao allwaiserDao;
 
-//	@RequestMapping(value = "all/{name}", method = RequestMethod.GET)
-//	public ResponseEntity<List<User>> searchUser(
-//			@PathVariable(name = "name") String name) {
-//		
-//		logger.info("searchUser(name={})", name);
-//		
-//		List<User> list = dao.findUserByName(name);
-//		
-//		System.out.println(list);
-//		
-//		ResponseEntity<List<User>> entity = 
-//				new ResponseEntity<List<User>>(list, HttpStatus.OK);
-//		
-//		
-//		return entity;
-//		
-//	}
-
-	@RequestMapping(value = "/{uno}", method = RequestMethod.PUT)
-	public ResponseEntity<Integer> friendInsert(@PathVariable(name = "uno") int uno) {
-		logger.info("friendInsert(uno={})", uno);
-
-		int result = 1;
+	@RequestMapping(value = "/allwaysInsert", method = RequestMethod.POST)
+	public ResponseEntity<Integer> friendInsert(
+			@RequestBody Allwaiser allwaiser) {
+		logger.info("friendInsert(uno={})", allwaiser);
+		
+		
+		int result = allwaiserDao.followAllwaiser(allwaiser);
 
 		ResponseEntity<Integer> entity = null;
 		if (result == 1) {
@@ -67,16 +56,7 @@ public class AllwaiserController {
 
 		List<User> list = null;
 		
-//		if (name == "" && graduation == "") {
-//			if (name != "") {
-//				list = dao.findUserByName(name);
-//			}
-//			if (graduation != "") {
-//				list = dao.findUserByGraduation(graduation);
-//			}
-//		} else {
-//			list = dao.findUserByNameAndGraduation(user);
-//		}
+
 		
 		if (!name.isEmpty() && name != null && !graduation.isEmpty() && graduation != null) {
 			list = dao.findUserByNameAndGraduation(user);

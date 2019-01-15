@@ -108,9 +108,10 @@ label {
 			</script>
 			<script id="search-template" type="text/x-handlebars-template" >
 			<div class="search-item">
+				<input id="uno" value="{{uno}}" type="hidden"/>
 				<a id="userName" >{{userName}}</a>
 				<a id="graduation">{{graduation}}</a>
-				<button id="btnInsert">친구추가</button>
+				<button class="btnInsert">친구추가</button>
 			</div>
 			</script>
 		</div>
@@ -129,7 +130,7 @@ label {
 			<div class=friend-item">
 				<a id="userName" >{{userName}}</a>
 				<a id="graduation">{{graduation}}</a>
-				<button id="friendDelete">친구끊기</button>
+				<button class="friendDelete">친구끊기</button>
 			</div>
 			</script>
 		</div>
@@ -151,32 +152,7 @@ label {
 			
 			var template = Handlebars.compile(source);
 			
-		/* 	// function getAllSearch() {
-				console.log('/allways/search/all/' + name);
-				
-				$.getJSON('/allways/search/all/' + name, function(data) {
-					
-					division.empty();
-					
-					console.log(data);
-				
-					$(data).each(function() {
-						
-						console.log(this);
-						
-						var content = {
-							userName: this.userName,
-							graduation: this.graduation
-						};
-						
-						var replyItem = template(content);
-						
-						division.append(replyItem);
-
-					});
-				});
-
-			}  */
+		
 
 			$('#search').click(function() {
 				
@@ -228,16 +204,22 @@ label {
 
 			
 			division.on('click', '.search-item .btnInsert', function() {
-
-				var uno = $(this).prevAll('#uno').val();
+				
+				var uno = 9;
+				
+				var f_no = $(this).prevAll('#uno').val();
 
 				$.ajax({
-					type : 'put',
-					url : '/allways/search/' + uno,
+					type : 'post',
+					url : '/allways/search/allwaysInsert/',
 					headers : {
 						'Content-Type' : 'application/json',
-						'X-HTTP-Method-Override' : 'put'
+						'X-HTTP-Method-Override' : 'post'
 					},
+					data: JSON.stringify({
+						'uno' : uno,
+						'f_no' : f_no
+					}),
 					success : function(data) {
 						if (data == 1) {
 							alert('친구 추가 성공');
