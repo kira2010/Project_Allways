@@ -13,8 +13,7 @@
 		<property name="board.content" value="CONTENT" />
 		<property name="board.regdate" value="REGDATE" />
 		<property name="board.privacy_bounds" value="PRIVACY_BOUNDS" />
-		<property name="board.bg_photo" value="BG_PHOTO" />
-		<property name="board.pf_photo" value="PF_PHOTO" />
+		<property name="board.photo" value="PHOTO" />
 		<property name="board.hashtag" value="HASHTAG"/>
 		
 		<property name="tbl_reply" value="TBL_REPLY" />
