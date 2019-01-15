@@ -5,7 +5,7 @@ import java.util.List;
 import edu.spring.project.domain.Board;
 
 public interface BoardDao {
-	List<Board> readAll(int uno);
+	List<Board> readAll(int uno, int page);
 	
 	int countMyAll(int uno);
 	

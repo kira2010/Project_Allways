@@ -22,10 +22,16 @@ public class BoardDaoImple implements BoardDao {
 	@Autowired private SqlSession session;
 	
 	// 내가 작성한 모든 게시글 가져오기
-	public List<Board> readAll(int uno) {
+	public List<Board> readAll(int uno, int page) {
 		logger.info("read(uno : {}) 호출");
 		
-		return session.selectList(BOARD_MAPPER + ".selectMyAll", uno);
+		Map<String, Integer> params = new HashMap<String, Integer>();
+		
+		params.put("uno", uno);
+		params.put("start", page * 10);
+		params.put("end", (page * 10) + 10);		
+		
+		return session.selectList(BOARD_MAPPER + ".selectMyAll", params);
 	}
 	
 	// 내가 작성한 모든 게시글 수 count

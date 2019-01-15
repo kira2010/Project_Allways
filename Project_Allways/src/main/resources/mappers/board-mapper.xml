@@ -7,7 +7,15 @@
 		SELECT * FROM ${tbl_board} 
 		WHERE ${board.uno} = #{uno} 
 		ORDER BY ${board.bno} DESC
+		LIMIT #{start}, #{end}
 	</select>
+	
+	<!-- 
+	<select id="selectAllBoard" resultType="Board">
+		SELECT * FROM ${tbl_board} 
+		WHERE (${board.privacy_bounds} = 0 OR ${board.privacy_bounds} = 1)
+	</select>
+	 -->
 	
 	<select id="countMyAll" resultType="java.lang.Integer">
 		SELECT COUNT(*) FROM ${tbl_board} WHERE ${board.uno} = #{uno}
@@ -60,13 +68,13 @@
 	<!-- 작성중인 코드, 담당 외 Do not touch!!!!!!! -->
 	<select id="searchByKeyword" resultType="Board">
 		SELECT * FROM ${tbl_board} WHERE 
-		<if test="searchType==1">
+		<if test="type==1">
 			INSTR(${board.content}, #{searchKeyword}) > 0
 		</if>
-		<if test="searchType==2">
+		<if test="type==2">
 			INSTR(${board.userid}, #{searchKeyword}) > 0
 		</if>
-		<if test="searchType==3">
+		<if test="type==3">
 			INSTR(${board.hashtag}, #{searchKeyword}) > 0
 		</if>
 	</select>
