@@ -238,11 +238,38 @@ label {
 
 			var friendTemplate = Handlebars.compile(friendSource);
 
-			friendDivision.on('click', '.friend-item .btnFriendSearch',
-					function() {
-
-						var friendName = $('#friend-Name').val();
-					});
+			$('#btnFriendSearch').click(function() {
+			
+				var friendName = $('#friendName').val();
+				
+				var uno = 9;
+				
+				$.ajax({
+					type: 'post',
+					url: '/allways/search/allwaysSeach',
+					headers: {
+						'Content-Type': 'application/json',
+						'X-HTTP-Method-Override': 'post'
+					},
+					data: JSON.stringify({
+						'uno' = uno,
+						'userName' = friendName
+					}),
+					success: function(data) {
+						
+					}
+					
+			
+				})
+				
+				
+			})
+			
+			
+			
+			
+			
+		
 		});
 	
 	</script>
