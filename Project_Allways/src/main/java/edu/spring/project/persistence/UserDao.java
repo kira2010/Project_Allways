@@ -27,6 +27,10 @@ public interface UserDao {
 	
 	int updateUser(User user);
 	
+	int updateBGPhoto(User user);
+	
+	int updatePFPhoto(User user);
+	
 	int updateEmotion(User user);
 	
 	int resetUserPwd(int uno);

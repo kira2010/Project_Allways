@@ -105,6 +105,20 @@ public class UserDaoImple implements UserDao {
 		return session.update(USER_MAPPER + ".updateUser", user);
 	}
 	
+	// Background 사진 업데이트
+	public int updateBGPhoto(User user) {
+		logger.info("updateBGPhoto() 호출");
+		
+		return 0;
+	}
+	
+	// Profile 사진 업데이트
+	public int updatePFPhoto(User user) {
+		logger.info("updatePFPhoto() 호출");
+		
+		return 0;
+	}
+	
 	// 감정 표현 수정
 	public int updateEmotion(User user) {
 		logger.info("updateEmotion({}) 호출", user);

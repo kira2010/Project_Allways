@@ -81,6 +81,14 @@
 		WHERE ${user.uno} = #{uno}
 	</update>
 	
+	<update id="registBackground">
+		UPDATE ${tbl_user} SET ${user.bg_photo} = #{bg_photo} WHERE ${user.uno} = #{uno}
+	</update>
+	
+	<update id="registProfile">
+		UPDATE ${tbl_user} SET ${user.pf_photo} = #{pf_photo} WHERE ${user.uno} = #{uno}
+	</update>
+	
 	<update id="updateEmotion">
 		UPDATE ${tbl_user} SET ${user.emotion} = #{emotion} WHERE ${user.uno} = #{uno}
 	</update>
