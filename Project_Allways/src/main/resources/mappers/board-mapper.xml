@@ -7,7 +7,6 @@
 		SELECT * FROM ${tbl_board} 
 		WHERE ${board.uno} = #{uno} 
 		ORDER BY ${board.bno} DESC
-		LIMIT 0, 10
 	</select>
 	
 	<select id="countMyAll" resultType="java.lang.Integer">

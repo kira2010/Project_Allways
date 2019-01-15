@@ -21,7 +21,8 @@
 	</select>
 	
 	<select id="selectMyOne" resultType="User">
-		SELECT ${user.userid}, ${user.username}, ${user.pf_photo} FROM ${tbl_user} 
+		SELECT ${user.uno}, ${user.userid}, ${user.username}, ${user.pf_photo} 
+		FROM ${tbl_user} 
 		WHERE INSTR(${user.username}, #{userName}) > 0 
 		AND 
 		${user.uno} IN (
