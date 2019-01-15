@@ -33,8 +33,8 @@ public class ReplyServiceImple implements ReplyService {
 	}
 
 	public int delete(int rno) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return replyDao.deleteReply(rno);
 	}
 
 }
