@@ -4,12 +4,11 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="edu.spring.project.mappers.AllwaiserMapper">
 	<select id="selectMylist" resultType="User">
-		SELECT ${user.userid}, ${user.username}, ${user.pf_photo} FROM ${tbl_user} 
+		SELECT ${user.uno}, ${user.userid}, ${user.username}, ${user.pf_photo} FROM ${tbl_user}
 		WHERE ${user.uno} IN (
-			SELECT ${allwaiser.allwaiseruno} FROM ${tbl_allwaiser} 
+			SELECT ${allwaiser.allwaiseruno} FROM ${tbl_allwaiser}
 			WHERE ${allwaiser.uno} = #{uno})
-		ORDER BY ${user.username} 
-		LIMIT 0, 5
+		ORDER BY ${user.username}
 	</select>
 	
 	<select id="countMyList" resultType="java.lang.Integer">
