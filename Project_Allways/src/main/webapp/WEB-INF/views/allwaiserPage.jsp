@@ -324,7 +324,7 @@ footer {
 						</div>
 
 	<div class="container">
-		<div class="row content">
+		<div class="row content"> 
 			<div class="col-sm-9">
 				<div class="content">				
 					<div>
