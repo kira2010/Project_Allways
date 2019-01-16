@@ -152,11 +152,11 @@ public class DatabaseTest {
 //		logger.info("결과 : {}", result);
 		
 		// 
-		List<Board> list = boardDao.readAll(1);
-		
-		for(Board b:list) {
-			logger.info(b.toString());
-		}
+//		List<Board> list = boardDao.readAll(1);
+//		
+//		for(Board b:list) {
+//			logger.info(b.toString());
+//		}
 	}
 	
 	private void userDaoTest() {

@@ -11,7 +11,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import edu.spring.project.domain.Board;
 import edu.spring.project.domain.User;
+import edu.spring.project.persistence.BoardDao;
 import edu.spring.project.persistence.UserDao;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -27,6 +29,7 @@ public class DaoTest {
 	private final Logger logger = LoggerFactory.getLogger(DaoTest.class);
 	
 	@Autowired private UserDao userDao;
+	@Autowired private BoardDao boardDao;
 	
 	@Test
 	public void test() {
@@ -39,14 +42,31 @@ public class DaoTest {
 		User user = new User();
 		
 		user.setUserName("김민재");
-		user.setGraduation("수원대학교");
+		user.setUserEmail("kira20105@gmail.com");
 		
-		List<User> searchList = userDao.findUserByNameAndGraduation(user);
 		
-		if(searchList != null && searchList.size() > 0) {
-			for(User u : searchList) {
-				logger.info(u.toString());
-			}
+//		StringBuffer buffer = new StringBuffer();
+//		
+//		buffer.append("kira20105").append("@").append("gmail").append(".").append("com");
+		
+		//user.setUserEmail(buffer.toString());
+		
+		String id = userDao.findUserId(user);
+		
+		if (id != null && !id.isEmpty()) {
+			logger.info("ID 찾기 결과 : {}", id);
 		}
 	}
+	/*
+	private void test1() {
+		logger.info("test1() 실행");
+		
+		List<Board> readAllBoardList = boardDao.readAllBoard(1, 0);
+		
+		if(readAllBoardList != null && readAllBoardList.size() > 0) {
+			for(Board b : readAllBoardList) {
+				
+			}
+		}
+	}*/
 }
