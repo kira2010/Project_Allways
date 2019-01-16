@@ -10,10 +10,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
 
 <title>회원가입</title>
 <script type="text/javascript">
@@ -27,11 +30,51 @@
 		$("input[name='birthDay']").val(year + month + day);
 		console.log($("input[name='birthDay']").val());
 		// TODO : 유효성 검사
+		
 		return true;
+		
 	}
 //]]>
 </script>
-
+<script>
+$(document).ready(function() {	
+	$("#signUpForm").submit(function(){
+		if($("#userPwd").val() !== $("#confirm").val()){
+			alert("비밀번호가 다릅니다.");
+			$("#userPwd").val("").focus();
+			$("#confirm").val("");
+			return false;
+		}else if ($("#userPwd").val().length < 8) {
+			alert("비밀번호는 8자 이상으로 설정해야 합니다.");
+			$("#userPwd").val("").focus();
+			return false;
+		}else if($.trim($("#userPwd").val()) !== $("#userPwd").val() || $.trim($("#userId").val()) !== $("#userId").val()){
+			alert("공백은 입력이 불가능합니다.");
+			return false;
+		}
+	})
+	
+	$("#userId").change(function() {
+		var registId = $('#userId').val();
+		$.ajax({
+			url : "../users/checkId",
+			type : "POST",
+			data : {
+				userId : registId
+			},
+			success : function(result) {
+				if (result == 'existed') {
+					$("#id_check").html("중복된 ID가 있습니다.");
+					$("#joinBtn").attr("disabled", "disabled");
+				} else {
+					$("#id_check").html("사용가능한 ID 입니다.");
+					$("#joinBtn").removeAttr("disabled");
+				}
+			},
+		});
+	});
+})
+</script>
 <style>
 .field-container {
     display: inline-block;
@@ -41,37 +84,33 @@
 </head>
 <body>
 
-<!-- 본문 시작 -->
-<form id="signUpForm" action="signUp" method="post" >
-<!-- <input type="hidden" name="birthDay" /> -->
-
-
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-sm-3" style="margin-top: 15%; margin-left: 15%; " ><a href="/allways"><img src="/allways/resources/images/allways.png" /></a></div>
-		<div class="col-sm-6" style="margin-top: 10%;">
-			<table>
-				<tr><td><h1>회원가입</h1></td></tr>
-				<tr>
-    				<td><input style="width: 200%" type="text" name="userId" placeholder="아이디" required /></td>
-				</tr>
-				<tr>
-    				<td><input style="width: 200%; margin-top: 15px;" type="password" name="userPwd" placeholder="비밀번호" required /></td>
-    			</tr>
-				<tr>
-    				<td><input style="width: 200%; margin-top: 15px;" type="password" name="confirm" placeholder="비밀번호 확인" required /></td>
-    			</tr>
-				<tr>
-    				<td><input style="width: 200%; margin-top: 15px;" type="text" name="userName" placeholder="이름"  required /></td>
-    			</tr>
-				<tr>
-					<td><input style="width: 200%; margin-top: 15px;" type="text" name="userEmail" placeholder="이메일" required /></td> 
-				</tr>
-				<tr>
-					<td><div id="birthDay" style="margin-top: 15px;">생일</div></td>
-				</tr>
-				<tr>
-					<td><div class="field-container" style="margin-right: 4px; margin-top: 5px;" >
+	<div class="w3-content w3-container w3-margin-top">
+		<div class="w3-container w3-card-4">
+			<div class="w3-center w3-large w3-margin-top">
+				<h3>회원 가입</h3>
+			</div>
+			<div>
+				<form id="signUpForm" action="signUp" method="post" onsubmit="return check()" >
+					<p> 
+						<input class="w3-input" type="text" id="userId" name="userId" placeholder="아이디" required /> 
+						<div id="id_check" class="w3-text-red"></div>
+					</p>
+					<p>
+						<input class="w3-input" id="userPwd" name="userPwd" type="password" placeholder="비밀번호" required />
+					</p>
+					<p>
+						<input class="w3-input" id="confirm" name="confirm" type="password" placeholder="비밀번호 확인" required />
+					</p>
+					<p>
+						<input type="text" id="userName" name="userName" class="w3-input" placeholder="이름" required />
+					</p>
+					<p>
+						<input type="email" id="userEmail" name="userEmail" class="w3-input" placeholder="이메일" required />
+					</p>
+					
+					<p>
+						<label>생년월일</label>
+						<div class="field-container" style="margin-right: 4px; margin-top: 5px;" >
 							<select name="birthY" class="dobYear"></select>
 						</div>
 						<div class="field-container month" style="margin-right: 4px;">
@@ -95,7 +134,7 @@
 							<select name="birthD" class="dobDay">
                     			<option value="">Day</option>
 							</select>
-						</div> </td>
+						</div> 
 			
 				<script>
 				
@@ -135,31 +174,18 @@
 					} // end if
 				};  	// end function
 				</script>
-				</tr>
-				
-				<tr>
-					<td><input style="width: 200%; margin-top: 15px;" type="text" name="graduation" placeholder="출신 학교" required />
-					</td>
-				</tr>
-			
-    			<tr style="text-align: center; padding-bottom: 20px;">
-    				<td>
-    					<input style="float: left; margin-top: 10px;" type="submit" value="취소"/> 
-    					<input style="margin-left: -40%; margin-top: 10px;" type="submit" value="가입" />
-    					<input type="hidden" name="queryString" value="${targetUrl}" />
-    				</td>
-    			</tr>		
-			</table>
-			
-			<div class="col-sm-3"></div>
-			
-			
-		</div> <!-- end <div class="col-sm-6"> -->
-		
-	</div> <!-- end <div class="row"> -->
-</div> <!-- end <div class="container-fluid"> -->
-
-</form>
+					</p>
+					<p>
+						<input type="text" id="graduation" name="graduation" class="w3-input" placeholder="출신학교" required />
+					</p>
+					<p class="w3-center">
+						<button type="submit" id="joinBtn" class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round" onclick="check();" >가입</button>
+						<button type="button" onclick="history.go(-1);" class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-margin-bottom w3-round">취소</button>
+					</p>
+				</form>
+			</div>
+		</div>
+	</div>
 
 </body>
 </html>

@@ -1,15 +1,18 @@
 package edu.spring.project.controller;
 
+import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -24,6 +27,20 @@ public class UsersController {
 	@Autowired
 	private UserService userService;
 	
+	// 아이디 중복 검사(AJAX)
+	@RequestMapping(value="checkId", method=RequestMethod.POST)
+	public void checkId(String userId, HttpServletResponse response) throws Exception {
+		response.setCharacterEncoding("UTF-8");
+		boolean checkIdResult = userService.checkId(userId, response);
+		PrintWriter writer = response.getWriter();
+		
+		if (!checkIdResult) {
+			writer.write("existed");
+		} else {
+			writer.write("not existed");
+		}
+	}
+	
 	// 회원가입
 	@RequestMapping(value="/signUp", method=RequestMethod.GET)
 	public String signUp() {
@@ -37,10 +54,8 @@ public class UsersController {
 		logger.info("signUp({}) POST 호출", user);
 		logger.info("생년월일 결과 : {}-{}-{}", birthY, birthM, birthD);
 		
-		LocalDate ld = LocalDate.of(Integer.parseInt(birthY), 
-				Integer.parseInt(birthM),
-				Integer.parseInt(birthD));
-		Date birth = Date.from(ld.atStartOfDay(ZoneId.systemDefault()).toInstant());
+		LocalDate id = LocalDate.of(Integer.parseInt(birthY), Integer.parseInt(birthM), Integer.parseInt(birthD));
+		Date birth = Date.from(id.atStartOfDay(ZoneId.systemDefault()).toInstant());
 		user.setBirthDay(birth);
 		
 		userService.insert(user);
@@ -73,10 +88,34 @@ public class UsersController {
 	}
 
 	// 아이디 찾기 폼
-	@RequestMapping(value="/findId")
-	public  String findId() throws Exception{
-		logger.info("findId() 호출");
+	@RequestMapping(value="/findIdForm")
+	public String findIdForm() throws Exception{
+		logger.info("findIdForm() 호출");
 		
-		return "users/findId";
+		return "users/findIdForm";
 	}
+	
+	// 아이디 찾기
+	@RequestMapping(value="/findId", method=RequestMethod.POST)
+	public void findId(User user, HttpServletResponse response) throws Exception {
+		response.setCharacterEncoding("UTF-8");
+		
+		String findId = userService.findId(user, response);
+		PrintWriter writer = response.getWriter();
+		
+		if (findId != null && !findId.isEmpty()) {
+			writer.write(findId);
+		} else {
+			writer.write("찾으시는 아이디가 없습니다.");
+		}
+	}
+	
+	// 비밀번호 찾기 폼
+	@RequestMapping(value="/findPwdForm")
+	public String findPwdForm() throws Exception{
+		logger.info("findPwdForm() 호출");
+		
+		return "users/findPwdForm";
+	}
+	
 }

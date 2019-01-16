@@ -9,57 +9,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
 <style>
-html, body {
-    margin: 0;
-    padding: 0;
-    background-color: #FFF;
-    font-family: "Noto Sans KR", "Liberation Sans", Helvetica, "돋움", dotum, sans-serif;
-    font-size: 1em;
-}
-#wrap {
-    margin: 0 auto;
-    padding: 0;
-    width: 1000px;
-}
-#header {
-    width: 1000px;
-    height: 48px;
-    margin-top: 120px;
-}
-#container {
-	float: center;
-    width: 100%;
-    border-top: 1px solid #DAEAAA;
-}
-#content {
-	font-size: large;
-    text-align: center;
-    background: #DDD;
-    height: 300px;     
-}
 #footer {
 	clear: both;
-    width: 1000px;
-    height: 70px;
-    font-size: 9px;
-    color: #8d8d8d;
-    letter-spacing: -1px;
-    border-top: 1px solid #DAEAAA;
-    position: relative;
-    top: 7px;
-}
-
-#header h1{
-	margin: 0;
-	padding: 0;
+	width: 1000px;
+	height: 70px;
+	font-size: 11px;
+	color: #8d8d8d;
+	letter-spacing: -1px;
+	border-top: 1px solid #DAEAAA;
 	position: relative;
-	top: 12px;
+	top: 7px;
 }
 
 #footer > ul {
@@ -69,72 +35,43 @@ html, body {
 	position: relative;
 	left: 8px;
 }
-
-#footer > ul > li {
-	float: left;
-	padding: 6px 12px 6px 8px;
-}
-
-#footer > ul > li > a {
-    color: #8D8D8D;
-    text-decoration: none;
-}
-
-#footer > ul > li > a:hover {
-    text-decoration: underline;
-}
-
-#footer > ul > li#company-info {
-    margin-left: 350px;
-    letter-spacing: 0;
-    background: none;
-}
-
 </style>
 
 <title>로그인</title>
 </head>
 <body>
 
-	<div id="wrap">
-	
-		<!--div id="header">
-			<h1 style="float: center; width: 150px;">
-				<a href="/allways"><img src="/allways/resources/images/allways.png" /></a>
-			</h1>
-		</div -->
-	
-		<div id="container">
-
-			<div id="content">
-
-				<!--본문시작  -->
+	<div class="w3-content w3-container w3-margin-top">
+		<div class="w3-container w3-card-4">
+			<div class="w3-center w3-large w3-margin-top">
+				<h3>
+					<a href="/allways"><img src="/allways/resources/images/allways.png" /></a>
+				</h3>
+			</div>
+			<div>
 				<form action="/allways/users/login" method="post">
-					<input style="width: 50%;" type="text" name="userId" placeholder="아이디 입력" required /> <br /> 
-					<input style="width: 50%" type="password" name="userPwd" placeholder="비밀번호 입력" required /> <br /> 
-					<input style="width: 50%" type="submit" value="로그인" /> 
+					<p>
+						<input class="w3-input" type="text" id="userId" name="userId" placeholder="아이디 입력" required /> 
+						<span id="id_check" class="w3-text-red"></span>
+					</p>
+					<p>
+						<input class="w3-input" id="userPwd" name="userPwd" type="password" placeholder="비밀번호 입력" required />
+					</p>
+					<p class="w3-center"> 
+						<input class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round" type="submit" value="로그인" href=""/>	
 					<input type="hidden" name="queryString" value="${targetUrl}" />
+					</p>
 				</form>
-				<!--본문끝  -->
-
-			</div>
-			<!-- content 끝 -->
-
-		</div>
-		<!--  container 끝 -->
-
-		<div id="footer">
-				<div style="text-align: center;;padding-bottom: 15px;">
-					<ul>
-						<a href="/allways/users/find_id_form" >아이디 찾기 |</a>
-						<a href="/allways/users/#">비밀번호 찾기 |</a>
-						<a href="/allways/users/signUp">회원가입</a>
-					</ul>	
-				</div>
 			</div>
 		</div>
-		
 	</div>
-
+	<div style="text-align: center;;padding-bottom: 15px; margin-top: 15px;">
+		<ul>
+			<a href="/allways/users/findIdForm" >아이디 찾기 |</a>
+			<a href="/allways/users/findPwdForm">비밀번호 찾기 |</a>
+			<a href="/allways/users/signUp">회원가입</a>
+		</ul>
+</div>
+	
 </body>
 </html>

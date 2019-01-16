@@ -15,22 +15,32 @@ public class UserServiceImple implements UserService {
 
 	@Autowired
 	private UserDao userDao;
+
+	// 아이디 중복 검사(AJAX)
+	public boolean checkId(String userId, HttpServletResponse response) throws Exception{
+		System.out.println("checkId() 호출");
+		
+		return userDao.checkUser(userId);
+	}
 	
 	// 로그인
 	public User login(User user) {
 		return userDao.loginCheck(user);
 	}
-	
-	// 아이치 중복 검사(AJAX)
-	public void checkUser(String userId, HttpServletResponse response) throws Exception {
-		PrintWriter out = response.getWriter();
-		out.println(userDao.checkUser(userId));
-		out.close();
+
+	// 회원가입
+	public int insert(User user){		
+		System.out.println("UserServiceImple insert() 호출");
+		
+		
+		return userDao.createUser(user);
+	}
+
+	// 아이디 찾기
+	public String findId(User user, HttpServletResponse response) throws Exception {
+		System.out.println("findId() 호출");
+		
+		return userDao.findUserId(user);
 	}
 	
-	// 회원가입
-	public int insert(User user) {
-		return userDao.createUser(user);
-		}
-
 }
