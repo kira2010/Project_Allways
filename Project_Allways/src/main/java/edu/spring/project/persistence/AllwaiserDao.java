@@ -13,6 +13,8 @@ public interface AllwaiserDao {
 	
 	int countMyAllwaisers(int uno);
 	
+	int existAllwaiser(Allwaiser allwaiser);
+	
 	// 친구 추가
 	int followAllwaiser(Allwaiser allwaiser);
 	

@@ -14,19 +14,27 @@
 	<select id="countMyList" resultType="java.lang.Integer">
 		SELECT COUNT(*) FROM ${tbl_user} 
 		WHERE ${user.uno} IN (
-			SELECT ${allwaiser.allwaiseruno} FROM ${tbl_allwaiser} 
-			WHERE ${allwaiser.uno} = #{uno}
-		)
+			SELECT ${allwaiser.allwaiseruno} FROM ${tbl_allwaiser}
+			WHERE ${allwaiser.uno} = #{uno})
 	</select>
 	
 	<select id="selectMyOne" resultType="User">
-		SELECT ${user.uno}, ${user.userid}, ${user.username}, ${user.pf_photo} 
-		FROM ${tbl_user} 
-		WHERE INSTR(${user.username}, #{userName}) > 0 
-		AND 
+		SELECT ${user.uno}, ${user.userid}, ${user.username}, ${user.pf_photo}
+		FROM ${tbl_user}
+		WHERE INSTR(${user.username}, #{userName}) > 0
+		AND
 		${user.uno} IN (
-			SELECT ${allwaiser.allwaiseruno} FROM ${tbl_allwaiser} 
+			SELECT ${allwaiser.allwaiseruno} FROM ${tbl_allwaiser}
 			WHERE ${allwaiser.uno} = #{uno})
+	</select>
+	
+	<select id="existAllwaiser" resultType="java.lang.Integer">
+		SELECT EXISTS(
+			SELECT * FROM ${tbl_allwaiser}
+			WHERE ${allwaiser.uno} = #{uno}
+			AND
+			${allwaiser.allwaiseruno} = #{allwaiser_uno})
+		AS SUCCESS
 	</select>
 	
 	<insert id="followAllwaiser">

@@ -36,6 +36,13 @@ public class AllwaiserDaoImple implements AllwaiserDao {
 		
 		return session.selectOne(ALLWAISER_MAPPER + ".countMyList", uno);
 	}
+	
+	// 구독여부 확인
+	public int existAllwaiser(Allwaiser allwaiser) {
+		logger.info("existAllwaiser() 호출");
+		
+		return session.selectOne(ALLWAISER_MAPPER + ".existAllwaiser", allwaiser);
+	}
 
 	// 새로운 following 추가하기
 	public int followAllwaiser(Allwaiser allwaiser) {
