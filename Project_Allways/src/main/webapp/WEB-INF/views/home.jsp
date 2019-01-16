@@ -71,8 +71,9 @@ label {
 }
 
 button {
-	background-color: #e7e7e7; color: black;
-	font-size: 10px;
+	 background-color: white;
+  color: black;
+  border: 2px solid #4CAF50;
 }
 
 </style>
@@ -114,7 +115,6 @@ button {
 			</script>
 			<script id="search-template" type="text/x-handlebars-template" >
 			<div class="search-item">
-					<input id="uno" value="{{uno}}" type="hidden"/>
 				<div class="boardItemHeader">
 					<div style="display: inline-block;">
 					<img src="/allways/resources/images/default_profile_img.jpg" height="40px" width="40px" class="img-circle">
@@ -122,7 +122,8 @@ button {
 						<span id="graduation" style:"font-size: x-small; color: gray;">{{graduation}}</span>
 					</div>
 					<div class="insert" style="float: right;">	
-						<button class="btn btn-secondary btn-sm">구독추가</button>
+						<input id="uno" value="{{uno}}" type="hidden"/>
+						<button class="btnInsert">구독추가</button>
 					</div>
 				</div>		
 			</div>
@@ -142,12 +143,12 @@ button {
 				
 			<script id="allways-template" type="text/x-handlebars-template" >
 			<div class="allways-item">
-				<input id="allways-uno" value="{{uno}}" type="hidden"/>
 				<img src="/allways/resources/images/default_profile_img.jpg" height="30px" width="30px" class="img-circle">
 				<a id="allwaysName" >{{allwaysName}}</a>
 				<div class="delete" style="float: right;">	
-						<button class="btn btn-secondary btn-sm">구독끊기</button>
-					</div>
+						<input id="allways-uno" value="{{uno}}" type="hidden"/>
+						<button class="btnDelete">구독끊기</button>
+				</div>
 			</div>
 			</script>
 		
@@ -189,7 +190,7 @@ button {
 			});
 
 			
-			division.on('click', '.search-item .insert .btn btn-secondary btn-sm', function() {
+			division.on('click', '.btnInsert', function() {
 				
 				var myUno = 9;
 				
@@ -233,7 +234,7 @@ button {
 			});
 			
 			
-			allwaysDivision.on('click', '.allways-item .delete .btn btn-secondary btn-sm', function() {
+			allwaysDivision.on('click', '.allways-item .btnDelete', function() {
 				
 				var myUno = 9;
 				
