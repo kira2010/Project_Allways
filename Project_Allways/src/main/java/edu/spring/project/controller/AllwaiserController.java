@@ -17,6 +17,7 @@ import edu.spring.project.domain.Allwaiser;
 import edu.spring.project.domain.User;
 import edu.spring.project.persistence.AllwaiserDao;
 import edu.spring.project.persistence.UserDao;
+import edu.spring.project.service.AllwaiserService;
 
 @RestController
 @RequestMapping(value = "search")
@@ -30,13 +31,21 @@ public class AllwaiserController {
 	@Autowired
 	private AllwaiserDao allwaiserDao;
 
+	
 	@RequestMapping(value = "/allwaysInsert", method = RequestMethod.POST)
-	public ResponseEntity<Integer> friendInsert(
+	public ResponseEntity<Integer> allwaysInsert(
 			@RequestBody Allwaiser allwaiser) {
 		logger.info("allwaiserInsert(uno={})", allwaiser);
 		
+
+		int allwaiserResult = allwaiserDao.existAllwaiser(allwaiser);
 		
-		int result = allwaiserDao.followAllwaiser(allwaiser);
+		int result = 0;
+		if (allwaiserResult == 0) { 
+			result = allwaiserDao.followAllwaiser(allwaiser);
+		}
+		
+		
 
 		ResponseEntity<Integer> entity = null;
 		if (result == 1) {
@@ -53,10 +62,13 @@ public class AllwaiserController {
 		String name = user.getUserName();
 
 		String graduation = user.getGraduation();
-
+		
+		int uno = user.getUno();
 		List<User> list = null;
 		
-
+		List<User> allways = allwaiserDao.readMyAllwaisers(uno);
+		
+		
 		
 		if (!name.isEmpty() && name != null && !graduation.isEmpty() && graduation != null) {
 			list = dao.findUserByNameAndGraduation(user);
@@ -66,6 +78,18 @@ public class AllwaiserController {
 			list = dao.findUserByGraduation(graduation);
 		} 
 		
+		for (int i = 0; i < list.size(); i++) {
+			
+			for (int j = 0; j < allways.size(); j++) {
+				
+				if (list.get(i).getUno() == allways.get(j).getUno()) {
+					System.out.println("list:" +list.get(i).getUno());
+					System.out.println("allways:" + allways.get(j).getUno());
+					list.remove(i);
+				}
+				
+			}
+		}
 
 		ResponseEntity<List<User>> entity = new ResponseEntity<List<User>>(list, HttpStatus.OK);
 
@@ -78,12 +102,15 @@ public class AllwaiserController {
 	String userName = user.getUserName();
 	
 	int uno = user.getUno();
-		
-	List<User> list = allwaiserDao.searchByName(userName, uno);
-		
-	ResponseEntity<List<User>> entity = 
-			new ResponseEntity<List<User>>(list, HttpStatus.OK);
 	
+	List<User> list = null;
+	ResponseEntity<List<User>> entity = null;
+	if (userName != "") {
+		list = allwaiserDao.searchByName(userName, uno);
+		entity = new ResponseEntity<List<User>>(list, HttpStatus.OK);
+	}
+	
+
 	return entity;
 	}
 	
@@ -98,6 +125,24 @@ public class AllwaiserController {
 			entity = new ResponseEntity<Integer>(result, HttpStatus.OK);
 		} else {
 			entity = new ResponseEntity<Integer>(result, HttpStatus.BAD_REQUEST);
+		}
+		
+		return entity;
+	}
+	
+	@RequestMapping(value = "/allAllways", method = RequestMethod.POST)
+	public ResponseEntity<List<User>> allAllways(@RequestBody User user) {
+		
+		int uno = user.getUno();
+		
+		List<User> list = allwaiserDao.readMyAllwaisers(uno);
+		
+		ResponseEntity<List<User>> entity = null;
+		
+		if (list != null) {
+			entity = new ResponseEntity<List<User>>(list, HttpStatus.OK);
+		} else {
+			entity = new ResponseEntity<List<User>>(list, HttpStatus.BAD_REQUEST);
 		}
 		
 		return entity;

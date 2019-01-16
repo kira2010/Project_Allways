@@ -109,9 +109,10 @@ label {
 			<script id="search-template" type="text/x-handlebars-template" >
 			<div class="search-item">
 				<input id="uno" value="{{uno}}" type="hidden"/>
+				<img src="/allways/resources/images/default_profile_img.jpg" height="30px" width="30px" />
 				<a id="userName" >{{userName}}</a>
 				<a id="graduation">{{graduation}}</a>
-				<button class="btnInsert">친구추가</button>
+				<button class="btnInsert">구독추가</button>
 			</div>
 			</script>
 		</div>
@@ -130,8 +131,17 @@ label {
 			<script id="allways-template" type="text/x-handlebars-template" >
 			<div class="allways-item">
 				<input id="allways-uno" value="{{uno}}" type="hidden"/>
+				<img src="/allways/resources/images/default_profile_img.jpg" height="30px" width="30px" />
 				<a id="allwaysName" >{{allwaysName}}</a>
-				<button class="allwaysDelete">친구끊기</button>
+				<button class="allwaysDelete">구독끊기</button>
+			</div>
+			</script>
+		
+			<script id="all-allways-template" type="text/x-handlebars-template" >
+			<div class="all-allways-item">
+				<input id="allways-uno" value="{{uno}}" type="hidden"/>
+				<img src="/allways/resources/images/default_profile_img.jpg" height="60px" width="60px" />
+				<a id="allwaysName" >{{allwaysName}}</a>
 			</div>
 			</script>
 			
@@ -157,61 +167,17 @@ label {
 			
 			var template = Handlebars.compile(source);
 			
-		
-
+	
 			$('#search').click(function() {
 				
-				userName = $('#name').val();
-				
-				graduation = $('#graduation').val();
-				
-				division = $('#searchs');
-				
-				source = $('#search-template').html();
-				
-				template = Handlebars.compile(source);
-				
-				division.empty();
-				
-				$.ajax({
-					type: 'post',
-					url: '/allways/search/user',
-					headers: {
-						'Content-Type': 'application/json',
-						'X-HTTP-Method-Override': 'post'
-					},
-					data: JSON.stringify({
-						'userName': userName,
-						'graduation': graduation
-					}),
-					success: function(users) {
-						
-						console.log(users);
-						$(users).each(function(index, value){
-							console.log(index, value);
-							var content = {
-									uno : value.uno,
-									userName: value.userName,
-									graduation: value.graduation
-							}
-							console.log(content);
-							
-							var searchItem = template(content);
-							
-							division.append(searchItem);
-						});
-						
-						
-					}
-					
-				});
+				getSearch();
 		
 			});
 
 			
 			division.on('click', '.search-item .btnInsert', function() {
 				
-				var uno = 9;
+				var myUno = 9;
 				
 				var allwaiser_uno = $(this).prevAll('#uno').val();
 				console.log(allwaiser_uno);
@@ -223,14 +189,16 @@ label {
 						'X-HTTP-Method-Override' : 'post'
 					},
 					data: JSON.stringify({
-						'uno' : uno,
+						'uno' : myUno,
 						'allwaiser_uno' : allwaiser_uno
 					}),
 					success : function(data) {
 						if (data == 1) {
-							alert('친구 추가 성공');
+							alert('구독 추가 성공');
+							getSearch();
+							getAllAllways();
 						} else {
-							alert('친구 추가 실패');
+							alert('구독 중 입니다.');
 						}
 
 					}
@@ -246,9 +214,55 @@ label {
 
 			$('#btnallwaysSearch').click(function() {
 			
+				getAllAllwaysSearch();
+				
+			});
+			
+			
+			allwaysDivision.on('click', '.allways-item .allwaysDelete', function() {
+				
+				var myUno = 9;
+				
+				var allwaiser_uno = parseInt($(this).prevAll('#allways-uno').val());
+				
+				
+				console.log(allwaiser_uno);
+				var result = confirm('친구를 삭제 하시겠습니까?');
+				if (result == true) {
+					$.ajax({
+						type: 'post',
+						url: '/allways/search/allwaysDelete',
+						headers: {
+							'Content-Type': 'application/json',
+							'X-HTTP-Method-Override': 'post'
+						},
+						data: JSON.stringify({
+							'uno' : myUno,
+							'allwaiser_uno' : allwaiser_uno
+						}),
+						success: function(data) {
+							
+							if (data == 1) {
+								alert('삭제 성공');
+								getAllAllways();
+								getSearch();
+							} else {
+								alert('삭제 실패');
+							}
+							
+						}
+					});
+				}
+				
+				
+			});
+			
+			
+			function getAllAllwaysSearch() {
+				
 				var allwaysName = $('#allwaysName').val();
 				
-				var uno = 9;
+				var myUno = 9;
 				
 				allwaysDivision = $('#allways-searchs');
 
@@ -258,6 +272,10 @@ label {
 				
 				allwaysDivision.empty();
 				
+				if (allwaysName == "") {
+					alert('이름을 작성해주세요');
+				}	
+				
 				$.ajax({
 					type: 'post',
 					url: '/allways/search/allwaysSearch',
@@ -266,12 +284,12 @@ label {
 						'X-HTTP-Method-Override': 'post'
 					},
 					data: JSON.stringify({
-						'uno' : uno,
+						'uno' : myUno,
 						'userName' : allwaysName
 					}),
 					success: function(data) {
 						console.log(data)
-						if (data != null) {
+						if (data != "") {
 							alert('검색 성공');
 							
 							$(data).each(function(index, value) {
@@ -293,7 +311,8 @@ label {
 							
 							
 						} else {
-							alert('검색 실패');
+							alert('검색할 내용이 없습니다.');
+							getAllAllways();
 						}
 					}
 					
@@ -301,46 +320,102 @@ label {
 				});
 				
 				
-			});
+			}
 			
+			function getAllAllways() {
+				
+				var myUno = 9;
+				
+				var allwaysDivision = $('#allways-searchs');
+
+				var allwaysSource = $('#all-allways-template').html();
+
+				var allwaysTemplate = Handlebars.compile(allwaysSource);
+				
+				allwaysDivision.empty();
+				$.ajax ({
+					type: 'post',
+					url: '/allways/search/allAllways',
+					headers: {
+						'Content-Type': 'application/json',
+						'X-HTTP-Method-Override': 'post'
+					},
+					data: JSON.stringify({
+						'uno' : myUno
+					}),
+					success: function(data) {
+						
+						$(data).each(function(index, value) {
+							
+									var content = {
+											uno : value.uno,
+											allwaysName: value.userName
+									}
+									
+									var allwaysSearchItem = allwaysTemplate(content);
+									
+									allwaysDivision.append(allwaysSearchItem);
+							})
+						}
+							
+					})
+				
+				}
 			
-			allwaysDivision.on('click', '.allways-item .allwaysDelete', function() {
-				
-				var uno = 9;
-				
-				var allwaiser_uno = parseInt($(this).prevAll('#allways-uno').val());
-				
-				
-				console.log(allwaiser_uno);
-				var result = confirm('친구를 삭제 하시겠습니까?');
-				if (result == true) {
+				function getSearch() {
+					
+					var myUno = 9;
+					
+					userName = $('#name').val();
+					
+					graduation = $('#graduation').val();
+					
+					division = $('#searchs');
+					
+					source = $('#search-template').html();
+					
+					template = Handlebars.compile(source);
+					
+					division.empty();
+					
 					$.ajax({
 						type: 'post',
-						url: '/allways/search/allwaysDelete',
+						url: '/allways/search/user',
 						headers: {
 							'Content-Type': 'application/json',
 							'X-HTTP-Method-Override': 'post'
 						},
 						data: JSON.stringify({
-							'uno' : uno,
-							'allwaiser_uno' : allwaiser_uno
+							'uno': myUno,
+							'userName': userName,
+							'graduation': graduation
 						}),
-						success: function(data) {
+						success: function(users) {
 							
-							if (data == 1) {
-								alert('삭제 성공');
-							} else {
-								alert('삭제 실패');
-							}
+							console.log(users);
+							$(users).each(function(index, value){
+								console.log(index, value);
+								var content = {
+										uno : value.uno,
+										userName: value.userName,
+										graduation: value.graduation
+								}
+								
+								console.log(content);
+								
+								var searchItem = template(content);
+								
+								division.append(searchItem);
+							});
+							
 							
 						}
+						
 					});
-				}
-				
-				
-			});
+				}	
 			
 			
+			getAllAllways();
 		
 		});
 	
