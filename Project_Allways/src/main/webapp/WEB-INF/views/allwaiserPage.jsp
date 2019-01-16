@@ -606,7 +606,7 @@ $(document).ready(function() {
 		// 구독버튼을 누르면 버튼이 사라지고 취소버튼 생성
 		var uno = ${check.uno};
 		var allwaiser_uno = ${userInfo.uno};
-		console.log(uno);
+		console.log(uno); 
 		console.log(allwaiser_uno);
 		$.ajax({
 			type: 'post',
