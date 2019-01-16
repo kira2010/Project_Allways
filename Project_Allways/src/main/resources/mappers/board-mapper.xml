@@ -4,56 +4,66 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="edu.spring.project.mappers.BoardMapper">
 	<select id="selectMyAll" resultType="Board">
-		SELECT * FROM ${tbl_board} 
-		WHERE ${board.uno} = #{uno} 
+		SELECT * FROM ${tbl_board}
+		WHERE ${board.uno} = #{uno}
 		ORDER BY ${board.bno} DESC
-		LIMIT #{start}, #{end}
+		LIMIT #{start}, 10
 	</select>
 	
-	<!-- 
 	<select id="selectAllBoard" resultType="Board">
-		SELECT * FROM ${tbl_board} 
-		WHERE (${board.privacy_bounds} = 0 OR ${board.privacy_bounds} = 1)
+		SELECT * FROM ${tbl_board}
+		WHERE
+		${board.uno} = #{uno}
+		OR 
+		(${board.uno} IN (
+			SELECT ${allwaiser.allwaiseruno}
+			FROM ${tbl_allwaiser}
+			WHERE ${allwaiser.uno} = #{uno}) 
+		AND (${board.privacy_bounds} = 0 OR ${board.privacy_bounds} = 1))
+		OR
+		(${board.privacy_bounds} = 0)
+		ORDER BY ${board.bno} DESC
+		LIMIT #{start}, 10
 	</select>
-	 -->
 	
 	<select id="countMyAll" resultType="java.lang.Integer">
 		SELECT COUNT(*) FROM ${tbl_board} WHERE ${board.uno} = #{uno}
 	</select>
 	
 	<select id="selectMyFavorite" resultType="Board">
-		SELECT * FROM ${tbl_board} 
-		WHERE ${board.bno} IN 
-		(SELECT ${favorite.bno} FROM ${tbl_favorite} WHERE ${favorite.uno} = #{uno}) 
-		AND (${board.privacy_bounds} = 0 OR ${board.privacy_bounds} = 1) 
+		SELECT * FROM ${tbl_board}
+		WHERE ${board.bno} IN
+		(SELECT ${favorite.bno} FROM ${tbl_favorite} WHERE ${favorite.uno} = #{uno})
+		AND
+		(${board.privacy_bounds} = 0 OR ${board.privacy_bounds} = 1)
 		ORDER BY ${board.bno} DESC 
 		LIMIT 0, 10
 	</select>
 	
 	<select id="countMyFavorite" resultType="java.lang.Integer">
-		SELECT COUNT(*) FROM ${tbl_board} 
-		WHERE ${board.bno} IN 
-		(SELECT ${favorite.bno} FROM ${tbl_favorite} WHERE ${favorite.uno} = #{uno}) 
+		SELECT COUNT(*) FROM ${tbl_board}
+		WHERE ${board.bno} IN
+		(SELECT ${favorite.bno} FROM ${tbl_favorite} WHERE ${favorite.uno} = #{uno})
 		AND (${board.privacy_bounds} = 0 OR ${board.privacy_bounds} = 1)
 	</select>
 	
 	<select id="selectMyAllwaisersPost" resultType="Board">
-		SELECT * FROM ${tbl_board} 
+		SELECT * FROM ${tbl_board}
 		WHERE ${board.uno} IN (
-			SELECT ${allwaiser.allwaiseruno} 
-			FROM ${tbl_allwaiser} 
-			WHERE ${allwaiser.uno} = #{uno}) 
+			SELECT ${allwaiser.allwaiseruno}
+			FROM ${tbl_allwaiser}
+			WHERE ${allwaiser.uno} = #{uno})
 		AND (${board.privacy_bounds} = 0 OR ${board.privacy_bounds} = 1)
-		ORDER BY ${board.bno} DESC 
+		ORDER BY ${board.bno} DESC
 		LIMIT 0, 10
 	</select>
 	
 	<select id="countMyALlwaisersPost" resultType="java.lang.Integer">
-		SELECT COUNT(*) AS COUNT FROM ${tbl_board} 
+		SELECT COUNT(*) AS COUNT FROM ${tbl_board}
 		WHERE ${board.uno} IN (
-			SELECT ${allwaiser.allwaiseruno} 
-			FROM ${tbl_allwaiser} 
-			WHERE ${allwaiser.uno} = #{uno}) 
+			SELECT ${allwaiser.allwaiseruno}
+			FROM ${tbl_allwaiser}
+			WHERE ${allwaiser.uno} = #{uno})
 		AND (${board.privacy_bounds} = 0 OR ${board.privacy_bounds} = 1)
 	</select>
 	
@@ -67,7 +77,7 @@
 	
 	<!-- 작성중인 코드, 담당 외 Do not touch!!!!!!! -->
 	<select id="searchByKeyword" resultType="Board">
-		SELECT * FROM ${tbl_board} WHERE 
+		SELECT * FROM ${tbl_board} WHERE
 		<if test="type==1">
 			INSTR(${board.content}, #{searchKeyword}) > 0
 		</if>
@@ -77,16 +87,23 @@
 		<if test="type==3">
 			INSTR(${board.hashtag}, #{searchKeyword}) > 0
 		</if>
+		AND
+		(${board.privacy_bounds} = 0 OR ${board.privacy_bounds} = 1)
 	</select>
 		
 	<insert id="createBoard">
-		INSERT INTO ${tbl_board} (${board.uno}, ${board.userid}, ${board.content}, ${board.privacy_bounds}, ${board.photo}) 
+		INSERT INTO ${tbl_board}
+		(${board.uno}, ${board.userid}, ${board.content},
+		${board.privacy_bounds}, ${board.photo})
 		VALUES (#{uno}, #{userId}, #{content}, #{privacy_bounds}, #{photo})
 	</insert>
 	
 	<update id="updateBoard">
-		UPDATE ${tbl_board} 
-		SET ${board.content} = #{content}, ${board.privacy_bounds} = #{privacy_bounds} WHERE ${board.bno} = #{bno}
+		UPDATE ${tbl_board}
+		SET
+		${board.content} = #{content},
+		${board.privacy_bounds} = #{privacy_bounds}
+		WHERE ${board.bno} = #{bno}
 	</update>
 	
 	<delete id="deleteBoard">

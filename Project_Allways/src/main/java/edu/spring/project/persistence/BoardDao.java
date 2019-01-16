@@ -9,6 +9,8 @@ public interface BoardDao {
 	
 	int countMyAll(int uno);
 	
+	List<Board> readAllBoard(int uno, int page);
+	
 	Board read(int bno);
 	
 	List<Board> searchByKeyword(int type, String keyword);

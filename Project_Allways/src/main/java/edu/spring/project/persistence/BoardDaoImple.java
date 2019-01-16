@@ -23,13 +23,12 @@ public class BoardDaoImple implements BoardDao {
 	
 	// 내가 작성한 모든 게시글 가져오기
 	public List<Board> readAll(int uno, int page) {
-		logger.info("read(uno : {}) 호출");
+		logger.info("readAll(uno : {}) 호출");
 		
 		Map<String, Integer> params = new HashMap<String, Integer>();
 		
 		params.put("uno", uno);
-		params.put("start", page * 10);
-		params.put("end", (page * 10) + 10);		
+		params.put("start", page * 10);		
 		
 		return session.selectList(BOARD_MAPPER + ".selectMyAll", params);
 	}
@@ -39,6 +38,18 @@ public class BoardDaoImple implements BoardDao {
 		logger.info("countMyAll() 호출");
 		
 		return session.selectOne(BOARD_MAPPER + ".countMyAll", uno);
+	}
+	
+	// 내가 쓴 게시물 + 친구가 쓴 게시물중 전체/친구 공개 게시물 + 그 외 전체 공개 게시물 가져오기
+	public List<Board> readAllBoard(int uno, int page) {
+		logger.info("readAllBoard(uno : {}) 호출");
+		
+		Map<String, Integer> params = new HashMap<String, Integer>();
+		
+		params.put("uno", uno);
+		params.put("start", page * 10);		
+		
+		return session.selectList(BOARD_MAPPER + ".selectAllBoard", params);
 	}
 
 	// 게시글 자세히 보기
