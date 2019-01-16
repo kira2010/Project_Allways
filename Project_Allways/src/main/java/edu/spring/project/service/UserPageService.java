@@ -1,11 +1,14 @@
 package edu.spring.project.service;
 
+import edu.spring.project.domain.Allwaiser;
 import edu.spring.project.domain.User;
 
 public interface UserPageService {
 	
 	
-	public User check(int uno);
+	User check(int uno);
 	
-	public int updateEmo(User user);
+	int updateEmo(User user);
+	
+	int existAllwaiser(Allwaiser allwaiser);
 }

@@ -11,6 +11,7 @@
 
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script
@@ -25,14 +26,18 @@
 
 /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
 .row.content {
-	height: 450px
+	height: 800px;
 }
 
 /* Set gray background color and 100% height */
 .sidenav {
 	padding-top: 20px;
+	background-color: #ffffff;
+	height: 100%;
+}
+body {
 	background-color: #f1f1f1;
-	padding: 15px;
+	min-width: 600px;
 }
 
 /* Set black background color, white text and some padding */
@@ -80,20 +85,32 @@ footer {
 }
 
 #backImg {
-	width: 100%;
 	position: relative;
+	
 }
 
 #profile {
 	position: absolute;
 	left: 7%;
-	top: 40%;
+	top: 70%;
+}
 
+#userName {
+	position: absolute;
+	left: 25%;
+	top: 86%;
+}
+
+#btnSub {
+	position: absolute;
+	left: 83%;
+	top: 86%;
 }
 
 #menubar {
 	border: solid 1px grey;
 	width: 100%;
+	background-color: #ffffff;
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
@@ -103,20 +120,23 @@ footer {
 	border: solid 1px grey;
 	margin-bottom: 15px;
 	margin-top: 15px;
+	background-color: #ffffff;
 }
 
 #emotion {
 	width: 130px;
 	height: 130px;
-	margin-left: 60px;
+	margin-left: 40px;
 }
 
 .subscribe {
-	visibility: hidden;
+	display: none;
+	margin-left: 10px;
 }
 
 .cancel {
-	visibility: hidden;
+	display: none;
+	margin-left: 10px;
 }
 
 #option3 {
@@ -136,7 +156,7 @@ footer {
 			<div class="content">
 			
 			<div class="navbar-header col-sm-4">
-				<a class="navbar-brand" href="main.jsp"><img
+				<a class="navbar-brand" href="/allways"><img
 					src="/allways/resources/images/allways.png" id="mainLogo"
 					height="px" width="140px"></a>
 				<button type="button" class="navbar-toggle" data-toggle="collapse"
@@ -305,14 +325,27 @@ footer {
 
 	<div class="container">
 		<div class="row content">
-			<div class="col-sm-10">
+			<div class="col-sm-9">
 				<div class="content">				
 					<div>
 					<!-- 배경사진 -->
-						<div>
-							<img id="backImg"
+						<div id="backImg">	
+							<img style="width: 100%;"
 								src="/allways/resources/images/background_pro.jpg"
 								onclick="location.href='#'">
+							<div id="userName">
+								<label id="name" style="font-size: 30px; color: white;"></label>										
+							</div>
+							<div id="btnSub">
+								<input class="subscribe btn btn-light text-dark" type="submit" value="구독하기" />
+								<input class="cancel btn btn-light text-dark" type="submit" value="구독취소하기" />
+							</div>
+							<!-- 헤더 밑 프로필사진 -->
+							<div id="profile">
+								<img 
+									src="/allways/resources/images/default_profile_img.jpg"
+									width="120px" height="120px" style="border-radius: 60px;">					
+							</div>
 						</div>
 						<div class="btn-group btn-group-toggle" data-toggle="buttons"
 							id="menubar">
@@ -325,17 +358,9 @@ footer {
 								name="options" autocomplete="off" />즐겨찾기
 							</label>
 						</div>
-						<!-- 헤더 밑 프로필사진 -->
-						<div id="profile">
-							<img 
-								src="/allways/resources/images/default_profile_img.jpg"
-								width="120px" height="120px" style="border-radius: 60px;">
-							<label id="name" style="font-size: 30px;"></label>
-							<input class="subscribe" type="submit" value="구독하기" />
-							<input class="cancel" type="submit" value="구독취소하기" />
-						</div>
+						
 					</div>
-					<div class="col-sm-4" style="padding: 0px;">
+					<div class="col-sm-3" style="padding: 0px;">
 						<!-- 왼쪽 정보 및 상태 -->
 						<div id="user-Info">
 							<label style="margin-top: 5px;">생년 월일 :</label> 
@@ -396,32 +421,26 @@ footer {
 				</div>
 			</div>
 			<!-- 오른쪽 메뉴바 -->
-			<div class="col-sm-2 sidenav" style="height: 100%;">
-				<form action="/action_page.php">
-					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Search"
-							name="search">
-						<div class="input-group-btn">
-							<button class="btn btn-default" type="submit">
-								<i class="glyphicon glyphicon-search"></i>
-							</button>
-						</div>
+			<div class="col-sm-3 sidenav">
+			
+			<form class="allwaiserForm">
+				<div class="input-group">
+					<input type="text" class="form-control" placeholder="Search"
+						name="search">
+					<div class="input-group-btn">
+						<button class="btn btn-default">
+						<i class="glyphicon glyphicon-search"></i>
+						</button>
 					</div>
-				</form>
-				<table class="table table-hover" id="rightlist">
-					<tbody>
-						<tr>
-							<td><a href="#">John</a></td>
-						</tr>
-						<tr>
-							<td><a href="#">Mary</a></td>
-						</tr>
-						<tr>
-							<td><a href="#">July</a></td>
-						</tr>
-					</tbody>
-				</table>
+				</div>
+			</form>
+			
+			<div id="myAllwayiserList">
+			
+				
 			</div>
+				
+		</div>
 		</div>
 	</div>
 	<footer class="container-fluid text-center">
@@ -443,11 +462,11 @@ $(document).ready(function() {
 		$('#emotion').attr("src", "/allways/resources/images/happy.jpg");
 		emotion = $('#img1').val();
 		$.ajax({
-			type: 'post',
+			type: 'put',
 			url: '/allways/userPage',
 			headers: {
 				'Content-Type': 'application/json',
-				'X-HTTP-Method-Override': 'post'
+				'X-HTTP-Method-Override': 'put'
 			},
 			data: JSON.stringify({
 				'uno': uno,
@@ -463,11 +482,11 @@ $(document).ready(function() {
 		emotion = $('#img2').val();
 		
 		$.ajax({
-			type: 'post',
+			type: 'put',
 			url: '/allways/userPage',
 			headers: {
 				'Content-Type': 'application/json',
-				'X-HTTP-Method-Override': 'post'
+				'X-HTTP-Method-Override': 'put'
 			},
 			data: JSON.stringify({
 				'uno': uno,
@@ -483,11 +502,11 @@ $(document).ready(function() {
 		$('#emotion').attr("src", "/allways/resources/images/sentimental.jpg");
 		emotion = $('#img3').val();
 		$.ajax({
-			type: 'post',
+			type: 'put',
 			url: '/allways/userPage',
 			headers: {
 				'Content-Type': 'application/json',
-				'X-HTTP-Method-Override': 'post'
+				'X-HTTP-Method-Override': 'put'
 			},
 			data: JSON.stringify({
 				'uno': uno,
@@ -502,11 +521,11 @@ $(document).ready(function() {
 		$('#emotion').attr("src", "/allways/resources/images/sad.jpg");
 		emotion = $('#img4').val();
 		$.ajax({
-			type: 'post',
+			type: 'put',
 			url: '/allways/userPage',
 			headers: {
 				'Content-Type': 'application/json',
-				'X-HTTP-Method-Override': 'post'
+				'X-HTTP-Method-Override': 'put'
 			},
 			data: JSON.stringify({
 				'uno': uno,
@@ -521,11 +540,11 @@ $(document).ready(function() {
 		$('#emotion').attr("src", "/allways/resources/images/dangerous.jpg");
 		emotion = $('#img5').val();
 		$.ajax({
-			type: 'post',
+			type: 'put',
 			url: '/allways/userPage',
 			headers: {
 				'Content-Type': 'application/json',
-				'X-HTTP-Method-Override': 'post'
+				'X-HTTP-Method-Override': 'put'
 			},
 			data: JSON.stringify({
 				'uno': uno,
@@ -540,7 +559,7 @@ $(document).ready(function() {
 	
 	
 	// MyPage
-	if (${userInfo.uno} == ${check.uno } ) {
+	if (${userInfo.uno} == ${check.uno}) {
 		$('#user').append("${userInfo.userId}님 안녕하세요!");
 		$('#name').append("${userInfo.userId}");
 		$('#birth').append("${birthDay}");
@@ -561,12 +580,84 @@ $(document).ready(function() {
 			$('#school').append("${userInfo.graduation}");
 		}
 		// 구독을 한 경우와 안한 경우
-	/* 	if () {
-			$('.subscribe').css("visibility", "visible");
-		} else {
-			$('.cancel').css("visibility", "visible");
-		} */
-	} 
+		// 구독버튼을 누르면 버튼이 사라지고 취소버튼 생성
+		var uno = ${check.uno};
+		var allwaiser_uno = ${userInfo.uno};
+		console.log(uno);
+		console.log(allwaiser_uno);
+		$.ajax({
+			type: 'post',
+			url: '/allways/userPage',
+			headers: {
+				'Content-Type' : 'application/json',
+				'X-HTTP-Method-Override' : 'post'
+			},
+			data: JSON.stringify({
+				'uno' : uno,
+				'allwaiser_uno' : allwaiser_uno
+			}),
+			success: function(data) {
+				console.log(data);
+				if(data == 1) {
+					$('.cancel').css("display", "inline");
+				} else {
+					$('.subscribe').css("display", "inline");
+				}
+			}
+		});
+	}
+	
+		$('.subscribe').click(function () {
+			var uno = ${check.uno};
+		
+			var allwaiser_uno = ${userInfo.uno};
+			$.ajax({
+				type: 'post',
+				url: '/allways/search/allwaysInsert',
+				headers: {
+					'Content-Type' : 'application/json',
+					'X-HTTP-Method-Override' : 'post'
+				},
+				data: JSON.stringify({
+					'uno' : uno,
+					'allwaiser_uno' : allwaiser_uno
+				}),
+				success: function(data) {
+					if (data == 1) {
+						alert('구독성공');
+						$('.cancel').css("display", "inline");
+						$('.subscribe').css("display", "none");
+					} 
+				}
+			});
+		});
+
+
+		$('.cancel').click(function () {
+			var uno = ${check.uno};
+		
+			var allwaiser_uno = ${userInfo.uno};
+			$.ajax({
+				type: 'post',
+				url: '/allways/search/allwaysDelete',
+				headers: {
+					'Content-Type' : 'application/json',
+					'X-HTTP-Method-Override' : 'post'
+				},
+				data: JSON.stringify({
+					'uno' : uno,
+					'allwaiser_uno' : allwaiser_uno
+				}),
+				success: function(data) {
+					if (data == 1) {
+						alert('구독취소');
+						$('.subscribe').css("display", "inline");
+						$('.cancel').css("display", "none");
+					} 
+				}
+			});
+		});
+		
 });
 
 </script>

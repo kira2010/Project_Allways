@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-
+import edu.spring.project.domain.Allwaiser;
 import edu.spring.project.domain.User;
+import edu.spring.project.persistence.AllwaiserDao;
+import edu.spring.project.service.AllwaiserService;
 import edu.spring.project.service.UserPageService;
 
 
@@ -29,6 +31,7 @@ public class UserPageController {
 	@Autowired
 	private UserPageService userPageService;
 	
+	
 	@RequestMapping(value = "/userPage", method = RequestMethod.GET)
 	public String userPage(int uno, HttpSession session) {
 		
@@ -38,7 +41,7 @@ public class UserPageController {
 		return "allwaiserPage";
 	}
 	
-	@RequestMapping(value = "/userPage", method = RequestMethod.POST)
+	@RequestMapping(value = "/userPage", method = RequestMethod.PUT)
 	public ResponseEntity<Integer> updateEmo(@RequestBody User user) {
 		
 		int result = userPageService.updateEmo(user);
@@ -49,6 +52,24 @@ public class UserPageController {
 		} else {
 			entity = new ResponseEntity<Integer>(result, HttpStatus.BAD_REQUEST);
 		}
+		
+		return entity;
+	}
+	
+	@RequestMapping(value = "/userPage", method = RequestMethod.POST)
+	public ResponseEntity<Integer> existAllwaiser(
+			@RequestBody Allwaiser allwaiser) {
+		
+		System.out.println(allwaiser);
+		
+		int result = userPageService.existAllwaiser(allwaiser);
+		System.out.println(result);
+		ResponseEntity<Integer> entity = null;
+		
+		if (result == 1) {
+			entity = new ResponseEntity<Integer>(result, HttpStatus.OK);
+		} 
+		
 		
 		return entity;
 	}
