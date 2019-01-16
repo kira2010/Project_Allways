@@ -24,8 +24,7 @@ public class BoardServiceImple implements BoardService {
 	}
 
 	public Board selectOne(int bno) {
-		// TODO Auto-generated method stub
-		return null;
+		return boardDao.read(bno);
 	}
 
 	public int insert(Board board) {

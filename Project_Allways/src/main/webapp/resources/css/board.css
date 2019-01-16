@@ -94,7 +94,7 @@ details{
 	resize: none;
 	border: 0;
 	float: right;
-	width: 90%;
+	width: 88%;
 	margin-right: 8px;
 }
 
@@ -112,7 +112,7 @@ details{
 	resize: none;
 	border: 0;
 	float: right;
-	width: 90%;
+	width: 88%;
 	margin-right: 8px;
 	margin-bottom: 4px;
 }
@@ -123,4 +123,22 @@ details{
 
 .replyDelete{
 	padding: 0px;
+}
+
+.boardImg{
+	display: inline-block;
+	width: 50%;
+	border: solid 1px #ffffff;
+}
+
+.boardImg > span{
+	float:left;
+	margin-left: 45%;
+	font-size: 50px;
+}
+
+.board-dialog{	
+	height: 90%;
+	width: 90%;
+	min-width: 500px;
 }

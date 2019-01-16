@@ -140,122 +140,218 @@
 	</div>
 </div>
 
+<!-- dropDown아이템 다이얼로그 -->
+<div class="modal fade" id="logout">
+	<div class="modal-dialog">
+		<div class="modal-content">
+	
+			<!-- Modal Header -->
+			<div class="modal-header">
+			<h4 class="modal-title">로그아웃</h4>
+			</div>
+	
+			<!-- Modal body -->
+			<div class="modal-body">정말 로그아웃하시겠습니까?</div>
+			
+				<!-- Modal footer -->
+			<div class="modal-footer">
+				<button type="button" class="btn" data-dismiss="modal">아니오</button>
+				<button type="button" class="btn" data-dismiss="modal"
+				onclick="location.href='login.jsp'">예</button>
+			</div>
 
-	 <!-- dropDown아이템 다이얼로그 -->
-						<div class="modal fade" id="logout">
-							<div class="modal-dialog">
-								<div class="modal-content">
+		</div>
+	</div>
+</div>
 
-									<!-- Modal Header -->
-									<div class="modal-header">
-										<h4 class="modal-title">로그아웃</h4>
-									</div>
+<div class="modal fade" id="updateInfo">
+	<div class="modal-dialog">
+		<div class="modal-content">
 
-									<!-- Modal body -->
-									<div class="modal-body">정말 로그아웃하시겠습니까?</div>
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<h4 class="modal-title">개인정보 수정</h4>
+			</div>
 
-									<!-- Modal footer -->
-									<div class="modal-footer">
-										<button type="button" class="btn" data-dismiss="modal"
-											>아니오</button>
-										<button type="button" class="btn" data-dismiss="modal"
-											onclick="location.href='login.jsp'">예</button>
-									</div>
-								</div>
+			<!-- Modal body -->
+			<div class="modal-body">
+				<!-- 모델클래스에 저장된 아이디 불러오기 -->
+				<input class="form-control" type="text" name="userId" readonly />
+				<br />
+				<input class="form-control" type="password"
+				name="userPwd" placeholder="비밀번호" required /> <br /> <input
+				class="form-control" type="password" name="userPwds"
+				placeholder="비밀번호 확인" required />
+				<br />
+				<button type="button" class="btn btn-danger"
+				data-dismiss="modal" style="margin-left: 435px">취소</button>
+				<button type="button" class="btn btn-danger"
+				data-dismiss="modal" style="margin-left: 15px"
+				data-toggle="modal" data-target="#update">확인</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 로그인정보 확인 후 정보수정 창 -->
+<div class="modal fade" id="update">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">개인정보 수정</h4>
+			</div>
+
+			<div class="modal-body">
+				<input type="password" name="userPwd" placeholder="새 비밀번호 입력"
+				required class="form-control"/> <br/>
+				<input type="password" name="userPwds" placeholder="새 비밀번호 확인"
+				required class="form-control"/> <br/>
+				<input type="text" name="userName" required class="form-control"/><br/>
+				<input type="email" name="userEmail" required class="form-control"/><br/>
+				<input type="submit" value="취소" class="btn btn-danger" style="margin-left: 435px"
+				data-dismiss="modal"/>
+
+				<input type="submit" value="확인" class="btn btn-danger" style="margin-left: 15px"
+				data-dismiss="modal"/>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="memberWithdrawal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<h4 class="modal-title">회원탈퇴</h4>
+			</div>
+
+			<!-- Modal body -->
+			<div class="modal-body">
+				<!-- 모델클래스에 저장된 아이디 불러오기 -->
+				<input class="form-control" type="text" name="userId" readonly />
+				<br />
+				<input class="form-control" type="password"
+				name="userPwd" placeholder="비밀번호" required /> <br />
+				<input class="form-control" type="password" name="userPwds"
+				placeholder="비밀번호 확인" required /> <br />
+				<button type="button" class="btn btn-danger"
+				data-dismiss="modal" style="margin-left: 435px">취소</button>
+				<button type="button" class="btn btn-danger"
+				data-dismiss="modal" style="margin-left: 20px"
+				data-toggle="modal" data-target="#withdrawal">획인</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="withdrawal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-body">Allways를 탈퇴하시겠습니까?</h4>
+				<br/>
+				<br/>
+				<input type="submit" value="취소" class="btn btn-danger" style="margin-left: 435px"
+				data-dismiss="modal"/>
+				<input type="submit" value="확인" class="btn btn-danger" style="margin-left: 15px"
+				data-dismiss="modal" onclick="location.href='login.jsp'"/>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 게시믈 상세 페이지 -->
+<div class="modal fade" id="board-detail" role="dialog">
+	<div class="modal-dialog board-dialog" >
+		<div class="modal-content">
+			
+			<div class="row">
+					<div class="col-xs-7">
+						<div id="boardCarousel" class="carousel slide"> 
+
+							<ol class="carousel-indicators" id = "carouselOl">
+							</ol>
+	
+							<div class="carousel-inner" id = "carouselDiv">
 							</div>
+ 
 						</div>
-						<div class="modal fade" id="updateInfo">
-							<div class="modal-dialog">
-								<div class="modal-content">
-
-									<!-- Modal Header -->
-									<div class="modal-header">
-										<h4 class="modal-title">개인정보 수정</h4>
-									</div>
-
-									<!-- Modal body -->
-									<div class="modal-body">
-										<!-- 모델클래스에 저장된 아이디 불러오기 -->
-										<input class="form-control" type="text" name="userId" readonly />
-										<br /> <input class="form-control" type="password"
-											name="userPwd" placeholder="비밀번호" required /> <br /> <input
-											class="form-control" type="password" name="userPwds"
-											placeholder="비밀번호 확인" required /> <br />
-										<button type="button" class="btn btn-danger"
-											data-dismiss="modal" style="margin-left: 435px"
-											>취소</button>
-										<button type="button" class="btn btn-danger"
-											data-dismiss="modal" style="margin-left: 15px"
-											data-toggle="modal" data-target="#update">확인</button>
-									</div>
-								</div>
-							</div>
-						</div> <!-- 로그인정보 확인 후 정보수정 창 -->
-						<div class="modal fade" id="update">
-							<div class="modal-dialog">
-								<div class="modal-content">
-									<div class="modal-header">
-										<h4 class="modal-title">개인정보 수정</h4>
-									</div>
-									<div class="modal-body">
-										<input type="password" name="userPwd" placeholder="새 비밀번호 입력"
-											required class="form-control"/> <br/>
-										<input type="password" name="userPwds" placeholder="새 비밀번호 확인"
-										required class="form-control"/> <br/>
-										<input type="text" name="userName" required class="form-control"/><br/>
-										<input type="email" name="userEmail" required class="form-control"/><br/>
-										<input type="submit" value="취소" class="btn btn-danger" style="margin-left: 435px"
-										data-dismiss="modal"/>
-
-										<input type="submit" value="확인" class="btn btn-danger" style="margin-left: 15px"
-										data-dismiss="modal"/>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="modal fade" id="memberWithdrawal">
-							<div class="modal-dialog">
-								<div class="modal-content">
-
-									<!-- Modal Header -->
-									<div class="modal-header">
-										<h4 class="modal-title">회원탈퇴</h4>
-									</div>
-
-									<!-- Modal body -->
-									<div class="modal-body">
-										<!-- 모델클래스에 저장된 아이디 불러오기 -->
-										<input class="form-control" type="text" name="userId" readonly />
-										<br /> <input class="form-control" type="password"
-											name="userPwd" placeholder="비밀번호" required /> <br /> <input
-											class="form-control" type="password" name="userPwds"
-											placeholder="비밀번호 확인" required /> <br />
-										<button type="button" class="btn btn-danger"
-											data-dismiss="modal" style="margin-left: 435px"
-											>취소</button>
-										<button type="button" class="btn btn-danger"
-											data-dismiss="modal" style="margin-left: 20px"
-											data-toggle="modal" data-target="#withdrawal">획인</button>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="modal fade" id="withdrawal">
-							<div class="modal-dialog">
-								<div class="modal-content">
-									<div class="modal-header">
-										<h4 class="modal-body">Allways를 탈퇴하시겠습니까?</h4>
-										<br/>
-										<br/>
-										<input type="submit" value="취소" class="btn btn-danger" style="margin-left: 435px"
-										data-dismiss="modal"/>
-										<input type="submit" value="확인" class="btn btn-danger" style="margin-left: 15px"
-										data-dismiss="modal" onclick="location.href='login.jsp'"/>
-									</div>
-								</div>
-							</div>
-						</div>
+					</div>
 					
+					<div class="col-xs-5">
+						
+						<div class="modal-header">
+							<div>게시물 상세 페이지</div>
+						</div>
+						
+						<div class="boardItemHead">
+
+						<img id = "writer-img" src="/allways/resources/images/default_profile_img.jpg"
+						style="border-radius: 30px; float: left; padding: 8px"
+						onclick="location.href='/allways'">
+						
+						<div style="display: inline-block;">
+						<a href = "/allways" id="writer-userId"></a><br />
+						<span style="font-size: x-small; color: gray;" id="writer-regDate"></span>
+						</div>
+
+						<div class="dropdown" style="float: right;">
+	  	 				<span class="glyphicon glyphicon-align-justify dropdown-toggle btn" id="menu1" data-toggle="dropdown"></span>
+	
+		  				  	<ul class="dropdown-menu" role="menu" aria-labelledby="menu1" style="right: 0; left: auto;">
+			   			 		<li role="presentation"><a role="menuitem" tabindex="-1" href="#">북마크</a></li>
+			     			 	<li role="presentation" id="modalBoardUpdate"><a role="menuitem" tabindex="-1" href="#">수정</a></li>
+			     			 	<li role="presentation" class="divider"></li>
+			     	 			<li role="presentation" id="modalBoardDelete"><a role="menuitem" tabindex="-1"  id="{{boardDeleteBtn}}" class="boardDeleteBtn">삭제</a></li>
+			    			</ul>
+						</div>
+
+						</div> <!-- BoardItemHead -->
+						
+						<div>	
+	    					<p id="writer-content"></p>
+						</div>
+						
+						<div class="container-fluid boardTail">
+							<div class="row">
+							<div class="col-xs-6" style="text-align: center;" >
+							<a id="{{bookMark}}" class = "btn" >북마크</a>
+							</div>
+							<div class="col-xs-6 " style="text-align: center;" >
+							<a data-bno="{{bno}}" class="reply btn" >댓글</a>
+							</div>
+							</div>
+						</div>
+						
+						<div id="replyInsertForm" class="clearfix">
+							<div class="replyProfileImg">
+								<img id = "profileImg" src="/allways/resources/images/default_profile_img.jpg"
+								class = "img-circle"
+								onclick="location.href='/allways'" />
+							</div>
+
+							<div class="input-group replyInsertContent">
+								<textarea id="replyTextModal" class="autosize form-control" rows="1" placeholder="내용 입력" style="resize: none; margin: 8px; width = 100%"></textarea>
+		
+								<div class="input-group-btn">
+								<button id= "replyInsertModal" data-bno="" class="replyInsertBtn btn btn-default ">
+								<i class="glyphicon glyphicon-edit"></i>
+								</button>
+								</div>
+							</div>	
+						</div>
+						
+						<div id= "modalReplyArea" class= "replyArea">
+						
+						</div>
+						
+					</div>
+				</div>
+			
+			
+		</div>
+	</div>
+</div>					
 
 	
 <footer class="container-fluid text-center">
@@ -286,7 +382,7 @@
 <form id="uploadForm" method="post" enctype="multipart/form-data">
 	<label class = "addImg" for="files">사진</label>
 	
-	<input id="files" type="file" style="display: none" />	
+	<input id="files" type="file" class="files" style="display: none" />	
 
 	<span id="boardUploadBtn" class = "btn btn-default" >올리기</span>			
 
@@ -338,21 +434,11 @@
     	<p>{{content}}</p>
 	</details>
 	
-
-	<div class="imageArea" style= "margin: 8px">
-
-		<div id="{{carousel}}" class="carousel slide" data-ride="carousel"> 
-
-			<ol class="carousel-indicators" id = "{{uno_ol}}">
-			</ol>
-
-			<div class="carousel-inner" id = "{{uno_div}}">
-			</div>
- 
-		</div>
-		
+	<div class="imageArea" id="{{imageArea}}" data-bno="{{bno}}" style= "margin: 8px">
+					
 	</div>
 	
+
 <div class="container-fluid boardTail">
 	<div class="row">
 		<div class="col-xs-6" style="text-align: center;" >
@@ -426,6 +512,8 @@
 
 $(document).ready(function(){
 
+	var fileBuffer = [];/*파일 리스트*/
+	
 	var boardInsertSource = $('#boardInsert').html();
 	var boardInsertTemplate = Handlebars.compile(boardInsertSource);
 
@@ -466,9 +554,7 @@ $(document).ready(function(){
 					regDate: dateString,
 					content_T: topContent,
 					content: subContent,
-					carousel: this.bno+"Carousel",
-					uno_ol: this.bno+"ol",
-					uno_div: this.bno+"div",
+					imageArea: this.bno+"imgArea",
 					bookMark:this.bno+"-bookMark",
 					bno: this.bno,
 					replyArea: this.bno+"replyArea",
@@ -480,43 +566,37 @@ $(document).ready(function(){
 				var boardItem = boardItemTem(content);
 				$('#boards').append(boardItem);
 				
-				// 게시물 삭제 관련
-				if(this.userId != '${check.userId}'){
-					$('#'+this.bno+'boardDelete').hide();
-					$('#'+this.bno+'boardUpdate').hide();
-				}
+				var divList = "";
 				
 				if(this.photo){
 					var photoList = this.photo.split(',');
 					
 					for(i = 0; i < photoList.length; i++){
-					
-					if(i == 0){
-					loList = '<li data-target="#myCarousel" data-slide-to='+i+' class="active"></li>';
-					divList = '<div class="item active">'	
-							+'<img src="/allways'+photoList[i]+'" style="width: 100%" alt="First slide">'
-							+'</div>'
-					}else{
-						loList = '<li data-target="#myCarousel" data-slide-to='+i+'></li>';
-						divList = '<div class="item">'	
-								+'<img src="/allways'+photoList[i]+'" style="width: 100%" alt="First slide">'
-								+'</div>'
+						if(i<3){
+						divList += '<div class="boardImg">'	
+								+'<img src="/allways'+photoList[i]+'" style="width: 100%">'
+								+'</div>';
+						}else if(photoList.length > 3){
+							console.log(photoList.length);
+							divList += '<div class="boardImg clearfix ">'	
+								+'<span>'+(photoList.length-3)+'+'+'<span>'
+								+'</div>';
+							break;
+						}
+							
+						
 					}
-							
-							
-						$('#'+this.bno+'ol').append(loList);
-						$('#'+this.bno+'div').append(divList);
-					};
-					
-					
-					btn ='<a class="left carousel-control" href="#'+this.bno+'Carousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a> '
-					+'<a class="right carousel-control" href="#'+this.bno+'Carousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>'
-					
-					$('#'+this.bno+'Carousel').append(btn);
-					
-				};
+				}
 				
+				$('#'+this.bno+'imgArea').append(divList);
 				
+				// 게시물 삭제 관련
+				if(this.userId != '${check.userId}'){
+					$('#'+this.bno+'boardUpdate').hide();
+					$('#'+this.bno+'boardDelete').hide();
+				}
+				
+									
 			});
 			
 		});
@@ -540,7 +620,7 @@ $(document).ready(function(){
 	});//end of 무한스크롤
 	
 	//boardInsert
-	$('#boardUploadBtn').click(function () {
+	$(document).on("click",'#boardUploadBtn',function() {
 		
 		var content = $("#boardInsertcontent").val();
 		var privacyBounds = $("#privacyBounds").val();
@@ -548,13 +628,6 @@ $(document).ready(function(){
 		boardUpload(content, privacyBounds);
 	
 	});
-
-	function endBoardInsert(){
-		page = 0;
-		drowBoardInsert();
-		$('#boards').empty();
-		drowBoardItems();
-	};
 	
 	$(document).on("click",'.boardDeleteBtn',function(event){
 
@@ -571,13 +644,22 @@ $(document).ready(function(){
 			},
 			success: function(result) {
 				alert('보드 삭제 결과: ' + result);
-				$('#boards').empty();
-				drowBoardItems();
+				endBoardInsert();
 			}
 		});
  	
 	});
 	
+	function endBoardInsert(){
+		fileBuffer = [];
+		page = 0;
+		drowBoardInsert();
+		$('#boards').empty();
+		drowBoardItems();
+	};
+	
+//////////////////////////////////////////////////////////////////////////////
+
 	var replyInsertSource = $('#replyInsert').html();
 	var replyInsertTemplate = Handlebars.compile(replyInsertSource);
 	
@@ -627,15 +709,21 @@ function drowReply(event, bno){
 	 
 	});
 }
+
+$(document).on("click", '#replyInsertBtn', function(event){
 	
-	
+});
+
 	$(document).on("click",'.reply', drowReply);	
 		
 	$(document).on("click",'.replyInsertBtn',function(event){
 		var bno = (this.id).split('-')[0];
-
 		var content = $('#'+bno+'-replyText').val();
-			
+		
+		if(bno == 'replyInsertModal'){
+			return;
+		}
+		
 		$.ajax({
 			type: 'post',
 			url: '/allways/replies',
@@ -670,21 +758,19 @@ function drowReply(event, bno){
 			},
 			success: function(result) {
 				alert('댓글 삭제 결과: ' + result);
-				drowReply({}, bno);
+				if( $('body').attr('class') == 'modal-open'){
+					drowReplyModal(bno);					
+				}else{
+					drowReply({}, bno);					
+				}
 			}
 		});
  	 
 	});
 
+//////////////////////////////////////////////////////////////////////////////
 
-	var fileBuffer = [];/*파일 리스트*/
-
-	$("textarea.autosize").on('keydown keyup', function () {
-		  $(this).height(1).height( $(this).prop('scrollHeight')+12 );	
-	});
-
-
-	$('#files').change(function() {
+	$(document).on('change', '.files', function() {
 		const target = document.getElementById('uploadForm');
 		
 		console.log(target);
@@ -722,6 +808,136 @@ function drowReply(event, bno){
 		console.log(fileBuffer);
 	});
 	
+//////////////////////////////////////////////////////////////////////////////
+
+	// modal 창 정보
+	$(document).on('click', '.imageArea', function(){
+			var bno = $(this).data('bno');
+			console.log(bno);
+			$('#replyInsertModal').attr("data-bno", bno);
+			
+			$.getJSON('/allways/board/selectBoard/detail/' + bno, function(data){
+				
+				$('#carouselOl').empty();
+				$('#carouselDiv').empty();
+				$('#boardCarousel > #prev').remove();
+				$('#boardCarousel > #next').remove();
+
+				
+				if(data.userId != '${check.userId}'){
+					$('#modalBoardUpdate').hide();
+					$('#modalBoardDelete').hide();
+				}
+				
+				if(data.photo){
+					var photoList = data.photo.split(',');
+					
+					for(i = 0; i < photoList.length; i++){
+					
+					if(i == 0){
+					loList = '<li data-target="#myCarousel" data-slide-to='+i+' class="active"></li>';
+					divList = '<div class="item active">'	
+							+'<img src="/allways'+photoList[i]+'" style="width: 100%" alt="First slide">'
+							+'</div>'
+					}else{
+						loList = '<li data-target="#myCarousel" data-slide-to='+i+'></li>';
+						divList = '<div class="item">'	
+								+'<img src="/allways'+photoList[i]+'" style="width: 100%" alt="First slide">'
+								+'</div>'
+					}
+							
+							
+						$('#carouselOl').append(loList);
+						$('#carouselDiv').append(divList);
+					};
+					
+					
+					btn ='<a id= "prev" class="left carousel-control" href="#boardCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a> '
+					+'<a id= "next" class="right carousel-control" href="#boardCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>'
+					
+					$('#boardCarousel').append(btn);
+					
+				};
+	
+				
+				var date = new Date(data.regDate);
+				var dateString = date.toLocaleDateString();
+				//$('#writer-img').attr("","");
+				$('#writer-userId').empty();
+				$('#writer-regDate').empty();
+				$('#writer-content').empty();
+
+				$('#writer-userId').append(data.userId);
+				$('#writer-regDate').append(dateString);
+				$('#writer-content').append(data.content);
+				
+				drowReplyModal(bno);
+				
+				$('#board-detail').modal('show');
+			});
+			
+			
+			
+	});
+	
+	$(document).on("click",'#replyInsertModal',function(event){
+		var bno = $(this).data('bno');
+
+		var content = $('#replyTextModal').val();
+			
+		$.ajax({
+			type: 'post',
+			url: '/allways/replies',
+			headers: {
+				'Content-Type': 'application/json',
+				'X-HTTP-Method-Override': 'post'
+			},
+			data: JSON.stringify({
+				'bno': bno,
+				'reply_content': content,
+				
+			}),
+			success: function(result) {
+				alert('댓글 추가 결과: ' + result +'bno :'+bno);
+				drowReplyModal(bno);
+			}
+		});
+	
+	});
+	
+	function drowReplyModal(bno){
+			
+		$('#modalReplyArea').empty(); 
+		
+		$.getJSON('/allways/replies/all/' + bno, function(data) {
+			
+			$(data).each(function() {
+				var date = new Date(this.regDate);
+				var dateString = date.toLocaleDateString()
+					
+				var content = {
+					rno: this.rno,
+					bno: bno,
+					replyContent: this.reply_content,
+					userId: this.userId,
+					regDate: dateString,
+					BRno : bno+'-'+this.rno+'-no'
+				};
+				
+				var replyItem = replyItemTemplate(content);
+				$('#modalReplyArea').append(replyItem);
+				
+				if(this.userId == '${check.userId}'){
+					$('#'+bno+'-'+this.rno+'-no').show();
+				}else{
+					$('#'+bno+'-'+this.rno+'-no').hide();
+				}
+			});
+		 
+		});
+	}
+	
+//////////////////////////////////////////////////////////////////////////////
 	
 	function boardUpload(content, privacyBounds) {
 		
@@ -777,6 +993,9 @@ function drowReply(event, bno){
 		});
 	}
 	
+	$("textarea.autosize").on('keydown keyup', function () {
+		  $(this).height(1).height( $(this).prop('scrollHeight')+12 );	
+	});
 
 	
 });

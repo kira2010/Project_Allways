@@ -8,6 +8,7 @@ public interface FavoriteService {
 
 	int insert(Favorite favorite);
 	List<Favorite> select(int uno);
+	
 	int update(Favorite favorite);
 	int delete(int itr_no);
 	

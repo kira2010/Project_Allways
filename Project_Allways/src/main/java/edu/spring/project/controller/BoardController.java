@@ -53,6 +53,20 @@ public class BoardController {
 		return  entity;
 	}
 	
+	@RequestMapping(value = "selectBoard/detail/{bno}", method = RequestMethod.GET)
+	public ResponseEntity<Board> selectOne(@PathVariable(name="bno") int bno) {
+		
+		Board result = boardService.selectOne(bno);
+				
+		ResponseEntity<Board> entity = null;
+		if(result != null) {
+			entity = new ResponseEntity<Board>(result , HttpStatus.OK);
+		}else {
+			entity = new ResponseEntity<Board>(result , HttpStatus.BAD_REQUEST);
+		}
+		return  entity;
+	}
+	
 	@RequestMapping(value = "{bno}", method = RequestMethod.DELETE)
 	public ResponseEntity<String> deleteBoard(
 			@PathVariable(name="bno") int bno) {
