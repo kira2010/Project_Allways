@@ -84,7 +84,7 @@ footer {
 	margin-top: 20px;
 }
 
-#backImg {
+#background {
 	position: relative;
 	
 }
@@ -137,6 +137,22 @@ footer {
 .cancel {
 	display: none;
 	margin-left: 10px;
+}
+
+.backImg {
+	position: absolute;
+	left: 83%;
+	top: 90%;
+	font-size: 10px;
+	opacity: 0.6;
+}
+
+.profileImg {
+	position: absolute;
+	left: 70%;
+	top: 90%;
+	font-size: 10px;
+	opacity: 0.6;
 }
 
 #option3 {
@@ -329,8 +345,8 @@ footer {
 				<div class="content">				
 					<div>
 					<!-- 배경사진 -->
-						<div id="backImg">	
-							<img style="width: 100%;"
+						<div id="background">	
+							<img style="width: 100%;" class="custom-file-input"
 								src="/allways/resources/images/background_pro.jpg"
 								onclick="location.href='#'">
 							<div id="userName">
@@ -338,13 +354,17 @@ footer {
 							</div>
 							<div id="btnSub">
 								<input class="subscribe btn btn-light text-dark" type="submit" value="구독하기" />
-								<input class="cancel btn btn-light text-dark" type="submit" value="구독취소하기" />
+								<input class="cancel btn btn-light text-dark" type="submit" value="구독취소하기" />		
+							</div>
+							<div>
+								<input class="backImg btn btn-light text-dark" type="submit" value="배경사진 변경" />
+								<input class="profileImg btn btn-light text-dark" type="submit" value="프로필사진 변경" />
 							</div>
 							<!-- 헤더 밑 프로필사진 -->
 							<div id="profile">
-								<img 
+								<img class="custom-file-input"
 									src="/allways/resources/images/default_profile_img.jpg"
-									width="120px" height="120px" style="border-radius: 60px;">					
+									width="120px" height="120px" style="border-radius: 60px;">			
 							</div>
 						</div>
 						<div class="btn-group btn-group-toggle" data-toggle="buttons"
@@ -568,6 +588,7 @@ $(document).ready(function() {
 		if("${userInfo.graduation}" != null) {
 			$('#school').append("${userInfo.graduation}");
 		}
+		
 	// AllwaiserPage
 	} else {
 		$('#name').append("${userInfo.userId}");
@@ -575,6 +596,8 @@ $(document).ready(function() {
 		$('#email').append("${userInfo.userEmail}");
 		$('#menu2').html("<label>Allwaiser 상태</label>");
 		$('.dropdown-menu').css('display', 'none');
+		$('.backImg').css('display', 'none');
+		$('.profileImg').css('display', 'none');
 		$('#option3').css("display", "none");
 		if("${userInfo.graduation}" !== null) {
 			$('#school').append("${userInfo.graduation}");
