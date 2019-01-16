@@ -22,7 +22,7 @@
 
 <style>
 #jb-container {
-	width: 1000px;
+	width: 1100px;
 	margin: 0px auto;
 	padding: 20px;
 	border: 1px solid #bcbcbc;
@@ -44,7 +44,7 @@
 }
 
 #jb-content {
-	width: 450px;
+	width: 550px;
 	padding: 20px;
 	margin-bottom: 20px;
 	float: left;
@@ -69,6 +69,12 @@ label {
 	margin-top: 7.5px;
 	margin-bottom: 7.5px;
 }
+
+button {
+	background-color: #e7e7e7; color: black;
+	font-size: 10px;
+}
+
 </style>
 <title>CSS</title>
 </head>
@@ -108,11 +114,17 @@ label {
 			</script>
 			<script id="search-template" type="text/x-handlebars-template" >
 			<div class="search-item">
-				<input id="uno" value="{{uno}}" type="hidden"/>
-				<img src="/allways/resources/images/default_profile_img.jpg" height="30px" width="30px" />
-				<a id="userName" >{{userName}}</a>
-				<a id="graduation">{{graduation}}</a>
-				<button class="btnInsert">구독추가</button>
+					<input id="uno" value="{{uno}}" type="hidden"/>
+				<div class="boardItemHeader">
+					<div style="display: inline-block;">
+					<img src="/allways/resources/images/default_profile_img.jpg" height="40px" width="40px" class="img-circle">
+						<a id="userName" >{{userName}}</a>
+						<span id="graduation" style:"font-size: x-small; color: gray;">{{graduation}}</span>
+					</div>
+					<div class="insert" style="float: right;">	
+						<button class="btn btn-secondary btn-sm">구독추가</button>
+					</div>
+				</div>		
 			</div>
 			</script>
 		</div>
@@ -131,16 +143,18 @@ label {
 			<script id="allways-template" type="text/x-handlebars-template" >
 			<div class="allways-item">
 				<input id="allways-uno" value="{{uno}}" type="hidden"/>
-				<img src="/allways/resources/images/default_profile_img.jpg" height="30px" width="30px" />
+				<img src="/allways/resources/images/default_profile_img.jpg" height="30px" width="30px" class="img-circle">
 				<a id="allwaysName" >{{allwaysName}}</a>
-				<button class="allwaysDelete">구독끊기</button>
+				<div class="delete" style="float: right;">	
+						<button class="btn btn-secondary btn-sm">구독끊기</button>
+					</div>
 			</div>
 			</script>
 		
 			<script id="all-allways-template" type="text/x-handlebars-template" >
 			<div class="all-allways-item">
 				<input id="allways-uno" value="{{uno}}" type="hidden"/>
-				<img src="/allways/resources/images/default_profile_img.jpg" height="60px" width="60px" />
+				<img src="/allways/resources/images/default_profile_img.jpg" height="60px" width="60px" class="img-circle">
 				<a id="allwaysName" >{{allwaysName}}</a>
 			</div>
 			</script>
@@ -175,7 +189,7 @@ label {
 			});
 
 			
-			division.on('click', '.search-item .btnInsert', function() {
+			division.on('click', '.search-item .insert .btn btn-secondary btn-sm', function() {
 				
 				var myUno = 9;
 				
@@ -219,7 +233,7 @@ label {
 			});
 			
 			
-			allwaysDivision.on('click', '.allways-item .allwaysDelete', function() {
+			allwaysDivision.on('click', '.allways-item .delete .btn btn-secondary btn-sm', function() {
 				
 				var myUno = 9;
 				
