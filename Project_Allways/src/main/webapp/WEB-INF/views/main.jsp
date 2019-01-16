@@ -17,6 +17,8 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <link rel="stylesheet" type="text/css" href="/allways/resources/css/board.css">
+<link rel="stylesheet" type="text/css" href="/allways/resources/css/main.css">
+
 
 <style>
 
@@ -31,8 +33,8 @@
 		<div class="container-fluid">
 			<div class="content">
 			
-			<div class="navbar-header col-sm-4">
-				<a class="navbar-brand" href="main.jsp"><img
+			<div class="navbar-header col-sm-3">
+				<a class="navbar-brand" href="/allways/"><img
 					src="/allways/resources/images/allways.png" id="mainLogo"
 					height="px" width="140px"></a>
 				<button type="button" class="navbar-toggle" data-toggle="collapse"
@@ -43,7 +45,7 @@
 			</div>
 			
 			<div id="myNavbar">
-			<div class="navbar-collapse col-sm-5">
+			<div class="navbar-collapse col-sm-6">
 				<form action="/action_page.php">
 					<div class="input-group" id="text" >
 							<input type="text" class="form-control" placeholder="Search"
@@ -84,7 +86,62 @@
 			</div>
 		</div>
 </nav>				
-						 <!-- dropDown아이템 다이얼로그 -->
+					
+<div class="container">
+	<div class="row content ">
+		<!-- 왼 쪽 메뉴바 -->
+		<div class="col-sm-2 sidenav">
+			<div class="left-menu">
+				<a class="btn btn-default form-control left-menu-a" href="/allways/userPage?uno=${check.uno}">
+				<img alt="프로필" src="/allways/resources/images/default_profile_img.jpg" class="img-circle">
+				</a>
+			</div>
+			<div class="left-menu">
+				<a class="btn btn-default form-control left-menu-a" id ="allwaiserSearchForm" >Allwaiser 찾기</a>
+			</div>
+			<div class="left-menu">
+				<a class="btn btn-default form-control left-menu-a" href="">날씨</a>
+			</div>
+				
+		</div>
+
+		<!-- 가운데 메뉴바 -->
+		<div class="col-sm-7 text-left">
+			<div>
+				<div id="boardMake">
+					
+				</div>
+				<div id ="boards">		
+				</div>
+			</div>
+		</div>
+		
+		<!-- 오른쪽 메뉴바 -->
+		<div class="col-sm-3 sidenav">
+			
+			<form class="allwaiserForm">
+				<div class="input-group">
+					<input type="text" class="form-control" placeholder="Search"
+						name="search">
+					<div class="input-group-btn">
+						<button class="btn btn-default">
+						<i class="glyphicon glyphicon-search"></i>
+						</button>
+					</div>
+				</div>
+			</form>
+			
+			<div id="myAllwayiserList">
+			
+				
+			</div>
+				
+		</div>
+	</div>
+</div>
+
+
+	 <!-- dropDown아이템 다이얼로그 -->
 						<div class="modal fade" id="logout">
 							<div class="modal-dialog">
 								<div class="modal-content">
@@ -200,54 +257,6 @@
 						</div>
 					
 
-	<div class="container">
-		<div class="row content ">
-			<!-- 왼 쪽 메뉴바 -->
-			<div class="col-sm-2 sidenav">
-				<div class="left-menu">
-					<a class="btn btn-default form-control" href="/allways/userPage?uno=${check.uno}">
-					<img alt="프로필"src="/allways+${check.pf_photo}"></a>
-				</div>
-				<div class="left-menu">
-					<a class="btn btn-default form-control" id ="allwaiserSearchForm" >Allwaiser 찾기</a>
-				</div>
-				<div class="left-menu">
-					<a class="btn btn-default form-control" href="">날씨</a>
-				</div>
-				
-			</div>
-			<!-- 가운데 메뉴바 -->
-			<div class="col-sm-7 text-left">
-				<div>
-					<div id="boardMake">
-						
-					</div>
-					<div id ="boards">		
-					</div>
-				</div>
-			</div>
-			<!-- 오른쪽 메뉴바 -->
-			<div class="col-sm-3 sidenav">
-				<form action="/action_page.php">
-					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Search"
-							name="search">
-						<div class="input-group-btn">
-							<button class="btn btn-default" type="submit">
-								<i class="glyphicon glyphicon-search"></i>
-							</button>
-						</div>
-					</div>
-				</form>
-				
-				<div id="myAllwayiserList">
-				
-				
-				</div>
-				
-			</div>
-		</div>
-	</div>
 	
 <footer class="container-fluid text-center">
 	<p>Footer Text</p>
@@ -258,33 +267,36 @@
 
 <script  id="boardInsert" type="text/x-handlebars-template">
 
-<div class = "boardInsertForm" style = "margin: 8px">
-<span>게시물 작성하기</span></br>
-<img id = "profileImg" src="/allways/resources/images/default_profile_img.jpg"
-		style="border-radius: 30px; float: left; padding: 4px"
-		onclick="location.href='/allways'">
+<div class = "boardInsertForm">
+	<div class = "boardInsertTitle">게시물 작성하기</div>
 
-<div style="margin-left: 40px">
-<textarea id="content" class="autosize" placeholder="내용 입력" style="resize: none; border: 0; width: 100%;"></textarea>
-</div>
+	<div class="clearfix boardHead">
+		<img id= "InsertprofileImg" src="/allways/resources/images/default_profile_img.jpg"
+			class = "img-circle"
+			onclick="location.href='/allways'">
+		<textarea id="boardInsertcontent" class="autosize" placeholder="내용 입력"></textarea>
+	</div>
 
-<div id="fileList">
-</div>
 
-<div>
+	<div id="fileList">
+	</div>
+
+<div class="boardTail">
+
 <form id="uploadForm" method="post" enctype="multipart/form-data">
-	<label for="files" style="margin: 8px;">사진</label>
+	<label class = "addImg" for="files">사진</label>
 	
 	<input id="files" type="file" style="display: none" />	
 
-	<select id= privacyBounds>
+	<span id="boardUploadBtn" class = "btn btn-default" >올리기</span>			
+
+	<select id="privacyBounds">
 		<option value="0">전체 공개</option>
 		<option value="1">친구 공개</option>
 		<option value="2">나만 보기</option>
 
 	</select>	
 
-	<span id="fileUploadBtn" style=" float:right; margin: 8px;">올리기</span>			
 </form>
 </div>
 	
@@ -293,9 +305,9 @@
 </script>
 
 <script id="boardItem" type="text/x-handlebars-template">
-<div class="boardItem" style="border: solid 1px gray; margin: 8px">
+<div class="boardItem">
 
-	<div>
+	<div class="boardItemHead">
 
 		<img id = "profileImg" src="/allways/resources/images/default_profile_img.jpg"
 			style="border-radius: 30px; float: left; padding: 8px"
@@ -306,52 +318,48 @@
 		</div>
 
 	
-	<div class="dropdown" style="float: right;">
-    	<button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
-   	 	<span class="glyphicon glyphicon-align-justify"></span>
-		</button>
+		<div class="dropdown" style="float: right;">
+  	 	<span class="glyphicon glyphicon-align-justify dropdown-toggle btn" type="button" id="menu1" data-toggle="dropdown"></span>
 
-    	<ul class="dropdown-menu" role="menu" aria-labelledby="menu1" style="right: 0; left: auto;">
-    	<li role="presentation"><a role="menuitem" tabindex="-1" href="#">북마크</a></li>
-      	<li role="presentation" id="{{boardUpdate}}"><a role="menuitem" tabindex="-1" href="#">수정</a></li>
-      	<li role="presentation" class="divider"></li>
-      	<li role="presentation" id="{{boardDelete}}"><a role="menuitem" tabindex="-1"  id="{{boardDeleteBtn}}" class="boardDeleteBtn">삭제</a></li>
+  	  	<ul class="dropdown-menu" role="menu" aria-labelledby="menu1" style="right: 0; left: auto;">
+    		<li role="presentation"><a role="menuitem" tabindex="-1" href="#">북마크</a></li>
+     	 	<li role="presentation" id="{{boardUpdate}}"><a role="menuitem" tabindex="-1" href="#">수정</a></li>
+     	 	<li role="presentation" class="divider"></li>
+     	 	<li role="presentation" id="{{boardDelete}}"><a role="menuitem" tabindex="-1"  id="{{boardDeleteBtn}}" class="boardDeleteBtn">삭제</a></li>
     	</ul>
-	</div>
+		</div>
 
 
-	</div> <!--  -->
-
-
-
-
+	</div> <!-- BoardItemHead -->
+	
+	
 	<details>
-    	<summary>{{content_T}}</summary>
+		<summary>{{content_T}}</summary>
     	<p>{{content}}</p>
 	</details>
-
+	
 
 	<div class="imageArea" style= "margin: 8px">
 
-		<div id={{carousel}} class="carousel slide" data-ride="carousel"> 
+		<div id="{{carousel}}" class="carousel slide" data-ride="carousel"> 
 
-			<ol class="carousel-indicators" id = {{uno_ol}}>
+			<ol class="carousel-indicators" id = "{{uno_ol}}">
 			</ol>
 
-			<div class="carousel-inner" id = {{uno_div}}>
+			<div class="carousel-inner" id = "{{uno_div}}">
 			</div>
  
 		</div>
 		
 	</div>
 	
-<div class="container-fluid" style="margin: 8px">
+<div class="container-fluid boardTail">
 	<div class="row">
 		<div class="col-xs-6" style="text-align: center;" >
-			<a id={{bookMark}} >북마크</a>
+			<a id="{{bookMark}}" class = "btn" >북마크</a>
 		</div>
 		<div class="col-xs-6 " style="text-align: center;" >
-			<a data-bno="{{bno}}" class="reply" >댓글</a>
+			<a data-bno="{{bno}}" class="reply btn" >댓글</a>
 		</div>
 	</div>
 
@@ -360,7 +368,7 @@
 
 </div>
 
-<div id= {{replyArea}} style="border: 1px solid grey; margin-left: 8px; margin-right: 8px; margin-top: -8px; ">
+<div id= "{{replyArea}}" class= "replyArea">
 </div>
 
 
@@ -368,53 +376,47 @@
 
 <script id="replyInsert" type="text/x-handlebars-template">
 
-<div id="replyInsertForm">
-	<div class="row">
-		<div class="col-xs-1  clearfix">
-		<img id = "profileImg" src="/allways/resources/images/default_profile_img.jpg"
-			style="border-radius: 30px; float: left; padding: 8px"
-			onclick="location.href='/allways'">
-		</div>
-		<div class="col-xs-11">			
-		<div class="input-group">
-			<textarea id="{{replyText}}" class="autosize form-control" rows="1" placeholder="내용 입력" style="resize: none; margin: 8px; width = 100%"></textarea>
-	
-			<div class="input-group-btn">
-				<button id= {{replyInsertBtn}} class="replyInsertBtn btn btn-default ">
-				<i class="glyphicon glyphicon-edit"></i>
-				</button>
-			</div>
-		</div>
+<div id="replyInsertForm" class="clearfix">
+	<div class="replyProfileImg">
+	<img id = "profileImg" src="/allways/resources/images/default_profile_img.jpg"
+		class = "img-circle"
+		onclick="location.href='/allways'" />
+	</div>
+
+	<div class="input-group replyInsertContent">
+		<textarea id="{{replyText}}" class="autosize form-control" rows="1" placeholder="내용 입력" style="resize: none; margin: 8px; width = 100%"></textarea>
+
+		<div class="input-group-btn">
+			<button id= {{replyInsertBtn}} class="replyInsertBtn btn btn-default ">
+			<i class="glyphicon glyphicon-edit"></i>
+			</button>
 		</div>
 	</div>	
 </div>
 	
-<hr style="width: 95%; color: grey; height: 1px; background-color:grey; margin-bottom: 5px; margin-top: 5px" />
-
 </script>
 
 <script id="replyItem" type="text/x-handlebars-template">
 
-<div style="margin-bottom: 8px;">
-<div class="row">
-	<div class="col-xs-1  clearfix">
+<div class= "replyItem clearfix">	
+	<div class="replyProfileImg">
 	<img id = "profileImg" src="/allways/resources/images/default_profile_img.jpg"
-		style="border-radius: 30px; float: left; padding: 8px"
+		class = "img-circle";
 		onclick="location.href='/allways'">
 	</div>
-	<div class="col-xs-11">			
+
+	<div class="replyContent">			
 		<div style="display: inline-block;">
 			<a href = "/allways">{{userId}}</a>
 			<span style="font-size: x-small; color: gray;">{{regDate}}</span>
 			<span class = "replayUpdate" id = {{BRno}}>
-			<span style="font-size: x-small" class="btn">수정</span>
+			<span style="font-size: x-small" class="btn replyUpdate">수정</span>
 			<span style="font-size: x-small">|</span>
 			<span style="font-size: x-small" data-rno ="{{rno}}" data-bno ="{{bno}}" class="btn replyDelete" >삭제</span>
 			</span>
 		</div>
 	<textarea id="{{replyText}}" class="autosize form-control" rows="1" readonly style="resize: none; margin-right: 8px"">{{replyContent}}</textarea>
 	</div>
-</div>
 </div>
 
 </script>
@@ -423,8 +425,7 @@
 <script>
 
 $(document).ready(function(){
-	
-	
+
 	var boardInsertSource = $('#boardInsert').html();
 	var boardInsertTemplate = Handlebars.compile(boardInsertSource);
 
@@ -446,8 +447,7 @@ $(document).ready(function(){
 			
 		$.getJSON('/allways/board/selectBoard/'+page, function(data){
 			console.log(data);
-			
-			
+						
 			$(data).each(function(){
 				var date = new Date(this.regDate);
 				var dateString = date.toLocaleDateString();
@@ -540,18 +540,22 @@ $(document).ready(function(){
 	});//end of 무한스크롤
 	
 	//boardInsert
-	$('#fileUploadBtn').click(function () {
+	$('#boardUploadBtn').click(function () {
 		
-		var content = $("#content").val();
+		var content = $("#boardInsertcontent").val();
 		var privacyBounds = $("#privacyBounds").val();
 		
 		boardUpload(content, privacyBounds);
-		
+	
+	});
+
+	function endBoardInsert(){
+		page = 0;
 		drowBoardInsert();
 		$('#boards').empty();
 		drowBoardItems();
-	});
-
+	};
+	
 	$(document).on("click",'.boardDeleteBtn',function(event){
 
 		var bno = this.id.split('-')[0];	
@@ -673,7 +677,107 @@ function drowReply(event, bno){
 	});
 
 
+	var fileBuffer = [];/*파일 리스트*/
+
+	$("textarea.autosize").on('keydown keyup', function () {
+		  $(this).height(1).height( $(this).prop('scrollHeight')+12 );	
+	});
+
+
+	$('#files').change(function() {
+		const target = document.getElementById('uploadForm');
+		
+		console.log(target);
+		
+		Array.prototype.push.apply(fileBuffer, target[0].files);
+		var html = '';
+			
+		$.each(fileBuffer, function(index, file) {
+			const fileName = file.name;
+
+			html += '<div class="file" style="display: inline-block">';
+			html += '<img width="150px" height="150px"  src="'+ URL.createObjectURL(file)+ '">'
+			html += '</br><span id="removeImg" style="float: right" > 취소 X </span>';
+			html += '</div>';
+			const fileEx = fileName.slice(fileName.indexOf(".") + 1).toLowerCase();
+			if (fileEx != "jpg"	&& fileEx != "png" && fileEx != "gif" && fileEx != "bmp") {
+					alert("파일은 (jpg, png, gif, bmp) 형식만 등록 가능합니다.");
+					resetFile();
+					return false;
+			}
+
+			$('#fileList').html(html);
+		});
+
+	});
+
+	$(document).on('click', '#removeImg', function() {
+				
+		const fileIndex = $(this).parent().index();
+		fileBuffer.splice(fileIndex, 1);
+		console.log(fileIndex);
+		console.log($(this).parent());
+		$('#fileList > div:eq(' + fileIndex + ')').remove();
+
+		console.log(fileBuffer);
+	});
 	
+	
+	function boardUpload(content, privacyBounds) {
+		
+		var form = new FormData();
+
+		for (i = 0; i < fileBuffer.length; i++) {
+			form.append("uploadfile", fileBuffer[i]);
+			console.log(form.length);
+		};
+			
+		form.append("content", content);
+		form.append("privacy_bounds", privacyBounds);
+		
+		var url;
+		
+		$.ajax({
+			type : 'post',
+			url : '/allways/image/upload',
+			data : form,
+			processData : false,
+			contentType : false,
+			success : function(data) {
+				console.log(data + "경로에 파일 업로드하였습니다.");
+				boardAjax(content, privacyBounds, data);
+			},
+			error : function(error) {
+				alert("파일 업로드에 실패하였습니다.");
+				console.log(error);
+				console.log(error.status);
+			}
+		});
+			
+	};
+
+	function boardAjax(content, privacyBounds, data) {
+		
+		console.log(data);
+		$.ajax({
+			type: 'post',
+			url: '/allways/board/insert',
+			headers: {
+				'Content-Type': 'application/json',
+				'X-HTTP-Method-Override': 'post'
+			},
+			data: JSON.stringify({
+				'content': content,
+				'privacy_bounds': privacyBounds,
+				'photo': data.toString()
+			}),
+			success: function(result) {
+				endBoardInsert();
+			}
+		});
+	}
+	
+
 	
 });
 

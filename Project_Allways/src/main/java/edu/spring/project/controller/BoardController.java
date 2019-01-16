@@ -42,17 +42,14 @@ public class BoardController {
 	@RequestMapping(value = "selectBoard/{page}", method = RequestMethod.GET)
 	public ResponseEntity<List<Board>> select(@PathVariable(name="page") int page) {
 		
-		List<Board> list = boardService.select(1);
-			List<Board> result = null;
-		if(list.size() > (4 + page*5) ) {
-			result = list.subList(0 + page*5, 4 + page*5);
+		List<Board> result = boardService.select(1, page);
+				
+		ResponseEntity<List<Board>> entity = null;
+		if(result != null) {
+			entity = new ResponseEntity<List<Board>>(result , HttpStatus.OK);
 		}else {
-			result = list.subList(0 + page*5, list.size());
+			entity = new ResponseEntity<List<Board>>(result , HttpStatus.BAD_REQUEST);
 		}
-		
-		ResponseEntity<List<Board>> entity = 
-						new ResponseEntity<List<Board>>(result , HttpStatus.OK);
-		
 		return  entity;
 	}
 	

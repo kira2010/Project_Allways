@@ -1,0 +1,87 @@
+@charset "UTF-8";
+
+/* main*/
+body {
+	background-color: #f1f1f1;
+	min-width: 600px;
+}
+
+.navbar {
+	margin-bottom: 0;
+	border-radius: 0;
+}
+/* row 길이 */
+.row.content {
+	height: 1000px;
+}
+
+/* 사이트 메뉴 */
+.sidenav {
+	padding-top: 20px;
+	padding-left: 0px;
+	padding-right: 0px;
+	background-color: #ffffff;
+	height: 100%;
+	
+}
+
+footer {
+	background-color: #555;
+	color: white;
+	padding: 15px;
+}
+
+@media screen and (max-width: 800px) {
+	.sidenav {
+		height: auto;
+		padding: 15px;
+	}
+	.row.content {
+		height: auto;
+	}
+}
+
+/* 검색창 */
+#text {
+	margin-top: 15px;
+}
+/* user 메뉴창 */
+#drop {
+	margin-top: 15px;
+}
+
+.left-menu{
+	margin: 8px;
+}
+
+.navbar-brand{
+	height: 60px;
+}
+
+.navbar-collapse{
+	max-width: 600px;
+}
+
+.navbar-right{
+	margin-left: 15px;
+	margin-right: 0px;
+}
+
+.text-left{
+	padding: 8px;
+}
+
+/*sidenav*/
+
+.allwaiserForm{
+	margin-left: 8px;
+	margin-right: 8px;
+}
+
+.left-menu-a{
+	height: 50px;
+	text-align: center;
+	font-size: 20px;
+}
+
+

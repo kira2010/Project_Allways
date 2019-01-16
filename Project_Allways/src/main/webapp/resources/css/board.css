@@ -2,83 +2,125 @@
 
 
 .boardInsertForm{
-	border: solid 1px gray;
+	background-color: #ffffff;
+	margin-bottom: 8px;
 }
 
-.boardItem{
-	border: solid 1px gray;
+.boardInsertTitle{
+	border-bottom: solid 1px #f1f1f1;
+	padding: 8px;
+	color: gray;
+	margin-bottom: 8px;
 }
 
-/* main
-
-/* Remove the navbar's default margin-bottom and rounded borders */
-.navbar {
-	margin-bottom: 0;
-	border-radius: 0;
+#boardInsertcontent{
+	resize: none;
+	border: 0;
+	float: right;
+	width: 90%;
+	margin-right: 8px;
 }
 
-/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-.row.content {
-	height: 450px
+#InsertprofileImg{
+	float: left;
+	width: 7%;
+	margin-left: 8px;
+	margin-bottom: 8px;
 }
 
-/* Set gray background color and 100% height */
-.sidenav {
-	padding-top: 20px;
-	background-color: #f1f1f1;
-	height: 100%;
+.boardTail{
+	border-top: solid 1px #f1f1f1;
+	margin-top: 8xp;
 }
 
-/* Set black background color, white text and some padding */
-footer {
-	background-color: #555;
-	color: white;
-	padding: 15px;
-}
-
-/* On small screens, set height to 'auto' for sidenav and grid */
-@media screen and (max-width: 767px) {
-	.sidenav {
-		height: auto;
-		padding: 15px;
-	}
-	.row.content {
-		height: auto;
-	}
-}
-
-#drop {
-	margin-top: 9px;
-}
-
-#text {
-	width: 400px;
-	margin-top: 9px;
-	max-width: 400px;
-}
-
-#drop {
-	width: 200px;
-	margin-top: 9px;
-	max-width: 400px;
-}
-
-#rightlist {
-	margin-top: 30px;
-}
-
-#leftlist {
-	margin-top: 20px;
-}
-
-#l1 {
-	margin-bottom: 30px;
-}
-
-#l2, #l3 {
-	margin-top: 20px;
-}
-
-.left-menu{
+.addImg{
 	margin: 8px;
+	padding: 5px;
+	vertical-align: middle;	
+}
+
+#privacyBounds{
+	margin: 8px;
+	padding: 5px;
+	vertical-align: middle;
+	float:right;
+}
+
+#boardUploadBtn{
+	margin: 8px;
+	padding: 5px;
+	vertical-align: middle;
+	float:right;
+}
+
+/*board Item*/
+.boardItem{
+	background-color: #ffffff;
+}
+
+details{
+	margin-left: 8px;
+}
+
+.boardItemHead{
+	margin-bottom: 8px;
+}
+
+.boardTail{
+	border-top: solid 1px #f1f1f1;
+	border-bottom: solid 1px #f1f1f1;
+}
+
+.replyItem{
+	background-color: #ffffff;
+}
+
+#replyInsertForm{
+	background-color: #ffffff;
+	border-bottom: solid 1px #f1f1f1;
+}
+
+.replyArea{
+	margin-bottom: 8px;
+}
+
+
+/* details{
+	display: inline-block;
+	margin-left: -40px;
+} */
+
+.replyInsertContent{
+	resize: none;
+	border: 0;
+	float: right;
+	width: 90%;
+	margin-right: 8px;
+}
+
+.replyProfileImg{
+	float: left;
+	width: 5%;
+	padding: 0px;
+	display: inline-block;
+	vertical-align: middle;
+	margin: 10px;
+	
+}
+
+.replyContent{
+	resize: none;
+	border: 0;
+	float: right;
+	width: 90%;
+	margin-right: 8px;
+	margin-bottom: 4px;
+}
+
+.replyUpdate{
+	padding: 0px;
+}
+
+.replyDelete{
+	padding: 0px;
 }

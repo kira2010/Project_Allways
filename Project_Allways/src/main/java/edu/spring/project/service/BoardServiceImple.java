@@ -16,15 +16,11 @@ public class BoardServiceImple implements BoardService {
 	@Autowired private BoardDao boardDao;
 	@Autowired private UserDao userDao;
 	
-	public List<Board> select(int service_bounds) {
+	public List<Board> select(int service_bounds, int page) {
 		// test
-		List<Board> list1 = boardDao.readAll(2);
-		List<Board> list2 = boardDao.readAll(4);
+		List<Board> list1 = boardDao.readAll(2, page);
 		
-		List<Board> newList = new ArrayList<Board>(list1);
-		newList.addAll(list2);
-
-		return newList;
+		return list1;
 	}
 
 	public Board selectOne(int bno) {
