@@ -47,7 +47,7 @@ public class BoardDaoImple implements BoardDao {
 		Map<String, Integer> params = new HashMap<String, Integer>();
 		
 		params.put("uno", uno);
-		params.put("start", page * 10);		
+		params.put("start", page * 10);
 		
 		return session.selectList(BOARD_MAPPER + ".selectAllBoard", params);
 	}
@@ -60,21 +60,27 @@ public class BoardDaoImple implements BoardDao {
 	}
 	
 	// 내용/작성자ID/hashTag 검색
-	public List<Board> searchByKeyword(int type, String keyword) {
+	public List<Board> searchByKeyword(int type, String keyword, int page) {
 		logger.info("searchByKeyword(type : {}, keyword : {}) 호출", type, keyword);
 		
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("type", type);
 		params.put("keyword", keyword);
+		params.put("start", page * 10);
 		
 		return session.selectList(BOARD_MAPPER + ".searchByKeyword", params);
 	}
 	
 	// 내가 저정한 즐겨찾기 목록 중 공개범위 0/1 인 모든 게시글 가져오기
-	public List<Board> readMyFavorite(int uno) {
+	public List<Board> readMyFavorite(int uno, int page) {
 		logger.info("readMyFavorite(uno : {}) 호출", uno);
 		
-		return session.selectList(BOARD_MAPPER + ".selectMyFavorite", uno);
+		Map<String, Integer> params = new HashMap<String, Integer>();
+		
+		params.put("uno", uno);
+		params.put("start", page * 10);
+		
+		return session.selectList(BOARD_MAPPER + ".selectMyFavorite", params);
 	}
 	
 	// 내가 저정한 즐겨찾기 목록 중 공개범위 0/1 인 모든 게시글 count
@@ -85,17 +91,22 @@ public class BoardDaoImple implements BoardDao {
 	}
 	
 	// 내가 등록한 Allwaiser가 작성한 게시글 목록 중 공개범위 0/1인 모든 게시글 가져오기
-	public List<Board> readMyAllwaisersPost(int uno) {
+	public List<Board> readMyAllwaisersPost(int uno, int page) {
 		logger.info("readMyAllwaisersPost(uno : {}) 호출", uno);
 		
-		return session.selectList(BOARD_MAPPER + ".selectMyAllwaisersPost", uno);
+		Map<String, Integer> params = new HashMap<String, Integer>();
+		
+		params.put("uno", uno);
+		params.put("start", page * 10);
+		
+		return session.selectList(BOARD_MAPPER + ".selectMyAllwaisersPost", params);
 	}
 	
 	// 내가 등록한 Allwaiser가 작성한 게시글 목록 중 공개범위 0/1인 모든 게시글의 갯수 세기
 	public int countMyAllwaisersPost(int uno) {
 		logger.info("countMyAllwaisersPost(uno : {}) 호출", uno);
 		
-		return session.selectOne(BOARD_MAPPER + ".countMyALlwaisersPost", uno);
+		return session.selectOne(BOARD_MAPPER + ".countMyAllwaisersPost", uno);
 	}
 	
 	// 게시글 작성하기

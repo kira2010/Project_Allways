@@ -11,8 +11,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import edu.spring.project.domain.Allwaiser;
 import edu.spring.project.domain.Board;
 import edu.spring.project.domain.User;
+import edu.spring.project.persistence.AllwaiserDao;
 import edu.spring.project.persistence.BoardDao;
 import edu.spring.project.persistence.UserDao;
 
@@ -30,12 +32,15 @@ public class DaoTest {
 	
 	@Autowired private UserDao userDao;
 	@Autowired private BoardDao boardDao;
+	@Autowired private AllwaiserDao allwaiserDao;
 	
 	@Test
 	public void test() {
-		userDaoTest();
+		//userDaoTest();
+		test1();
+		//allwaiserDaoTest();
 	}
-	
+	/*
 	private void userDaoTest() {
 		logger.info("userDaoTest 실행");
 		
@@ -56,8 +61,8 @@ public class DaoTest {
 		if (id != null && !id.isEmpty()) {
 			logger.info("ID 찾기 결과 : {}", id);
 		}
-	}
-	/*
+	}*/
+	
 	private void test1() {
 		logger.info("test1() 실행");
 		
@@ -65,8 +70,25 @@ public class DaoTest {
 		
 		if(readAllBoardList != null && readAllBoardList.size() > 0) {
 			for(Board b : readAllBoardList) {
-				
+				logger.info(b.toString());
 			}
 		}
-	}*/
+	}
+	
+//	private void allwaiserDaoTest() {
+//		logger.info("allwaiserDaoTest() 호출");
+//		
+//		Allwaiser allwaiser = new Allwaiser();
+//		
+//		allwaiser.setUno(9);
+//		allwaiser.setAllwaiser_uno(10);
+//		
+//		int result = allwaiserDao.existAllwaiser(allwaiser);
+//		
+//		if(result == 1) {
+//			logger.info("결과 : 구독중!");
+//		} else {
+//			logger.info("결과 : 구독중이 아님!");
+//		}
+//	}
 }

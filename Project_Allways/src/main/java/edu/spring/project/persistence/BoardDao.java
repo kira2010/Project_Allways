@@ -13,13 +13,13 @@ public interface BoardDao {
 	
 	Board read(int bno);
 	
-	List<Board> searchByKeyword(int type, String keyword);
+	List<Board> searchByKeyword(int type, String keyword, int page);
 	
-	List<Board> readMyFavorite(int uno);
+	List<Board> readMyFavorite(int uno, int page);
 	
 	int countMyFavorite(int uno);
 	
-	List<Board> readMyAllwaisersPost(int uno);
+	List<Board> readMyAllwaisersPost(int uno, int page);
 	
 	int countMyAllwaisersPost(int uno);
 	

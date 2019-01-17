@@ -37,7 +37,7 @@
 		AND
 		(${board.privacy_bounds} = 0 OR ${board.privacy_bounds} = 1)
 		ORDER BY ${board.bno} DESC 
-		LIMIT 0, 10
+		LIMIT #{start}, 10
 	</select>
 	
 	<select id="countMyFavorite" resultType="java.lang.Integer">
@@ -55,10 +55,10 @@
 			WHERE ${allwaiser.uno} = #{uno})
 		AND (${board.privacy_bounds} = 0 OR ${board.privacy_bounds} = 1)
 		ORDER BY ${board.bno} DESC
-		LIMIT 0, 10
+		LIMIT #{start}, 10
 	</select>
 	
-	<select id="countMyALlwaisersPost" resultType="java.lang.Integer">
+	<select id="countMyAllwaisersPost" resultType="java.lang.Integer">
 		SELECT COUNT(*) AS COUNT FROM ${tbl_board}
 		WHERE ${board.uno} IN (
 			SELECT ${allwaiser.allwaiseruno}
@@ -67,28 +67,47 @@
 		AND (${board.privacy_bounds} = 0 OR ${board.privacy_bounds} = 1)
 	</select>
 	
-	<select id="selectByBno" resultType="Board">
-		SELECT * FROM ${tbl_board} WHERE ${board.bno} = #{bno}
+	<select id="selectMyAndAllwaisersPost" resultType="Board">
+		SELECT * FROM ${tbl_board}
+		WHERE ${board.uno} = #{uno}
+		OR
+		${board.uno} IN (
+			SELECT ${allwaiser.allwaiseruno}
+			FROM ${tbl_allwaiser}
+			WHERE ${allwaiser.uno} = #{uno})
+		ORDER ${board.bno} DESC
+		LIMIT #{start}, 10
 	</select>
 	
-	<select id="searchByContent" resultType="Board">
-		SELECT * FROM ${tbl_board} WHERE INSTR(${board.content}, #{searchKeyword})
+	<select id="selectByBno" resultType="Board">
+		SELECT * FROM ${tbl_board} WHERE ${board.bno} = #{bno}
 	</select>
 	
 	<!-- 작성중인 코드, 담당 외 Do not touch!!!!!!! -->
 	<select id="searchByKeyword" resultType="Board">
 		SELECT * FROM ${tbl_board} WHERE
 		<if test="type==1">
-			INSTR(${board.content}, #{searchKeyword}) > 0
+			${board.uno} IN (
+				SELECT ${board.uno}
+				FROM ${tbl_board}
+				WHERE INSTR(${board.content}, #{searchKeyword}) > 0)
 		</if>
 		<if test="type==2">
-			INSTR(${board.userid}, #{searchKeyword}) > 0
+			${board.uno} IN (
+				SELECT ${board.uno}
+				FROM ${tbl_board}
+				WHERE INSTR(${board.userid}, #{searchKeyword}) > 0)
 		</if>
 		<if test="type==3">
-			INSTR(${board.hashtag}, #{searchKeyword}) > 0
+			${board.uno} IN (
+				SELECT ${board.uno}
+				FROM ${tbl_board}
+				WHERE INSTR(${board.hashtag}, #{searchKeyword}) > 0)
 		</if>
 		AND
-		(${board.privacy_bounds} = 0 OR ${board.privacy_bounds} = 1)
+		(${board.privacy_bounds} = 0)
+		ORDER BY ${board.bno} DESC
+		LIMIT #{start}, 10
 	</select>
 		
 	<insert id="createBoard">
