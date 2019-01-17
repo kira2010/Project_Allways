@@ -6,8 +6,11 @@ import edu.spring.project.domain.User;
 
 public interface UserService {
 	
-	// 아이디 중복 확인(AJAX)
+	// ID 중복 확인(AJAX)
 	public boolean checkId(String userId, HttpServletResponse response) throws Exception;
+	
+	// Email 중복 확인
+	public boolean checkEmail(String userEmail, HttpServletResponse response) throws Exception;
 	
 	// 회원 가입
 	public int insert(User user);

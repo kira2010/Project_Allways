@@ -4,13 +4,27 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="edu.spring.project.mappers.UserMapper">
 	<select id="loginCheck" resultType="User">
-		SELECT * FROM ${tbl_user}
+		SELECT ${user.uno}, ${user.userid}, ${user.username},
+		${user.useremail}, ${user.birthday}, ${user.graduation},
+		${user.bg_photo}, ${user.pf_photo}, ${user.emotion}
+		FROM ${tbl_user}
 		WHERE ${user.userid} = #{userId} AND ${user.userpwd} = #{userPwd}
 	</select>
 	
-	<select id="existUserId" resultType="java.lang.String">
-		SELECT ${user.userid} FROM ${tbl_user}
-		WHERE ${user.userid} = #{userId}
+	<select id="existUserId" resultType="java.lang.Integer">
+		SELECT EXISTS(
+			SELECT * FROM ${tbl_user}
+			WHERE ${user.userid} = #{userId}
+		)
+		AS isEXIST
+	</select>
+	
+	<select id="existUserEmail" resultType="java.lang.Integer">
+		SELECT EXISTS(
+			SELECT * FROM ${tbl_user}
+			WHERE ${user.useremail} = #{userEmail}
+		)
+		AS isEXIST
 	</select>
 	
 	<select id="getEmotion" resultType="java.lang.Integer">

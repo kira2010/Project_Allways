@@ -28,15 +28,31 @@ public class UserDaoImple implements UserDao {
 	}
 
 	// 회원가입시 ID 중복여부 확인
-	public boolean checkUser(String userId) {
+	public boolean checkUserId(String userId) {
 		boolean result = true;
 		
-		logger.info("checkUser({}) 호출", userId);
+		logger.info("checkUserId({}) 호출", userId);
 		
-		String newId = session.selectOne(USER_MAPPER + ".existUserId", userId);
+		int checkResult = session.selectOne(USER_MAPPER + ".existUserId", userId);
 		
-		// ID 가 이미 있을 경우 false(중복되는 ID 존재) 반환!!
-		if (newId != null && !newId.isEmpty() && newId.equals(userId)) {
+		// 동일한 ID를 쓰는 유저가 있을 경우 false(중복되는 ID 존재) 반환!!
+		if (checkResult == 1) {
+			result = false;
+		}
+		
+		return result;
+	}
+	
+	// 회원가입시 Email 중복여부 확인
+	public boolean checkUserEmail(String userEmail) {
+		boolean result = true;
+		
+		logger.info("checkUserEmail({}) 호출", userEmail);
+		
+		int checkResult = session.selectOne(USER_MAPPER + ".existUserEmail", userEmail);
+		
+		// 동일한 Email을 쓰는 유저가 있을 경우 false(중복되는 Email 존재) 반환!!
+		if (checkResult == 1) {
 			result = false;
 		}
 		

@@ -7,7 +7,9 @@ import edu.spring.project.domain.User;
 public interface UserDao {
 	User loginCheck(User user);
 	
-	boolean checkUser(String userId);
+	boolean checkUserId(String userId);
+	
+	boolean checkUserEmail(String userEmail);
 	
 	int findUnoFromId(String userId);
 	
