@@ -3,6 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="edu.spring.project.mappers.FavoriteMapper">
+	<!-- 내가 추가한 즐겨찾기 목록 가져오기 -->
 	<select id="selectMyFavorite" resultType="Board">
 		SELECT * FROM ${tbl_board} 
 		WHERE ${board.bno} 
@@ -12,6 +13,7 @@
 		LIMIT #{start}, 10
 	</select>
 	
+	<!-- 내가 추가한 즐겨찾기 목록 개수 -->
 	<select id="countMyFavorite" resultType="java.lang.Integer">
 		SELECT COUNT(*) FROM ${tbl_board} 
 		WHERE ${board.bno} 
@@ -19,12 +21,21 @@
 		AND (${board.privacy_bounds} = 0 OR ${board.privacy_bounds} = 1)
 	</select>
 	
+	<!-- 삭제용 itr_no 찾기 -->
+	<select id="findItr_no" resultType="java.lang.Integer">
+		SELECT ${favorite.itr_no} FROM ${tbl_favorite}
+		WHERE ${favorite.uno} = #{uno}
+		AND ${favorite.bno} = #{bno}
+	</select>
+	
+	<!-- 즐겨찾기 추가 -->
 	<insert id="registFavorite">
 		INSERT INTO ${tbl_favorite} 
 		(${favorite.uno}, ${favorite.bno}) 
 		VALUES (#{uno}, #{bno})
 	</insert>
 	
+	<!-- 즐겨찾기 삭제 -->
 	<delete id="deleteFavorite">
 		DELETE FROM ${tbl_favorite} 
 		WHERE ${favorite.itr_no} = #{itr_no}

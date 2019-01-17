@@ -3,6 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="edu.spring.project.mappers.UserMapper">
+	<!-- 로그인 확인! -->
 	<select id="loginCheck" resultType="User">
 		SELECT ${user.uno}, ${user.userid}, ${user.username},
 		${user.useremail}, ${user.birthday}, ${user.graduation},
@@ -11,6 +12,7 @@
 		WHERE ${user.userid} = #{userId} AND ${user.userpwd} = #{userPwd}
 	</select>
 	
+	<!-- 회원 가입시 ID 중복 확인 -->
 	<select id="existUserId" resultType="java.lang.Integer">
 		SELECT EXISTS(
 			SELECT * FROM ${tbl_user}
@@ -19,6 +21,7 @@
 		AS isEXIST
 	</select>
 	
+	<!-- 회원 가입시 Email 중복 확인 -->
 	<select id="existUserEmail" resultType="java.lang.Integer">
 		SELECT EXISTS(
 			SELECT * FROM ${tbl_user}
@@ -27,15 +30,18 @@
 		AS isEXIST
 	</select>
 	
+	<!-- 내가 설정했던 감정 가져오기 -->
 	<select id="getEmotion" resultType="java.lang.Integer">
 		SELECT ${user.emotion} FROM ${tbl_user} WHERE ${user.uno} = #{uno}
 	</select>
 	
+	<!-- ID로 회원번호 찾기 -->
 	<select id="findUnoFromId" resultType="java.lang.Integer">
 		SELECT ${user.uno} FROM ${tbl_user}
 		WHERE ${user.userid} = #{userId}
 	</select>
 	
+	<!-- 회원번호로 해당 회원 정보 가져오기 -->
 	<select id="findUserByUno" resultType="User">
 		SELECT ${user.uno}, ${user.userid}, ${user.username},
 		${user.useremail}, ${user.birthday}, ${user.graduation},
@@ -44,6 +50,7 @@
 		WHERE ${user.uno} = #{uno}
 	</select>
 	
+	<!-- 이름으로 해당 회원의 정보 목록 찾기 -->
 	<select id="findUserByName" resultType="User">
 		SELECT ${user.uno}, ${user.userid}, ${user.username},
 		${user.useremail}, ${user.birthday}, ${user.graduation},
@@ -52,6 +59,7 @@
 		WHERE INSTR(${user.username}, #{userName}) > 0
 	</select>
 	
+	<!-- 출신학교로 해당 회원의 정보 목록 찾기 -->
 	<select id="findUserByGraduation" resultType="User">
 		SELECT ${user.uno}, ${user.userid}, ${user.username},
 		${user.useremail}, ${user.birthday}, ${user.graduation},
@@ -60,6 +68,7 @@
 		WHERE INSTR(${user.graduation}, #{graduation}) > 0
 	</select>
 	
+	<!-- 이름 + 출신학교로 해당 회원의 정보 목록 찾기 -->
 	<select id="findUserByNameAndGraduation" resultType="User">
 		SELECT ${user.uno}, ${user.userid}, ${user.username},
 		${user.useremail}, ${user.birthday}, ${user.graduation},
@@ -71,6 +80,7 @@
 		INSTR(${user.graduation}, #{graduation}) > 0
 	</select>
 	
+	<!-- ID 찾기 -->
 	<select id="findUserId" resultType="java.lang.String">
 		SELECT ${user.userid}
 		FROM ${tbl_user}
@@ -80,6 +90,7 @@
 		INSTR(${user.useremail}, #{userEmail}) > 0
 	</select>
 	
+	<!-- 비밀번호 찾기 -->
 	<select id="findUserPwd" resultType="java.lang.Integer">
 		SELECT ${user.uno}
 		FROM ${tbl_user}
@@ -91,6 +102,7 @@
 		INSTR(${user.useremail}, #{userEmail}) > 0
 	</select>
 	
+	<!-- 회원가입 -->
 	<insert id="registUser">
 		INSERT INTO ${tbl_user}
 		(${user.userid}, ${user.userpwd}, ${user.username}, 
@@ -99,6 +111,7 @@
 		(#{userId}, #{userPwd}, #{userName}, #{userEmail}, #{birthDay}, #{graduation})
 	</insert>
 	
+	<!-- 회원정보 수정(비밀번호, Email, 출신학교) -->
 	<update id="updateUser">
 		UPDATE ${tbl_user} 
 		SET ${user.userpwd} = #{userPwd},
@@ -107,22 +120,27 @@
 		WHERE ${user.uno} = #{uno}
 	</update>
 	
+	<!-- 배경사진 수정 -->
 	<update id="registBackground">
 		UPDATE ${tbl_user} SET ${user.bg_photo} = #{bg_photo} WHERE ${user.uno} = #{uno}
 	</update>
 	
+	<!-- 프로필 사진 수정 -->
 	<update id="registProfile">
 		UPDATE ${tbl_user} SET ${user.pf_photo} = #{pf_photo} WHERE ${user.uno} = #{uno}
 	</update>
 	
+	<!-- 나의 감정상태 수정 -->
 	<update id="updateEmotion">
 		UPDATE ${tbl_user} SET ${user.emotion} = #{emotion} WHERE ${user.uno} = #{uno}
 	</update>
 	
+	<!-- 비밀번호 재설정 -->
 	<update id="resetPassword">
 		UPDATE ${tbl_user} SET ${user.userpwd} = #{userPwd} WHERE ${user.uno} = #{uno}
 	</update>
 	
+	<!-- 회원탈퇴 -->
 	<delete id="quitUser">
 		DELETE FROM ${tbl_user}
 		WHERE ${user.uno} = #{uno}
