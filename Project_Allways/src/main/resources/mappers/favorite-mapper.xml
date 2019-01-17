@@ -9,7 +9,7 @@
 		IN (SELECT ${favorite.bno} FROM ${tbl_favorite} WHERE ${favorite.uno} = #{uno}) 
 		AND (${board.privacy_bounds} = 0 OR ${board.privacy_bounds} = 1) 
 		ORDER BY ${board.bno} DESC 
-		LIMIT 0, 10
+		LIMIT #{start}, 10
 	</select>
 	
 	<select id="countMyFavorite" resultType="java.lang.Integer">

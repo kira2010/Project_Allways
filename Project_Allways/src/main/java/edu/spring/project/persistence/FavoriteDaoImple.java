@@ -1,6 +1,8 @@
 package edu.spring.project.persistence;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
@@ -22,10 +24,14 @@ public class FavoriteDaoImple implements FavoriteDao {
 	@Autowired private SqlSession session;
 	
 	// 내가 추가한 즐겨찾기 리스트 목록 뽑아오기
-	public List<Board> readMyFavorite(int uno) {
+	public List<Board> readMyFavorite(int uno, int page) {
 		logger.info("readMyFavorite(uno : {}) 호출", uno);
 		
-		return session.selectList(FAVORITE_MAPPER + ".selectMyFavorite", uno);
+		Map<String, Integer> params = new HashMap<String, Integer>();
+		params.put("uno", uno);
+		params.put("start", page * 10);
+		
+		return session.selectList(FAVORITE_MAPPER + ".selectMyFavorite", params);
 	}
 	
 	// 내개 추가한 즐겨찾기 리스트 저장개수 구하기

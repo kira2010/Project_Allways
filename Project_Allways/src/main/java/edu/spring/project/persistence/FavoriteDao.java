@@ -6,7 +6,7 @@ import edu.spring.project.domain.Board;
 import edu.spring.project.domain.Favorite;
 
 public interface FavoriteDao {
-	List<Board> readMyFavorite(int uno);
+	List<Board> readMyFavorite(int uno, int page);
 	
 	int countMyFavorite(int uno);
 	
