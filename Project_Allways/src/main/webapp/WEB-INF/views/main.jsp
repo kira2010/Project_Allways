@@ -29,23 +29,17 @@
 
 <body>
 
-<nav class="navbar navbar-inverse" id="header">
+<nav class="navbar-inverse" id="header">
 		<div class="container-fluid">
 			<div class="content">
 			
-			<div class="navbar-header col-sm-3">
+			<div class="col-sm-3">
 				<a class="navbar-brand" href="/allways/"><img
 					src="/allways/resources/images/allways.png" id="mainLogo"
 					height="px" width="140px"></a>
-				<button type="button" class="navbar-toggle" data-toggle="collapse"
-					data-target="#myNavbar">
-					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
 			</div>
 			
-			<div id="myNavbar">
-			<div class="navbar-collapse col-sm-6">
+			<div class="col-sm-6">
 				<form action="/action_page.php">
 					<div class="input-group" id="text" >
 							<input type="text" class="form-control" placeholder="Search"
@@ -59,7 +53,7 @@
 				</form>
 			</div>		
 			
-			<div class = "nav navbar-nav navbar-right col-sm-3">				
+			<div class = "col-sm-3">				
 				<div class="dropdown input-group" id="drop">
 					<input type="text" class="form-control" value="${check.userId} 님 안녕하세요!" readonly>
 					<div class="input-group-btn">
@@ -67,7 +61,7 @@
 								id="menu1" data-toggle="dropdown">
 					<span class="caret"></span>
 					</button>
-					<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+					<ul class="dropdown-menu" role="menu" aria-labelledby="menu1" style="right: 0; left: auto;">
 						<li role="presentation"><a role="menuitem" tabindex="-1"
 							data-toggle="modal" data-target="#logout">로그아웃</a></li>
 						<li role="presentation"><a role="menuitem" tabindex="-1"
@@ -83,10 +77,10 @@
 			</div>
 			
 			</div>
-			</div>
 		</div>
-</nav>				
-					
+</nav>
+
+				
 <div class="container">
 	<div class="row content ">
 		<!-- 왼 쪽 메뉴바 -->
@@ -108,11 +102,21 @@
 		<!-- 가운데 메뉴바 -->
 		<div class="col-sm-7 text-left">
 			<div>
-				<div id="boardMake">
-					
+				<div id="boardMake">	
 				</div>
+				
 				<div id ="boards">		
 				</div>
+				
+				<div id="jb-content">
+					<div id="searchForm">
+					</div>
+					
+					<div id="searchs">
+					</div>
+				</div>
+				
+				
 			</div>
 		</div>
 		
@@ -506,6 +510,55 @@
 </div>
 
 </script>
+
+<script id="search-condition-template" type="text/x-handlebars-template" >
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+	<form class="form-inline">
+		<input id="name" class="form-control mr-sm-2" type="text" placeholder="이름">
+		<input id="graduation" class="form-control mr-sm-2" type="text" placeholder="학교">
+		<button id="search" type="button"
+		class="btn btn-outline-light text-dark">
+		<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+		</button>
+	</form>
+</nav>
+</script>
+
+<script id="search-template" type="text/x-handlebars-template" >
+	<div class="search-item">
+		<div class="boardItemHeader">
+			<div style="display: inline-block;">
+				<img src="/allways/resources/images/default_profile_img.jpg" height="40px" width="40px" class="img-circle">
+				<a id="userName" >{{userName}}</a>
+				<span id="graduation" style:"font-size: x-small; color: gray;">{{graduation}}</span>
+			</div>
+			<div class="insert" style="float: right;">	
+				<input id="uno" value="{{uno}}" type="hidden"/>
+				<button class="btnInsert">구독추가</button>
+			</div>
+		</div>		
+	</div>
+</script>
+
+<script id="allways-template" type="text/x-handlebars-template" >
+	<div class="allways-item">
+		<img src="/allways/resources/images/default_profile_img.jpg" height="30px" width="30px" class="img-circle">
+		<a id="allwaysName" >{{allwaysName}}</a>
+		<div class="delete" style="float: right;">	
+				<input id="allways-uno" value="{{uno}}" type="hidden"/>
+				<button class="btnDelete">구독끊기</button>
+		</div>
+	</div>
+</script>
+		
+<script id="all-allways-template" type="text/x-handlebars-template" >
+	<div class="all-allways-item">
+		<input id="allways-uno" value="{{uno}}" type="hidden"/>
+		<img src="/allways/resources/images/default_profile_img.jpg" height="60px" width="60px" class="img-circle">
+		<a id="allwaysName" >{{allwaysName}}</a>
+	</div>
+</script>
+		
 
 
 <script>
@@ -1002,8 +1055,300 @@ $(document).on("click", '#replyInsertBtn', function(event){
 
 </script>
 
-<script type="text/javascript" src="/allways/resources/js/board.js"></script>
+<script>
+$(document).ready(function(){
+	
+	var source = $('#search-condition-template').html();
+	var template = Handlebars.compile(source);
 
+	function drowSearchAllwaiserCondition(){
+		var templateItem = template();
+		$('#searchForm').empty();
+		$('#searchForm').append(templateItem);
+	};
+	
+	$(document).on("click", '#allwaiserSearchForm', function () {
+		$('#boardMake').empty();
+		$('#boards').empty();
+		drowSearchAllwaiserCondition();	
+	});
+		
+});
+</script>
+
+<script>
+$(document).ready(function() {
+
+	var userName = $('#name').val();			
+	var graduation = $('#graduation').val();
+	
+	var division = $('#searchs');		
+	
+	var source = $('#search-template').html();
+	var template = Handlebars.compile(source);
+			
+ 	$(document).on("click", '#search', function () {
+		getSearch();
+	});
+	
+	
+/* 	$('#search').click(function() {
+				
+		getSearch();
+		
+	});
+ */
+			
+	division.on('click', '.btnInsert', function() {
+				
+		var myUno = 9;
+				
+		var allwaiser_uno = $(this).prevAll('#uno').val();
+		console.log(allwaiser_uno);
+
+		$.ajax({
+			type : 'post',
+			url : '/allways/search/allwaysInsert/',
+			headers : {
+				'Content-Type' : 'application/json',
+				'X-HTTP-Method-Override' : 'post'
+			},
+			data: JSON.stringify({
+				'uno' : myUno,
+				'allwaiser_uno' : allwaiser_uno
+			}),
+			success : function(data) {
+				if (data == 1) {
+					alert('구독 추가 성공');
+					getSearch();
+					getAllAllways();
+				} else {
+					alert('구독 중 입니다.');
+				}
+
+			}
+		});
+
+	});
+
+	var allwaysDivision = $('#allways-searchs');
+
+	var allwaysSource = $('#allways-template').html();
+
+	var allwaysTemplate = Handlebars.compile(allwaysSource);
+
+	$('#btnallwaysSearch').click(function() {
+			
+		getAllAllwaysSearch();
+				
+	});
+			
+			
+	allwaysDivision.on('click', '.allways-item .btnDelete', function() {
+				
+		var myUno = 9;
+				
+		var allwaiser_uno = parseInt($(this).prevAll('#allways-uno').val());
+				
+				
+		console.log(allwaiser_uno);
+		var result = confirm('친구를 삭제 하시겠습니까?');
+		if (result == true) {
+			$.ajax({
+				type: 'post',
+				url: '/allways/search/allwaysDelete',
+				headers: {
+					'Content-Type': 'application/json',
+					'X-HTTP-Method-Override': 'post'
+				},
+				data: JSON.stringify({
+					'uno' : myUno,
+					'allwaiser_uno' : allwaiser_uno
+				}),
+				success: function(data) {
+							
+					if (data == 1) {
+						alert('삭제 성공');
+						getAllAllways();
+						getSearch();
+					} else {
+						alert('삭제 실패');
+					}
+							
+				}
+			});
+		}
+				
+				
+	});
+			
+			
+	function getAllAllwaysSearch() {
+				
+		var allwaysName = $('#allwaysName').val();
+				
+		var myUno = 9;
+				
+		allwaysDivision = $('#allways-searchs');
+
+		allwaysSource = $('#allways-template').html();
+
+		allwaysTemplate = Handlebars.compile(allwaysSource);
+				
+		allwaysDivision.empty();
+				
+		if (allwaysName == "") {
+			alert('이름을 작성해주세요');
+		}	
+				
+		$.ajax({
+			type: 'post',
+			url: '/allways/search/allwaysSearch',
+			headers: {
+				'Content-Type': 'application/json',
+				'X-HTTP-Method-Override': 'post'
+			},
+			data: JSON.stringify({
+				'uno' : myUno,
+				'userName' : allwaysName
+			}),
+			success: function(data) {
+				console.log(data)
+				if (data != "") {
+					alert('검색 성공');
+							
+					$(data).each(function(index, value) {
+						console.log(value.uno);
+								
+						var content = {
+								uno : value.uno,
+								allwaysName: value.userName
+						}
+								
+						console.log(content);
+								
+						var allwaysSearchItem = allwaysTemplate(content);
+								
+						allwaysDivision.append(allwaysSearchItem);
+								
+								
+					});
+							
+							
+				} else {
+					alert('검색할 내용이 없습니다.');
+					getAllAllways();
+				}
+			}
+					
+			
+		});
+				
+				
+	}
+			
+			function getAllAllways() {
+				
+				var myUno = 9;
+				
+				var allwaysDivision = $('#allways-searchs');
+
+				var allwaysSource = $('#all-allways-template').html();
+
+				var allwaysTemplate = Handlebars.compile(allwaysSource);
+				
+				allwaysDivision.empty();
+				$.ajax ({
+					type: 'post',
+					url: '/allways/search/allAllways',
+					headers: {
+						'Content-Type': 'application/json',
+						'X-HTTP-Method-Override': 'post'
+					},
+					data: JSON.stringify({
+						'uno' : myUno
+					}),
+					success: function(data) {
+						
+						$(data).each(function(index, value) {
+							
+									var content = {
+											uno : value.uno,
+											allwaysName: value.userName
+									}
+									
+									var allwaysSearchItem = allwaysTemplate(content);
+									
+									allwaysDivision.append(allwaysSearchItem);
+							})
+						}
+							
+					})
+				
+				}
+			
+				function getSearch() {
+					
+					var myUno = 9;
+					
+					userName = $('#name').val();
+					
+					graduation = $('#graduation').val();
+					
+					division = $('#searchs');
+					
+					source = $('#search-template').html();
+					
+					template = Handlebars.compile(source);
+					
+					division.empty();
+					
+					$.ajax({
+						type: 'post',
+						url: '/allways/search/user',
+						headers: {
+							'Content-Type': 'application/json',
+							'X-HTTP-Method-Override': 'post'
+						},
+						data: JSON.stringify({
+							'uno': myUno,
+							'userName': userName,
+							'graduation': graduation
+						}),
+						success: function(users) {
+							
+							console.log(users);
+							$(users).each(function(index, value){
+								console.log(index, value);
+								var content = {
+										uno : value.uno,
+										userName: value.userName,
+										graduation: value.graduation
+								}
+								
+								console.log(content);
+								
+								var searchItem = template(content);
+								
+								division.append(searchItem);
+							});
+							
+							
+						}
+						
+					});
+				}	
+			
+			
+			getAllAllways();
+		
+		});
+	
+</script>
+
+
+<!-- <script type="text/javascript" src="/allways/resources/js/board.js"></script>
+ -->
 </body>
 
 </html>

@@ -40,9 +40,11 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value = "selectBoard/{page}", method = RequestMethod.GET)
-	public ResponseEntity<List<Board>> select(@PathVariable(name="page") int page) {
+	public ResponseEntity<List<Board>> select(@PathVariable(name="page") int page, HttpSession session) {
 		
-		List<Board> result = boardService.select(1, page);
+		User user = (User)session.getAttribute("check");
+		
+		List<Board> result = boardService.select(user.getUno(), page);
 				
 		ResponseEntity<List<Board>> entity = null;
 		if(result != null) {

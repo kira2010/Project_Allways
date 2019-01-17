@@ -48,6 +48,7 @@ footer {
 /* user 메뉴창 */
 #drop {
 	margin-top: 15px;
+	min-width: 300px;
 }
 
 .left-menu{
