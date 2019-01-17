@@ -33,4 +33,12 @@ public class UserPageServiceImple implements UserPageService {
 		return allwaiserDao.existAllwaiser(allwaiser);
 	}
 
+	public int updateBGPhoto(User user) {
+		return userDao.updateBGPhoto(user);
+	}
+
+	public int updatePFPhoto(User user) {
+		return userDao.updatePFPhoto(user);
+	}
+
 }

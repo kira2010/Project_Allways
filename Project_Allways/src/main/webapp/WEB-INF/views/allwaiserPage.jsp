@@ -16,77 +16,16 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="/allways/resources/css/board.css">
+<link rel="stylesheet" type="text/css" href="/allways/resources/css/main.css">
+<link rel="stylesheet" type="text/css" href="/allways/resources/css/allwaiserSearch.css">
+
+
 <style>
-
-/* Remove the navbar's default margin-bottom and rounded borders */
-.navbar {
-	margin-bottom: 0;
-	border-radius: 0;
-}
-
-/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-.row.content {
-	height: 800px;
-}
-
-/* Set gray background color and 100% height */
-.sidenav {
-	padding-top: 20px;
-	background-color: #ffffff;
-	height: 100%;
-}
-body {
-	background-color: #f1f1f1;
-	min-width: 600px;
-}
-
-/* Set black background color, white text and some padding */
-footer {
-	background-color: #555;
-	color: white;
-	padding: 15px;
-}
-
-/* On small screens, set height to 'auto' for sidenav and grid */
-@media screen and (min-width: 350px) and (max-width: 767px) {
-	.row.content {
-		height: auto;
-	}
-}
-#user {
-	color: white;
-	margin-top: 9px;
-}
-
-#drop {
-	margin-top: 9px;
-}
-
-#text {
-	width: 450px;
-	margin-top: 9px;
-	max-width: 450px;
-}
-
-#rightlist {
-	margin-top: 30px;
-}
-
-#leftlist {
-	margin-top: 20px;
-}
-
-#l1 {
-	margin-bottom: 30px;
-}
-
-#l2, #l3 {
-	margin-top: 20px;
-}
 
 #background {
 	position: relative;
-	
 }
 
 #profile {
@@ -144,7 +83,7 @@ footer {
 	left: 83%;
 	top: 90%;
 	font-size: 10px;
-	opacity: 0.6;
+	width: 12%
 }
 
 .profileImg {
@@ -152,44 +91,33 @@ footer {
 	left: 70%;
 	top: 90%;
 	font-size: 10px;
-	opacity: 0.6;
+	width: 12%
 }
 
 #option3 {
 	visibility: visible;
 }
 
-.dropdown-menu {
-	float: right;
-}
-
 </style>
 </head>
 <body>
-
-<nav class="navbar navbar-inverse" id="header">
+<nav class="navbar-inverse" id="header">
 		<div class="container-fluid">
 			<div class="content">
 			
-			<div class="navbar-header col-sm-4">
-				<a class="navbar-brand" href="/allways"><img
+			<div class="col-sm-3">
+				<a class="navbar-brand" href="/allways/"><img
 					src="/allways/resources/images/allways.png" id="mainLogo"
 					height="px" width="140px"></a>
-				<button type="button" class="navbar-toggle" data-toggle="collapse"
-					data-target="#myNavbar">
-					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
 			</div>
 			
-			<div id="myNavbar">
-			<div class="navbar-collapse col-sm-5">
+			<div class="col-sm-6">
 				<form action="/action_page.php">
 					<div class="input-group" id="text" >
 							<input type="text" class="form-control" placeholder="Search"
 								name="search">
 						<div class="input-group-btn">
-							<button class="btn btn-default" type="submit">
+							<button class="btn btn-default">
 							<i class="glyphicon glyphicon-search"></i>
 							</button>
 						</div>
@@ -197,7 +125,7 @@ footer {
 				</form>
 			</div>		
 			
-			<div class = "nav navbar-nav navbar-right col-sm-3">				
+			<div class = "col-sm-3">				
 				<div class="dropdown input-group" id="drop">
 					<input type="text" class="form-control" value="${check.userId} 님 안녕하세요!" readonly>
 					<div class="input-group-btn">
@@ -205,7 +133,7 @@ footer {
 								id="menu1" data-toggle="dropdown">
 					<span class="caret"></span>
 					</button>
-					<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+					<ul class="dropdown-menu" role="menu" aria-labelledby="menu1" style="right: 0; left: auto;">
 						<li role="presentation"><a role="menuitem" tabindex="-1"
 							data-toggle="modal" data-target="#logout">로그아웃</a></li>
 						<li role="presentation"><a role="menuitem" tabindex="-1"
@@ -221,9 +149,10 @@ footer {
 			</div>
 			
 			</div>
-			</div>
 		</div>
 </nav>
+
+
 	 <!-- dropDown아이템 다이얼로그 -->
 						<div class="modal fade" id="logout">
 							<div class="modal-dialog">
@@ -345,8 +274,8 @@ footer {
 				<div class="content">				
 					<div>
 					<!-- 배경사진 -->
-						<div id="background">	
-							<img style="width: 100%;" class="custom-file-input"
+						<div id="background">
+							<img id = "backImage" style="width: 100%;" class="custom-file-input"
 								src="/allways/resources/images/background_pro.jpg"
 								onclick="location.href='#'">
 							<div id="userName">
@@ -356,13 +285,16 @@ footer {
 								<input class="subscribe btn btn-light text-dark" type="submit" value="구독하기" />
 								<input class="cancel btn btn-light text-dark" type="submit" value="구독취소하기" />		
 							</div>
-							<div>
-								<input class="backImg btn btn-light text-dark" type="submit" value="배경사진 변경" />
-								<input class="profileImg btn btn-light text-dark" type="submit" value="프로필사진 변경" />
+							<!-- 사진 수정 버튼 -->
+							<div>	
+								<label for="bImg" class="backImg btn text-dark" style="background-color: white;">배경사진</label>
+								<input id="bImg" type="file" style="display: none"/>
+								<label for="pImg" class="profileImg btn text-dark" style="background-color: white;">프로필사진</label>
+								<input id="pImg" type="file" style="display: none"/>
 							</div>
 							<!-- 헤더 밑 프로필사진 -->
 							<div id="profile">
-								<img class="custom-file-input"
+								<img id="profileImage" class="custom-file-input"
 									src="/allways/resources/images/default_profile_img.jpg"
 									width="120px" height="120px" style="border-radius: 60px;">			
 							</div>
@@ -431,11 +363,14 @@ footer {
 					</div>
 
 					<!-- 가운데 메뉴바 -->
-					<div class="col-sm-6 text-left">
+					<div class="col-sm-9 text-left">
 						<div id="boardMake">
-							<div>
-								<div id="boards"></div>
+							<div id="boardMake">	
 							</div>
+				
+							<div id ="boards">		
+							</div>
+							
 						</div>
 					</div>
 				</div>
@@ -443,29 +378,508 @@ footer {
 			<!-- 오른쪽 메뉴바 -->
 			<div class="col-sm-3 sidenav">
 			
-			<form class="allwaiserForm">
-				<div class="input-group">
-					<input type="text" class="form-control" placeholder="Search"
-						name="search">
-					<div class="input-group-btn">
-						<button class="btn btn-default">
-						<i class="glyphicon glyphicon-search"></i>
-						</button>
-					</div>
-				</div>
+			<form class="form-inline myAllayierSearch">
+				<input id="allwaysName" class="form-control" type="text" placeholder="친구 이름">
+				<button id="btnallwaysSearch" type="button"
+				class="btn btn-outline-light text-dark">
+				<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+				</button>
 			</form>
 			
-			<div id="myAllwayiserList">
-			
+			<div id="allways-searchs" >
 				
 			</div>
 				
 		</div>
+		
 		</div>
 	</div>
+
 	<footer class="container-fluid text-center">
 		<p>Footer Text</p>
 	</footer>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.min.js"></script>
+
+<script  id="boardInsert" type="text/x-handlebars-template">
+
+<div class = "boardInsertForm">
+	<div class = "boardInsertTitle">게시물 작성하기</div>
+
+	<div class="clearfix boardHead">
+		<img id= "InsertprofileImg" src="/allways/resources/images/default_profile_img.jpg"
+			class = "img-circle"
+			onclick="location.href='/allways'">
+		<textarea id="boardInsertcontent" class="autosize" placeholder="내용 입력"></textarea>
+	</div>
+
+
+	<div id="fileList">
+	</div>
+
+<div class="boardTail">
+
+<form id="uploadForm" method="post" enctype="multipart/form-data">
+	<label class = "addImg" for="files">사진</label>
+	
+	<input id="files" type="file" class="files" style="display: none" />	
+
+	<span id="boardUploadBtn" class = "btn btn-default" >올리기</span>			
+
+	<select id="privacyBounds">
+		<option value="0">전체 공개</option>
+		<option value="1">친구 공개</option>
+		<option value="2">나만 보기</option>
+
+	</select>	
+
+</form>
+</div>
+	
+</div>
+
+</script>
+
+<script id="boardItem" type="text/x-handlebars-template">
+<div class="boardItem">
+
+	<div class="boardItemHead">
+
+		<img id = "profileImg" src="/allways/resources/images/default_profile_img.jpg"
+			style="border-radius: 30px; float: left; padding: 8px"
+			onclick="location.href='/allways'">
+		<div style="display: inline-block;">
+			<a href = "/allways">{{userId}}</a><br />
+			<span style="font-size: x-small; color: gray;">{{regDate}}</span>
+		</div>
+
+	
+		<div class="dropdown" style="float: right;">
+  	 	<span class="glyphicon glyphicon-align-justify dropdown-toggle btn" type="button" id="menu1" data-toggle="dropdown"></span>
+
+  	  	<ul class="dropdown-menu" role="menu" aria-labelledby="menu1" style="right: 0; left: auto;">
+    		<li role="presentation"><a role="menuitem" tabindex="-1" href="#">북마크</a></li>
+     	 	<li role="presentation" id="{{boardUpdate}}"><a role="menuitem" tabindex="-1" href="#">수정</a></li>
+     	 	<li role="presentation" class="divider"></li>
+     	 	<li role="presentation" id="{{boardDelete}}"><a role="menuitem" tabindex="-1"  id="{{boardDeleteBtn}}" class="boardDeleteBtn">삭제</a></li>
+    	</ul>
+		</div>
+
+
+	</div> <!-- BoardItemHead -->
+	
+	
+	<details>
+		<summary>{{content_T}}</summary>
+    	<p>{{content}}</p>
+	</details>
+	
+	<div class="imageArea" id="{{imageArea}}" data-bno="{{bno}}" style= "margin: 8px">
+					
+	</div>
+	
+
+<div class="container-fluid boardTail">
+	<div class="row">
+		<div class="col-xs-6" style="text-align: center;" >
+			<a id="{{bookMark}}" class = "btn" >북마크</a>
+		</div>
+		<div class="col-xs-6 " style="text-align: center;" >
+			<a data-bno="{{bno}}" class="reply btn" >댓글</a>
+		</div>
+	</div>
+
+</div>
+
+
+</div>
+
+<div id= "{{replyArea}}" class= "replyArea">
+</div>
+
+
+</script>
+
+<script id="replyInsert" type="text/x-handlebars-template">
+
+<div id="replyInsertForm" class="clearfix">
+	<div class="replyProfileImg">
+	<img id = "profileImg" src="/allways/resources/images/default_profile_img.jpg"
+		class = "img-circle"
+		onclick="location.href='/allways'" />
+	</div>
+
+	<div class="input-group replyInsertContent">
+		<textarea id="{{replyText}}" class="autosize form-control" rows="1" placeholder="내용 입력" style="resize: none; margin: 8px; width = 100%"></textarea>
+
+		<div class="input-group-btn">
+			<button id= {{replyInsertBtn}} class="replyInsertBtn btn btn-default ">
+			<i class="glyphicon glyphicon-edit"></i>
+			</button>
+		</div>
+	</div>	
+</div>
+	
+</script>
+
+<script id="replyItem" type="text/x-handlebars-template">
+
+<div class= "replyItem clearfix">	
+	<div class="replyProfileImg">
+	<img id = "profileImg" src="/allways/resources/images/default_profile_img.jpg"
+		class = "img-circle";
+		onclick="location.href='/allways'">
+	</div>
+
+	<div class="replyContent">			
+		<div style="display: inline-block;">
+			<a href = "/allways">{{userId}}</a>
+			<span style="font-size: x-small; color: gray;">{{regDate}}</span>
+			<span class = "replayUpdate" id = {{BRno}}>
+			<span style="font-size: x-small" class="btn replyUpdate">수정</span>
+			<span style="font-size: x-small">|</span>
+			<span style="font-size: x-small" data-rno ="{{rno}}" data-bno ="{{bno}}" class="btn replyDelete" >삭제</span>
+			</span>
+		</div>
+	<textarea id="{{replyText}}" class="autosize form-control" rows="1" readonly style="resize: none; margin-right: 8px"">{{replyContent}}</textarea>
+	</div>
+</div>
+
+</script>
+
+<script id="search-template" type="text/x-handlebars-template" >
+	<div class="search-item">
+		<div class="boardItemHeader">
+			<div style="display: inline-block;">
+				<img src="/allways/resources/images/default_profile_img.jpg" height="40px" width="40px" class="img-circle">
+				<a id="userName" href="/allways/userPage?uno={{uno}}" >{{userName}}</a>
+				<span style:"font-size: x-small; color: #f1f1f1;">({{userId}})</span>
+				<span id="graduation" style:"font-size: x-small; color: gray;">{{graduation}}</span>
+			</div>
+			<div class="insert" style="float: right;">	
+				<input id="uno" value="{{uno}}" type="hidden"/>
+				<a class="btn btn-default btnInsert">구독추가</a>
+			</div>
+		</div>		
+	</div>
+</script>
+
+<script id="allways-template" type="text/x-handlebars-template" >
+	<div class="allways-item">
+		<img src="/allways/resources/images/default_profile_img.jpg" height="45px" width="45px" class="img-circle">
+		<a id="allwaysName" href="/allways/userPage?uno={{uno}}">{{allwaysName}}</a>
+		<span style:"font-size: x-small; color: #f1f1f1">({{userId}})</span>
+		<div class="delete" style="float: right;">	
+				<input id="allways-uno" value="{{uno}}" type="hidden"/>
+				<button class="btn btn-default btnDelete">구독끊기</button>
+		</div>
+	</div>
+</script>
+		
+<script id="all-allways-template" type="text/x-handlebars-template" >
+	<div class="all-allways-item">
+		<input id="allways-uno" value="{{uno}}" type="hidden"/>
+		<img src="/allways/resources/images/default_profile_img.jpg" height="45px" width="45px" class="img-circle">
+		<a id="allwaysName" href="/allways/userPage?uno={{uno}}" >{{allwaysName}}</a>
+		<span style:"font-size: x-small; color: #f1f1f1;">({{userId}})</span>
+	</div>
+</script>
+
+<script>
+
+$(document).ready(function() {
+
+	function setUserImage(){
+		if('${userInfo.bg_photo}'){
+			var url = '/allways'+'${userInfo.bg_photo}';
+			$('#backImage').attr("src",url);
+		}
+		if('${userInfo.pf_photo}'){
+			var url = '/allways'+'${userInfo.pf_photo}';
+			$('#profileImage').attr("src",url);
+		}
+		
+	}
+	
+	setUserImage();
+	
+	var allwaysDivision = $('#allways-searchs');
+
+	var allwaysSource = $('#allways-template').html();
+
+	var allwaysTemplate = Handlebars.compile(allwaysSource);
+
+	$('#btnallwaysSearch').click(function() {
+			
+		getAllAllwaysSearch();
+				
+	});
+			
+			
+	allwaysDivision.on('click', '.allways-item .btnDelete', function() {
+				
+		var myUno = ${check.uno};
+				
+		var allwaiser_uno = parseInt($(this).prevAll('#allways-uno').val());
+				
+				
+		console.log(allwaiser_uno);
+		var result = confirm('친구를 삭제 하시겠습니까?');
+		if (result == true) {
+			$.ajax({
+				type: 'post',
+				url: '/allways/search/allwaysDelete',
+				headers: {
+					'Content-Type': 'application/json',
+					'X-HTTP-Method-Override': 'post'
+				},
+				data: JSON.stringify({
+					'uno' : myUno,
+					'allwaiser_uno' : allwaiser_uno
+				}),
+				success: function(data) {
+							
+					if (data == 1) {
+						alert('삭제 성공');
+						getAllAllways();
+						getSearch();
+					} else {
+						alert('삭제 실패');
+					}
+							
+				}
+			});
+		}
+				
+				
+	});
+			
+			
+	function getAllAllwaysSearch() {
+				
+		var allwaysName = $('#allwaysName').val();
+				
+		var myUno = ${check.uno};
+				
+		allwaysDivision = $('#allways-searchs');
+
+		allwaysSource = $('#allways-template').html();
+
+		allwaysTemplate = Handlebars.compile(allwaysSource);
+				
+		allwaysDivision.empty();
+				
+		if (allwaysName == "") {
+			alert('이름을 작성해주세요');
+		}	
+				
+		$.ajax({
+			type: 'post',
+			url: '/allways/search/allwaysSearch',
+			headers: {
+				'Content-Type': 'application/json',
+				'X-HTTP-Method-Override': 'post'
+			},
+			data: JSON.stringify({
+				'uno' : myUno,
+				'userName' : allwaysName
+			}),
+			success: function(data) {
+				console.log(data)
+				if (data != "") {
+					alert('검색 성공');
+							
+					$(data).each(function(index, value) {
+						console.log(value.uno);
+								
+						var content = {
+								uno : value.uno,
+								userId: value.userId,
+								allwaysName: value.userName
+						}
+								
+						console.log(content);
+								
+						var allwaysSearchItem = allwaysTemplate(content);
+								
+						allwaysDivision.append(allwaysSearchItem);
+								
+								
+					});
+							
+							
+				} else {
+					alert('검색할 내용이 없습니다.');
+					getAllAllways();
+				}
+			}
+					
+			
+		});
+				
+				
+	}
+			
+			function getAllAllways() {
+				
+				var myUno = ${check.uno};
+				
+				var allwaysDivision = $('#allways-searchs');
+
+				var allwaysSource = $('#all-allways-template').html();
+
+				var allwaysTemplate = Handlebars.compile(allwaysSource);
+				
+				allwaysDivision.empty();
+				$.ajax ({
+					type: 'post',
+					url: '/allways/search/allAllways',
+					headers: {
+						'Content-Type': 'application/json',
+						'X-HTTP-Method-Override': 'post'
+					},
+					data: JSON.stringify({
+						'uno' : myUno
+					}),
+					success: function(data) {
+						
+						$(data).each(function(index, value) {
+							
+									var content = {
+											uno : value.uno,
+											userId: value.userId,
+											allwaysName: value.userName
+									}
+									
+									var allwaysSearchItem = allwaysTemplate(content);
+									
+									allwaysDivision.append(allwaysSearchItem);
+							})
+						}
+							
+					})
+				
+				}
+			
+				function getSearch() {
+					
+					var myUno = ${check.uno};
+					
+					userName = $('#name').val();
+					
+					graduation = $('#graduation').val();
+					
+					division = $('#searchs');
+					
+					source = $('#search-template').html();
+					
+					template = Handlebars.compile(source);
+					
+					division.empty();
+					
+					$.ajax({
+						type: 'post',
+						url: '/allways/search/user',
+						headers: {
+							'Content-Type': 'application/json',
+							'X-HTTP-Method-Override': 'post'
+						},
+						data: JSON.stringify({
+							'uno': myUno,
+							'userName': userName,
+							'graduation': graduation
+						}),
+						success: function(users) {
+							
+							console.log(users);
+							$(users).each(function(index, value){
+								console.log(index, value);
+								var content = {
+										uno : value.uno,
+										userName: value.userName,
+										userId: value.userId,
+										graduation: value.graduation
+								}
+								
+								console.log(content);
+								
+								var searchItem = template(content);
+								
+								division.append(searchItem);
+							});
+							
+							
+						}
+						
+					});
+				}	
+			
+			
+			getAllAllways();
+		
+			$(document).on('change', '#bImg', function(){
+				const target = document.getElementById('bImg');
+				console.log(target);
+				var file = target.files[0];
+				console.log(file);
+				
+				var form = new FormData();
+				form.append("uploadfile", file);
+				form.append("uno", ${check.uno});
+				
+				$.ajax({
+					type : 'post',
+					url : '/allways/userPage/bimg',
+					data : form,
+					processData : false,
+					contentType : false,
+					success : function(data) {
+						console.log(data + "성공");
+						
+					},
+					error : function(error) {
+						alert("파일 업로드에 실패하였습니다.");
+						console.log(error);
+						console.log(error.status);
+					}
+				});
+				
+			});
+			
+			
+			$(document).on('change', '#pImg', function(){
+				const target = document.getElementById('pImg');
+				console.log(target);
+				var file = target.files[0];
+				console.log(file);
+				
+				var form = new FormData();
+				form.append("uploadfile", file);
+				form.append("uno", ${check.uno});
+				
+				$.ajax({
+					type : 'post',
+					url : '/allways/userPage/pimg',
+					data : form,
+					processData : false,
+					contentType : false,
+					success : function(data) {
+						console.log(data + "성공");
+						
+					},
+					error : function(error) {
+						alert("파일 업로드에 실패하였습니다.");
+						console.log(error);
+						console.log(error.status);
+					}
+				});
+				
+			});
+			
+		});
+	
+</script>
 
 
 </body>
@@ -680,6 +1094,8 @@ $(document).ready(function() {
 				}
 			});
 		});
+		
+		
 		
 });
 

@@ -38,6 +38,7 @@ public class FileUploadController {
   public ResponseEntity<List<String>> upload(MultipartHttpServletRequest req) {
     
 	List<MultipartFile> mf = req.getFiles("uploadfile");
+	
 	// 로그인 UNO
 	int uno = 0;
 	List<String> imageUrls = new ArrayList<String>();

@@ -525,7 +525,7 @@
 		<div class="boardItemHeader">
 			<div style="display: inline-block;">
 				<img src="/allways/resources/images/default_profile_img.jpg" height="40px" width="40px" class="img-circle">
-				<a id="userName" href="/allways/userPage?uno={{uno}}" >{{userName}}</a>
+				<a id="userName" href="/allways/userPage?uno={{uno}}">{{userName}}</a>
 				<span style:"font-size: x-small; color: #f1f1f1;">({{userId}})</span>
 				<span id="graduation" style:"font-size: x-small; color: gray;">{{graduation}}</span>
 			</div>
