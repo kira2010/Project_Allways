@@ -123,20 +123,16 @@
 		<!-- 오른쪽 메뉴바 -->
 		<div class="col-sm-3 sidenav">
 			
-			<form class="allwaiserForm">
-				<div class="input-group">
-					<input type="text" class="form-control" placeholder="Search"
-						name="search">
-					<div class="input-group-btn">
-						<button class="btn btn-default">
-						<i class="glyphicon glyphicon-search"></i>
-						</button>
-					</div>
-				</div>
+			<form class="form-inline">
+
+				<input id="allwaysName" class="form-control mr-sm-2" type="text" placeholder="친구 이름">
+				<button id="btnallwaysSearch" type="button"
+				class="btn btn-outline-light text-dark">
+				<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+				</button>
 			</form>
 			
-			<div id="myAllwayiserList">
-			
+			<div id="allways-searchs" >
 				
 			</div>
 				
