@@ -1,0 +1,27 @@
+@charset "UTF-8";
+
+.search-condition{
+	background-color: #ffffff;
+	padding: 8px;
+	border-bottom: solid 1px #f1f1f1;	
+}
+
+.search-condition-title{
+	height: 50px;
+	text-align: center;
+	font-size: 20px;
+}
+
+#searchs{
+	background-color: #ffffff;
+}
+
+.search-item{
+	background-color: #ffffff;
+	padding: 8px;
+	border-bottom: solid 1px #f1f1f1;	
+}
+
+.insert{
+	vertical-align: middle;	
+}

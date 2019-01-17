@@ -48,7 +48,6 @@ footer {
 /* user 메뉴창 */
 #drop {
 	margin-top: 15px;
-	min-width: 300px;
 }
 
 .left-menu{
@@ -85,4 +84,25 @@ footer {
 	font-size: 20px;
 }
 
+.all-allways-item{
+	padding: 8px;
+	border-bottom: solid 1px #f1f1f1;
+}
 
+.allways-item{
+	padding: 8px;
+	border-bottom: solid 1px #f1f1f1;
+}
+
+.myAllayierSearch{
+	padding: 8px;
+	border-bottom: solid 1px #f1f1f1;	
+}
+
+#allwaysName{
+	width: 80%;
+}
+
+#btnallwaysSearch{
+	float: right;
+}

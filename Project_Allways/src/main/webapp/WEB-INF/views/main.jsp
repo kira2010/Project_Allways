@@ -18,7 +18,7 @@
 
 <link rel="stylesheet" type="text/css" href="/allways/resources/css/board.css">
 <link rel="stylesheet" type="text/css" href="/allways/resources/css/main.css">
-
+<link rel="stylesheet" type="text/css" href="/allways/resources/css/allwaiserSearch.css">
 
 <style>
 
@@ -123,9 +123,8 @@
 		<!-- 오른쪽 메뉴바 -->
 		<div class="col-sm-3 sidenav">
 			
-			<form class="form-inline">
-
-				<input id="allwaysName" class="form-control mr-sm-2" type="text" placeholder="친구 이름">
+			<form class="form-inline myAllayierSearch">
+				<input id="allwaysName" class="form-control" type="text" placeholder="친구 이름">
 				<button id="btnallwaysSearch" type="button"
 				class="btn btn-outline-light text-dark">
 				<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
@@ -508,7 +507,8 @@
 </script>
 
 <script id="search-condition-template" type="text/x-handlebars-template" >
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+<nav class="search-condition">
+	<div class="search-condition-title" >Allwaiser 검색하기</div>
 	<form class="form-inline">
 		<input id="name" class="form-control mr-sm-2" type="text" placeholder="이름">
 		<input id="graduation" class="form-control mr-sm-2" type="text" placeholder="학교">
@@ -525,12 +525,13 @@
 		<div class="boardItemHeader">
 			<div style="display: inline-block;">
 				<img src="/allways/resources/images/default_profile_img.jpg" height="40px" width="40px" class="img-circle">
-				<a id="userName" >{{userName}}</a>
+				<a id="userName" href="/allways/userPage?uno={{uno}}" >{{userName}}</a>
+				<span style:"font-size: x-small; color: #f1f1f1;">({{userId}})</span>
 				<span id="graduation" style:"font-size: x-small; color: gray;">{{graduation}}</span>
 			</div>
 			<div class="insert" style="float: right;">	
 				<input id="uno" value="{{uno}}" type="hidden"/>
-				<button class="btnInsert">구독추가</button>
+				<a class="btn btn-default btnInsert">구독추가</a>
 			</div>
 		</div>		
 	</div>
@@ -538,11 +539,12 @@
 
 <script id="allways-template" type="text/x-handlebars-template" >
 	<div class="allways-item">
-		<img src="/allways/resources/images/default_profile_img.jpg" height="30px" width="30px" class="img-circle">
-		<a id="allwaysName" >{{allwaysName}}</a>
+		<img src="/allways/resources/images/default_profile_img.jpg" height="45px" width="45px" class="img-circle">
+		<a id="allwaysName" href="/allways/userPage?uno={{uno}}">{{allwaysName}}</a>
+		<span style:"font-size: x-small; color: #f1f1f1">({{userId}})</span>
 		<div class="delete" style="float: right;">	
 				<input id="allways-uno" value="{{uno}}" type="hidden"/>
-				<button class="btnDelete">구독끊기</button>
+				<button class="btn btn-default btnDelete">구독끊기</button>
 		</div>
 	</div>
 </script>
@@ -550,8 +552,9 @@
 <script id="all-allways-template" type="text/x-handlebars-template" >
 	<div class="all-allways-item">
 		<input id="allways-uno" value="{{uno}}" type="hidden"/>
-		<img src="/allways/resources/images/default_profile_img.jpg" height="60px" width="60px" class="img-circle">
-		<a id="allwaysName" >{{allwaysName}}</a>
+		<img src="/allways/resources/images/default_profile_img.jpg" height="45px" width="45px" class="img-circle">
+		<a id="allwaysName" href="/allways/userPage?uno={{uno}}" >{{allwaysName}}</a>
+		<span style:"font-size: x-small; color: #f1f1f1;">({{userId}})</span>
 	</div>
 </script>
 		
@@ -1086,18 +1089,10 @@ $(document).ready(function() {
  	$(document).on("click", '#search', function () {
 		getSearch();
 	});
-	
-	
-/* 	$('#search').click(function() {
 				
-		getSearch();
-		
-	});
- */
-			
 	division.on('click', '.btnInsert', function() {
 				
-		var myUno = 9;
+		var myUno = ${check.uno};
 				
 		var allwaiser_uno = $(this).prevAll('#uno').val();
 		console.log(allwaiser_uno);
@@ -1142,7 +1137,7 @@ $(document).ready(function() {
 			
 	allwaysDivision.on('click', '.allways-item .btnDelete', function() {
 				
-		var myUno = 9;
+		var myUno = ${check.uno};
 				
 		var allwaiser_uno = parseInt($(this).prevAll('#allways-uno').val());
 				
@@ -1183,7 +1178,7 @@ $(document).ready(function() {
 				
 		var allwaysName = $('#allwaysName').val();
 				
-		var myUno = 9;
+		var myUno = ${check.uno};
 				
 		allwaysDivision = $('#allways-searchs');
 
@@ -1218,6 +1213,7 @@ $(document).ready(function() {
 								
 						var content = {
 								uno : value.uno,
+								userId: value.userId,
 								allwaysName: value.userName
 						}
 								
@@ -1245,7 +1241,7 @@ $(document).ready(function() {
 			
 			function getAllAllways() {
 				
-				var myUno = 9;
+				var myUno = ${check.uno};
 				
 				var allwaysDivision = $('#allways-searchs');
 
@@ -1270,6 +1266,7 @@ $(document).ready(function() {
 							
 									var content = {
 											uno : value.uno,
+											userId: value.userId,
 											allwaysName: value.userName
 									}
 									
@@ -1285,7 +1282,7 @@ $(document).ready(function() {
 			
 				function getSearch() {
 					
-					var myUno = 9;
+					var myUno = ${check.uno};
 					
 					userName = $('#name').val();
 					
@@ -1319,6 +1316,7 @@ $(document).ready(function() {
 								var content = {
 										uno : value.uno,
 										userName: value.userName,
+										userId: value.userId,
 										graduation: value.graduation
 								}
 								
