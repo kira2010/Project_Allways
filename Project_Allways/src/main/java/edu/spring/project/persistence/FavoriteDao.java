@@ -12,6 +12,8 @@ public interface FavoriteDao {
 	
 	int findItr_no(Favorite fav);
 	
+	int existFavorite(Favorite fav);
+	
 	int registFavorite(Favorite fav);
 	
 	int deleteFavorite(int itr_no);
