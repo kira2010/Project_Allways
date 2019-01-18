@@ -442,7 +442,7 @@
 <div class="container-fluid boardTail">
 	<div class="row">
 		<div class="col-xs-6" style="text-align: center;" >
-			<a id="{{bookMark}}" class = "btn" >북마크</a>
+			<a data-bno="{{bno}}" class="bookMark btn" >북마크</a>
 		</div>
 		<div class="col-xs-6 " style="text-align: center;" >
 			<a data-bno="{{bno}}" class="reply btn" >댓글</a>
@@ -615,7 +615,6 @@ $(document).ready(function(){
 					content_T: topContent,
 					content: subContent,
 					imageArea: this.bno+"imgArea",
-					bookMark:this.bno+"-bookMark",
 					bno: this.bno,
 					replyArea: this.bno+"replyArea",
 					boardDeleteBtn: this.bno+"-boardDeleteBtn",
@@ -1386,6 +1385,35 @@ $(document).ready(function() {
 	
 </script>
 
+<script>
+$(document).ready(function(){
+	
+	
+	$(document).on("click", '.bookMark', function () {
+		var bno = $(this).data('bno');
+		
+		$.ajax({
+			type: 'post',
+			url: '/allways/favorite/insert',
+			headers: {
+				'Content-Type': 'application/json',
+				'X-HTTP-Method-Override': 'post'
+			},
+			data: JSON.stringify({
+				'bno' : bno
+			}),
+			success: function(result) {
+				alert('결과'+result);
+			}
+		});
+		
+	});
+	
+	
+});
+
+
+</script>
 
 <!-- <script type="text/javascript" src="/allways/resources/js/board.js"></script>
  -->

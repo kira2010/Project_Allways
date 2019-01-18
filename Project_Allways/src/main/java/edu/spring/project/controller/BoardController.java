@@ -38,7 +38,7 @@ public class BoardController {
 		boardService.insert(board);
 		
 	}
-	
+		
 	@RequestMapping(value = "selectBoard/{page}", method = RequestMethod.GET)
 	public ResponseEntity<List<Board>> select(@PathVariable(name="page") int page, HttpSession session) {
 		

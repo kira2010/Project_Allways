@@ -2,6 +2,8 @@ package edu.spring.project.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +23,24 @@ public class FavoriteController {
 
 	@Autowired
 	private FavoriteDao dao;
+	
+	
+	@RequestMapping(value = "insert", method = RequestMethod.POST)
+	public ResponseEntity<Integer> insertBookMark(@RequestBody Favorite favorite, HttpSession session) {
+		
+		User loginUser =  (User) session.getAttribute("check");
+		favorite.setUno(loginUser.getUno());
+		int result = dao.registFavorite(favorite);
+
+		ResponseEntity<Integer> entity = null;
+		
+		if(result != 0) {
+			entity = new ResponseEntity<Integer>(result , HttpStatus.OK);
+		}else {
+			entity = new ResponseEntity<Integer>(result , HttpStatus.BAD_REQUEST);
+		}
+		return  entity;	
+	}
 	
 	@RequestMapping(value = "list" , method = RequestMethod.POST)
 	public ResponseEntity<List<Board>> favoriteList(@RequestBody User user) {
@@ -52,6 +72,7 @@ public class FavoriteController {
 		
 		return entity;
 	}
+	
 	
 	
 }
