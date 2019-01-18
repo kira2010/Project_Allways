@@ -89,7 +89,7 @@ public class UsersController {
 	public String login(User user, HttpSession session) throws Exception {
 		logger.info("login() POST 호출");
 		
-		User checkUser = userService.login(user);
+		User checkUser = userService.login(user); 
 		User loginUser = checkUser;
 		loginUser.setUserPwd("");
 		if (checkUser != null) {
