@@ -35,6 +35,9 @@
 	position: relative;
 	left: 8px;
 }
+body {
+	background-color: #f1f1f1;
+}
 </style>
 
 <title>로그인</title>

@@ -38,23 +38,8 @@
 </script>
 <script>
 $(document).ready(function() {	
-	$("#signUpForm").submit(function(){
-		if($("#userPwd").val() !== $("#confirm").val()){
-			alert("비밀번호가 다릅니다.");
-			$("#userPwd").val("").focus();
-			$("#confirm").val("");
-			return false;
-		}else if ($("#userPwd").val().length < 8) {
-			alert("비밀번호는 8자 이상으로 설정해야 합니다.");
-			$("#userPwd").val("").focus();
-			return false;
-		}else if($.trim($("#userPwd").val()) !== $("#userPwd").val() || $.trim($("#userId").val()) !== $("#userId").val()){
-			alert("공백은 입력이 불가능합니다.");
-			return false;
-		}
-	})
-	
-	$("#userId").change(function() {
+
+	$("#userId").focusout(function() {
 		var registId = $('#userId').val();
 		$.ajax({
 			url : "../users/checkId",
@@ -65,9 +50,53 @@ $(document).ready(function() {
 			success : function(result) {
 				if (result == 'existed') {
 					$("#id_check").html("중복된 ID가 있습니다.");
+					$("#id_check").css('color', 'red');
 					$("#joinBtn").attr("disabled", "disabled");
 				} else {
 					$("#id_check").html("사용가능한 ID 입니다.");
+					$("#id_check").css('color', 'green');
+					$("#joinBtn").removeAttr("disabled");
+				}
+			},
+		});
+	});
+	
+	$('#confirm').focusout(function(){
+		var first = $('#userPwd').val();
+		var second = $('#confirm').val();
+		if($("#userPwd").val().length < 8){	
+			$("#pwCheck").html("비밀번호는 8자 이상으로 설정해야 합니다.")
+			$("#pwCheck").css('color', 'red');
+			$("#userPwd").val('');
+			$("#userPwd").focus();
+		} else if(first != '' && second != '' && first !== second){
+			$("#pw_check").html("비밀번호가 일치하지 않습니다.");
+			$("#pw_check").css('color', 'red');
+			$('#confirm').val('');
+			$('#confirm').focus();
+		} else {
+			$('#pwCheck').html("");
+			$('#pw_check').html("확인 되었습니다.");
+			$("#pw_check").css('color', 'green');
+		}
+	});
+	
+	$("#userEmail").focusout(function() {
+		var registEmail = $('#userEmail').val();
+		$.ajax({
+			url : "../users/checkEmail",
+			type : "POST",
+			data : {
+				userEmail : registEmail
+			},
+			success : function(result) {
+				if (result == 'existed') {
+					$("#email_check").html("중복된 EMAIL이 있습니다");
+					$("#email_check").css('color', 'red');
+					$("#joinBtn").attr("disabled", "disabled");
+				} else {
+					$("#email_check").html("사용 가능한 EMAIL 입니다.");
+					$("#email_check").css('color', 'green');
 					$("#joinBtn").removeAttr("disabled");
 				}
 			},
@@ -79,6 +108,9 @@ $(document).ready(function() {
 .field-container {
     display: inline-block;
 }
+body {
+	background-color: #f1f1f1;
+}
 </style>
 
 </head>
@@ -87,25 +119,29 @@ $(document).ready(function() {
 	<div class="w3-content w3-container w3-margin-top">
 		<div class="w3-container w3-card-4">
 			<div class="w3-center w3-large w3-margin-top">
+				<h3><a href="/allways"><img src="/allways/resources/images/allways.png" /></a></h3>
 				<h3>회원 가입</h3>
 			</div>
 			<div>
 				<form id="signUpForm" action="signUp" method="post" onsubmit="return check()" >
 					<p> 
 						<input class="w3-input" type="text" id="userId" name="userId" placeholder="아이디" required /> 
-						<div id="id_check" class="w3-text-red"></div>
+						<div id="id_check"></div>
 					</p>
 					<p>
 						<input class="w3-input" id="userPwd" name="userPwd" type="password" placeholder="비밀번호" required />
+						<div id="pwCheck"></div>
 					</p>
 					<p>
 						<input class="w3-input" id="confirm" name="confirm" type="password" placeholder="비밀번호 확인" required />
+						<div id="pw_check"></div>
 					</p>
 					<p>
 						<input type="text" id="userName" name="userName" class="w3-input" placeholder="이름" required />
 					</p>
 					<p>
 						<input type="email" id="userEmail" name="userEmail" class="w3-input" placeholder="이메일" required />
+						<div id="email_check"></div>
 					</p>
 					
 					<p>

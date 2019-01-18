@@ -41,6 +41,20 @@ public class UsersController {
 		}
 	}
 	
+	// 이메일 중복 검사(AJAX)
+	@RequestMapping(value="checkEmail", method=RequestMethod.POST)
+	public void checkEmail(String userEmail, HttpServletResponse response) throws Exception {
+		response.setCharacterEncoding("UTF-8");
+		boolean checkEmailResult = userService.checkEmail(userEmail, response);
+		PrintWriter writer = response.getWriter();
+		
+		if (!checkEmailResult) {
+			writer.write("existed");
+		} else {
+			writer.write("not existed");
+		}
+	}
+	
 	// 회원가입
 	@RequestMapping(value="/signUp", method=RequestMethod.GET)
 	public String signUp() {
@@ -105,8 +119,6 @@ public class UsersController {
 		
 		if (findId != null && !findId.isEmpty()) {
 			writer.write(findId);
-		} else {
-			writer.write("찾으시는 아이디가 없습니다.");
 		}
 	}
 	
@@ -116,6 +128,75 @@ public class UsersController {
 		logger.info("findPwdForm() 호출");
 		
 		return "users/findPwdForm";
+	}
+	
+	// 비밀번호 찾기
+//	@RequestMapping(value="/findPwd", method=RequestMethod.POST)
+//	public void findPwd(User user, HttpServletResponse response) throws Exception {
+//		response.setCharacterEncoding("UTF-8");
+//		
+//		String findPwd = userService.findPwd(user, response);
+//		PrintWriter writer = response.getWriter();
+//		
+//		if (findPwd != null && !findPwd.isEmpty()) {
+//			writer.write(findPwd);
+//		}
+//	}
+	
+	// 회원 정보 수정
+	@RequestMapping(value="/updateUser", method=RequestMethod.POST)
+	public String updateUser(User user, HttpSession session) throws Exception {
+		User loginUser = (User) session.getAttribute("check");
+		String userEmail = loginUser.getUserEmail(); // 세션에 저장된 사용자 정보로부터 아이디를 알아낸다.
+		
+		if (user.getUserName() == null) {
+			user.setUserName(loginUser.getUserName());
+		}
+		
+		user.setUserEmail(userEmail);
+		int check = userService.updateUser(user);
+		if (check == 1) {
+			session.setAttribute("check", user);
+		}
+		
+		return "users/resetUserPwd";
+		
+	}
+	
+	// 비밀 번호 변경
+	@RequestMapping(value="/resetUserPwd", method=RequestMethod.GET)
+	public String resetUserPwd() {
+		return "users/resetUserPwd";
+	}
+	
+	@RequestMapping(value="/resetUserPwd", method=RequestMethod.POST)
+	public String resetUserPwd(int uno, HttpSession session) throws Exception {
+		String id = ((User)session.getAttribute("check")).getUserId();
+		
+		User user = new User();
+		user.setUserId(id);
+		user.setUno(uno);
+		
+		return "/main";
+		
+	}
+	
+	// 회원 탈퇴
+	@RequestMapping(value="/deleteUser", method=RequestMethod.GET)
+	public String deleteUser(int uno, HttpSession session) {
+		User user = (User)session.getAttribute("check");
+		userService.deleteUser(uno);
+		session.invalidate();
+		
+		return "users/login";
+	}
+	
+	// 로그 아웃
+	@RequestMapping(value="/logout", method=RequestMethod.GET)
+	public String logout(HttpSession session) {
+		session.removeAttribute("check");
+		
+		return "users/login";
 	}
 	
 }

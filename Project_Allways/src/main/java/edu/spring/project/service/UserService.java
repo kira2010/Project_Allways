@@ -21,4 +21,16 @@ public interface UserService {
 	// 아이디 찾기
 	public String findId(User user, HttpServletResponse response) throws Exception;
 	
+	// 비밀번호 찾기
+	public int findPwd(User user, HttpServletResponse response) throws Exception;
+	
+	// 회원 정보 수정
+	public int updateUser(User user);
+	
+	// 비밀번호 변경
+	public int resetUserPwd(int uno);
+	
+	// 회원 탈퇴
+	public int deleteUser(int uno);
+	
 }

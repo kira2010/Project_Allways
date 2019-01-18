@@ -53,4 +53,31 @@ public class UserServiceImple implements UserService {
 		return userDao.findUserId(user);
 	}
 	
+	// 비밀번호 찾기
+	public int findPwd(User user, HttpServletResponse response) throws Exception {
+		logger.info("findPwd() 호출");
+		
+		return userDao.findUserPwd(user);
+	}
+	
+	// 회원 정보 수정
+	public int updateUser(User user) {
+		logger.info("updateUser() 호출");
+		
+		return userDao.updateUser(user);
+	}
+	
+	// 비밀번호 변경
+	public int resetUserPwd(int uno) {
+		logger.info("resetUserPwd() 호출");
+		
+		return userDao.resetUserPwd(uno);
+	}
+	
+	// 회원 탈퇴
+	public int deleteUser(int uno) {
+		logger.info("deleteUser() 호출");
+		
+		return userDao.deleteUser(uno);
+	}
 }
