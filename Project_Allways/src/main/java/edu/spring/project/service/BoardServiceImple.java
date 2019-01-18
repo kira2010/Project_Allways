@@ -23,6 +23,21 @@ public class BoardServiceImple implements BoardService {
 		return result;
 	}
 
+	public List<Board> selectTimeLine(int uno, int page) {
+		
+		return boardDao.readMyTimeLine(uno, page);
+	}
+
+	public List<Board> selectPosting(int uno, int page) {
+		
+		return boardDao.readMyAllwaisersPost(uno, page);
+	}
+
+	public List<Board> selectFavorite(int uno, int page) {
+
+		return boardDao.readMyFavorite(uno, page);
+	}
+	
 	public Board selectOne(int bno) {
 		return boardDao.read(bno);
 	}
@@ -41,5 +56,7 @@ public class BoardServiceImple implements BoardService {
 
 		return boardDao.deleteBoard(bno);
 	}
+
+
 
 }

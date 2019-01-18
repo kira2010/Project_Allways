@@ -55,6 +55,55 @@ public class BoardController {
 		return  entity;
 	}
 	
+	@RequestMapping(value = "favorite/{page}", method = RequestMethod.GET)
+	public ResponseEntity<List<Board>> selectFavorite(@PathVariable(name="page") int page, HttpSession session) {
+		
+		User user = (User)session.getAttribute("check");
+		
+		List<Board> result = boardService.selectFavorite(user.getUno(), page);
+				
+		ResponseEntity<List<Board>> entity = null;
+		if(result != null) {
+			entity = new ResponseEntity<List<Board>>(result , HttpStatus.OK);
+		}else {
+			entity = new ResponseEntity<List<Board>>(result , HttpStatus.BAD_REQUEST);
+		}
+		return  entity;
+	}
+	
+	@RequestMapping(value = "timeLine/{page}", method = RequestMethod.GET)
+	public ResponseEntity<List<Board>> selectTimeLine(@PathVariable(name="page") int page, HttpSession session) {
+		
+		User user = (User)session.getAttribute("check");
+		
+		List<Board> result = boardService.selectTimeLine(user.getUno(), page);
+				
+		ResponseEntity<List<Board>> entity = null;
+		if(result != null) {
+			entity = new ResponseEntity<List<Board>>(result , HttpStatus.OK);
+		}else {
+			entity = new ResponseEntity<List<Board>>(result , HttpStatus.BAD_REQUEST);
+		}
+		return  entity;
+	}
+	
+	@RequestMapping(value = "posting/{page}", method = RequestMethod.GET)
+	public ResponseEntity<List<Board>> selectPosting(@PathVariable(name="page") int page, HttpSession session) {
+		
+		User user = (User)session.getAttribute("check");
+		
+		List<Board> result = boardService.selectPosting(user.getUno(), page);
+				
+		ResponseEntity<List<Board>> entity = null;
+		if(result != null) {
+			entity = new ResponseEntity<List<Board>>(result , HttpStatus.OK);
+		}else {
+			entity = new ResponseEntity<List<Board>>(result , HttpStatus.BAD_REQUEST);
+		}
+		return  entity;
+	}
+	
+	
 	@RequestMapping(value = "selectBoard/detail/{bno}", method = RequestMethod.GET)
 	public ResponseEntity<Board> selectOne(@PathVariable(name="bno") int bno) {
 		

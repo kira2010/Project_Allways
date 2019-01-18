@@ -648,7 +648,8 @@ $(document).ready(function(){
 					$('#'+this.bno+'boardDelete').hide();
 				}
 				
-									
+				
+				
 			});
 			
 		});
