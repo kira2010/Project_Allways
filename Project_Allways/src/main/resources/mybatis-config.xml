@@ -15,6 +15,7 @@
 		<property name="board.privacy_bounds" value="PRIVACY_BOUNDS" />
 		<property name="board.photo" value="PHOTO" />
 		<property name="board.hashtag" value="HASHTAG"/>
+		<property name="board.pf_photo" value="PF_PHOTO" />
 		
 		<property name="tbl_reply" value="TBL_REPLY" />
 		<property name="reply.rno" value="RNO"/>

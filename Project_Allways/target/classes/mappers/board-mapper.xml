@@ -90,7 +90,7 @@
 		AND (${board.privacy_bounds} = 0 OR ${board.privacy_bounds} = 1)
 	</select>
 	
-	<!-- 내가 쓴 글 + 내가 추가한 친구의 전체/친구공개 게시물 가져오기 -->
+	<!-- 타임라인(내가 쓴 글 + 내가 추가한 친구의 전체/친구공개 게시물) 가져오기 -->
 	<select id="selectMyAndAllwaisersPost" resultType="Board">
 		SELECT * FROM ${tbl_board}
 		WHERE ${board.uno} = #{uno}
@@ -151,9 +151,19 @@
 	<insert id="createBoard">
 		INSERT INTO ${tbl_board}
 		(${board.uno}, ${board.userid}, ${board.content},
-		${board.privacy_bounds}, ${board.photo})
-		VALUES (#{uno}, #{userId}, #{content}, #{privacy_bounds}, #{photo})
+		${board.privacy_bounds}, ${board.photo}, ${board.pf_photo})
+		VALUES (#{uno}, #{userId}, #{content}, #{privacy_bounds}, #{photo},
+		(SELECT ${user.pf_photo} FROM ${tbl_user} WHERE ${user.uno} = #{uno}))
 	</insert>
+	
+	<!-- 프로필 사진 변경시 board의 프로필 사진 변경 -->
+	<update id="changeProfile">
+		UPDATE ${tbl_board}
+		SET
+		${board.pf_photo} = (
+			SELECT ${user.pf_photo} FROM ${tbl_user} WHERE ${user.uno} = #{uno})
+		WHERE ${board.uno} = #{uno}
+	</update>
 	
 	<!-- 게시글 수정(사진 빠짐) -->
 	<update id="updateBoard">

@@ -109,11 +109,29 @@ public class BoardDaoImple implements BoardDao {
 		return session.selectOne(BOARD_MAPPER + ".countMyAllwaisersPost", uno);
 	}
 	
+	// 내 타임라인 가져오기
+	public List<Board> readMyTimeLine(int uno, int page) {
+		logger.info("readMyTimeLine() 호출");
+		
+		Map<String, Integer> params = new HashMap<String, Integer>();
+		params.put("uno", uno);
+		params.put("start", page);
+		
+		return session.selectList(BOARD_MAPPER + ".selectMyAndAllwaisersPost", params);
+	}
+	
 	// 게시글 작성하기
 	public int createBoard(Board board) {
 		logger.info("createBoard({}) 호출", board);
 		
 		return session.insert(BOARD_MAPPER + ".createBoard", board);
+	}
+	
+	// 사용자가 프로필 사진을 변경할 때 board의 프로필 갱신 
+	public int changePFPhoto(int uno) {
+		logger.info("changePFPhoto() 호출");
+		
+		return session.update(BOARD_MAPPER + ".changeProfile", uno);
 	}
 	
 	// 게시글 수정하기

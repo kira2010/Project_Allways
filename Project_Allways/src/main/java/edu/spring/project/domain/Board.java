@@ -11,6 +11,7 @@ public class Board {
 	private int privacy_bounds;
 	private String photo;
 	private String hashTag;
+	private String pf_photo;
 	
 	public Board() {}
 	
@@ -22,7 +23,8 @@ public class Board {
 			Date regDate, 
 			int privacy_bounds, 
 			String photo,
-			String hashTag) {
+			String hashTag,
+			String pf_photo) {
 		this.bno = bno;
 		this.uno = uno;
 		this.userId = userId;
@@ -31,6 +33,7 @@ public class Board {
 		this.privacy_bounds = privacy_bounds;
 		this.photo = photo;
 		this.hashTag = hashTag;
+		this.pf_photo = pf_photo;
 	}
 
 	public int getBno() {
@@ -97,13 +100,18 @@ public class Board {
 		this.hashTag = hashTag;
 	}
 	
+	public String getPf_photo() {
+		return pf_photo;
+	}
+
+	public void setPf_photo(String pf_photo) {
+		this.pf_photo = pf_photo;
+	}
+
 	@Override
 	public String toString() {
-		String board = String.format(
-				"BOARD:{bno : %d, uno : %d, userId : %s, content : %s, "
-				+ "regDate : %s, privacy_bounds : %d, photo : %s, hashTag : %s}", 
-				bno, uno, userId, content, regDate, privacy_bounds, photo, hashTag);
-		
-		return board;
+		return "Board [bno=" + bno + ", uno=" + uno + ", userId=" + userId + ", content=" + content + ", regDate="
+				+ regDate + ", privacy_bounds=" + privacy_bounds + ", photo=" + photo + ", hashTag=" + hashTag
+				+ ", pf_photo=" + pf_photo + "]";
 	}
 }

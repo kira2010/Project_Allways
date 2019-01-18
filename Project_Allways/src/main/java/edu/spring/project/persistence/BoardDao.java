@@ -23,7 +23,11 @@ public interface BoardDao {
 	
 	int countMyAllwaisersPost(int uno);
 	
+	List<Board> readMyTimeLine(int uno, int page);
+	
 	int createBoard(Board board);
+	
+	int changePFPhoto(int uno);
 	
 	int updateBoard(Board board);
 	
