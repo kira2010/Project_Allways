@@ -8,14 +8,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class jinyongController {
 	
 	@RequestMapping(value="home")
-	public void home() {
-		
-	}
+	public void home() {}
 	
 	@RequestMapping(value="home2")
-	public void home2() {
-		
-	}
+	public void home2() {}
+	
+	@RequestMapping(value="home3")
+	public void home3() {}
 	
 
 }
