@@ -341,18 +341,16 @@
 
 			<div class="modal-body">
 				<h5>비밀번호 수정하지 않는다면 비워주세요</h5>
-				<form action="" method="post">
-					<input type="password" name="userPwd" placeholder="새 비밀번호 입력"
-					required class="form-control"/> <br/>
-					<input type="password" name="userPwds" placeholder="새 비밀번호 확인"
-					required class="form-control"/> <br/>
-					<input type="email" name="userEmail" required class="form-control" value="${userInfo.userEmail}"/><br/>
-					<input type="text" name="graduation" required class="form-control" value="${userInfo.graduation}"/><br/>
-					<input type="submit" value="취소" class="btn btn-danger" style="margin-left: 435px"
-					data-dismiss="modal"/>
-					<input type="submit" value="확인" class="btn btn-danger" style="margin-left: 15px"
-					data-dismiss="modal"/>
-				</form>
+				<input type="password" name="userPwd" id="newPwd" placeholder="새 비밀번호 입력"
+				required class="form-control"/> <br/>				
+				<input type="password" name="userPwds" id="newPwds" placeholder="새 비밀번호 확인"
+				required class="form-control"/> <br/>
+				<input type="email" name="userEmail" id="newEmail" required class="form-control" value="${userInfo.userEmail}"/><br/>
+				<input type="text" name="graduation" id="newGrad" required class="form-control" value="${userInfo.graduation}"/><br/>
+				<input type="submit" value="취소" class="btn btn-danger" style="margin-left: 435px"
+				data-dismiss="modal"/>
+				<input type="button" value="확인" class="btn btn-danger" style="margin-left: 15px"
+				data-dismiss="modal" id="nUpdate"/>
 			</div>
 		</div>
 	</div>
@@ -2006,7 +2004,55 @@ $(document).ready(function() {
 			});
 		});
 		
+		
+		$('#nUpdate').click(function() {
+			var userPwd = $('#newPwd').val();
+			var userPwds = $('#newPwds').val();
+			
+			console.log('수정할 pw1 : ', userPwd);
+			console.log('수정할 pw2 : ', userPwds);
+			
+			if(userPwd.length < 8){	
+				alert('8자 이상으로 입력해주세요!');
+			} else if(userPwd != '' && userPwds != '' && userPwd !== userPwds){
+				alert('비밀번호가 같지 않습니다!');
+			} else {
+				updateUser(userPwd);
+			}
+		});
+		
+		function updateUser(userPwd) {
+			
+			var userEmail = $('#newEmail').val();
+			var graduation = $('#newGrad').val();
+			var uno = ${check.uno};			
+			
+			$.ajax({
+				type : 'post',
+				url : '/allways/userUpdate',
+				headers: {
+					'Content-Type' : 'application/json',
+					'X-HTTP-Method-Override' : 'post'
+				},
+				data : JSON.stringify({
+					'userPwd' : userPwd,
+					'userEmail' : userEmail,
+					'graduation' : graduation,
+					'uno' : uno
+				}),
+				success : function(data) {
+					if (data == 1) {
+						alert('회원정보 수정완료');
+						location.replace('/allways');
+					} else {
+						alert('회원정보 수정실패');
+					}
+				}
+			});
+		}
+	
 	 
+		
 });
 
 </script>

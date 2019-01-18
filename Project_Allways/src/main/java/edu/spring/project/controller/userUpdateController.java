@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.spring.project.domain.User;
 import edu.spring.project.service.UserService;
@@ -17,12 +19,13 @@ public class userUpdateController {
 	
 	@Autowired private UserService userService;
 	
-	@RequestMapping(value = "/allways", method = RequestMethod.POST)
-	public ResponseEntity<Integer> updateUserInfo(HttpSession session) {
-		User user = (User) session.getAttribute("check");
-		int result = userService.updateUser(user);
-		ResponseEntity<Integer> entity = null;
+	@ResponseBody
+	@RequestMapping(value = "userUpdate", method = RequestMethod.POST)
+	public ResponseEntity<Integer> updateUserInfo(@RequestBody User user) {
 		
+		int result = userService.updateUser(user);
+		
+		ResponseEntity<Integer> entity = null;
 		if (result == 1) {
 			entity = new ResponseEntity<Integer>(result, HttpStatus.OK);
 		} else {
@@ -51,7 +54,7 @@ public class userUpdateController {
 		return "redirect: /allways";
 		}
 
-
+	// 회원 체크
 	@RequestMapping(value = "userCheck", method = RequestMethod.POST)
 	public ResponseEntity<User> userCheck(User user, HttpSession session) {
 		
