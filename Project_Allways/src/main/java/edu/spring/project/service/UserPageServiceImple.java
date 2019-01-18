@@ -8,6 +8,7 @@ import edu.spring.project.domain.Allwaiser;
 import edu.spring.project.domain.User;
 import edu.spring.project.persistence.AllwaiserDao;
 import edu.spring.project.persistence.BoardDao;
+import edu.spring.project.persistence.ReplyDao;
 import edu.spring.project.persistence.UserDao;
 
 @Service
@@ -17,6 +18,8 @@ public class UserPageServiceImple implements UserPageService {
 	public UserDao userDao;
 	@Autowired
 	public BoardDao boardDao;
+	@Autowired
+	public ReplyDao replyDao;
 	
 	@Autowired
 	public AllwaiserDao allwaiserDao;
@@ -45,7 +48,7 @@ public class UserPageServiceImple implements UserPageService {
 	public int updatePFPhoto(User user) {
 		int result = userDao.updatePFPhoto(user);
 		boardDao.changePFPhoto(user.getUno());
-		
+		replyDao.changePFPhoto(user.getUno());
 		return result; 
 	}
 

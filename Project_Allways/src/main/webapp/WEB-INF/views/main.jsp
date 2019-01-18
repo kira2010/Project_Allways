@@ -86,8 +86,11 @@
 		<!-- 왼 쪽 메뉴바 -->
 		<div class="col-sm-2 sidenav">
 			<div class="left-menu">
-				<a class="btn btn-default form-control left-menu-a" href="/allways/userPage?uno=${check.uno}">
-				<img alt="프로필" src="/allways/resources/images/default_profile_img.jpg" class="img-circle">
+				<a class="btn" href="/allways/userPage?uno=${check.uno}">
+				<img alt="프로필" id="sidProfile" src="/allways/resources/images/default_profile_img.jpg"
+				 class="img-circle"
+				 style="width: 60%;">
+				 <span style="vertical-align: bottom;">내 페이지</span>
 				</a>
 			</div>
 			<div class="left-menu">
@@ -285,8 +288,8 @@
 						
 						<div class="boardItemHead">
 
-						<img id = "writer-img" src="/allways/resources/images/default_profile_img.jpg"
-						style="border-radius: 30px; float: left; padding: 8px"
+						<img id = "writer-img" class="img-circle boardProfileImg" src="/allways/resources/images/default_profile_img.jpg"
+						style="float: left; padding: 8px; width:70px; height:45px;"
 						onclick="location.href='/allways'">
 						
 						<div style="display: inline-block;">
@@ -317,18 +320,16 @@
 							<a id="{{bookMark}}" class = "btn" >북마크</a>
 							</div>
 							<div class="col-xs-6 " style="text-align: center;" >
-							<a data-bno="{{bno}}" class="reply btn" >댓글</a>
+							<a class="reply btn" >댓글</a>
 							</div>
 							</div>
 						</div>
 						
 						<div id="replyInsertForm" class="clearfix">
-							<div class="replyProfileImg">
-								<img id = "profileImg" src="/allways/resources/images/default_profile_img.jpg"
-								class = "img-circle"
-								onclick="location.href='/allways'" />
-							</div>
-
+							<img id = "profileImg" src="/allways/resources/images/default_profile_img.jpg"
+							class = "img-circle replyProfileImg"
+							onclick="location.href='/allways'" />
+							
 							<div class="input-group replyInsertContent">
 								<textarea id="replyTextModal" class="autosize form-control" rows="1" placeholder="내용 입력" style="resize: none; margin: 8px; width = 100%"></textarea>
 		
@@ -402,10 +403,10 @@
 <script id="boardItem" type="text/x-handlebars-template">
 <div class="boardItem">
 
-	<div class="boardItemHead">
+	<div class="boardItemHead clearfix">
 
-		<img id = "profileImg" src="/allways/resources/images/default_profile_img.jpg"
-			style="border-radius: 30px; float: left; padding: 8px"
+		<img class = "img-circle boardProfileImg" data-bno = "{{bno}}" src="/allways/resources/images/default_profile_img.jpg"
+			style="float: left; padding: 8px; width:70px; height:45px;"
 			onclick="location.href='/allways'">
 		<div style="display: inline-block;">
 			<a href = "/allways">{{userId}}</a><br />
@@ -462,11 +463,8 @@
 <script id="replyInsert" type="text/x-handlebars-template">
 
 <div id="replyInsertForm" class="clearfix">
-	<div class="replyProfileImg">
-	<img id = "profileImg" src="/allways/resources/images/default_profile_img.jpg"
-		class = "img-circle"
+	<img id = "profileImg" class="replyProfileImg img-circle" src="/allways/resources/images/default_profile_img.jpg"
 		onclick="location.href='/allways'" />
-	</div>
 
 	<div class="input-group replyInsertContent">
 		<textarea id="{{replyText}}" class="autosize form-control" rows="1" placeholder="내용 입력" style="resize: none; margin: 8px; width = 100%"></textarea>
@@ -484,11 +482,9 @@
 <script id="replyItem" type="text/x-handlebars-template">
 
 <div class= "replyItem clearfix">	
-	<div class="replyProfileImg">
-	<img id = "profileImg" src="/allways/resources/images/default_profile_img.jpg"
-		class = "img-circle";
+	<img src="/allways/resources/images/default_profile_img.jpg"
+		class = "img-circle replyProfileImg" data-rno="{{rno}}"
 		onclick="location.href='/allways'">
-	</div>
 
 	<div class="replyContent">			
 		<div style="display: inline-block;">
@@ -524,7 +520,7 @@
 	<div class="search-item">
 		<div class="boardItemHeader">
 			<div style="display: inline-block;">
-				<img src="/allways/resources/images/default_profile_img.jpg" height="40px" width="40px" class="img-circle">
+				<img class="img-circle myAllaiserProfile" data-uno = "{{uno}}" src="/allways/resources/images/default_profile_img.jpg" height="40px" width="40px">
 				<a id="userName" href="/allways/userPage?uno={{uno}}">{{userName}}</a>
 				<span style:"font-size: x-small; color: #f1f1f1;">({{userId}})</span>
 				<span id="graduation" style:"font-size: x-small; color: gray;">{{graduation}}</span>
@@ -539,7 +535,7 @@
 
 <script id="allways-template" type="text/x-handlebars-template" >
 	<div class="allways-item">
-		<img src="/allways/resources/images/default_profile_img.jpg" height="45px" width="45px" class="img-circle">
+		<img class="img-circle myAllaiserProfile" data-uno = "{{uno}}" src="/allways/resources/images/default_profile_img.jpg" height="45px" width="45px">
 		<a id="allwaysName" href="/allways/userPage?uno={{uno}}">{{allwaysName}}</a>
 		<span style:"font-size: x-small; color: #f1f1f1">({{userId}})</span>
 		<div class="delete" style="float: right;">	
@@ -552,7 +548,7 @@
 <script id="all-allways-template" type="text/x-handlebars-template" >
 	<div class="all-allways-item">
 		<input id="allways-uno" value="{{uno}}" type="hidden"/>
-		<img src="/allways/resources/images/default_profile_img.jpg" height="45px" width="45px" class="img-circle">
+		<img class="img-circle myAllaiserProfile" data-uno = "{{uno}}" src="/allways/resources/images/default_profile_img.jpg" height="45px" width="45px">
 		<a id="allwaysName" href="/allways/userPage?uno={{uno}}" >{{allwaysName}}</a>
 		<span style:"font-size: x-small; color: #f1f1f1;">({{userId}})</span>
 	</div>
@@ -573,8 +569,20 @@ $(document).ready(function(){
 		var boardInsertForm = boardInsertTemplate();
 		$('#boardMake').empty();
 		$('#boardMake').append(boardInsertForm);
+		
+		if('${check.pf_photo}'){	
+			var url = '/allways'+'${check.pf_photo}';
+			$('#InsertprofileImg').attr('src', url);
+		}
+		
 	};
-
+	
+	if('${check.pf_photo}'){	
+		var url = '/allways'+'${check.pf_photo}';
+		$('#sidProfile').attr('src', url);
+	}
+	
+	
 	drowBoardInsert();
 
 	var boardItemSource = $('#boardItem').html();
@@ -617,7 +625,13 @@ $(document).ready(function(){
 				
 				var boardItem = boardItemTem(content);
 				$('#boards').append(boardItem);
+				// 프로필 사진 설정
 				
+				if(this.pf_photo){
+					var url = '/allways'+this.pf_photo;
+					$('.boardProfileImg[data-bno='+this.bno+']').attr('src', url);
+				}
+			
 				var divList = "";
 				
 				if(this.photo){
@@ -736,6 +750,11 @@ function drowReply(event, bno){
 	
 	$('#'+bno+'replyArea').append(replyInsert);
 
+	if('${check.pf_photo}'){	
+		var url = '/allways'+'${check.pf_photo}';
+		$('#profileImg').attr('src', url);
+	}
+	
 	$.getJSON('/allways/replies/all/' + bno, function(data) {
 		
 		$(data).each(function() {
@@ -753,6 +772,11 @@ function drowReply(event, bno){
 			var replyItem = replyItemTemplate(content);
 			$('#'+bno+'replyArea').append(replyItem);
 			
+			if(this.pf_photo){
+				var url = '/allways'+this.pf_photo;
+				$('.replyProfileImg[data-rno='+this.rno+']').attr('src', url);
+			}
+			
 			if(this.userId == '${check.userId}'){
 				$('#'+bno+'-'+this.rno+'-no').show();
 			}else{
@@ -762,10 +786,6 @@ function drowReply(event, bno){
 	 
 	});
 }
-
-$(document).on("click", '#replyInsertBtn', function(event){
-	
-});
 
 	$(document).on("click",'.reply', drowReply);	
 		
@@ -926,6 +946,11 @@ $(document).on("click", '#replyInsertBtn', function(event){
 				
 				drowReplyModal(bno);
 				
+				if(data.pf_photo){
+					var url = '/allways'+data.pf_photo;
+					$('#writer-img').attr('src', url);
+				}
+				
 				$('#board-detail').modal('show');
 			});
 			
@@ -980,6 +1005,11 @@ $(document).on("click", '#replyInsertBtn', function(event){
 				var replyItem = replyItemTemplate(content);
 				$('#modalReplyArea').append(replyItem);
 				
+				if(this.pf_photo){
+					var url = '/allways'+this.pf_photo;
+					$('.replyProfileImg[data-rno='+this.rno+']').attr('src', url);
+				}
+					
 				if(this.userId == '${check.userId}'){
 					$('#'+bno+'-'+this.rno+'-no').show();
 				}else{
@@ -1223,7 +1253,11 @@ $(document).ready(function() {
 						var allwaysSearchItem = allwaysTemplate(content);
 								
 						allwaysDivision.append(allwaysSearchItem);
-								
+						
+						if(this.pf_photo){
+							var url = '/allways'+this.pf_photo;
+							$('.myAllaiserProfile[data-uno='+this.uno+']').attr('src', url);
+						}
 								
 					});
 							
@@ -1274,6 +1308,11 @@ $(document).ready(function() {
 									var allwaysSearchItem = allwaysTemplate(content);
 									
 									allwaysDivision.append(allwaysSearchItem);
+									
+									if(this.pf_photo){
+										var url = '/allways'+this.pf_photo;
+										$('.myAllaiserProfile[data-uno='+this.uno+']').attr('src', url);
+									}
 							})
 						}
 							
@@ -1326,6 +1365,12 @@ $(document).ready(function() {
 								var searchItem = template(content);
 								
 								division.append(searchItem);
+								
+								if(this.pf_photo){
+									var url = '/allways'+this.pf_photo;
+									$('.myAllaiserProfile[data-uno='+this.uno+']').attr('src', url);
+								}
+								
 							});
 							
 							
