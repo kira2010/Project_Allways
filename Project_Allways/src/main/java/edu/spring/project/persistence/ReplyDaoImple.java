@@ -41,6 +41,13 @@ public class ReplyDaoImple implements ReplyDao {
 		return session.insert(REPLY_MAPPER + ".registReply", reply);
 	}
 	
+	// 사용자가 프로필 사진을 변경할 때 reply의 프로필 갱신
+	public int changePFPhoto(int uno) {
+		logger.info("changePFPhoto() 호출");
+		
+		return session.update(REPLY_MAPPER + ".changeProfile", uno);
+	}
+	
 	// reply 삭제
 	public int deleteReply(int rno) {
 		logger.info("deleteReply(rno : {}) 호출", rno);

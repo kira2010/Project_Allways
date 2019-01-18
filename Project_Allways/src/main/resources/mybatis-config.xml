@@ -24,6 +24,7 @@
 		<property name="reply.userid" value="USERID"/>
 		<property name="reply.reply_content" value="REPLY_CONTENT"/>
 		<property name="reply.regdate" value="REGDATE"/>
+		<property name="reply.pf_photo" value="PF_PHOTO" />
 		
 		<property name="tbl_user" value="TBL_USER" />
 		<property name="user.uno" value="UNO" />

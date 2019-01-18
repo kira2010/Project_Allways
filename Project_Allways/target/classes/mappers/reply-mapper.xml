@@ -20,14 +20,24 @@
 	<!-- 댓글 등록 -->
 	<insert id="registReply">
 		INSERT INTO ${tbl_reply} 
-		(${reply.bno}, ${reply.uno}, ${reply.userid}, ${reply.reply_content}) 
-		VALUES (#{bno}, #{uno}, #{userId}, #{reply_content})
+		(${reply.bno}, ${reply.uno}, ${reply.userid}, ${reply.reply_content}, ${reply.pf_photo}) 
+		VALUES (#{bno}, #{uno}, #{userId}, #{reply_content}, 
+		(SELECT ${user.pf_photo} FROM ${tbl_user} WHERE ${user.uno} = #{uno}))
 	</insert>
 	
 	<!-- 댓글 수정(삭제 가능성?) -->
 	<update id="updateReply">
 		UPDATE ${tbl_reply} 
 		SET ${reply.reply_content} = #{reply_content} WHERE ${reply.rno} = #{rno}
+	</update>
+	
+	<!-- 프로필 사진 변경시 reply의 프로필 사진 변경 -->
+	<update id="changeProfile">
+		UPDATE ${tbl_reply}
+		SET
+		${reply.pf_photo} = (
+			SELECT ${user.pf_photo} FROM ${tbl_user} WHERE ${user.uno} = #{uno})
+		WHERE ${reply.uno} = #{uno}
 	</update>
 	
 	<!-- 댓글 삭제 -->

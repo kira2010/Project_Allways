@@ -9,6 +9,7 @@ public class Reply {
 	private String userId;
 	private String reply_content;
 	private Date regDate;
+	private String pf_photo;
 	
 	public Reply() {}
 	
@@ -18,13 +19,15 @@ public class Reply {
 			int uno, 
 			String userId, 
 			String reply_content, 
-			Date regDate) {
+			Date regDate,
+			String pf_photo) {
 		this.rno = rno;
 		this.bno = bno;
 		this.uno = uno;
 		this.userId = userId;
 		this.reply_content = reply_content;
 		this.regDate = regDate;
+		this.pf_photo = pf_photo;
 	}
 
 	public int getRno() {
@@ -75,13 +78,17 @@ public class Reply {
 		this.regDate = regDate;
 	}
 
+	public String getPf_photo() {
+		return pf_photo;
+	}
+
+	public void setPf_photo(String pf_photo) {
+		this.pf_photo = pf_photo;
+	}
+
 	@Override
 	public String toString() {
-		String reply = String.format(
-				"REPLY:{rno : %d, bno : %d, uno : %d, "
-				+ "userId : %s, reply_content : %s, wr_time : %s}",
-				rno, bno, uno, userId, reply_content, regDate);
-		
-		return reply;
+		return "Reply [rno=" + rno + ", bno=" + bno + ", uno=" + uno + ", userId=" + userId + ", reply_content="
+				+ reply_content + ", regDate=" + regDate + ", pf_photo=" + pf_photo + "]";
 	}
 }
