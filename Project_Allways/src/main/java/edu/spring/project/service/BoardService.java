@@ -12,7 +12,10 @@ public interface BoardService {
 	 * 1: ,2: ,3: ,4:
 	 * @return
 	 */
-	List<Board> select(int service_bounds, int page);
+	List<Board> select(int uno, int page);
+	List<Board> selectTimeLine(int uno, int page);
+	List<Board> selectPosting(int uno, int page);
+	List<Board> selectFavorite(int uno, int page);
 	Board selectOne(int bno);
 	int insert(Board board);
 	int update(Board board);

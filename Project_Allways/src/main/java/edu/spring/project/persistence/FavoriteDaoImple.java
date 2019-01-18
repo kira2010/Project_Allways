@@ -48,6 +48,13 @@ public class FavoriteDaoImple implements FavoriteDao {
 		return session.selectOne(FAVORITE_MAPPER + ".findItr_no", fav);
 	}
 	
+	// 즐겨찾기 존재여부 확인
+	public int existFavorite(Favorite fav) {
+		logger.info("existFavorite() 호출");
+		
+		return session.selectOne(FAVORITE_MAPPER + ".existFavorite", fav);
+	}
+	
 	// 즐겨찾기 추가
 	public int registFavorite(Favorite fav) {
 		logger.info("registFavorite({}) 호출", fav);

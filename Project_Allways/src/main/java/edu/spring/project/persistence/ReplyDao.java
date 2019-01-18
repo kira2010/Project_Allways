@@ -11,5 +11,7 @@ public interface ReplyDao {
 	
 	int createReply(Reply reply);
 	
+	int changePFPhoto(int uno);
+	
 	int deleteReply(int rno);
 }

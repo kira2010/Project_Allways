@@ -127,7 +127,7 @@ public class BoardDaoImple implements BoardDao {
 		return session.insert(BOARD_MAPPER + ".createBoard", board);
 	}
 	
-	// 사용자가 프로필 사진을 변경할 때 board의 프로필 갱신 
+	// 사용자가 프로필 사진을 변경할 때 board의 프로필 갱신
 	public int changePFPhoto(int uno) {
 		logger.info("changePFPhoto() 호출");
 		

@@ -21,6 +21,8 @@ public interface UserDao {
 	
 	List<User> findUserByNameAndGraduation(User user);
 	
+	List<User> recommendedAllwaisers(User user, int page);
+	
 	String findUserId(User user);
 	
 	int findUserPwd(User user);

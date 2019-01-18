@@ -1,6 +1,8 @@
 package edu.spring.project.persistence;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
@@ -92,6 +94,18 @@ public class UserDaoImple implements UserDao {
 		logger.info("findUserByNameAndGraudation(user : {}) 호출", user);
 				
 		return session.selectList(USER_MAPPER + ".findUserByNameAndGraduation", user);
+	}
+	
+	// 출신학교로 추천친구 찾기
+	public List<User> recommendedAllwaisers(User user, int page) {
+		logger.info("recommendedAllwaisers() 호출");
+		
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("uno", user.getUno());
+		params.put("graduation", user.getGraduation());
+		params.put("start", page);
+		
+		return session.selectList(USER_MAPPER + ".recommendedAllwaisers", params);
 	}
 	
 	// 이름 + Email 로 ID 찾기
