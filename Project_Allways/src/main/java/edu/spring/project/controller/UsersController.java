@@ -90,9 +90,8 @@ public class UsersController {
 		logger.info("login() POST 호출");
 		
 		User checkUser = userService.login(user);
-		User loginUser = new User();
-		loginUser.setUno(checkUser.getUno());
-		loginUser.setUserId(checkUser.getUserId());
+		User loginUser = checkUser;
+		loginUser.setUserPwd("");
 		if (checkUser != null) {
 			session.setAttribute("check", loginUser);
 			return "redirect:/";
@@ -131,17 +130,18 @@ public class UsersController {
 	}
 	
 	// 비밀번호 찾기
-//	@RequestMapping(value="/findPwd", method=RequestMethod.POST)
-//	public void findPwd(User user, HttpServletResponse response) throws Exception {
-//		response.setCharacterEncoding("UTF-8");
-//		
-//		String findPwd = userService.findPwd(user, response);
-//		PrintWriter writer = response.getWriter();
-//		
-//		if (findPwd != null && !findPwd.isEmpty()) {
-//			writer.write(findPwd);
-//		}
-//	}
+	@RequestMapping(value="/findPwd", method=RequestMethod.POST)
+	public void findPwd(User user, HttpServletResponse response) throws Exception {
+		response.setCharacterEncoding("UTF-8");
+		
+		PrintWriter writer = response.getWriter();
+		
+		int uno = userService.findPwd(user, response);
+		
+		if (uno != 0 && uno > 0) {
+			writer.write(userService.resetUserPwd(uno));
+		}
+	}
 	
 	// 회원 정보 수정
 	@RequestMapping(value="/updateUser", method=RequestMethod.POST)
