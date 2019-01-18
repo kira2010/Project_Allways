@@ -3,7 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <title>My Page</title>
 <meta charset="utf-8">
@@ -297,7 +297,7 @@
 			<div class="modal-footer">
 				<button type="button" class="btn" data-dismiss="modal">아니오</button>
 				<button type="button" class="btn" data-dismiss="modal"
-				onclick="location.href='login.jsp'">예</button>
+				onclick="location.href='/allways/logout'">예</button>
 			</div>
 
 		</div>
@@ -310,29 +310,28 @@
 
 			<!-- Modal Header -->
 			<div class="modal-header">
-				<h4 class="modal-title">개인정보 수정</h4>
+				<h4 class="modal-title">비밀번호 확인</h4>
 			</div>
 
 			<!-- Modal body -->
 			<div class="modal-body">
 				<!-- 모델클래스에 저장된 아이디 불러오기 -->
-				<input class="form-control" type="text" name="userId" readonly />
+				<h5>확인을 위해 비밀번호를 입력해 주세요!</h5>
+				<input class="form-control" type="text" name="userId" value="${check.userId}" id="Id" readonly />
 				<br />
 				<input class="form-control" type="password"
-				name="userPwd" placeholder="비밀번호" required /> <br /> <input
-				class="form-control" type="password" name="userPwds"
-				placeholder="비밀번호 확인" required />
-				<br />
+				name="userPwd" placeholder="비밀번호" required id="pwd" /><br />
 				<button type="button" class="btn btn-danger"
 				data-dismiss="modal" style="margin-left: 435px">취소</button>
 				<button type="button" class="btn btn-danger"
 				data-dismiss="modal" style="margin-left: 15px"
-				data-toggle="modal" data-target="#update">확인</button>
+				data-toggle="modal" id="checkUser">확인</button>
 			</div>
 		</div>
 	</div>
 </div>
 <!-- 로그인정보 확인 후 정보수정 창 -->
+
 <div class="modal fade" id="update">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -341,17 +340,19 @@
 			</div>
 
 			<div class="modal-body">
-				<input type="password" name="userPwd" placeholder="새 비밀번호 입력"
-				required class="form-control"/> <br/>
-				<input type="password" name="userPwds" placeholder="새 비밀번호 확인"
-				required class="form-control"/> <br/>
-				<input type="text" name="userName" required class="form-control"/><br/>
-				<input type="email" name="userEmail" required class="form-control"/><br/>
-				<input type="submit" value="취소" class="btn btn-danger" style="margin-left: 435px"
-				data-dismiss="modal"/>
-
-				<input type="submit" value="확인" class="btn btn-danger" style="margin-left: 15px"
-				data-dismiss="modal"/>
+				<h5>비밀번호 수정하지 않는다면 비워주세요</h5>
+				<form action="" method="post">
+					<input type="password" name="userPwd" placeholder="새 비밀번호 입력"
+					required class="form-control"/> <br/>
+					<input type="password" name="userPwds" placeholder="새 비밀번호 확인"
+					required class="form-control"/> <br/>
+					<input type="email" name="userEmail" required class="form-control" value="${userInfo.userEmail}"/><br/>
+					<input type="text" name="graduation" required class="form-control" value="${userInfo.graduation}"/><br/>
+					<input type="submit" value="취소" class="btn btn-danger" style="margin-left: 435px"
+					data-dismiss="modal"/>
+					<input type="submit" value="확인" class="btn btn-danger" style="margin-left: 15px"
+					data-dismiss="modal"/>
+				</form>
 			</div>
 		</div>
 	</div>
@@ -369,17 +370,15 @@
 			<!-- Modal body -->
 			<div class="modal-body">
 				<!-- 모델클래스에 저장된 아이디 불러오기 -->
-				<input class="form-control" type="text" name="userId" readonly />
+				<input class="form-control" type="text" name="userId" value="${check.userId}" id="userId" readonly />
 				<br />
 				<input class="form-control" type="password"
-				name="userPwd" placeholder="비밀번호" required /> <br />
-				<input class="form-control" type="password" name="userPwds"
-				placeholder="비밀번호 확인" required /> <br />
+				name="userPwd" placeholder="비밀번호" required id="userPwd"/> <br />
 				<button type="button" class="btn btn-danger"
 				data-dismiss="modal" style="margin-left: 435px">취소</button>
 				<button type="button" class="btn btn-danger"
 				data-dismiss="modal" style="margin-left: 20px"
-				data-toggle="modal" data-target="#withdrawal">획인</button>
+				data-toggle="modal" id="userCheck">획인</button>
 			</div>
 		</div>
 	</div>
@@ -395,7 +394,7 @@
 				<input type="submit" value="취소" class="btn btn-danger" style="margin-left: 435px"
 				data-dismiss="modal"/>
 				<input type="submit" value="확인" class="btn btn-danger" style="margin-left: 15px"
-				data-dismiss="modal" onclick="location.href='login.jsp'"/>
+				data-dismiss="modal" onclick="location.href='/allways/deleteUser'"/>
 			</div>
 		</div>
 	</div>
@@ -1959,7 +1958,55 @@ $(document).ready(function() {
 			});
 		});
 		
-	
+		$("#checkUser").on('click', function () {
+			var userId = $('#Id').val();
+			var userPwd = $('#pwd').val();
+			
+			$.ajax({
+				type : 'post',
+				url : '/allways/userCheck',
+				contentType: 'application/x-www-form-urlencoded',
+				data : {
+					'userId' : userId,
+					'userPwd' : userPwd,
+				},
+				success : function(result) {
+					if (result) {
+						alert('확인되었습니다!');
+						$('#update').modal('show');
+					} else {
+						alert('잘못입력하였습니다. 비밀번호를 다시 입력해주세요.');
+						$("#pwd").val('');
+					}
+				}
+			});
+		});
+		
+		$("#userCheck").on('click', function () {
+			var userId = $('#userId').val();
+			var userPwd = $('#userPwd').val();
+			
+			$.ajax({
+				type : 'post',
+				url : '/allways/userCheck',
+				contentType: 'application/x-www-form-urlencoded',
+				data : {
+					'userId' : userId,
+					'userPwd' : userPwd,
+				},
+				success : function(result) {
+					if (result) {
+						alert('확인되었습니다!');
+						$('#withdrawal').modal('show');
+					} else {
+						alert('잘못입력하였습니다. 비밀번호를 다시 입력해주세요.');
+						$("#userPwd").val('');
+					}
+				}
+			});
+		});
+		
+	 
 });
 
 </script>
