@@ -80,6 +80,21 @@
 		INSTR(${user.graduation}, #{graduation}) > 0
 	</select>
 	
+	<!-- 출신학교를 통한 추천친구 목록 -->
+	<select id="recommendedAllwaisers" resultType="User">
+		SELECT ${user.uno}, ${user.userid}, ${user.username}, ${user.pf_photo}
+		FROM ${tbl_user}
+		WHERE
+		INSTR(${user.graduation}, #{graduation}) > 0
+		AND
+		${user.uno} NOT IN (
+			SELECT ${allwaiser.allwaiseruno} FROM ${tbl_allwaiser}
+			WHERE ${allwaiser.uno} = #{uno})
+		AND ${user.uno} != #{uno}
+		ORDER BY ${user.username}
+		LIMIT #{start}, 5
+	</select>
+	
 	<!-- ID 찾기 -->
 	<select id="findUserId" resultType="java.lang.String">
 		SELECT ${user.userid}
