@@ -66,10 +66,10 @@ public class DaoTest {
 	private void test1() {
 		logger.info("test1() 실행");
 		
-		List<Board> readAllBoardList = boardDao.readAllBoard(1, 0);
+		List<Board> myTimeLineList = boardDao.readMyTimeLine(1, 0);
 		
-		if(readAllBoardList != null && readAllBoardList.size() > 0) {
-			for(Board b : readAllBoardList) {
+		if(myTimeLineList != null && myTimeLineList.size() > 0) {
+			for(Board b : myTimeLineList) {
 				logger.info(b.toString());
 			}
 		}

@@ -99,7 +99,7 @@
 			SELECT ${allwaiser.allwaiseruno}
 			FROM ${tbl_allwaiser}
 			WHERE ${allwaiser.uno} = #{uno})
-		ORDER ${board.bno} DESC
+		ORDER BY ${board.bno} DESC
 		LIMIT #{start}, 10
 	</select>
 	
