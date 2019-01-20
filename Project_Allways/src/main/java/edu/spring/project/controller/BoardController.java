@@ -38,6 +38,37 @@ public class BoardController {
 		boardService.insert(board);
 		
 	}
+
+	@RequestMapping(value = "searchPage", method = RequestMethod.GET)
+	public String searchPage(String searchKeyword, int serchBounds, Model model) {
+		
+		
+		List<Board> result = boardService.selectKeyword(searchKeyword, serchBounds, 0);
+		model.addAttribute("boardList", result);		
+		
+		return  "searchPage";
+		
+	}
+	
+	@RequestMapping(value = "searchKeyword", method = RequestMethod.GET)
+	public ResponseEntity<List<Board>> searchKeyword(String searchKeyword, int serchBounds, int page) {
+		
+		
+		List<Board> result = boardService.selectKeyword(searchKeyword, serchBounds, page);
+				
+		ResponseEntity<List<Board>> entity = null;
+		if(result != null) {
+			entity = new ResponseEntity<List<Board>>(result , HttpStatus.OK);
+		}else {
+			entity = new ResponseEntity<List<Board>>(result , HttpStatus.BAD_REQUEST);
+		}
+		
+		return  entity;
+		
+	}
+	
+	
+	
 		
 	@RequestMapping(value = "selectBoard/{page}", method = RequestMethod.GET)
 	public ResponseEntity<List<Board>> select(@PathVariable(name="page") int page, HttpSession session) {
@@ -135,5 +166,6 @@ public class BoardController {
 		return  entity;
 	}
 
+	
 	
 }

@@ -40,14 +40,9 @@ footer {
 		height: auto;
 	}
 }
-
-/* 검색창 */
-#text {
-	margin-top: 15px;
-}
 /* user 메뉴창 */
 #drop {
-	margin-top: 15px;
+	padding: 13px;;
 }
 
 .left-menu{

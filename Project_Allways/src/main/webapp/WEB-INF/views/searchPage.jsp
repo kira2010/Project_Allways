@@ -41,15 +41,15 @@
 			
 			<div class="col-sm-6">
 				<div style="padding: 13px">
-				<form class="form-inline boardSearchForm" action="/allways/board/searchPage" method="get">
-					<select class="btn" id="serchBounds" name ="serchBounds" style="display: inline-block;">
+				<form class="form-inline boardSearchForm">
+					<select class="btn" id="serchBounds" style="display: inline-block;">
 						<option value="0">내용 검색</option>
 						<option value="1">아이디 검색</option>
 						<option value="2">태그검색</option>
 					</select>
 					
-					<input id="searchKeyword" name="searchKeyword" class="form-control" type="text" placeholder="search">
-					<button id="searchKeywordBtn" type="submit"
+					<input id="searchKeyword" class="form-control" type="text" placeholder="search">
+					<button id="searchKeywordBtn" type="button"
 					class="btn btn-outline-light text-dark">
 					<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 					</button>
@@ -151,223 +151,213 @@
 <!-- dropDown아이템 다이얼로그 -->
 <div class="modal fade" id="logout">
 	<div class="modal-dialog">
-			<div class="modal-content">
-
-				<!-- Modal Header -->
-				<div class="modal-header">
-					<h4 class="modal-title">로그아웃</h4>
-				</div>
-
-				<!-- Modal body -->
-				<div class="modal-body">정말 로그아웃하시겠습니까?</div>
-
-				<!-- Modal footer -->
-				<div class="modal-footer">
-					<button type="button" class="btn" data-dismiss="modal">아니오</button>
-					<button type="button" class="btn" data-dismiss="modal"
-						onclick="location.href='/allways/logout'">예</button>
-				</div>
-
+		<div class="modal-content">
+	
+			<!-- Modal Header -->
+			<div class="modal-header">
+			<h4 class="modal-title">로그아웃</h4>
 			</div>
+	
+			<!-- Modal body -->
+			<div class="modal-body">정말 로그아웃하시겠습니까?</div>
+			
+				<!-- Modal footer -->
+			<div class="modal-footer">
+				<button type="button" class="btn" data-dismiss="modal">아니오</button>
+				<button type="button" class="btn" data-dismiss="modal"
+				onclick="location.href='login.jsp'">예</button>
+			</div>
+
 		</div>
+	</div>
 </div>
 
 <div class="modal fade" id="updateInfo">
 	<div class="modal-dialog">
-			<div class="modal-content">
+		<div class="modal-content">
 
-				<!-- Modal Header -->
-				<div class="modal-header">
-					<h4 class="modal-title">비밀번호 확인</h4>
-				</div>
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<h4 class="modal-title">개인정보 수정</h4>
+			</div>
 
-				<!-- Modal body -->
-				<div class="modal-body">
-					<!-- 모델클래스에 저장된 아이디 불러오기 -->
-					<h5>확인을 위해 비밀번호를 입력해 주세요!</h5>
-					<input class="form-control" type="text" name="userId"
-						value="${check.userId}" id="Id" readonly /> <br /> <input
-						class="form-control" type="password" name="userPwd"
-						placeholder="비밀번호" required id="pwd" /><br />
-					<button type="button" class="btn btn-danger" data-dismiss="modal"
-						style="margin-left: 435px">취소</button>
-					<button type="button" class="btn btn-danger" data-dismiss="modal"
-						style="margin-left: 15px" data-toggle="modal" id="checkUser">확인</button>
-				</div>
+			<!-- Modal body -->
+			<div class="modal-body">
+				<!-- 모델클래스에 저장된 아이디 불러오기 -->
+				<input class="form-control" type="text" name="userId" readonly />
+				<br />
+				<input class="form-control" type="password"
+				name="userPwd" placeholder="비밀번호" required /> <br /> <input
+				class="form-control" type="password" name="userPwds"
+				placeholder="비밀번호 확인" required />
+				<br />
+				<button type="button" class="btn btn-danger"
+				data-dismiss="modal" style="margin-left: 435px">취소</button>
+				<button type="button" class="btn btn-danger"
+				data-dismiss="modal" style="margin-left: 15px"
+				data-toggle="modal" data-target="#update">확인</button>
 			</div>
 		</div>
+	</div>
 </div>
-	
 <!-- 로그인정보 확인 후 정보수정 창 -->
 <div class="modal fade" id="update">
 	<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title">개인정보 수정</h4>
-				</div>
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">개인정보 수정</h4>
+			</div>
 
-				<div class="modal-body">
-					<h5>비밀번호 수정하지 않는다면 비워주세요</h5>
-					<input type="password" name="userPwd" id="newPwd"
-						placeholder="새 비밀번호 입력" required class="form-control" /> <br />
-					<input type="password" name="userPwds" id="newPwds"
-						placeholder="새 비밀번호 확인" required class="form-control" /> <br />
-					<input type="email" name="userEmail" id="newEmail" required
-						class="form-control" value="${userInfo.userEmail}" /><br /> <input
-						type="text" name="graduation" id="newGrad" required
-						class="form-control" value="${userInfo.graduation}" /><br /> <input
-						type="submit" value="취소" class="btn btn-danger"
-						style="margin-left: 435px" data-dismiss="modal" /> <input
-						type="button" value="확인" class="btn btn-danger"
-						style="margin-left: 15px" data-dismiss="modal" id="nUpdate" />
-				</div>
+			<div class="modal-body">
+				<input type="password" name="userPwd" placeholder="새 비밀번호 입력"
+				required class="form-control"/> <br/>
+				<input type="password" name="userPwds" placeholder="새 비밀번호 확인"
+				required class="form-control"/> <br/>
+				<input type="text" name="userName" required class="form-control"/><br/>
+				<input type="email" name="userEmail" required class="form-control"/><br/>
+				<input type="submit" value="취소" class="btn btn-danger" style="margin-left: 435px"
+				data-dismiss="modal"/>
+
+				<input type="submit" value="확인" class="btn btn-danger" style="margin-left: 15px"
+				data-dismiss="modal"/>
 			</div>
 		</div>
+	</div>
 </div>
 
 <div class="modal fade" id="memberWithdrawal">
 	<div class="modal-dialog">
-			<div class="modal-content">
+		<div class="modal-content">
 
-				<!-- Modal Header -->
-				<div class="modal-header">
-					<h4 class="modal-title">회원탈퇴</h4>
-				</div>
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<h4 class="modal-title">회원탈퇴</h4>
+			</div>
 
-				<!-- Modal body -->
-				<div class="modal-body">
-					<!-- 모델클래스에 저장된 아이디 불러오기 -->
-					<input class="form-control" type="text" name="userId"
-						value="${check.userId}" id="userId" readonly /> <br /> <input
-						class="form-control" type="password" name="userPwd"
-						placeholder="비밀번호" required id="userPwd" /> <br />
-					<button type="button" class="btn btn-danger" data-dismiss="modal"
-						style="margin-left: 435px">취소</button>
-					<button type="button" class="btn btn-danger" data-dismiss="modal"
-						style="margin-left: 20px" data-toggle="modal" id="userCheck">획인</button>
-				</div>
+			<!-- Modal body -->
+			<div class="modal-body">
+				<!-- 모델클래스에 저장된 아이디 불러오기 -->
+				<input class="form-control" type="text" name="userId" readonly />
+				<br />
+				<input class="form-control" type="password"
+				name="userPwd" placeholder="비밀번호" required /> <br />
+				<input class="form-control" type="password" name="userPwds"
+				placeholder="비밀번호 확인" required /> <br />
+				<button type="button" class="btn btn-danger"
+				data-dismiss="modal" style="margin-left: 435px">취소</button>
+				<button type="button" class="btn btn-danger"
+				data-dismiss="modal" style="margin-left: 20px"
+				data-toggle="modal" data-target="#withdrawal">획인</button>
 			</div>
 		</div>
+	</div>
 </div>
 
 <div class="modal fade" id="withdrawal">
 	<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-body">Allways를 탈퇴하시겠습니까?</h4>
-					<br /> <br /> <input type="submit" value="취소"
-						class="btn btn-danger" style="margin-left: 435px"
-						data-dismiss="modal" /> <input type="submit" value="확인"
-						class="btn btn-danger" style="margin-left: 15px"
-						data-dismiss="modal" onclick="location.href='/allways/deleteUser'" />
-				</div>
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-body">Allways를 탈퇴하시겠습니까?</h4>
+				<br/>
+				<br/>
+				<input type="submit" value="취소" class="btn btn-danger" style="margin-left: 435px"
+				data-dismiss="modal"/>
+				<input type="submit" value="확인" class="btn btn-danger" style="margin-left: 15px"
+				data-dismiss="modal" onclick="location.href='login.jsp'"/>
 			</div>
 		</div>
+	</div>
 </div>
-
 <!-- 게시믈 상세 페이지 -->
 <div class="modal fade" id="board-detail" role="dialog">
-	<div class="modal-dialog board-dialog">
-			<div class="modal-content">
-
-				<div class="row">
+	<div class="modal-dialog board-dialog" >
+		<div class="modal-content">
+			
+			<div class="row">
 					<div class="col-xs-7">
-						<div id="boardCarousel" class="carousel slide">
+						<div id="boardCarousel" class="carousel slide"> 
 
-							<ol class="carousel-indicators" id="carouselOl">
+							<ol class="carousel-indicators" id = "carouselOl">
 							</ol>
-
-							<div class="carousel-inner" id="carouselDiv"></div>
-
+	
+							<div class="carousel-inner" id = "carouselDiv">
+							</div>
+ 
 						</div>
 					</div>
-
+					
 					<div class="col-xs-5">
-
+						
 						<div class="modal-header">
 							<div>게시물 상세 페이지</div>
 						</div>
-
+						
 						<div class="boardItemHead">
 
-							<img id="writer-img"
-								src="/allways/resources/images/default_profile_img.jpg"
-								height="45px" width="45px"
-								style="border-radius: 30px; float: left; padding: 8px"
-								onclick="location.href='/allways'">
-
-							<div style="display: inline-block;">
-								<a href="/allways" id="writer-userId"></a><br /> <span
-									style="font-size: x-small; color: gray;" id="writer-regDate"></span>
-							</div>
-
-							<div class="dropdown" style="float: right;">
-								<span
-									class="glyphicon glyphicon-align-justify dropdown-toggle btn"
-									id="menu1" data-toggle="dropdown"></span>
-
-								<ul class="dropdown-menu" role="menu" aria-labelledby="menu1"
-									style="right: 0; left: auto;">
-									<li role="presentation"><a role="menuitem" tabindex="-1"
-										href="#">북마크</a></li>
-									<li role="presentation" id="modalBoardUpdate"><a
-										role="menuitem" tabindex="-1" href="#">수정</a></li>
-									<li role="presentation" class="divider"></li>
-									<li role="presentation" id="modalBoardDelete"><a
-										role="menuitem" tabindex="-1" id="{{boardDeleteBtn}}"
-										class="boardDeleteBtn">삭제</a></li>
-								</ul>
-							</div>
-
-						</div>
-						<!-- BoardItemHead -->
-
-						<div>
-							<p id="writer-content"></p>
+						<img id = "writer-img" class="img-circle boardProfileImg" src="/allways/resources/images/default_profile_img.jpg"
+						style="float: left; padding: 8px; width:70px; height:45px;"
+						onclick="location.href='/allways'">
+						
+						<div style="display: inline-block;">
+						<a href = "/allways" id="writer-userId"></a><br />
+						<span style="font-size: x-small; color: gray;" id="writer-regDate"></span>
 						</div>
 
+						<div class="dropdown" style="float: right;">
+	  	 				<span class="glyphicon glyphicon-align-justify dropdown-toggle btn" id="menu1" data-toggle="dropdown"></span>
+	
+		  				  	<ul class="dropdown-menu" role="menu" aria-labelledby="menu1" style="right: 0; left: auto;">
+			   			 		<li role="presentation"><a role="menuitem" tabindex="-1" href="#">북마크</a></li>
+			     			 	<li role="presentation" id="modalBoardUpdate"><a role="menuitem" tabindex="-1" href="#">수정</a></li>
+			     			 	<li role="presentation" class="divider"></li>
+			     	 			<li role="presentation" id="modalBoardDelete"><a role="menuitem" tabindex="-1"  id="{{boardDeleteBtn}}" class="boardDeleteBtn">삭제</a></li>
+			    			</ul>
+						</div>
+
+						</div> <!-- BoardItemHead -->
+						
+						<div>	
+	    					<p id="writer-content"></p>
+						</div>
+						
 						<div class="container-fluid boardTail">
 							<div class="row">
-								<div class="col-xs-6" style="text-align: center;">
-									<a id="{{bookMark}}" class="btn">북마크</a>
-								</div>
-								<div class="col-xs-6 " style="text-align: center;">
-									<a data-bno="{{bno}}" class="reply btn">댓글</a>
-								</div>
+							<div class="col-xs-6" style="text-align: center;" >
+							<a id="{{bookMark}}" class = "btn" >북마크</a>
+							</div>
+							<div class="col-xs-6 " style="text-align: center;" >
+							<a class="reply btn" >댓글</a>
+							</div>
 							</div>
 						</div>
-
+						
 						<div id="replyInsertForm" class="clearfix">
-							<div class="replyProfileImg">
-								<img id="modalreplyInsertImg"
-									src="/allways/resources/images/default_profile_img.jpg"
-									class="img-circle" onclick="location.href='/allways'"
-									height="45px" width="45px"/>
-							</div>
-
+							<img id = "profileImg" src="/allways/resources/images/default_profile_img.jpg"
+							class = "img-circle replyProfileImg"
+							onclick="location.href='/allways'" />
+							
 							<div class="input-group replyInsertContent">
-								<textarea id="replyTextModal" class="autosize form-control"
-									rows="1" placeholder="내용 입력" style="resize: none; margin: 8px;"></textarea>
-
+								<textarea id="replyTextModal" class="autosize form-control" rows="1" placeholder="내용 입력" style="resize: none; margin: 8px; width = 100%"></textarea>
+		
 								<div class="input-group-btn">
-									<button id="replyInsertModal" data-bno=""
-										class="replyInsertBtn btn btn-default ">
-										<i class="glyphicon glyphicon-edit"></i>
-									</button>
+								<button id= "replyInsertModal" data-bno="" class="replyInsertBtn btn btn-default ">
+								<i class="glyphicon glyphicon-edit"></i>
+								</button>
 								</div>
-							</div>
+							</div>	
 						</div>
-
-						<div id="modalReplyArea" class="replyArea"></div>
-
+						
+						<div id= "modalReplyArea" class= "replyArea">
+						
+						</div>
+						
 					</div>
 				</div>
-
-
-			</div>
+			
+			
 		</div>
-</div>
-
+	</div>
+</div>					
 
 	
 <footer class="container-fluid text-center">
@@ -376,44 +366,6 @@
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.min.js"></script>
-
-<script  id="boardInsert" type="text/x-handlebars-template">
-
-<div class = "boardInsertForm">
-	<div class = "boardInsertTitle">게시물 작성하기</div>
-
-	<div class="clearfix boardHead">
-		<img id= "InsertprofileImg" src="/allways/resources/images/default_profile_img.jpg"
-			class = "img-circle"
-			onclick="location.href='/allways'">
-		<textarea id="boardInsertcontent" class="autosize" placeholder="내용 입력"></textarea>
-	</div>
-
-
-	<div id="fileList">
-	</div>
-
-<div class="boardTail">
-
-<form id="uploadForm" method="post" enctype="multipart/form-data">
-	<label class = "addImg" for="files">사진</label>
-	
-	<input id="files" type="file" class="files" style="display: none" />	
-
-	<span id="boardUploadBtn" class = "btn btn-default" >올리기</span>			
-
-	<select id="privacyBounds">
-		<option value="0">전체 공개</option>
-		<option value="1">친구 공개</option>
-		<option value="2">나만 보기</option>
-	</select>	
-
-</form>
-</div>
-	
-</div>
-
-</script>
 
 <script id="boardItem" type="text/x-handlebars-template">
 <div class="boardItem">
@@ -589,37 +541,89 @@ $(document).ready(function(){
 	var boardInsertSource = $('#boardInsert').html();
 	var boardInsertTemplate = Handlebars.compile(boardInsertSource);
 
-	function drowBoardInsert(){
-		var boardInsertForm = boardInsertTemplate();
-		$('#boardMake').empty();
-		$('#boardMake').append(boardInsertForm);
-		
-		if('${check.pf_photo}'){	
-			var url = '/allways'+'${check.pf_photo}';
-			$('#InsertprofileImg').attr('src', url);
-		}
-		
-		if('${check.pf_photo}'){	
-			var url = '/allways'+'${check.pf_photo}';
-			$('#modalreplyInsertImg').attr('src', url);
-		}
-		
-	};
-	
 	if('${check.pf_photo}'){	
 		var url = '/allways'+'${check.pf_photo}';
 		$('#sidProfile').attr('src', url);
 	}
 	
-	
-	drowBoardInsert();
-
 	var boardItemSource = $('#boardItem').html();
 	
 	var boardItemTem = Handlebars.compile(boardItemSource);
 
 	var page = 0;
 
+	var boardList = ${boardList};
+						
+	$(boardList).each(function(){
+		var date = new Date(this.regDate);
+		var dateString = date.toLocaleDateString();
+		var topContent;
+		var subContent;
+		
+		if(this.content.length >= 14){
+			topContent = this.content.substr(0,15)+"...";
+			subContent = this.content.substr(15, this.content.length);
+		}else{
+			topContent = this.content
+		}
+
+		var content = {
+			userId: this.userId,	
+			regDate: dateString,
+			content_T: topContent,
+			content: subContent,
+			imageArea: this.bno+"imgArea",
+			bno: this.bno,
+			replyArea: this.bno+"replyArea",
+			boardDeleteBtn: this.bno+"-boardDeleteBtn",
+			boardUpdate: this.bno+"boardUpdate",
+			boardDelete: this.bno+"boardDelete"
+		};
+				
+		var boardItem = boardItemTem(content);
+		$('#boards').append(boardItem);
+		// 프로필 사진 설정
+		
+		if(this.pf_photo){
+			var url = '/allways'+this.pf_photo;
+			$('.boardProfileImg[data-bno='+this.bno+']').attr('src', url);
+		}
+			
+		var divList = "";
+		
+		if(this.photo){
+			var photoList = this.photo.split(',');
+					
+			for(i = 0; i < photoList.length; i++){
+				if(i<3){
+				divList += '<div class="boardImg">'	
+						+'<img src="/allways'+photoList[i]+'" style="width: 100%">'
+						+'</div>';
+				}else if(photoList.length > 3){
+					console.log(photoList.length);
+					divList += '<div class="boardImg clearfix ">'	
+						+'<span>'+(photoList.length-3)+'+'+'<span>'
+						+'</div>';
+					break;
+				}
+							
+						
+			}
+		}
+				
+		$('#'+this.bno+'imgArea').append(divList);
+				
+		// 게시물 삭제 관련
+		if(this.userId != '${check.userId}'){
+			$('#'+this.bno+'boardUpdate').hide();
+			$('#'+this.bno+'boardDelete').hide();
+		}
+			
+	});
+			
+
+//////////////////////////////////////////////////////////////////////////	
+	
 	function drowBoardItems(){
 			
 		$.getJSON('/allways/board/selectBoard/'+page, function(data){
@@ -698,9 +702,6 @@ $(document).ready(function(){
 			
 	
 	};
-
-	$('#boards').empty();
-	drowBoardItems();
 	
 	$(window).scroll(function() { // 스크롤 이벤트가 발생할 때마다 인식
 		if ( $(window).scrollTop() == $(document).height() - $(window).height() ) { // 스크롤이 끝에 닿는걸 인식
@@ -963,6 +964,7 @@ function drowReply(event, bno){
 				
 				var date = new Date(data.regDate);
 				var dateString = date.toLocaleDateString();
+				//$('#writer-img').attr("","");
 				$('#writer-userId').empty();
 				$('#writer-regDate').empty();
 				$('#writer-content').empty();
@@ -1110,7 +1112,15 @@ function drowReply(event, bno){
 
 //////////////////////////////////////////////////////////////////////////////////////////
 	
+	$('#searchKeywordBtn').on("click", function(){
+		var serchBounds = $('#serchBounds').val();
+		var searchKeyword = $('#searchKeyword').val();
+		
+		
 
+		
+	});
+	
 });
 
 </script>
@@ -1504,107 +1514,6 @@ $(document).ready(function() {
 	}
 });
 </script>
-
-<script>
-$(document).ready(function(){
-$("#checkUser").on('click', function () {
-	var userId = $('#Id').val();
-	var userPwd = $('#pwd').val();
-	
-	$.ajax({
-		type : 'post',
-		url : '/allways/userCheck',
-		contentType: 'application/x-www-form-urlencoded',
-		data : {
-			'userId' : userId,
-			'userPwd' : userPwd,
-		},
-		success : function(result) {
-			if (result) {
-				alert('확인되었습니다!');
-				$('#update').modal('show');
-			} else {
-				alert('잘못입력하였습니다. 비밀번호를 다시 입력해주세요.');
-				$("#pwd").val('');
-			}
-		}
-	});
-});
-
-$("#userCheck").on('click', function () {
-	var userId = $('#userId').val();
-	var userPwd = $('#userPwd').val();
-	
-	$.ajax({
-		type : 'post',
-		url : '/allways/userCheck',
-		contentType: 'application/x-www-form-urlencoded',
-		data : {
-			'userId' : userId,
-			'userPwd' : userPwd,
-		},
-		success : function(result) {
-			if (result) {
-				alert('확인되었습니다!');
-				$('#withdrawal').modal('show');
-			} else {
-				alert('잘못입력하였습니다. 비밀번호를 다시 입력해주세요.');
-				$("#userPwd").val('');
-			}
-		}
-	});
-});
-
-
-$('#nUpdate').click(function() {
-	var userPwd = $('#newPwd').val();
-	var userPwds = $('#newPwds').val();
-	
-	console.log('수정할 pw1 : ', userPwd);
-	console.log('수정할 pw2 : ', userPwds);
-	
-	if(userPwd.length < 8){	
-		alert('8자 이상으로 입력해주세요!');
-	} else if(userPwd != '' && userPwds != '' && userPwd !== userPwds){
-		alert('비밀번호가 같지 않습니다!');
-	} else {
-		updateUser(userPwd);
-	}
-});
-
-function updateUser(userPwd) {
-	
-	var userEmail = $('#newEmail').val();
-	var graduation = $('#newGrad').val();
-	var uno = ${check.uno};			
-	
-	$.ajax({
-		type : 'post',
-		url : '/allways/userUpdate',
-		headers: {
-			'Content-Type' : 'application/json',
-			'X-HTTP-Method-Override' : 'post'
-		},
-		data : JSON.stringify({
-			'userPwd' : userPwd,
-			'userEmail' : userEmail,
-			'graduation' : graduation,
-			'uno' : uno
-		}),
-		success : function(data) {
-			if (data == 1) {
-				alert('회원정보 수정완료');
-				location.replace('/allways');
-			} else {
-				alert('회원정보 수정실패');
-			}
-		}
-	});
-}
-
-});
-</script>
-
 
 
 <!-- <script type="text/javascript" src="/allways/resources/js/board.js"></script>

@@ -57,6 +57,10 @@ public class BoardServiceImple implements BoardService {
 		return boardDao.deleteBoard(bno);
 	}
 
+	public List<Board> selectKeyword(String searchKeyword, int serchBounds, int page) {
+		return boardDao.searchByKeyword(serchBounds, searchKeyword, page);
+	}
+
 
 
 }
