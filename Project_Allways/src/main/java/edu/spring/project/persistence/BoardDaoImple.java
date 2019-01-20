@@ -115,7 +115,7 @@ public class BoardDaoImple implements BoardDao {
 		
 		Map<String, Integer> params = new HashMap<String, Integer>();
 		params.put("uno", uno);
-		params.put("start", page);
+		params.put("start", page * 10);
 		
 		return session.selectList(BOARD_MAPPER + ".selectMyAndAllwaisersPost", params);
 	}

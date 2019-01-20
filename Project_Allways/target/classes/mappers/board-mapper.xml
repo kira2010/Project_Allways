@@ -127,19 +127,19 @@
 			${board.uno} IN (
 				SELECT ${board.uno}
 				FROM ${tbl_board}
-				WHERE INSTR(${board.content}, #{searchKeyword}) > 0)
+				WHERE INSTR(${board.content}, #{keyword}) > 0)
 		</if>
 		<if test="type==2">
 			${board.uno} IN (
 				SELECT ${board.uno}
 				FROM ${tbl_board}
-				WHERE INSTR(${board.userid}, #{searchKeyword}) > 0)
+				WHERE INSTR(${board.userid}, #{keyword}) > 0)
 		</if>
 		<if test="type==3">
 			${board.uno} IN (
 				SELECT ${board.uno}
 				FROM ${tbl_board}
-				WHERE INSTR(${board.hashtag}, #{searchKeyword}) > 0)
+				WHERE INSTR(${board.hashtag}, #{keyword}) > 0)
 		</if>
 		AND
 		(${board.privacy_bounds} = 0)
