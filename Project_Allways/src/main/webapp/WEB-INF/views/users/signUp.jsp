@@ -111,6 +111,14 @@ $(document).ready(function() {
 body {
 	background-color: #f1f1f1;
 }
+
+.signUp {
+	font-weight: bolder;
+	font-famliy : arial, helvetica, sans-serif;
+	text-align: left;
+	margin-top: 10%;
+	margin-bottom: 2%;
+}
 </style>
 
 </head>
@@ -119,8 +127,8 @@ body {
 	<div class="w3-content w3-container w3-margin-top">
 		<div class="w3-container w3-card-4">
 			<div class="w3-center w3-large w3-margin-top">
-				<h3><a href="/allways"><img src="/allways/resources/images/allways.png" /></a></h3>
-				<h3>회원 가입</h3>
+				<h3><a href="/allways"><img src="/allways/resources/images/login.png" /></a></h3>
+				<h2 class="signUp">회원 가입</h2>
 			</div>
 			<div>
 				<form id="signUpForm" action="signUp" method="post" onsubmit="return check()" >

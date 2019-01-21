@@ -48,7 +48,7 @@ body {
 		<div class="w3-container w3-card-4">
 			<div class="w3-center w3-large w3-margin-top">
 				<h3>
-					<a href="/allways"><img src="/allways/resources/images/allways.png" /></a>
+					<a href="/allways"><img src="/allways/resources/images/login.png" /></a>
 				</h3>
 			</div>
 			<div>
