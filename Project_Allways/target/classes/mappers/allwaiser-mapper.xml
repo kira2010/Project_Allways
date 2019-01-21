@@ -39,12 +39,13 @@
 			WHERE ${allwaiser.uno} = #{uno}
 			AND
 			${allwaiser.allwaiseruno} = #{allwaiser_uno})
-		AS SUCCESS
+		AS isEXIST
 	</select>
 	
 	<!-- 친구 추가 -->
 	<insert id="followAllwaiser">
-		INSERT INTO ${tbl_allwaiser} (${allwaiser.uno}, ${allwaiser.allwaiseruno})
+		INSERT INTO ${tbl_allwaiser}
+		(${allwaiser.uno}, ${allwaiser.allwaiseruno})
 		VALUES (#{uno}, #{allwaiser_uno})
 	</insert>
 	

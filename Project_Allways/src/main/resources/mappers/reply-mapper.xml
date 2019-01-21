@@ -5,10 +5,9 @@
 <mapper namespace="edu.spring.project.mappers.ReplyMapper">
 	<!-- bno 기준으로 등록된 댓글 가져오기 -->
 	<select id="selectReplyByBno" resultType="Reply">
-		SELECT * FROM ${tbl_reply} 
-		WHERE ${reply.bno} = #{bno} 
+		SELECT * FROM ${tbl_reply}
+		WHERE ${reply.bno} = #{bno}
 		ORDER BY ${reply.rno} DESC
-		LIMIT 0, 10
 	</select>
 	
 	<!-- bno 기준으로 등록된 댓글 갯수 -->
@@ -19,15 +18,16 @@
 	
 	<!-- 댓글 등록 -->
 	<insert id="registReply">
-		INSERT INTO ${tbl_reply} 
+		INSERT INTO ${tbl_reply}
 		(${reply.bno}, ${reply.uno}, ${reply.userid}, ${reply.reply_content}, ${reply.pf_photo}) 
 		VALUES (#{bno}, #{uno}, #{userId}, #{reply_content}, 
-		(SELECT ${user.pf_photo} FROM ${tbl_user} WHERE ${user.uno} = #{uno}))
+			(SELECT ${user.pf_photo} FROM ${tbl_user}
+			WHERE ${user.uno} = #{uno}))
 	</insert>
 	
 	<!-- 댓글 수정(삭제 가능성?) -->
 	<update id="updateReply">
-		UPDATE ${tbl_reply} 
+		UPDATE ${tbl_reply}
 		SET ${reply.reply_content} = #{reply_content} WHERE ${reply.rno} = #{rno}
 	</update>
 	
