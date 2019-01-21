@@ -158,7 +158,7 @@ button {
 <script>
 $(document).ready(function() {
 	
-	var myUno = 6;
+	var myUno = 2;
 		
 	var division = $('#favorite-board');
 	

@@ -61,6 +61,11 @@ public class BoardServiceImple implements BoardService {
 		return boardDao.searchByKeyword(serchBounds, searchKeyword, page);
 	}
 
+	public List<Board> selectMyPosting(int uno, int page) {
+		
+		return boardDao.readAll(uno, page);
+	}
+
 
 
 }

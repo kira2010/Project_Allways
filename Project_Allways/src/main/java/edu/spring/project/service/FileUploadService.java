@@ -25,7 +25,7 @@ public class FileUploadService {
         = originFilename.substring(originFilename.lastIndexOf("."), originFilename.length());
        
       // 서버에서 저장 할 파일 이름
-      String saveFileName = genSaveFileName(Integer.toString(uno)+extName);
+      String saveFileName = genSaveFileName(originFilename+Integer.toString(uno)+extName);
        
       System.out.println("originFilename : " + originFilename);
       System.out.println("saveFileName : " + saveFileName);

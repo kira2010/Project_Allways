@@ -35,9 +35,9 @@
 				<div style="padding: 13px">
 				<form class="form-inline boardSearchForm">
 					<select class="btn" id="serchBounds" style="display: inline-block;">
-						<option value="0">내용 검색</option>
-						<option value="1">아이디 검색</option>
-						<option value="2">태그검색</option>
+						<option value="1">내용 검색</option>
+						<option value="2">아이디 검색</option>
+						<option value="3">태그검색</option>
 					</select>
 					
 					<input id="searchKeyword" class="form-control" type="text" placeholder="search">
@@ -528,8 +528,6 @@
 	</div>
 
 </div>
-
-
 </div>
 
 <div id= "{{replyArea}}" class= "replyArea">
@@ -613,6 +611,67 @@
 		<a id="allwaysName" href="/allways/userPage?uno={{uno}}" >{{allwaysName}}</a>
 		<span style:"font-size: x-small; color: #f1f1f1;">({{userId}})</span>
 	</div>
+</script>
+
+<script id="boardRecommendedItem" type="text/x-handlebars-template">
+<div class="boardItem">
+
+	<div class="boardItemHead clearfix">
+
+		<img class = "img-circle boardProfileImg" data-bno = "{{bno}}" src="/allways/resources/images/default_profile_img.jpg"
+			style="float: left; padding: 8px; width:70px; height:45px;"
+			onclick="location.href='/allways'">
+		<div style="display: inline-block;">
+			<a href = "/allways">{{userId}}</a><br />
+			<span style="font-size: x-small; color: gray;">{{regDate}}</span>
+		</div>
+
+	
+		<div class="dropdown" style="float: right;">
+  	 	<span class="glyphicon glyphicon-align-justify dropdown-toggle btn" type="button" id="menu1" data-toggle="dropdown"></span>
+
+  	  	<ul class="dropdown-menu" role="menu" aria-labelledby="menu1" style="right: 0; left: auto;">
+    		<li role="presentation"><a role="menuitem" tabindex="-1" href="#">북마크</a></li>
+     	 	<li role="presentation" id="{{boardUpdate}}"><a role="menuitem" tabindex="-1" href="#">수정</a></li>
+     	 	<li role="presentation" class="divider"></li>
+     	 	<li role="presentation" id="{{boardDelete}}"><a role="menuitem" tabindex="-1"  id="{{boardDeleteBtn}}" class="boardDeleteBtn">삭제</a></li>
+    	</ul>
+		</div>
+
+
+	</div> <!-- BoardItemHead -->
+	
+	
+	<details>
+		<summary>{{content_T}}</summary>
+    	<p>{{content}}</p>
+	</details>
+	
+	<div class="imageArea" id="{{imageArea}}" data-bno="{{bno}}" style= "margin: 8px">
+					
+	</div>
+	
+
+
+<div class="container-fluid boardTail">
+	<div class="row">
+		<div class="col-xs-6" style="text-align: center;" >
+			<input id="bno" value="{{bno}}" type="hidden"/>		
+			<a data-bno="{{bno}}" class="btnBookmarkDelete btn" >북마크 끊기</a>
+		</div>
+		<div class="col-xs-6 " style="text-align: center;" >
+			<a data-bno="{{bno}}" class="reply btn" >댓글</a>
+		</div>
+	</div>
+
+</div>
+
+</div>
+</div>
+
+<div id= "{{replyArea}}" class= "replyArea">
+</div>
+
 </script>
 		
 <script>
@@ -1612,13 +1671,13 @@ function drowReply(event, bno){
 		
 		$.ajax({
 			type : 'post',
-			url : '/allways/image/upload',
+			url : '/allways/board/insert',
 			data : form,
 			processData : false,
 			contentType : false,
 			success : function(data) {
 				console.log(data + "경로에 파일 업로드하였습니다.");
-				boardAjax(content, privacyBounds, data);
+				endBoardInsert();
 			},
 			error : function(error) {
 				alert("파일 업로드에 실패하였습니다.");
@@ -1629,27 +1688,7 @@ function drowReply(event, bno){
 			
 	};
 
-	function boardAjax(content, privacyBounds, data) {
-		
-		console.log(data);
-		$.ajax({
-			type: 'post',
-			url: '/allways/board/insert',
-			headers: {
-				'Content-Type': 'application/json',
-				'X-HTTP-Method-Override': 'post'
-			},
-			data: JSON.stringify({
-				'content': content,
-				'privacy_bounds': privacyBounds,
-				'photo': data.toString()
-			}),
-			success: function(result) {
-				endBoardInsert();
-			}
-		});
-	}
-	
+
 	$("textarea.autosize").on('keydown keyup', function () {
 		  $(this).height(1).height( $(this).prop('scrollHeight')+12 );	
 	});
@@ -1812,6 +1851,10 @@ function drowPostingItems(){
 	
 	};
 	
+var boardRecommendedItemSource = $('#boardRecommendedItem').html();
+var boardRecommendedItemTem = Handlebars.compile(boardRecommendedItemSource);
+
+	
 function drowFavoriteItems(){
 		
 	$.getJSON('/allways/board/favorite/'+page, function(data){
@@ -1844,7 +1887,7 @@ function drowFavoriteItems(){
 					boardDelete: this.bno+"boardDelete"
 				};
 				
-				var boardItem = boardItemTem(content);
+				var boardItem = boardRecommendedItemTem(content);
 				$('#boards').append(boardItem);
 				
 				if(this.pf_photo){
@@ -1890,10 +1933,81 @@ function drowFavoriteItems(){
 	
 	};
 	
-	
+$(document).on('click', '.btnBookmarkDelete', function() {
+		
+		var bno = $(this).prevAll('#bno').val();
+		var uno = ${check.uno};
+		
+		$.ajax({
+			type: 'post',
+			url: '/allways/favorite/delete',
+			headers : {
+				'Content-Type' : 'application/json',
+				'X-HTTP-Method-Override' : 'post'
+			},
+			data: JSON.stringify({
+				'uno' : uno,
+				'bno' : bno
+			}),
+			success: function(data) {
+				
+				if (data == 1) {
+					alert('삭제 성공');
+					
+					$('#boardMake').empty();
+					$('#boards').empty();
+					console.log("#option3" + "click");
+					page = 0;
+					drowFavoriteItems();
+				
+				} else {
+					alert('삭제 실패');
+				}
+				
+			}
+			
+		});
+		
+	});
 	
 });
 
+</script>
+
+<script>
+$(document).ready(function(){
+	
+	
+	$(document).on("click", '.bookMark', function () {
+		var bno = $(this).data('bno');
+		
+		$.ajax({
+			type: 'post',
+			url: '/allways/favorite/insert',
+			headers: {
+				'Content-Type': 'application/json',
+				'X-HTTP-Method-Override': 'post'
+			},
+			data: JSON.stringify({
+				'bno' : bno
+			}),
+			success: function(result) {
+				if(result == 1){
+					alert('성공');
+				}else{
+					alert('이미 북마크된 게시물 입니다.');					
+				}
+				
+			},
+			error : function(error) {
+				alert('이미 북마크된 게시물 입니다.');
+			}
+		});
+		
+	});
+	
+	
+});
 
 
 </script>

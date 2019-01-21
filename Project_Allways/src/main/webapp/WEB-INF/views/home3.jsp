@@ -128,7 +128,7 @@ button {
 		
 		function getremmended() {
 		
-		var myUno = 1;
+		var myUno = 2;
 		
 		var graduation = "아이티윌";
 		

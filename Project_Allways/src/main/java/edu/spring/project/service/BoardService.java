@@ -17,6 +17,7 @@ public interface BoardService {
 	List<Board> selectPosting(int uno, int page);
 	List<Board> selectFavorite(int uno, int page);
 	List<Board> selectKeyword(String searchKeyword, int serchBounds, int page);
+	List<Board> selectMyPosting(int uno, int page);
 	Board selectOne(int bno);
 	int insert(Board board);
 	int update(Board board);

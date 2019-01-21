@@ -26,6 +26,7 @@ import edu.spring.project.persistence.AllwaiserDao;
 import edu.spring.project.service.AllwaiserService;
 import edu.spring.project.service.FileUploadService;
 import edu.spring.project.service.UserPageService;
+import edu.spring.project.service.UserService;
 
 
 @Controller
@@ -35,6 +36,7 @@ public class UserPageController {
 			LoggerFactory.getLogger(UserPageController.class);
 
 	@Autowired FileUploadService fileUploadService;
+	@Autowired private UserService userService;
 	
 	@Autowired
 	private UserPageService userPageService;
@@ -109,7 +111,8 @@ public class UserPageController {
 	  }
 	    
 	  @RequestMapping(value = "userPage/pimg", method = RequestMethod.POST )
-	  public ResponseEntity<Integer> pimgUpload(MultipartHttpServletRequest req) {
+	  public ResponseEntity<Integer> pimgUpload(MultipartHttpServletRequest req,
+			  HttpSession session) {
 	    
 		List<MultipartFile> mf = req.getFiles("uploadfile");
 		String uno = req.getParameter("uno");
@@ -126,6 +129,10 @@ public class UserPageController {
 		user.setPf_photo(imageUrls.get(0));
 		
 		int result = userPageService.updatePFPhoto(user);
+		
+		User loginId = userPageService.check(Integer.parseInt(uno));
+		
+		session.setAttribute("check", loginId);
 		
 		ResponseEntity<Integer> entity=
 				new ResponseEntity<Integer>(result, HttpStatus.OK); 

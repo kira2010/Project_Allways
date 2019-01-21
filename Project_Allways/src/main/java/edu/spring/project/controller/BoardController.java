@@ -1,5 +1,6 @@
 package edu.spring.project.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -14,29 +15,64 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import edu.spring.project.domain.Board;
 import edu.spring.project.domain.User;
 import edu.spring.project.service.BoardService;
+import edu.spring.project.service.FileUploadService;
 
-@RestController
+@Controller
 @RequestMapping(value = "board")
 public class BoardController {
 
 	@Autowired public BoardService boardService;
-	
+	@Autowired public FileUploadService fileUploadService;	
 	
 	@RequestMapping(value = "insert", method = RequestMethod.POST)
-	public void insert(@RequestBody Board board, HttpSession session) {
+	public ResponseEntity<Integer> insert(MultipartHttpServletRequest req, HttpSession session) {
+		
+		Board board = new Board();
 		
 		User loginUser =  (User) session.getAttribute("check");
 		board.setUno(loginUser.getUno());
 		board.setUserId(loginUser.getUserId());
 		
-		System.out.println("session input: " + board);
+		String content = req.getParameter("content");
+		String privacy_bounds = req.getParameter("privacy_bounds");
 		
-		boardService.insert(board);
+		board.setContent(content);
+		board.setPrivacy_bounds(Integer.parseInt(privacy_bounds));
 		
+		// 파일 업
+		List<MultipartFile> mf = req.getFiles("uploadfile");
+		List<String> imageUrls = new ArrayList<String>();
+		
+		for(MultipartFile m : mf) {		
+			String url = fileUploadService.restore(m, loginUser.getUno());
+			imageUrls.add(url);
+		}
+		StringBuffer buffer = new StringBuffer();
+		for(String url : imageUrls) {
+			buffer.append(url).append(",");
+		}
+		String urls = buffer.toString();
+		urls = urls.substring(0, urls.length()-1);
+		System.out.println(urls);
+		
+		board.setPhoto(urls);
+		
+		int result = boardService.insert(board);
+		ResponseEntity<Integer> entity = null;
+
+		if(result == 1 ) {
+			entity = new ResponseEntity<Integer>(result , HttpStatus.OK);
+		}else {
+			entity = new ResponseEntity<Integer>(result , HttpStatus.BAD_REQUEST);
+		}
+		
+		return entity;
 	}
 
 	@RequestMapping(value = "searchPage", method = RequestMethod.GET)
@@ -122,9 +158,17 @@ public class BoardController {
 	public ResponseEntity<List<Board>> selectPosting(@PathVariable(name="page") int page, HttpSession session) {
 		
 		User user = (User)session.getAttribute("check");
+		User pageUser = (User)session.getAttribute("userInfo");
 		
-		List<Board> result = boardService.selectPosting(user.getUno(), page);
-				
+		// 나 일때 하고 친구 일때가 다름 수정!!!
+		List<Board> result = null;
+	
+		if(user.getUno() == pageUser.getUno()) {
+			result = boardService.selectMyPosting(user.getUno(), page);
+		}else {
+			result = boardService.selectPosting(user.getUno(), page);
+		}
+			
 		ResponseEntity<List<Board>> entity = null;
 		if(result != null) {
 			entity = new ResponseEntity<List<Board>>(result , HttpStatus.OK);

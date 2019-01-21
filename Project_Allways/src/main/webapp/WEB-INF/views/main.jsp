@@ -16,6 +16,7 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+
 <link rel="stylesheet" type="text/css" href="/allways/resources/css/board.css">
 <link rel="stylesheet" type="text/css" href="/allways/resources/css/main.css">
 <link rel="stylesheet" type="text/css" href="/allways/resources/css/allwaiserSearch.css">
@@ -43,9 +44,9 @@
 				<div style="padding: 13px">
 				<form class="form-inline boardSearchForm" action="/allways/board/searchPage" method="get">
 					<select class="btn" id="serchBounds" name ="serchBounds" style="display: inline-block;">
-						<option value="0">내용 검색</option>
-						<option value="1">아이디 검색</option>
-						<option value="2">태그검색</option>
+						<option value="1">내용 검색</option>
+						<option value="2">아이디 검색</option>
+						<option value="3">태그검색</option>
 					</select>
 					
 					<input id="searchKeyword" name="searchKeyword" class="form-control" type="text" placeholder="search">
@@ -1065,13 +1066,13 @@ function drowReply(event, bno){
 		
 		$.ajax({
 			type : 'post',
-			url : '/allways/image/upload',
+			url : '/allways/board/insert',
 			data : form,
 			processData : false,
 			contentType : false,
 			success : function(data) {
 				console.log(data + "경로에 파일 업로드하였습니다.");
-				boardAjax(content, privacyBounds, data);
+				endBoardInsert();
 			},
 			error : function(error) {
 				alert("파일 업로드에 실패하였습니다.");
@@ -1081,27 +1082,6 @@ function drowReply(event, bno){
 		});
 			
 	};
-
-	function boardAjax(content, privacyBounds, data) {
-		
-		console.log(data);
-		$.ajax({
-			type: 'post',
-			url: '/allways/board/insert',
-			headers: {
-				'Content-Type': 'application/json',
-				'X-HTTP-Method-Override': 'post'
-			},
-			data: JSON.stringify({
-				'content': content,
-				'privacy_bounds': privacyBounds,
-				'photo': data.toString()
-			}),
-			success: function(result) {
-				endBoardInsert();
-			}
-		});
-	}
 
 //////////////////////////////////////////////////////////////////////////////////////////
 	$("textarea.autosize").on('keydown keyup', function () {
@@ -1434,7 +1414,15 @@ $(document).ready(function(){
 				'bno' : bno
 			}),
 			success: function(result) {
-				alert('결과'+result);
+				if(result == 1){
+					alert('성공');
+				}else{
+					alert('이미 북마크된 게시물 입니다.');					
+				}
+				
+			},
+			error : function(error) {
+				alert('이미 북마크된 게시물 입니다.');
 			}
 		});
 		

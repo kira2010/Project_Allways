@@ -38,6 +38,10 @@ public class FileUploadController {
   public ResponseEntity<List<String>> upload(MultipartHttpServletRequest req) {
     
 	List<MultipartFile> mf = req.getFiles("uploadfile");
+	String content = req.getParameter("content");
+	String privacy_bounds = req.getParameter("privacy_bounds");
+	System.out.println("file: 확인" + content + privacy_bounds);
+	
 	
 	// 로그인 UNO
 	int uno = 0;

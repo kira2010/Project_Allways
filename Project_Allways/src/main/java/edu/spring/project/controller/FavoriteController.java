@@ -16,13 +16,14 @@ import edu.spring.project.domain.Board;
 import edu.spring.project.domain.Favorite;
 import edu.spring.project.domain.User;
 import edu.spring.project.persistence.FavoriteDao;
+import edu.spring.project.service.FavoriteService;
 
 @RestController
 @RequestMapping(value = "favorite")
 public class FavoriteController {
 
 	@Autowired
-	private FavoriteDao dao;
+	private FavoriteService favoriteService; 
 	
 	
 	@RequestMapping(value = "insert", method = RequestMethod.POST)
@@ -30,7 +31,7 @@ public class FavoriteController {
 		
 		User loginUser =  (User) session.getAttribute("check");
 		favorite.setUno(loginUser.getUno());
-		int result = dao.registFavorite(favorite);
+		int result = favoriteService.insert(favorite);
 
 		ResponseEntity<Integer> entity = null;
 		
@@ -59,10 +60,10 @@ public class FavoriteController {
 		return entity;
 	}
 	
+	@Autowired FavoriteDao dao;
+	
 	@RequestMapping(value = "delete" , method = RequestMethod.POST)
 	public ResponseEntity<Integer> favoriteDelete(@RequestBody Favorite fav) {
-		
-		
 		
 		int itr_no = dao.findItr_no(fav);
 		
