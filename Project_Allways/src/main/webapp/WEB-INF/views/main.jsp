@@ -207,7 +207,7 @@
 				</div>
 
 				<div class="modal-body">
-					<h5>비밀번호 수정하지 않는다면 비워주세요</h5>
+					<h5>비밀번호를 수정하지 않는다면 회원님의 비밀번호를 다시 기입해 주세요.</h5>
 					<input type="password" name="userPwd" id="newPwd"
 						placeholder="새 비밀번호 입력" required class="form-control" /> <br />
 					<input type="password" name="userPwds" id="newPwds"
