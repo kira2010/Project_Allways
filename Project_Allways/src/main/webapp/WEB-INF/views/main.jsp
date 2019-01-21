@@ -43,7 +43,7 @@
 			<div class="col-sm-6">
 				<div style="padding: 13px">
 				<form class="form-inline boardSearchForm" action="/allways/board/searchPage" method="get">
-					<select class="btn" id="serchBounds" name ="serchBounds" style="display: inline-block;">
+					<select class="btn" id="searchBounds" name ="searchBounds" style="display: inline-block;">
 						<option value="1">내용 검색</option>
 						<option value="2">아이디 검색</option>
 						<option value="3">태그검색</option>

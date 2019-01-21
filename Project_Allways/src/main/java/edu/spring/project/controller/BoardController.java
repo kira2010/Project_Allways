@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.google.gson.Gson;
+
 import edu.spring.project.domain.Board;
 import edu.spring.project.domain.User;
 import edu.spring.project.service.BoardService;
@@ -76,21 +78,26 @@ public class BoardController {
 	}
 
 	@RequestMapping(value = "searchPage", method = RequestMethod.GET)
-	public String searchPage(String searchKeyword, int serchBounds, Model model) {
+	public String searchPage(String searchKeyword, int searchBounds, Model model) {
 		
 		
-		List<Board> result = boardService.selectKeyword(searchKeyword, serchBounds, 0);
-		model.addAttribute("boardList", result);		
+		List<Board> result = boardService.selectKeyword(searchKeyword, searchBounds, 0);
+		
+		Gson gson = new Gson();
+		
+		String jsonResult = gson.toJson(result);
+		
+		model.addAttribute("boardList", jsonResult);		
 		
 		return  "searchPage";
 		
 	}
 	
 	@RequestMapping(value = "searchKeyword", method = RequestMethod.GET)
-	public ResponseEntity<List<Board>> searchKeyword(String searchKeyword, int serchBounds, int page) {
+	public ResponseEntity<List<Board>> searchKeyword(String searchKeyword, int searchBounds, int page) {
 		
 		
-		List<Board> result = boardService.selectKeyword(searchKeyword, serchBounds, page);
+		List<Board> result = boardService.selectKeyword(searchKeyword, searchBounds, page);
 				
 		ResponseEntity<List<Board>> entity = null;
 		if(result != null) {

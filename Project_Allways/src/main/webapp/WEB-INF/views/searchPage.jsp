@@ -538,9 +538,6 @@ $(document).ready(function(){
 
 	var fileBuffer = [];/*파일 리스트*/
 	
-	var boardInsertSource = $('#boardInsert').html();
-	var boardInsertTemplate = Handlebars.compile(boardInsertSource);
-
 	if('${check.pf_photo}'){	
 		var url = '/allways'+'${check.pf_photo}';
 		$('#sidProfile').attr('src', url);
@@ -626,7 +623,7 @@ $(document).ready(function(){
 	
 	function drowBoardItems(){
 			
-		$.getJSON('/allways/board/selectBoard/'+page, function(data){
+		$.getJSON('/allways/board/searchKeyword/?searchKeyword=${param.searchKeyword}&searchBounds=${param.searchBounds}'+'&page='+page, function(data){
 			console.log(data);
 						
 			$(data).each(function(){
@@ -715,15 +712,6 @@ $(document).ready(function(){
 			}
 	});//end of 무한스크롤
 	
-	//boardInsert
-	$(document).on("click",'#boardUploadBtn',function() {
-		
-		var content = $("#boardInsertcontent").val();
-		var privacyBounds = $("#privacyBounds").val();
-		
-		boardUpload(content, privacyBounds);
-	
-	});
 	
 	$(document).on("click",'.boardDeleteBtn',function(event){
 
@@ -749,7 +737,6 @@ $(document).ready(function(){
 	function endBoardInsert(){
 		fileBuffer = [];
 		page = 0;
-		drowBoardInsert();
 		$('#boards').empty();
 		drowBoardItems();
 	};
@@ -1051,59 +1038,6 @@ function drowReply(event, bno){
 	
 //////////////////////////////////////////////////////////////////////////////
 	
-	function boardUpload(content, privacyBounds) {
-		
-		var form = new FormData();
-
-		for (i = 0; i < fileBuffer.length; i++) {
-			form.append("uploadfile", fileBuffer[i]);
-			console.log(form.length);
-		};
-			
-		form.append("content", content);
-		form.append("privacy_bounds", privacyBounds);
-		
-		var url;
-		
-		$.ajax({
-			type : 'post',
-			url : '/allways/image/upload',
-			data : form,
-			processData : false,
-			contentType : false,
-			success : function(data) {
-				console.log(data + "경로에 파일 업로드하였습니다.");
-				boardAjax(content, privacyBounds, data);
-			},
-			error : function(error) {
-				alert("파일 업로드에 실패하였습니다.");
-				console.log(error);
-				console.log(error.status);
-			}
-		});
-			
-	};
-
-	function boardAjax(content, privacyBounds, data) {
-		
-		console.log(data);
-		$.ajax({
-			type: 'post',
-			url: '/allways/board/insert',
-			headers: {
-				'Content-Type': 'application/json',
-				'X-HTTP-Method-Override': 'post'
-			},
-			data: JSON.stringify({
-				'content': content,
-				'privacy_bounds': privacyBounds,
-				'photo': data.toString()
-			}),
-			success: function(result) {
-				endBoardInsert();
-			}
-		});
-	}
 
 //////////////////////////////////////////////////////////////////////////////////////////
 	$("textarea.autosize").on('keydown keyup', function () {
