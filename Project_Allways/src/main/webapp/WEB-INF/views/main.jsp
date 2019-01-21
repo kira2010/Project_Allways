@@ -231,12 +231,13 @@
 
 				<!-- Modal Header -->
 				<div class="modal-header">
-					<h4 class="modal-title">회원탈퇴</h4>
+					<h4 class="modal-title">비밀번호 확인</h4>
 				</div>
 
 				<!-- Modal body -->
 				<div class="modal-body">
 					<!-- 모델클래스에 저장된 아이디 불러오기 -->
+					<h5>확인을 위해 비밀번호를 입력해 주세요!</h5>
 					<input class="form-control" type="text" name="userId"
 						value="${check.userId}" id="userId" readonly /> <br /> <input
 						class="form-control" type="password" name="userPwd"
