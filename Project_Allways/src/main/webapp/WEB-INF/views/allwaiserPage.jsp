@@ -229,8 +229,8 @@
 				<!-- Modal footer -->
 				<div class="modal-footer">
 					<button type="button" class="btn" data-dismiss="modal">아니오</button>
-					<button type="button" class="btn" data-dismiss="modal"
-						onclick="location.href='/allways/logout'">예</button>
+					<button type="button" class="btn" data-dismiss="modal" id="checkLogout"
+						>예</button>
 				</div>
 
 			</div>
@@ -1118,6 +1118,11 @@ $(document).ready(function() {
 					} 
 				}
 			});
+		});
+		
+		$('#checkLogout').click(function () {
+			alert('로그아웃 되었습니다!');
+			location.href='/allways/logout';
 		});
 		
 		$("#checkUser").on('click', function () {
