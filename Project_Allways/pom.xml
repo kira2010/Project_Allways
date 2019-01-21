@@ -44,6 +44,8 @@
 		
 		<!-- Email 전송 -->
 		<commons-email.version>1.5</commons-email.version>
+		
+		<gson>2.8.5</gson>
 	</properties>
 
 	<dependencies>
@@ -156,6 +158,13 @@
 			<artifactId>commons-email</artifactId>
 			<version>${commons-email.version}</version>
 		</dependency>
+		
+		<dependency>
+  			<groupId>com.google.code.gson</groupId>
+  			<artifactId>gson</artifactId>
+  			<version>${gson}</version>
+		</dependency>
+		
 	</dependencies>
 </project>
 
