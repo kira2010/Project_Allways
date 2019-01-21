@@ -418,12 +418,13 @@
 <script id="boardItem" type="text/x-handlebars-template">
 <div class="boardItem">
 
-	<div class="boardItemHead clearfix">
+	<div class="boardItemHead clearfix" style="padding: 8px;">
 
 		<img class = "img-circle boardProfileImg" data-bno = "{{bno}}" src="/allways/resources/images/default_profile_img.jpg"
-			style="float: left; padding: 8px; width:70px; height:45px;"
+			style="float: left;"
+			width="45px" height="45px"
 			onclick="location.href='/allways'">
-		<div style="display: inline-block;">
+		<div style="display: inline-block; padding-left: 8px;">
 			<a href = "/allways">{{userId}}</a><br />
 			<span style="font-size: x-small; color: gray;">{{regDate}}</span>
 		</div>
