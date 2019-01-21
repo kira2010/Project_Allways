@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,7 +19,7 @@ import edu.spring.project.persistence.AllwaiserDao;
 import edu.spring.project.persistence.UserDao;
 import edu.spring.project.service.AllwaiserService;
 
-@RestController
+@Controller
 @RequestMapping(value = "search")
 public class AllwaiserController {
 
@@ -31,6 +31,12 @@ public class AllwaiserController {
 	@Autowired
 	private AllwaiserDao allwaiserDao;
 
+	
+	@RequestMapping(value = "/allwaysSearchPage", method = RequestMethod.GET)
+	public String allwaysSearchPage() {
+		
+		return "allwaysSearchPage";
+	}
 	
 	@RequestMapping(value = "/allwaysInsert", method = RequestMethod.POST)
 	public ResponseEntity<Integer> allwaysInsert(

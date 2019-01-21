@@ -98,7 +98,7 @@
 				</a>
 			</div>
 			<div class="left-menu">
-				<a class="btn btn-default form-control left-menu-a" id ="allwaiserSearchForm" >Allwaiser 찾기</a>
+				<a class="btn btn-default form-control left-menu-a" id ="allwaiserSearchForm" href="/allways/search/allwaysSearchPage">Allwaiser 찾기</a>
 			</div>
 			<div class="left-menu">
 				<a class="btn btn-default form-control left-menu-a" href="">추천 친구</a>
@@ -1078,13 +1078,7 @@ $(document).ready(function(){
 		$('#searchForm').empty();
 		$('#searchForm').append(templateItem);
 	};
-	
-	$(document).on("click", '#allwaiserSearchForm', function () {
-		$('#boardMake').empty();
-		$('#boards').empty();
-		drowSearchAllwaiserCondition();	
-	});
-		
+			
 });
 </script>
 
