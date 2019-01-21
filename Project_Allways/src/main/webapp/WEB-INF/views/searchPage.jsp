@@ -661,6 +661,7 @@ $(document).ready(function(){
 					$('.boardProfileImg[data-bno='+this.bno+']').attr('src', url);
 				}
 			
+				
 				var divList = "";
 				
 				if(this.photo){
