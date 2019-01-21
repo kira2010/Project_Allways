@@ -133,7 +133,7 @@ body {
 			<div>
 				<form id="signUpForm" action="signUp" method="post" onsubmit="return check()" >
 					<p> 
-						<input class="w3-input" type="text" id="userId" name="userId" placeholder="아이디" required /> 
+						<input class="w3-input" type="text" id="userId" name="userId" placeholder="ID" required /> 
 						<div id="id_check"></div>
 					</p>
 					<p>
@@ -148,7 +148,7 @@ body {
 						<input type="text" id="userName" name="userName" class="w3-input" placeholder="이름" required />
 					</p>
 					<p>
-						<input type="email" id="userEmail" name="userEmail" class="w3-input" placeholder="이메일" required />
+						<input type="email" id="userEmail" name="userEmail" class="w3-input" placeholder="Email 주소" required />
 						<div id="email_check"></div>
 					</p>
 					

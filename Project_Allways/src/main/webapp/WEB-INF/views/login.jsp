@@ -54,7 +54,7 @@ body {
 			<div>
 				<form action="/allways/users/login" method="post">
 					<p>
-						<input class="w3-input" type="text" id="userId" name="userId" placeholder="아이디 입력" required /> 
+						<input class="w3-input" type="text" id="userId" name="userId" placeholder="ID 입력" required /> 
 						<span id="id_check" class="w3-text-red"></span>
 					</p>
 					<p>
@@ -70,7 +70,7 @@ body {
 	</div>
 	<div style="text-align: center;;padding-bottom: 15px; margin-top: 15px;">
 		<ul>
-			<a href="/allways/users/findIdForm" >아이디 찾기 |</a>
+			<a href="/allways/users/findIdForm" >ID 찾기 |</a>
 			<a href="/allways/users/findPwdForm">비밀번호 찾기 |</a>
 			<a href="/allways/users/signUp">회원가입</a>
 		</ul>

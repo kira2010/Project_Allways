@@ -39,6 +39,14 @@ $(document).ready(function() {
 body {
 	background-color: #f1f1f1;
 }
+
+.findID {
+	font-weight: bolder;
+	font-famliy : arial, helvetica, sans-serif;
+	text-align: left;
+	margin-top: 10%;
+	margin-bottom: 2%;
+}
 </style>
 <title>아이디 찾기</title>
 </head>
@@ -47,13 +55,13 @@ body {
 		<div class="w3-container w3-card-4">
 			<form>
 				<div class="w3-center w3-large w3-margin-top">
-				<h3><a href="/allways"><img src="/allways/resources/images/allways.png" /></a></h3>
-					<h3>아이디 찾기</h3>
+				<h3><a href="/allways"><img src="/allways/resources/images/login.png" /></a></h3>
+					<h2 class="findID">ID 찾기</h2>
 				</div>
 				<div>
 					<p>
 						<input class="w3-input" type="text" id="userName" name="userName" placeholder="이름" required>
-						<input class="w3-input" type="text" id="userEmail" name="userEmail" placeholder="이메일" required>
+						<input class="w3-input" type="text" id="userEmail" name="userEmail" placeholder="Email 주소" required>
 						<input type="hidden" name="queryString" value="${targetUrl}" />
 					</p>
 					<p class="w3-center">
