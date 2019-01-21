@@ -33,15 +33,15 @@
 			
 			<div class="col-sm-6">
 				<div style="padding: 13px">
-				<form class="form-inline boardSearchForm">
-					<select class="btn" id="serchBounds" style="display: inline-block;">
+				<form class="form-inline boardSearchForm" action="/allways/board/searchPage" method="get">
+					<select class="btn" id="searchBounds" name ="searchBounds" style="display: inline-block;">
 						<option value="1">내용 검색</option>
 						<option value="2">아이디 검색</option>
 						<option value="3">태그검색</option>
 					</select>
 					
-					<input id="searchKeyword" class="form-control" type="text" placeholder="search">
-					<button id="searchKeywordBtn" type="button"
+					<input id="searchKeyword" name="searchKeyword" class="form-control" type="text" placeholder="search">
+					<button id="searchKeywordBtn" type="submit"
 					class="btn btn-outline-light text-dark">
 					<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 					</button>
@@ -135,15 +135,15 @@
 					</div>
 					<div class="col-sm-3" style="padding: 0px;">
 						<!-- 왼쪽 정보 및 상태 -->
-						<div id="user-Info">
+						<div id="user-Info" >
 							<label style="margin-top: 5px;">생년 월일 :</label>
 							<fmt:formatDate value="${userInfo.birthDay}"
-								pattern="yyyy년 MM월 dd일" var="birthDay" />
+								pattern="yyyy년 MM월 dd일" var="birthDay" /> 
 							<label id="birth"></label> <br /> <label>이메일:</label> <label
 								id="email"></label><br /> <label>학교 :</label> <label
 								id="school"></label><br />
 							<div class="dropdown" id="drop"
-								style="text-align: right; margin: 5px;">
+								style="text-align: right;">
 								<button class="btn btn-default dropdown-toggle" id="menu2"
 									data-toggle="dropdown">
 									내 상태 <span class="caret"></span>
@@ -196,6 +196,9 @@
 			</div>
 			<!-- 오른쪽 메뉴바 -->
 			<div class="col-sm-3 sidenav">
+				<div style="font-size:large; background-color: #ffffff; margin-bottom: 1px; margin-left: 8px;">
+					친구 리스트
+				</div>
 
 				<form class="form-inline myAllayierSearch">
 					<input id="allwaysName" class="form-control" type="text"
@@ -482,12 +485,13 @@
 <script id="boardItem" type="text/x-handlebars-template">
 <div class="boardItem">
 
-	<div class="boardItemHead clearfix">
+	<div class="boardItemHead clearfix" style="padding: 8px;">
 
 		<img class = "img-circle boardProfileImg" data-bno = "{{bno}}" src="/allways/resources/images/default_profile_img.jpg"
-			style="float: left; padding: 8px; width:70px; height:45px;"
+			style="float: left;"
+			width="45px" height="45px"
 			onclick="location.href='/allways'">
-		<div style="display: inline-block;">
+		<div style="display: inline-block; padding-left: 8px;">
 			<a href = "/allways">{{userId}}</a><br />
 			<span style="font-size: x-small; color: gray;">{{regDate}}</span>
 		</div>
@@ -529,6 +533,8 @@
 	</div>
 
 </div>
+
+
 </div>
 
 <div id= "{{replyArea}}" class= "replyArea">
@@ -540,7 +546,8 @@
 <script id="replyInsert" type="text/x-handlebars-template">
 
 <div id="replyInsertForm" class="clearfix">
-	<img id = "profileImg" class="replyProfileImg img-circle" src="/allways/resources/images/default_profile_img.jpg"
+	<img data-bno="{{bno}}" class="replyProfileImg img-circle" src="/allways/resources/images/default_profile_img.jpg"
+		width="45px" height="45px"
 		onclick="location.href='/allways'" />
 
 	<div class="input-group replyInsertContent">
@@ -561,6 +568,7 @@
 <div class= "replyItem clearfix">	
 	<img src="/allways/resources/images/default_profile_img.jpg"
 		class = "img-circle replyProfileImg" data-rno="{{rno}}"
+		width="45px" height="45px"
 		onclick="location.href='/allways'">
 
 	<div class="replyContent">			
@@ -593,6 +601,23 @@
 </nav>
 </script>
 
+<script id="search-template" type="text/x-handlebars-template" >
+	<div class="search-item">
+		<div class="boardItemHeader">
+			<div style="display: inline-block;">
+				<img class="img-circle myAllaiserProfile" data-uno = "{{uno}}" src="/allways/resources/images/default_profile_img.jpg" height="40px" width="40px">
+				<a id="userName" href="/allways/userPage?uno={{uno}}">{{userName}}</a>
+				<span style:"font-size: x-small; color: #f1f1f1;">({{userId}})</span>
+				<span id="graduation" style:"font-size: x-small; color: gray;">{{graduation}}</span>
+			</div>
+			<div class="insert" style="float: right;">	
+				<input id="uno" value="{{uno}}" type="hidden"/>
+				<a class="btn btn-default btnInsert">구독추가</a>
+			</div>
+		</div>		
+	</div>
+</script>
+
 <script id="allways-template" type="text/x-handlebars-template" >
 	<div class="allways-item">
 		<img class="img-circle myAllaiserProfile" data-uno = "{{uno}}" src="/allways/resources/images/default_profile_img.jpg" height="45px" width="45px">
@@ -613,20 +638,31 @@
 		<span style:"font-size: x-small; color: #f1f1f1;">({{userId}})</span>
 	</div>
 </script>
+		
+<script id="recommended-template" type="text/x-handlebars-template" >
+	<div class="all-allways-item">
+		<input id="allways-uno" value="{{uno}}" type="hidden"/>
+		<img data-uno = "{{uno}}" src="/allways/resources/images/default_profile_img.jpg" height="45px" width="45px" class="img-circle recommendedProfile">
+		<a id="allwaysName" href="/allways/userPage?uno={{uno}}" >{{userName}}</a>
+		<span style:"font-size: x-small; color: #f1f1f1;">({{userId}})</span>
+	</div>
+</script>
+
+
 
 <script id="boardRecommendedItem" type="text/x-handlebars-template">
 <div class="boardItem">
 
-	<div class="boardItemHead clearfix">
+	<div class="boardItemHead clearfix" style="padding: 8px;>
 
 		<img class = "img-circle boardProfileImg" data-bno = "{{bno}}" src="/allways/resources/images/default_profile_img.jpg"
-			style="float: left; padding: 8px; width:70px; height:45px;"
+			style="float: left;"
+			width="45px" height="45px"
 			onclick="location.href='/allways'">
-		<div style="display: inline-block;">
+		<div style="display: inline-block; padding-left: 8px;">
 			<a href = "/allways">{{userId}}</a><br />
 			<span style="font-size: x-small; color: gray;">{{regDate}}</span>
 		</div>
-
 	
 		<div class="dropdown" style="float: right;">
   	 	<span class="glyphicon glyphicon-align-justify dropdown-toggle btn" type="button" id="menu1" data-toggle="dropdown"></span>
@@ -1382,7 +1418,8 @@ function drowReply(event, bno){
 		
 	var content = {
 		replyText: bno + "-replyText",
-		replyInsertBtn: bno + "-replyInsertBtn"
+		replyInsertBtn: bno + "-replyInsertBtn",
+		bno : bno
 	}
 	
 	var replyInsert = replyInsertTemplate(content);
@@ -1393,7 +1430,7 @@ function drowReply(event, bno){
 
 	if('${check.pf_photo}'){	
 		var url = '/allways'+'${check.pf_photo}';
-		$('#profileImg').attr('src', url);
+		$('.replyProfileImg[data-bno='+bno+']').attr('src', url);
 	}
 	
 	$.getJSON('/allways/replies/all/' + bno, function(data) {

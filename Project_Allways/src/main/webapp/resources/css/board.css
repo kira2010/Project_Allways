@@ -93,22 +93,21 @@ details{
 .replyInsertContent{
 	resize: none;
 	border: 0;
-	float: right;
+	float: left;
 	width: 85%;
 	margin-right: 4px;
 }
 
 .replyProfileImg{
 	float: left;
-	width: 10%;
 	vertical-align: middle;
-	margin: 4px;
+	margin: 8px;
 }
 
 .replyContent{
 	resize: none;
 	border: 0;
-	float: right;
+	float: left;
 	width: 85%;
 	margin-right: 8px;
 	margin-bottom: 4px;

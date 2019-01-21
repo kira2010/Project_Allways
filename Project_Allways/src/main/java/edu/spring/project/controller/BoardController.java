@@ -59,10 +59,12 @@ public class BoardController {
 		for(String url : imageUrls) {
 			buffer.append(url).append(",");
 		}
-		String urls = buffer.toString();
-		urls = urls.substring(0, urls.length()-1);
-		System.out.println(urls);
 		
+		String urls = buffer.toString();
+		if(urls.length()>0){
+			urls = urls.substring(0, urls.length()-1);
+			System.out.println(urls);
+		}
 		board.setPhoto(urls);
 		
 		int result = boardService.insert(board);

@@ -132,6 +132,9 @@
 		
 		<!-- 오른쪽 메뉴바 -->
 		<div class="col-sm-3 sidenav">
+			<div style="font-size:large; background-color: #ffffff; margin-bottom: 1px; margin-left: 8px;">
+					친구 리스트
+			</div>
 			
 			<form class="form-inline myAllayierSearch">
 				<input id="allwaysName" class="form-control" type="text" placeholder="친구 이름">
@@ -480,7 +483,8 @@
 <script id="replyInsert" type="text/x-handlebars-template">
 
 <div id="replyInsertForm" class="clearfix">
-	<img id = "profileImg" class="replyProfileImg img-circle" src="/allways/resources/images/default_profile_img.jpg"
+	<img data-bno = "{{bno}}" class="replyProfileImg img-circle" src="/allways/resources/images/default_profile_img.jpg"
+		width="45px" height="45px"
 		onclick="location.href='/allways'" />
 
 	<div class="input-group replyInsertContent">
@@ -501,6 +505,7 @@
 <div class= "replyItem clearfix">	
 	<img src="/allways/resources/images/default_profile_img.jpg"
 		class = "img-circle replyProfileImg" data-rno="{{rno}}"
+		width="45px" height="45px"
 		onclick="location.href='/allways'">
 
 	<div class="replyContent">			
@@ -771,7 +776,8 @@ function drowReply(event, bno){
 		
 	var content = {
 		replyText: bno + "-replyText",
-		replyInsertBtn: bno + "-replyInsertBtn"
+		replyInsertBtn: bno + "-replyInsertBtn",
+		bno : bno
 	}
 	
 	var replyInsert = replyInsertTemplate(content);
@@ -782,7 +788,7 @@ function drowReply(event, bno){
 
 	if('${check.pf_photo}'){	
 		var url = '/allways'+'${check.pf_photo}';
-		$('#profileImg').attr('src', url);
+		$('.replyProfileImg[data-bno='+bno+']').attr('src', url);
 	}
 	
 	$.getJSON('/allways/replies/all/' + bno, function(data) {
