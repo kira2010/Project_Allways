@@ -324,7 +324,7 @@
 						class="btn btn-danger" style="margin-left: 435px"
 						data-dismiss="modal" /> <input type="submit" value="확인"
 						class="btn btn-danger" style="margin-left: 15px"
-						data-dismiss="modal" onclick="location.href='/allways/deleteUser'" />
+						data-dismiss="modal" id="checkDelete" />
 				</div>
 			</div>
 		</div>
@@ -1220,6 +1220,11 @@ $(document).ready(function() {
 			});
 		}
 		
+		$('#checkDelete').click(function() {
+			alert('그 동안 Allways와 함께해 주셔서 감사합니다.');
+			location.href='/allways/deleteUser';
+			});
+	
 });
 
 </script>

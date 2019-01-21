@@ -213,9 +213,9 @@
 					<input type="password" name="userPwds" id="newPwds"
 						placeholder="새 비밀번호 확인" required class="form-control" /> <br />
 					<input type="email" name="userEmail" id="newEmail" required
-						class="form-control" value="${userInfo.userEmail}" /><br /> <input
+						class="form-control" value="${check.userEmail}" /><br /> <input
 						type="text" name="graduation" id="newGrad" required
-						class="form-control" value="${userInfo.graduation}" /><br /> <input
+						class="form-control" value="${check.graduation}" /><br /> <input
 						type="submit" value="취소" class="btn btn-danger"
 						style="margin-left: 435px" data-dismiss="modal" /> <input
 						type="button" value="확인" class="btn btn-danger"
@@ -259,7 +259,7 @@
 						class="btn btn-danger" style="margin-left: 435px"
 						data-dismiss="modal" /> <input type="submit" value="확인"
 						class="btn btn-danger" style="margin-left: 15px"
-						data-dismiss="modal" onclick="location.href='/allways/deleteUser'" />
+						data-dismiss="modal" id="checkDelete" />
 				</div>
 			</div>
 		</div>
@@ -1594,6 +1594,10 @@ function updateUser(userPwd) {
 		}
 	});
 }
+	$('#checkDelete').click(function() {
+		alert('그 동안 Allways와 함께해 주셔서 감사합니다.');
+		location.href='/allways/deleteUser';
+	});
 
 });
 </script>
