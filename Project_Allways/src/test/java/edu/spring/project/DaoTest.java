@@ -68,7 +68,7 @@ public class DaoTest {
 		
 		//List<Board> myTimeLineList = boardDao.readMyTimeLine(1, 0);
 		
-		List<Board> searchList = boardDao.searchByKeyword(1, "공개", 0);
+		List<Board> searchList = boardDao.searchByKeyword(1, "test", 0);
 		
 		if(searchList != null && searchList.size() > 0) {
 			for(Board b : searchList) {

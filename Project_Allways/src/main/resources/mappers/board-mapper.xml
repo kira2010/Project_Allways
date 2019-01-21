@@ -124,20 +124,20 @@
 	<select id="searchByKeyword" resultType="Board">
 		SELECT * FROM ${tbl_board} WHERE
 		<if test="type==1">
-			${board.uno} IN (
-				SELECT ${board.uno}
+			${board.bno} IN (
+				SELECT ${board.bno}
 				FROM ${tbl_board}
 				WHERE INSTR(${board.content}, #{keyword}) > 0)
 		</if>
 		<if test="type==2">
-			${board.uno} IN (
-				SELECT ${board.uno}
+			${board.bno} IN (
+				SELECT ${board.bno}
 				FROM ${tbl_board}
 				WHERE INSTR(${board.userid}, #{keyword}) > 0)
 		</if>
 		<if test="type==3">
-			${board.uno} IN (
-				SELECT ${board.uno}
+			${board.bno} IN (
+				SELECT ${board.bno}
 				FROM ${tbl_board}
 				WHERE INSTR(${board.hashtag}, #{keyword}) > 0)
 		</if>
