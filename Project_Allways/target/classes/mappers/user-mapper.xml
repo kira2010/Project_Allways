@@ -112,7 +112,7 @@
 		WHERE 
 		INSTR(${user.username}, #{userName}) > 0
 		AND
-		INSTR(${user.userpwd}, #{userPwd}) > 0
+		INSTR(${user.userid}, #{userId}) > 0
 		AND
 		INSTR(${user.useremail}, #{userEmail}) > 0
 	</select>
