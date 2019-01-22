@@ -37,7 +37,7 @@ public interface UserDao {
 	
 	int updateEmotion(User user);
 	
-	int resetUserPwd(int uno);
+	int resetUserPwd(User user);
 	
 	int deleteUser(int uno);
 }

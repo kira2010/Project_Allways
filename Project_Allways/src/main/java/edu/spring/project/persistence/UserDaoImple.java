@@ -158,10 +158,10 @@ public class UserDaoImple implements UserDao {
 	}
 	
 	// 비밀번호 reset
-	public int resetUserPwd(int uno) {
-		logger.info("resetUserPwd({}) 호출", uno);
+	public int resetUserPwd(User user) {
+		logger.info("resetUserPwd({}) 호출");
 		
-		return session.update(USER_MAPPER + ".resetPassword", uno);
+		return session.update(USER_MAPPER + ".resetPassword", user);
 	}
 
 	// 회원 탈퇴
