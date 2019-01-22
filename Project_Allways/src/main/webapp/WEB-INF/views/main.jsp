@@ -31,17 +31,17 @@
 <body>
 
 <nav class="navbar-inverse" id="header">
-		<div class="container-fluid">
-			<div class="row">
+	<div class="container-fluid">
+		<div class="row">
+		
+		<div class="col-sm-3">
+			<a class="navbar-brand" href="/allways/"><img
+				src="/allways/resources/images/allways.png" id="mainLogo"
+				width="140px"></a>
+		</div>
 			
-			<div class="col-sm-3">
-				<a class="navbar-brand" href="/allways/"><img
-					src="/allways/resources/images/allways.png" id="mainLogo"
-					height="px" width="140px"></a>
-			</div>
-			
-			<div class="col-sm-6">
-				<div style="padding: 13px">
+		<div class="col-sm-6">
+			<div style="padding: 13px">
 				<form class="form-inline boardSearchForm" action="/allways/board/searchPage" method="get">
 					<select class="btn" id="searchBounds" name ="searchBounds" style="display: inline-block;">
 						<option value="1">내용 검색</option>
@@ -50,42 +50,41 @@
 					</select>
 					
 					<input id="searchKeyword" name="searchKeyword" class="form-control" type="text" placeholder="search">
-					<button id="searchKeywordBtn" type="submit"
-					class="btn btn-outline-light text-dark">
-					<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+					<button id="searchKeywordBtn" type="submit" class="btn btn-outline-light text-dark">
+						<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 					</button>
 				</form>
-				</div>
-			</div>		
+			</div>
+		</div>		
 			
-			<div class = "col-sm-3">				
-				<div class="dropdown input-group" id="drop">
-					<input type="text" class="form-control" style="width:auto; " value="${check.userId} 님 안녕하세요!" readonly>
-					<div class="input-group-btn" style="float: left;">
-					<button class="btn btn-default dropdown-toggle" type="button"
+		<div class = "col-sm-3">				
+			<div class="dropdown input-group" id="drop">
+				<input type="text" class="form-control" style="width:auto; " value="${check.userId} 님 안녕하세요!" readonly>
+				<div class="input-group-btn" style="float: left;">
+				<button class="btn btn-default dropdown-toggle" type="button"
 								id="menu1" data-toggle="dropdown">
-					<span class="caret"></span>
-					</button>
-					<ul class="dropdown-menu" role="menu" aria-labelledby="menu1" style="right: 0; left: auto;">
-						<li role="presentation"><a role="menuitem" tabindex="-1"
-							data-toggle="modal" data-target="#logout">로그아웃</a></li>
-						<li role="presentation"><a role="menuitem" tabindex="-1"
-							data-toggle="modal" data-target="#updateInfo">개인정보 수정</a></li>
-						<li role="presentation"><a role="menuitem" tabindex="-1"
-							data-toggle="modal" data-target="#memberWithdrawal">회원탈퇴</a></li>
-					</ul>
+				<span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu" role="menu" aria-labelledby="menu1" style="right: 0; left: auto;">
+					<li role="presentation"><a role="menuitem" tabindex="-1"
+						data-toggle="modal" data-target="#logout">로그아웃</a></li>
+					<li role="presentation"><a role="menuitem" tabindex="-1"
+						data-toggle="modal" data-target="#updateInfo">개인정보 수정</a></li>
+					<li role="presentation"><a role="menuitem" tabindex="-1"
+						data-toggle="modal" data-target="#memberWithdrawal">회원탈퇴</a></li>
+				</ul>
 
-					</div>
-					
-				</div>	
-			
-			</div>
-			
-			</div>
-		</div>
-</nav>
-
+				</div>
 				
+			</div>	
+			
+		</div>
+			
+	</div>
+</div>
+
+</nav>
+			
 <div class="container">
 	<div class="row content ">
 		<!-- 왼 쪽 메뉴바 -->
@@ -117,16 +116,7 @@
 				
 				<div id ="boards">		
 				</div>
-				
-				<div id="jb-content">
-					<div id="searchForm">
-					</div>
-					
-					<div id="searchs">
-					</div>
-				</div>
-				
-				
+							
 			</div>
 		</div>
 		
@@ -399,7 +389,6 @@
 		<textarea id="boardInsertcontent" class="autosize" placeholder="내용 입력"></textarea>
 	</div>
 
-
 	<div id="fileList">
 	</div>
 
@@ -611,13 +600,14 @@ $(document).ready(function(){
 			var url = '/allways'+'${check.pf_photo}';
 			$('#InsertprofileImg').attr('src', url);
 		}
-		
-		if('${check.pf_photo}'){	
-			var url = '/allways'+'${check.pf_photo}';
-			$('#modalreplyInsertImg').attr('src', url);
-		}
-		
+	
 	};
+
+	
+	if('${check.pf_photo}'){	
+		var url = '/allways'+'${check.pf_photo}';
+		$('#modalreplyInsertImg').attr('src', url);
+	}
 	
 	if('${check.pf_photo}'){	
 		var url = '/allways'+'${check.pf_photo}';
@@ -626,6 +616,8 @@ $(document).ready(function(){
 	
 	
 	drowBoardInsert();
+	
+////////////////////////////////////////////////////////////////////////////////////
 
 	var boardItemSource = $('#boardItem').html();
 	
@@ -712,9 +704,8 @@ $(document).ready(function(){
 	
 	};
 
-	$('#boards').empty();
 	drowBoardItems();
-	
+
 	$(window).scroll(function() { // 스크롤 이벤트가 발생할 때마다 인식
 		if ( $(window).scrollTop() == $(document).height() - $(window).height() ) { // 스크롤이 끝에 닿는걸 인식
 			console.log("스크롤 인식");
@@ -774,60 +765,60 @@ $(document).ready(function(){
 	var replyItemSource = $('#replyItem').html();
 	var replyItemTemplate = Handlebars.compile(replyItemSource);
 	
-function drowReply(event, bno){
+	function drowReply(event, bno){
 	
-	if(bno == undefined){	
-		bno = $(this).data('bno');
-	}
+		if(bno == undefined){	
+			bno = $(this).data('bno');
+		}
 		
-	var content = {
-		replyText: bno + "-replyText",
-		replyInsertBtn: bno + "-replyInsertBtn",
-		bno : bno
-	}
+		var content = {
+			replyText: bno + "-replyText",
+			replyInsertBtn: bno + "-replyInsertBtn",
+			bno : bno
+		}
 	
-	var replyInsert = replyInsertTemplate(content);
-		
-	$('#'+bno+'replyArea').empty(); 
+		var replyInsert = replyInsertTemplate(content);
+			
+		$('#'+bno+'replyArea').empty(); 
 	
-	$('#'+bno+'replyArea').append(replyInsert);
+		$('#'+bno+'replyArea').append(replyInsert);
 
-	if('${check.pf_photo}'){	
-		var url = '/allways'+'${check.pf_photo}';
-		$('.replyProfileImg[data-bno='+bno+']').attr('src', url);
-	}
+		if('${check.pf_photo}'){	
+			var url = '/allways'+'${check.pf_photo}';
+			$('.replyProfileImg[data-bno='+bno+']').attr('src', url);
+		}
 	
-	$.getJSON('/allways/replies/all/' + bno, function(data) {
+		$.getJSON('/allways/replies/all/' + bno, function(data) {
 		
-		$(data).each(function() {
-			var date = new Date(this.regDate);
-			var dateString = date.toLocaleDateString()
-				
-			var content = {
-				rno: this.rno,
-				bno: bno,
-				replyContent: this.reply_content,
-				userId: this.userId,
-				regDate: dateString,
-				BRno : bno+'-'+this.rno+'-no'
-			};
-			var replyItem = replyItemTemplate(content);
-			$('#'+bno+'replyArea').append(replyItem);
+			$(data).each(function() {
+				var date = new Date(this.regDate);
+				var dateString = date.toLocaleDateString()
+					
+				var content = {
+					rno: this.rno,
+					bno: bno,
+					replyContent: this.reply_content,
+					userId: this.userId,
+					regDate: dateString,
+					BRno : bno+'-'+this.rno+'-no'
+				};
+				var replyItem = replyItemTemplate(content);
+				$('#'+bno+'replyArea').append(replyItem);
 			
-			if(this.pf_photo){
-				var url = '/allways'+this.pf_photo;
-				$('.replyProfileImg[data-rno='+this.rno+']').attr('src', url);
-			}
+				if(this.pf_photo){
+					var url = '/allways'+this.pf_photo;
+					$('.replyProfileImg[data-rno='+this.rno+']').attr('src', url);
+				}
 			
-			if(this.userId == '${check.userId}'){
-				$('#'+bno+'-'+this.rno+'-no').show();
-			}else{
-				$('#'+bno+'-'+this.rno+'-no').hide();
-			}
-		});
+				if(this.userId == '${check.userId}'){
+					$('#'+bno+'-'+this.rno+'-no').show();
+				}else{
+					$('#'+bno+'-'+this.rno+'-no').hide();
+				}
+			});
 	 
-	});
-}
+		});
+	}
 
 	$(document).on("click",'.reply', drowReply);	
 		
@@ -903,7 +894,8 @@ function drowReply(event, bno){
 			const fileEx = fileName.slice(fileName.indexOf(".") + 1).toLowerCase();
 			if (fileEx != "jpg"	&& fileEx != "png" && fileEx != "gif" && fileEx != "bmp") {
 					alert("파일은 (jpg, png, gif, bmp) 형식만 등록 가능합니다.");
-					resetFile();
+					fileBuffer = fileBuffer.slice(0,fileBuffer.length-1);
+					console.log(fileBuffer);
 					return false;
 			}
 
@@ -927,76 +919,74 @@ function drowReply(event, bno){
 
 	// modal 창 정보
 	$(document).on('click', '.imageArea', function(){
-			var bno = $(this).data('bno');
-			console.log(bno);
-			$('#replyInsertModal').attr("data-bno", bno);
+		var bno = $(this).data('bno');
+		console.log(bno);
+		$('#replyInsertModal').attr("data-bno", bno);
+		
+		$.getJSON('/allways/board/selectBoard/detail/' + bno, function(data){
 			
-			$.getJSON('/allways/board/selectBoard/detail/' + bno, function(data){
-				
-				$('#carouselOl').empty();
-				$('#carouselDiv').empty();
-				$('#boardCarousel > #prev').remove();
-				$('#boardCarousel > #next').remove();
+			$('#carouselOl').empty();
+			$('#carouselDiv').empty();
+			$('#boardCarousel > #prev').remove();
+			$('#boardCarousel > #next').remove();
 
 				
-				if(data.userId != '${check.userId}'){
-					$('#modalBoardUpdate').hide();
-					$('#modalBoardDelete').hide();
-				}
+			if(data.userId != '${check.userId}'){
+				$('#modalBoardUpdate').hide();
+				$('#modalBoardDelete').hide();
+			}
 				
-				if(data.photo){
-					var photoList = data.photo.split(',');
+			if(data.photo){
+				var photoList = data.photo.split(',');
 					
-					for(i = 0; i < photoList.length; i++){
-					
-					if(i == 0){
+				for(i = 0; i < photoList.length; i++){
+				
+				if(i == 0){
 					loList = '<li data-target="#myCarousel" data-slide-to='+i+' class="active"></li>';
 					divList = '<div class="item active">'	
 							+'<img src="/allways'+photoList[i]+'" style="width: 100%" alt="First slide">'
 							+'</div>'
-					}else{
-						loList = '<li data-target="#myCarousel" data-slide-to='+i+'></li>';
-						divList = '<div class="item">'	
-								+'<img src="/allways'+photoList[i]+'" style="width: 100%" alt="First slide">'
-								+'</div>'
-					}
+				}else{
+					loList = '<li data-target="#myCarousel" data-slide-to='+i+'></li>';
+					divList = '<div class="item">'	
+							+'<img src="/allways'+photoList[i]+'" style="width: 100%" alt="First slide">'
+							+'</div>'
+				}
 							
 							
-						$('#carouselOl').append(loList);
-						$('#carouselDiv').append(divList);
-					};
-					
-					
-					btn ='<a id= "prev" class="left carousel-control" href="#boardCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a> '
-					+'<a id= "next" class="right carousel-control" href="#boardCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>'
-					
-					$('#boardCarousel').append(btn);
-					
+					$('#carouselOl').append(loList);
+					$('#carouselDiv').append(divList);
 				};
+					
+					
+				btn ='<a id= "prev" class="left carousel-control" href="#boardCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a> '
+				+'<a id= "next" class="right carousel-control" href="#boardCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>'
+					
+				$('#boardCarousel').append(btn);
+					
+			};
 	
 				
-				var date = new Date(data.regDate);
-				var dateString = date.toLocaleDateString();
-				$('#writer-userId').empty();
-				$('#writer-regDate').empty();
-				$('#writer-content').empty();
+			var date = new Date(data.regDate);
+			var dateString = date.toLocaleDateString();
+			$('#writer-userId').empty();
+			$('#writer-regDate').empty();
+			$('#writer-content').empty();
 
-				$('#writer-userId').append(data.userId);
-				$('#writer-regDate').append(dateString);
-				$('#writer-content').append(data.content);
+			$('#writer-userId').append(data.userId);
+			$('#writer-regDate').append(dateString);
+			$('#writer-content').append(data.content);
 				
-				drowReplyModal(bno);
+			drowReplyModal(bno);
 				
-				if(data.pf_photo){
-					var url = '/allways'+data.pf_photo;
-					$('#writer-img').attr('src', url);
-				}
+			if(data.pf_photo){
+				var url = '/allways'+data.pf_photo;
+				$('#writer-img').attr('src', url);
+			}
 				
-				$('#board-detail').modal('show');
-			});
-			
-			
-			
+			$('#board-detail').modal('show');
+		});
+					
 	});
 	
 	$(document).on("click",'#replyInsertModal',function(event){
@@ -1106,21 +1096,6 @@ function drowReply(event, bno){
 
 });
 
-</script>
-
-<script>
-$(document).ready(function(){
-	
-	var source = $('#search-condition-template').html();
-	var template = Handlebars.compile(source);
-
-	function drowSearchAllwaiserCondition(){
-		var templateItem = template();
-		$('#searchForm').empty();
-		$('#searchForm').append(templateItem);
-	};
-			
-});
 </script>
 
 <script>
@@ -1291,115 +1266,112 @@ $(document).ready(function() {
 				
 	}
 			
-			function getAllAllways() {
+	function getAllAllways() {
 				
-				var myUno = ${check.uno};
+		var myUno = ${check.uno};
 				
-				var allwaysDivision = $('#allways-searchs');
+		var allwaysDivision = $('#allways-searchs');
 
-				var allwaysSource = $('#all-allways-template').html();
+		var allwaysSource = $('#all-allways-template').html();
 
-				var allwaysTemplate = Handlebars.compile(allwaysSource);
+		var allwaysTemplate = Handlebars.compile(allwaysSource);
 				
-				allwaysDivision.empty();
-				$.ajax ({
-					type: 'post',
-					url: '/allways/search/allAllways',
-					headers: {
-						'Content-Type': 'application/json',
-						'X-HTTP-Method-Override': 'post'
-					},
-					data: JSON.stringify({
-						'uno' : myUno
-					}),
-					success: function(data) {
+		allwaysDivision.empty();
+		$.ajax ({
+			type: 'post',
+			url: '/allways/search/allAllways',
+			headers: {
+				'Content-Type': 'application/json',
+				'X-HTTP-Method-Override': 'post'
+			},
+			data: JSON.stringify({
+				'uno' : myUno
+			}),
+			success: function(data) {
 						
-						$(data).each(function(index, value) {
+				$(data).each(function(index, value) {
 							
-									var content = {
-											uno : value.uno,
-											userId: value.userId,
-											allwaysName: value.userName
-									}
+					var content = {
+						uno : value.uno,
+						userId: value.userId,
+						allwaysName: value.userName
+					}
 									
-									var allwaysSearchItem = allwaysTemplate(content);
+					var allwaysSearchItem = allwaysTemplate(content);
 									
-									allwaysDivision.append(allwaysSearchItem);
+					allwaysDivision.append(allwaysSearchItem);
 									
-									if(this.pf_photo){
-										var url = '/allways'+this.pf_photo;
-										$('.myAllaiserProfile[data-uno='+this.uno+']').attr('src', url);
-									}
-							})
-						}
-							
-					})
-				
-				}
-			
-				function getSearch() {
-					
-					var myUno = ${check.uno};
-					
-					userName = $('#name').val();
-					
-					graduation = $('#graduation').val();
-					
-					division = $('#searchs');
-					
-					source = $('#search-template').html();
-					
-					template = Handlebars.compile(source);
-					
-					division.empty();
-					
-					$.ajax({
-						type: 'post',
-						url: '/allways/search/user',
-						headers: {
-							'Content-Type': 'application/json',
-							'X-HTTP-Method-Override': 'post'
-						},
-						data: JSON.stringify({
-							'uno': myUno,
-							'userName': userName,
-							'graduation': graduation
-						}),
-						success: function(users) {
-							
-							console.log(users);
-							$(users).each(function(index, value){
-								console.log(index, value);
-								var content = {
-										uno : value.uno,
-										userName: value.userName,
-										userId: value.userId,
-										graduation: value.graduation
-								}
-								
-								console.log(content);
-								
-								var searchItem = template(content);
-								
-								division.append(searchItem);
-								
-								if(this.pf_photo){
-									var url = '/allways'+this.pf_photo;
-									$('.myAllaiserProfile[data-uno='+this.uno+']').attr('src', url);
-								}
-								
-							});
-							
-							
-						}
+					if(this.pf_photo){
+						var url = '/allways'+this.pf_photo;
+						$('.myAllaiserProfile[data-uno='+this.uno+']').attr('src', url);
+					}
+				});
+			}
 						
-					});
-				}	
-			
-			
-			getAllAllways();
-		
 		});
+				
+	}
+			
+	function getSearch() {
+					
+		var myUno = ${check.uno};
+					
+		userName = $('#name').val();
+					
+		graduation = $('#graduation').val();
+					
+		division = $('#searchs');
+					
+		source = $('#search-template').html();
+					
+		template = Handlebars.compile(source);
+					
+		division.empty();
+					
+		$.ajax({
+			type: 'post',
+			url: '/allways/search/user',
+			headers: {
+				'Content-Type': 'application/json',
+				'X-HTTP-Method-Override': 'post'
+			},
+			data: JSON.stringify({
+				'uno': myUno,
+				'userName': userName,
+				'graduation': graduation
+			}),
+			success: function(users) {							
+				console.log(users);
+				$(users).each(function(index, value){
+
+					var content = {
+						uno : value.uno,
+						userName: value.userName,
+						userId: value.userId,
+						graduation: value.graduation
+					}
+								
+						
+					var searchItem = template(content);
+								
+					division.append(searchItem);
+								
+					if(this.pf_photo){
+						var url = '/allways'+this.pf_photo;
+						$('.myAllaiserProfile[data-uno='+this.uno+']').attr('src', url);
+					}
+								
+				});
+							
+							
+			}
+						
+		});
+	}	
+						
+	getAllAllways();
+		
+});
 	
 </script>
 
@@ -1423,10 +1395,7 @@ $(document).ready(function(){
 			success: function(result) {
 				if(result == 1){
 					alert('성공');
-				}else{
-					alert('이미 북마크된 게시물 입니다.');					
-				}
-				
+				}		
 			},
 			error : function(error) {
 				alert('이미 북마크된 게시물 입니다.');
