@@ -274,96 +274,115 @@
 		</div>
 	</div>
 </div>
+			
 <!-- 게시믈 상세 페이지 -->
 <div class="modal fade" id="board-detail" role="dialog">
-	<div class="modal-dialog board-dialog" >
-		<div class="modal-content">
-			
-			<div class="row">
-					<div class="col-xs-7">
-						<div id="boardCarousel" class="carousel slide"> 
+	<div class="modal-dialog board-dialog">
+			<div class="modal-content">
 
-							<ol class="carousel-indicators" id = "carouselOl">
+				<div class="row">
+					<div class="col-xs-7">
+						<div id="boardCarousel" class="carousel slide">
+
+							<ol class="carousel-indicators" id="carouselOl">
 							</ol>
-	
-							<div class="carousel-inner" id = "carouselDiv">
-							</div>
- 
+
+							<div class="carousel-inner" id="carouselDiv"></div>
+
 						</div>
 					</div>
-					
+
 					<div class="col-xs-5">
-						
+
 						<div class="modal-header">
-							<div>게시물 상세 페이지</div>
-						</div>
-						
-						<div class="boardItemHead">
-
-						<img id = "writer-img" class="img-circle boardProfileImg" src="/allways/resources/images/default_profile_img.jpg"
-						style="float: left; padding: 8px; width:70px; height:45px;"
-						onclick="location.href='/allways'">
-						
-						<div style="display: inline-block;">
-						<a href = "/allways" id="writer-userId"></a><br />
-						<span style="font-size: x-small; color: gray;" id="writer-regDate"></span>
+							<div style="display: inline-block;">게시물 상세 페이지</div>
+							
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true" aria-label="Close">
+                     			<span aria-hidden="true">&times;</span>
+                  			</button>
+                  			
 						</div>
 
-						<div class="dropdown" style="float: right;">
-	  	 				<span class="glyphicon glyphicon-align-justify dropdown-toggle btn" id="menu1" data-toggle="dropdown"></span>
-	
-		  				  	<ul class="dropdown-menu" role="menu" aria-labelledby="menu1" style="right: 0; left: auto;">
-			   			 		<li role="presentation"><a role="menuitem" tabindex="-1" href="#">북마크</a></li>
-			     			 	<li role="presentation" id="modalBoardUpdate"><a role="menuitem" tabindex="-1" href="#">수정</a></li>
-			     			 	<li role="presentation" class="divider"></li>
-			     	 			<li role="presentation" id="modalBoardDelete"><a role="menuitem" tabindex="-1"  id="{{boardDeleteBtn}}" class="boardDeleteBtn">삭제</a></li>
-			    			</ul>
+						<div class="boardItemHead clearfix" style="padding: 8px;">
+							
+							<img id="writer-img"
+								src="/allways/resources/images/default_profile_img.jpg"
+								height="45px" width="45px"
+								class = "img-circle"
+								style="float: left;"
+								onclick="location.href='/allways'">
+
+							<div style="display: inline-block; padding-left: 8px;">
+								<a href="/allways" id="writer-userId"></a><br /> <span
+									style="font-size: x-small; color: gray;" id="writer-regDate"></span>
+							</div>
+
+							<div class="dropdown" style="float: right;">
+								<span
+									class="glyphicon glyphicon-align-justify dropdown-toggle btn"
+									id="menu1" data-toggle="dropdown"></span>
+
+								<ul class="dropdown-menu" role="menu" aria-labelledby="menu1"
+									style="right: 0; left: auto;">
+									<li role="presentation"><a role="menuitem" tabindex="-1"
+										href="#">북마크</a></li>
+									<li role="presentation" id="modalBoardUpdate"><a
+										role="menuitem" tabindex="-1" href="#">수정</a></li>
+									<li role="presentation" class="divider"></li>
+									<li role="presentation" id="modalBoardDelete"><a
+										role="menuitem" tabindex="-1" id="{{boardDeleteBtn}}"
+										class="boardDeleteBtn">삭제</a></li>
+								</ul>
+							</div>
+
+						</div>
+						<!-- BoardItemHead -->
+
+						<div>
+							<p id="writer-content"></p>
 						</div>
 
-						</div> <!-- BoardItemHead -->
-						
-						<div>	
-	    					<p id="writer-content"></p>
-						</div>
-						
 						<div class="container-fluid boardTail">
 							<div class="row">
-							<div class="col-xs-6" style="text-align: center;" >
-							<a id="{{bookMark}}" class = "btn" >북마크</a>
-							</div>
-							<div class="col-xs-6 " style="text-align: center;" >
-							<a class="reply btn" >댓글</a>
-							</div>
-							</div>
-						</div>
-						
-						<div id="replyInsertForm" class="clearfix">
-							<img id = "profileImg" src="/allways/resources/images/default_profile_img.jpg"
-							class = "img-circle replyProfileImg"
-							onclick="location.href='/allways'" />
-							
-							<div class="input-group replyInsertContent">
-								<textarea id="replyTextModal" class="autosize form-control" rows="1" placeholder="내용 입력" style="resize: none; margin: 8px; width = 100%"></textarea>
-		
-								<div class="input-group-btn">
-								<button id= "replyInsertModal" data-bno="" class="replyInsertBtn btn btn-default ">
-								<i class="glyphicon glyphicon-edit"></i>
-								</button>
+								<div class="col-xs-6" style="text-align: center;">
+									<a id="{{bookMark}}" class="btn">북마크</a>
 								</div>
-							</div>	
+								<div class="col-xs-6 " style="text-align: center;">
+									<a data-bno="{{bno}}" class="reply btn">댓글</a>
+								</div>
+							</div>
 						</div>
-						
-						<div id= "modalReplyArea" class= "replyArea">
-						
+
+						<div id="replyInsertForm" class="clearfix">
+							<div class="replyProfileImg">
+								<img id="modalreplyInsertImg"
+									src="/allways/resources/images/default_profile_img.jpg"
+									class="img-circle" onclick="location.href='/allways'"
+									height="45px" width="45px"/>
+							</div>
+
+							<div class="input-group replyInsertContent">
+								<textarea id="replyTextModal" class="autosize form-control"
+									rows="1" placeholder="내용 입력" style="resize: none; margin: 8px;"></textarea>
+
+								<div class="input-group-btn">
+									<button id="replyInsertModal" data-bno=""
+										class="replyInsertBtn btn btn-default ">
+										<i class="glyphicon glyphicon-edit"></i>
+									</button>
+								</div>
+							</div>
 						</div>
-						
+
+						<div id="modalReplyArea" class="replyArea"></div>
+
 					</div>
 				</div>
-			
-			
+
+
+			</div>
 		</div>
-	</div>
-</div>					
+</div>
 
 	
 <footer class="container-fluid text-center">

@@ -18,18 +18,11 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		
-		logger.info("AuthInterceptor");
-		
-		User loginId = null;
+				
 		
 		HttpSession session = request.getSession();
-		if(session.getAttribute("check") != null) {
-			
-			loginId = (User) session.getAttribute("check");
-			System.out.println(loginId.toString());
-						
-		}
+		
+		Object loginId = session.getAttribute("check");
 		
 		if(loginId != null) {
 			return true;

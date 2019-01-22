@@ -289,18 +289,24 @@
 					<div class="col-xs-5">
 
 						<div class="modal-header">
-							<div>게시물 상세 페이지</div>
+							<div style="display: inline-block;">게시물 상세 페이지</div>
+							
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true" aria-label="Close">
+                     			<span aria-hidden="true">&times;</span>
+                  			</button>
+                  			
 						</div>
 
-						<div class="boardItemHead">
-
+						<div class="boardItemHead clearfix" style="padding: 8px;">
+							
 							<img id="writer-img"
 								src="/allways/resources/images/default_profile_img.jpg"
 								height="45px" width="45px"
-								style="border-radius: 30px; float: left; padding: 8px"
+								class = "img-circle"
+								style="float: left;"
 								onclick="location.href='/allways'">
 
-							<div style="display: inline-block;">
+							<div style="display: inline-block; padding-left: 8px;">
 								<a href="/allways" id="writer-userId"></a><br /> <span
 									style="font-size: x-small; color: gray;" id="writer-regDate"></span>
 							</div>
