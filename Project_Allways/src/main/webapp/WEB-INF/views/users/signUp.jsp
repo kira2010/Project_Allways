@@ -22,7 +22,7 @@
 <script type="text/javascript">
 //<![CDATA[
 	function check() {
-		var form = document.getElementById("signUpForm");
+		var form = document.getElementById('signUpForm');
 		var year = $("select[name='birthY']").val();
 		var month = $("select[name='birthM']").val();
 		var day = $("select[name='birthD']").val();
@@ -32,85 +32,93 @@
 		// TODO : 유효성 검사
 		
 		return true;
-		
 	}
 //]]>
 </script>
 <script>
-$(document).ready(function() {	
-
-	$("#userId").focusout(function() {
+$(document).ready(function() {
+	$('#userId').focusout(function() {
 		var registId = $('#userId').val();
 		$.ajax({
-			url : "../users/checkId",
-			type : "POST",
+			url : '../users/checkId',
+			type : 'POST',
 			data : {
 				userId : registId
 			},
 			success : function(result) {
 				if (result == 'existed') {
-					$("#id_check").html("중복된 ID가 있습니다.");
-					$("#id_check").css('color', 'red');
-					$("#joinBtn").attr("disabled", "disabled");
+					$('#id_check').html('중복된 ID가 있습니다.');
+					$('#id_check').css('color', 'red');
+					$('#joinBtn').attr('disabled', 'disabled');
 					$('#userId').focus();
-				} else if (result == 'not existed') {
-					$("#id_check").html("사용가능한 ID 입니다.");
-					$("#id_check").css('color', 'green');
-					$("#joinBtn").removeAttr("disabled");
-				} else {
-					$("#id_check").html("ID 입력이 잘못되었습니다.");
-					$("#id_check").css('color', 'red');
-					$("#joinBtn").attr("disabled", "disabled");
+				} else if (result == 'not input') {
+					$('#id_check').html('반드시 입력해야 합니다!!');
+					$('#id_check').css('color', 'red');
+					$('#joinBtn').attr('disabled', 'disabled');
 					$('#userId').focus();
+				} else if (result == 'not existed'){
+					$('#id_check').html('사용가능한 ID 입니다.');
+					$('#id_check').css('color', 'green');
+					$('#joinBtn').removeAttr('disabled');
 				}
 			},
 		});
 	});
 	
-	$('#confirm').focusout(function(){
+	$('#userPwd').focusout(function() {
 		var first = $('#userPwd').val();
-		var second = $('#confirm').val();
-		if($("#userPwd").val().length < 8){	
-			$("#pwCheck").html("비밀번호는 8자 이상으로 설정해야 합니다.")
-			$("#pwCheck").css('color', 'red');
-			$("#userPwd").val('');
-			$("#userPwd").focus();
-		} else if((first != '' || second != '') && first !== second){
-			$("#pw_check").html("비밀번호가 일치하지 않습니다.");
-			$("#pw_check").css('color', 'red');
-			$('#confirm').val('');
-			$('#confirm').focus();
-		} else  {
-			$('#pwCheck').html("");
-			$('#pw_check').html("확인 되었습니다.");
-			$("#pw_check").css('color', 'green');
+		
+		if(first.length < 8){	
+			$('#pwCheck1').html('비밀번호는 8자 이상으로 설정해야 합니다.')
+			$('#pwCheck1').css('color', 'red');
+			$('#userPwd').val('');
+			$('#userPwd').focus();
+		} else {
+			$('#pwCheck1').html('사용가능 합니다.');
+			$('#pwCheck1').css('color', 'green');
 		}
 	});
 	
-	$("#userEmail").focusout(function() {
+	$('#confirm').focusout(function() {
+		var first = $('#userPwd').val();
+		var second = $('#confirm').val();
+		
+		if((first != '' || second != '') && first !== second){
+			$('#pwcheck2').html('비밀번호가 일치하지 않습니다.');
+			$('#pwcheck2').css('color', 'red');
+			$('#confirm').val('');
+			$('#confirm').focus();
+		} else  {
+			//$('#pwCheck1').html('');
+			$('#pwcheck2').html('확인 되었습니다.');
+			$('#pwcheck2').css('color', 'green');
+		}
+	});
+	
+	$('#userEmail').focusout(function() {
 		var registEmail = $('#userEmail').val();
 		$.ajax({
-			url : "../users/checkEmail",
-			type : "POST",
+			url : '../users/checkEmail',
+			type : 'POST',
 			data : {
 				userEmail : registEmail
 			},
 			success : function(result) {
 				if (result == 'existed') {
-					$('#email_check').html("Email을 사용중인 User가 이미 존재합니다");
+					$('#email_check').html('Email을 사용중인 User가 이미 존재합니다');
 					$('#email_check').css('color', 'red');
-					$('#joinBtn').attr("disabled", "disabled");
+					$('#joinBtn').attr('disabled', 'disabled');
+					$('#userEmail').focus();
+				} else if (result == 'not input') {
+					$('#email_check').html('반드시 입력해야 합니다.');
+					$('#email_check').css('color', 'red');
+					$('#joinBtn').attr('disabled', 'disabled');
 					$('#userEmail').focus();
 				} else if (result == 'not existed') {
-					$('#email_check').html("사용 가능한 Email 입니다.");
+					$('#email_check').html('사용 가능한 Email 입니다.');
 					$('#email_check').css('color', 'green');
-					$('#joinBtn').removeAttr("disabled");
-				} else {
-					$('#email_check').html("Email 입력이 잘못되었습니다.");
-					$('#email_check').css('color', 'red');
-					$('#joinBtn').attr("disabled", "disabled");
-					$('#userEmail').focus();
-				}
+					$('#joinBtn').removeAttr('disabled');
+				} 
 			},
 		});
 	});
@@ -120,6 +128,7 @@ $(document).ready(function() {
 .field-container {
     display: inline-block;
 }
+
 body {
 	background-color: #f1f1f1;
 }
@@ -135,7 +144,6 @@ body {
 
 </head>
 <body>
-
 	<div class="w3-content w3-container w3-margin-top">
 		<div class="w3-container w3-card-4">
 			<div class="w3-center w3-large w3-margin-top">
@@ -150,11 +158,11 @@ body {
 					</p>
 					<p>
 						<input class="w3-input" id="userPwd" name="userPwd" type="password" placeholder="비밀번호" required />
-						<div id="pwCheck"></div>
+						<div id="pwCheck1"></div>
 					</p>
 					<p>
 						<input class="w3-input" id="confirm" name="confirm" type="password" placeholder="비밀번호 확인" required />
-						<div id="pw_check"></div>
+						<div id="pwcheck2"></div>
 					</p>
 					<p>
 						<input type="text" id="userName" name="userName" class="w3-input" placeholder="이름" required />
@@ -193,14 +201,13 @@ body {
 						</div> 
 			
 				<script>
-				
 					var month = 1;
 					var year = 2019;
 					var day, seq, daysInMonth, prevDaysInMonth=-1;
 
 					// 현재 연도에서 현재 연도로 연도 드롭 다운을 초기화. -100
 					var yearOption = '<option value="">Year</option>';
-					for(i=year; i >= year-100; i--) {
+					for (i = year; i >= year - 100; i--) {
 						yearOption = yearOption + '<option value='+i+'>'+i+'</option>';
 					}
 					$('.dobYear').append(yearOption);

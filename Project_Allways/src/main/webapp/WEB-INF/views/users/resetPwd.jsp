@@ -15,15 +15,15 @@
 		<div class="w3-container w3-card-4">
 			<form action="resetPwd" method="post">
 				<div class="w3-center w3-large w3-margin-top">
-					<h2 class="resetPwd">비밀번호 변경</h2>
+					<h2 class="resetPwd">비밀번호 재설정</h2>
 				</div>
 				<div>
 					<p>
 						<input class="w3-input" type="password" id="resetPwd1" name="userPwd" placeholder="새로운 비밀번호를 입력하세요!" required />
-						<div id="resetPwd1"></div>
+						<div id="checkPwd1"></div>
 						<input class="w3-input" type="password" id="resetPwd2" placeholder="다시 입력해주세요!" required />
-						<div id="resetPwd2"></div>					
-					</p>
+						<div id="checkPwd2"></div>					
+				 	</p>
 					<p class="w3-center">
 						<button type="submit" id=pwdBtn class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round">비밀번호 변경 확인</button>
 					</p>
@@ -34,23 +34,34 @@
 <script>
 $(document).ready(function(){
 	
-	$('#resetPwd').focusout(function(){
+	$('#resetPwd1').focusout(function() {
+		var first = $('#resetPwd1').val();
+		
+		if (first.length < 8) {
+			$('#checkPwd1').html('비밀번호는 8자 이상으로 설정해야 합니다.');
+			$('#checkPwd1').css('color', 'red');
+			$('#resetPwd1').val('');
+			$('#resetPwd1').focus();
+		} else {
+			$('#checkPwd1').html('사용가능 합니다.');
+			$('#checkPwd1').css('color', 'green');
+		}
+	});
+	
+	
+	$('#resetPwd2').focusout(function(){
 		var first = $('#resetPwd1').val();
 		var second = $('#resetPwd2').val();
-		if($("#reset1").val().length < 8){	
-			$("#resetPwd1").html("비밀번호는 8자 이상으로 설정해야 합니다.")
-			$("#resetPwd1").css('color', 'red');
-			$("#resetPwd1").val('');
-			$("#resetPwd1").focus();
-		} else if((first != '' || second != '') && first !== second){
-			$("#resetPwd2").html("비밀번호가 일치하지 않습니다.");
-			$("#resetPwd2").css('color', 'red');
+		
+		if((first != '' || second != '') && first !== second){
+			$('#checkPwd2').html('비밀번호가 일치하지 않습니다.');
+			$('#checkPwd2').css('color', 'red');
 			$('#resetPwd2').val('');
 			$('#resetPwd2').focus();
 		} else  {
-			$('#resetPwd1').html("");
-			$('#resetPwd2').html("확인 되었습니다.");
-			$("#resetPwd2").css('color', 'green');
+			$('#checkPwd1').html('');
+			$('#checkPwd2').html('확인 되었습니다.');
+			$('#checkPwd2').css('color', 'green');
 		}
 	});
 	
