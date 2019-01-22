@@ -11,7 +11,7 @@ public interface UserDao {
 	
 	boolean checkUserEmail(String userEmail);
 	
-	boolean checkUserName(User user);
+	String getkUserName(User user);
 	
 	int findUnoFromId(String userId);
 	

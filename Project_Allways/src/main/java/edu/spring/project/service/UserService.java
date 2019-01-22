@@ -12,6 +12,9 @@ public interface UserService {
 	// Email 중복 확인
 	public boolean checkEmail(String userEmail, HttpServletResponse response) throws Exception;
 	
+	// 이름 존재 여부
+	public String getName(User user, HttpServletResponse response) throws Exception;
+	
 	// 회원 가입
 	public int insert(User user);
 	
@@ -19,7 +22,7 @@ public interface UserService {
 	public User login(User user);
 	
 	// 아이디 찾기
-	public String findId(User user, HttpServletResponse response) throws Exception;
+	public String findId(User user);
 	
 	// 비밀번호 찾기
 	public int findPwd(User user, HttpServletResponse response) throws Exception;
@@ -28,7 +31,7 @@ public interface UserService {
 	public int updateUser(User user);
 	
 	// 비밀번호 변경
-	public int resetUserPwd(int uno);
+	public int resetUserPwd(User user);
 	
 	// 회원 탈퇴
 	public int deleteUser(int uno);

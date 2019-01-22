@@ -117,13 +117,11 @@
 		INSTR(${user.useremail}, #{userEmail}) > 0
 	</select>
 	
-	<select id="existUserName" resultType="java.lang.Integer">
-		SELECT EXISTS(
-			SELECT ${user.name} FROM ${tbl_board}
-			WHERE ${user.userid} = #{userId}
-			AND
-			${user.useremail} = #{userEmail}
-		) AS isEXIST
+	<select id="getUserNameByIdAndEmail" resultType="java.lang.String">
+		SELECT ${user.username} FROM ${tbl_user}
+		WHERE INSTR(${user.userid}, #{userId}) > 0
+		AND
+		INSTR(${user.useremail}, #{userEmail}) > 0
 	</select>
 	
 	<!-- 회원가입 -->

@@ -32,6 +32,13 @@ public class UserServiceImple implements UserService {
 		return userDao.checkUserEmail(userEmail);
 	}
 	
+	// 이름 존재 여부
+	public String getName(User user, HttpServletResponse response) throws Exception {
+		logger.info("getName() 호출");
+		
+		return userDao.getkUserName(user);
+	}
+	
 	// 로그인
 	public User login(User user) {
 		logger.info("login() 호출"); 
@@ -47,7 +54,7 @@ public class UserServiceImple implements UserService {
 	}
 
 	// 아이디 찾기
-	public String findId(User user, HttpServletResponse response) throws Exception {
+	public String findId(User user) {
 		logger.info("findId() 호출");
 		
 		return userDao.findUserId(user);
@@ -68,10 +75,10 @@ public class UserServiceImple implements UserService {
 	}
 	
 	// 비밀번호 변경
-	public int resetUserPwd(int uno) {
+	public int resetUserPwd(User user) {
 		logger.info("resetUserPwd() 호출");
 		
-		return userDao.resetUserPwd(uno);
+		return userDao.resetUserPwd(user);
 	}
 	
 	// 회원 탈퇴
@@ -80,4 +87,5 @@ public class UserServiceImple implements UserService {
 		
 		return userDao.deleteUser(uno);
 	}
+	
 }

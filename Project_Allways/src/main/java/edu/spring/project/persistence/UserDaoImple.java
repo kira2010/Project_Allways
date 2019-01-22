@@ -61,20 +61,10 @@ public class UserDaoImple implements UserDao {
 		return result;
 	}
 	
-	// 비밀번호 찾기 시 이름 확인
-	public boolean checkUserName(User user) {
-		boolean result = false;
+	public String getkUserName(User user) {
+		logger.info("getUserName() 호출");
 		
-		logger.info("checkUserName() 호출"); 
-		
-		int checkResult = session.selectOne(USER_MAPPER + ".existUserName", user);
-		
-		// 등록된 ID와 Email에 대한 이름이 일치할 경우 true 반환!!
-		if (checkResult == 1) {
-			result = true;
-		}
-		
-		return result;
+		return session.selectOne(USER_MAPPER + ".getUserNameByIdAndEmail", user);
 	}
 	
 	// ID로 회원번호 찾기
