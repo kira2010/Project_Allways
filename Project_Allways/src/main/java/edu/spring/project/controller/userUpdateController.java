@@ -12,18 +12,24 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.spring.project.domain.User;
+import edu.spring.project.service.UserPageService;
 import edu.spring.project.service.UserService;
 
 @Controller
 public class userUpdateController {
 	
 	@Autowired private UserService userService;
+	@Autowired private UserPageService userPageService;
 	
 	@ResponseBody
 	@RequestMapping(value = "userUpdate", method = RequestMethod.POST)
-	public ResponseEntity<Integer> updateUserInfo(@RequestBody User user) {
+	public ResponseEntity<Integer> updateUserInfo(@RequestBody User user, HttpSession session) {
 		
 		int result = userService.updateUser(user);
+		
+		User loginId = userPageService.check(user.getUno());
+		
+		session.setAttribute("check", loginId);
 		
 		ResponseEntity<Integer> entity = null;
 		if (result == 1) {

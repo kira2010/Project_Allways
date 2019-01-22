@@ -137,7 +137,7 @@
 			</div>
 			
 			<form class="form-inline myAllayierSearch">
-				<input id="allwaysName" class="form-control" type="text" placeholder="친구 이름">
+				<input id="searchAllwaysName" class="form-control" type="text" placeholder="친구 이름">
 				<button id="btnallwaysSearch" type="button"
 				class="btn btn-outline-light text-dark">
 				<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
@@ -361,7 +361,7 @@
 								</div>
 							</div>
 						</div>
-
+						
 						<div id="modalReplyArea" class="replyArea"></div>
 
 					</div>
@@ -709,7 +709,7 @@ $(document).ready(function() {
 			
 	function getAllAllwaysSearch() {
 				
-		var allwaysName = $('#allwaysName').val();
+		var allwaysName = $('#searchAllwaysName').val();
 				
 		var myUno = ${check.uno};
 				

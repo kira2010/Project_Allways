@@ -201,7 +201,7 @@
 				</div>
 
 				<form class="form-inline myAllayierSearch">
-					<input id="allwaysName" class="form-control" type="text"
+					<input id="searchAllwaysName" class="form-control" type="text"
 						placeholder="친구 이름">
 					<button id="btnallwaysSearch" type="button"
 						class="btn btn-outline-light text-dark">
@@ -780,7 +780,8 @@ $(document).ready(function() {
 				
 	});
 			
-			
+
+	
 	function getAllAllways() {
 				
 		var myUno = ${check.uno};
@@ -882,7 +883,76 @@ $(document).ready(function() {
 	}	
 			
 	getAllAllways();
+	
+	function getAllAllwaysSearch() {
 		
+		var allwaysName = $('#searchAllwaysName').val();
+				
+		var myUno = ${check.uno};
+				
+		allwaysDivision = $('#allways-searchs');
+
+		allwaysSource = $('#allways-template').html();
+
+		allwaysTemplate = Handlebars.compile(allwaysSource);
+				
+		allwaysDivision.empty();
+				
+		if (allwaysName == "") {
+			alert('이름을 작성해주세요');
+		}	
+				
+		$.ajax({
+			type: 'post',
+			url: '/allways/search/allwaysSearch',
+			headers: {
+				'Content-Type': 'application/json',
+				'X-HTTP-Method-Override': 'post'
+			},
+			data: JSON.stringify({
+				'uno' : myUno,
+				'userName' : allwaysName
+			}),
+			success: function(data) {
+				console.log(data)
+				if (data != "") {
+					alert('검색 성공');
+							
+					$(data).each(function(index, value) {
+						console.log(value.uno);
+								
+						var content = {
+								uno : value.uno,
+								userId: value.userId,
+								allwaysName: value.userName
+						}
+								
+						console.log(content);
+								
+						var allwaysSearchItem = allwaysTemplate(content);
+								
+						allwaysDivision.append(allwaysSearchItem);
+						
+						if(this.pf_photo){
+							var url = '/allways'+this.pf_photo;
+							$('.myAllaiserProfile[data-uno='+this.uno+']').attr('src', url);
+						}
+								
+					});
+							
+							
+				} else {
+					alert('검색할 내용이 없습니다.');
+					getAllAllways();
+				}
+			}
+					
+			
+		});
+				
+				
+	}
+	
 	$(document).on('change', '#bImg', function(){
 
 		const target = document.getElementById('bImg');
