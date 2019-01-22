@@ -2,6 +2,7 @@ package edu.spring.project.persistence;
 
 import java.util.List;
 
+import edu.spring.project.domain.Allwaiser;
 import edu.spring.project.domain.Board;
 
 public interface BoardDao {
@@ -23,7 +24,9 @@ public interface BoardDao {
 	
 	int countMyAllwaisersPost(int uno);
 	
-	List<Board> readMyTimeLine(int uno, int page);
+	List<Board> readAllwaiserPost(Allwaiser allwaiser, int page);
+	
+	List<Board> readTimeLine(Allwaiser allwaiser, int page);
 	
 	int createBoard(Board board);
 	

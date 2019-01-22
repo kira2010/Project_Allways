@@ -25,7 +25,8 @@ public class BoardServiceImple implements BoardService {
 
 	public List<Board> selectTimeLine(int uno, int page) {
 		
-		return boardDao.readMyTimeLine(uno, page);
+		//return boardDao.readMyTimeLine(uno, page);
+		return null;
 	}
 
 	public List<Board> selectPosting(int uno, int page) {

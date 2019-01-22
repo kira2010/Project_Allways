@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import edu.spring.project.domain.Allwaiser;
 import edu.spring.project.domain.Board;
 
 @Repository
@@ -20,6 +21,8 @@ public class BoardDaoImple implements BoardDao {
 	private final Logger logger = LoggerFactory.getLogger(BoardDaoImple.class);
 	
 	@Autowired private SqlSession session;
+	
+	@Autowired private AllwaiserDao allwaiserDao;
 	
 	// 내가 작성한 모든 게시글 가져오기
 	public List<Board> readAll(int uno, int page) {
@@ -109,15 +112,56 @@ public class BoardDaoImple implements BoardDao {
 		return session.selectOne(BOARD_MAPPER + ".countMyAllwaisersPost", uno);
 	}
 	
-	// 내 타임라인 가져오기
-	public List<Board> readMyTimeLine(int uno, int page) {
-		logger.info("readMyTimeLine() 호출");
+	// 친구의 마이 페이지 혹은 친구가 아닌 user의 마이 페이지에 접속할 때의 경우
+	public List<Board> readAllwaiserPost(Allwaiser allwaiser, int page) {
+		logger.info("readAllwaiserPost() 호출");
+		
+		int result = allwaiserDao.existAllwaiser(allwaiser);
 		
 		Map<String, Integer> params = new HashMap<String, Integer>();
-		params.put("uno", uno);
+		
+		if (result == 1) {
+			params.put("result", 1);
+		} else {
+			params.put("result", 0);
+		}
+		params.put("uno", allwaiser.getAllwaiser_uno());
+		params.put("start", page);
+		
+		return session.selectList(BOARD_MAPPER + ".selectAllwaiserPost", params);
+	}
+	
+	// 타임라인 가져오기
+	public List<Board> readTimeLine(Allwaiser allwaiser, int page) {
+		logger.info("readTimeLine() 호출");
+		
+		Map<String, Integer> params = new HashMap<String, Integer>();
+		
+		// 로그인한 user의 회원번호
+		int uno = allwaiser.getUno();
+		
+		// 접속하려는 다른 user의 회원번호
+		int allwaiser_uno = allwaiser.getAllwaiser_uno();
+		
+		// 내 페이지에 접속할 경우
+		if (uno == allwaiser_uno) {
+			params.put("result", 2);
+			params.put("uno", uno);
+		} else {  // 내가 아닌 다른 user의 마이 페이지에 접속할 경우
+			int result = allwaiserDao.existAllwaiser(allwaiser);
+			
+			// 친구관계일 경우
+			if (result == 1) {
+				params.put("result", 1);
+			} else {  // 친구관계가 아닌 경우
+				params.put("result", 0);
+			}
+			params.put("uno", allwaiser_uno);
+		}
+		
 		params.put("start", page * 10);
 		
-		return session.selectList(BOARD_MAPPER + ".selectMyAndAllwaisersPost", params);
+		return session.selectList(BOARD_MAPPER + ".selectTimeLine", params);
 	}
 	
 	// 게시글 작성하기

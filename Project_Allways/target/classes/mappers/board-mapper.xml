@@ -91,15 +91,27 @@
 		AND (${board.privacy_bounds} = 0 OR ${board.privacy_bounds} = 1)
 	</select>
 	
-	<!-- 타임라인(내가 쓴 글 + 내가 추가한 친구의 전체/친구공개 게시물) 가져오기 -->
-	<select id="selectMyAndAllwaisersPost" resultType="Board">
+	<!-- 내 타임라인(내가 쓴 글 + 내가 추가한 친구의 전체/친구공개 게시물) 가져오기 -->
+	<select id="selectTimeLine" resultType="Board">
 		SELECT * FROM ${tbl_board}
-		WHERE ${board.uno} = #{uno}
-		OR
-		${board.uno} IN (
-			SELECT ${allwaiser.allwaiseruno}
-			FROM ${tbl_allwaiser}
-			WHERE ${allwaiser.uno} = #{uno})
+		WHERE 
+		<if test="result == 2">
+			${board.uno} = #{uno}
+			OR
+			(${board.uno} IN (
+				SELECT ${allwaiser.allwaiseruno}
+				FROM ${tbl_allwaiser}
+				WHERE ${allwaiser.uno} = #{uno})
+			AND (${board.privacy_bounds} = 0 OR ${board.privacy_bounds} = 1))
+		</if>
+		<if test="result == 1">
+			${board.uno} = #{uno}
+			AND (${board.privacy_bounds} = 0 OR ${board.privacy_bounds} = 1)
+		</if>
+		<if test="result == 0">
+			${board.uno} = #{uno}
+			AND ${board.privacy_bounds} = 0
+		</if>
 		ORDER BY ${board.bno} DESC
 		LIMIT #{start}, 10
 	</select>
@@ -115,6 +127,23 @@
 			WHERE ${allwaiser.uno} = #{uno})
 	</select>
 	 -->
+	 
+	 <!-- 친구관계 일 경우 공개범위 0/1로 된 board List를,
+	 	    아닐 경우 공개범위 0의 board List 가져오기 -->
+	 <select id="selectAllwaiserPost" resultType="Board">
+	 	SELECT * FROM ${tbl_board}
+	 	WHERE
+	 	<if test="result == 1">
+ 			${board.uno} = #{uno}
+ 			AND (${board.privacy_bounds} = 0 OR ${board.privacy_bounds} = 1)
+	 	</if>
+	 	<if test="result == 0">
+	 		${board.uno} = #{uno}
+	 		AND ${board.privacy_bounds} = 0
+	 	</if>
+	 	ORDER BY ${board.bno} DESC
+	 	LIMIT #{start}, 10
+	 </select>
 	
 	<!-- 게시글 자세히 보기 -->
 	<select id="selectByBno" resultType="Board">
