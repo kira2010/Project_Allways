@@ -145,7 +145,7 @@ public class BoardDaoImple implements BoardDao {
 		
 		// 내 페이지에 접속할 경우
 		if (uno == allwaiser_uno) {
-			params.put("result", 2);
+			params.put("result", 1);
 			params.put("uno", uno);
 		} else {  // 내가 아닌 다른 user의 마이 페이지에 접속할 경우
 			int result = allwaiserDao.existAllwaiser(allwaiser);

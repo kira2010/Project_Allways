@@ -94,8 +94,8 @@
 	<!-- 내 타임라인(내가 쓴 글 + 내가 추가한 친구의 전체/친구공개 게시물) 가져오기 -->
 	<select id="selectTimeLine" resultType="Board">
 		SELECT * FROM ${tbl_board}
-		WHERE 
-		<if test="result == 2">
+		WHERE
+		<if test="result == 1">
 			${board.uno} = #{uno}
 			OR
 			(${board.uno} IN (
@@ -103,10 +103,6 @@
 				FROM ${tbl_allwaiser}
 				WHERE ${allwaiser.uno} = #{uno})
 			AND (${board.privacy_bounds} = 0 OR ${board.privacy_bounds} = 1))
-		</if>
-		<if test="result == 1">
-			${board.uno} = #{uno}
-			AND (${board.privacy_bounds} = 0 OR ${board.privacy_bounds} = 1)
 		</if>
 		<if test="result == 0">
 			${board.uno} = #{uno}

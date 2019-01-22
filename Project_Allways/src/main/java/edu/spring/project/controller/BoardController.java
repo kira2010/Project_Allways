@@ -154,7 +154,7 @@ public class BoardController {
 		
 		Allwaiser allwaiser = new Allwaiser();
 		allwaiser.setUno(user.getUno());
-		allwaiser.setF_no(fno);
+		allwaiser.setAllwaiser_uno(fno);
 		
 		List<Board> result = boardService.selectTimeLine(allwaiser, page);
 				
@@ -174,10 +174,16 @@ public class BoardController {
 		
 		Allwaiser allwaiser = new Allwaiser();
 		allwaiser.setUno(user.getUno());
-		allwaiser.setF_no(fno);
+		allwaiser.setAllwaiser_uno(fno);
 		
-		// 나 일때 하고 친구 일때가 다름 수정!!!
-		List<Board> result = boardService.selectPosting(allwaiser, page);
+		List<Board> result = null;
+		
+		if (user.getUno() == fno) {
+			result = boardService.selectMyPosting(user.getUno(), page);
+		} else {
+			// 나 일때 하고 친구 일때가 다름 수정!!!
+			result = boardService.selectPosting(allwaiser, page);
+		}		
 		
 		ResponseEntity<List<Board>> entity = null;
 		if(result != null) {
