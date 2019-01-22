@@ -36,7 +36,7 @@
 				<form class="form-inline boardSearchForm" action="/allways/board/searchPage" method="get">
 					<select class="btn" id="searchBounds" name ="searchBounds" style="display: inline-block;">
 						<option value="1">내용 검색</option>
-						<option value="2">아이디 검색</option>
+						<option value="2">ID 검색</option>
 						<option value="3">태그검색</option>
 					</select>
 					
@@ -93,8 +93,8 @@
 							</div>
 							<div id="btnSub">
 								<input class="subscribe btn btn-light text-dark" type="submit"
-									value="구독하기" /> <input class="cancel btn btn-light text-dark"
-									type="submit" value="구독취소하기" />
+									value="Follow 추가" /> <input class="cancel btn btn-light text-dark"
+									type="submit" value="Follow 해제" />
 							</div>
 							<!-- 사진 수정 버튼 -->
 							<div>
@@ -197,12 +197,12 @@
 			<!-- 오른쪽 메뉴바 -->
 			<div class="col-sm-3 sidenav">
 				<div style="font-size:large; background-color: #ffffff; margin-bottom: 1px; margin-left: 8px;">
-					친구 리스트
+					Following 리스트
 				</div>
 
 				<form class="form-inline myAllayierSearch">
 					<input id="searchAllwaysName" class="form-control" type="text"
-						placeholder="친구 이름">
+						placeholder="Allwaiser 이름">
 					<button id="btnallwaysSearch" type="button"
 						class="btn btn-outline-light text-dark">
 						<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
@@ -477,7 +477,7 @@
 
 	<select id="privacyBounds">
 		<option value="0">전체 공개</option>
-		<option value="1">친구 공개</option>
+		<option value="1">Follower 공개</option>
 		<option value="2">나만 보기</option>
 	</select>	
 
@@ -618,7 +618,7 @@
 			</div>
 			<div class="insert" style="float: right;">	
 				<input id="uno" value="{{uno}}" type="hidden"/>
-				<a class="btn btn-default btnInsert">구독추가</a>
+				<a class="btn btn-default btnInsert">Follow 추가</a>
 			</div>
 		</div>		
 	</div>
@@ -631,7 +631,7 @@
 		<span style:"font-size: x-small; color: #f1f1f1">({{userId}})</span>
 		<div class="delete" style="float: right;">	
 				<input id="allways-uno" value="{{uno}}" type="hidden"/>
-				<button class="btn btn-default btnDelete">구독끊기</button>
+				<button class="btn btn-default btnDelete">Follow 해제</button>
 		</div>
 	</div>
 </script>
@@ -756,7 +756,7 @@ $(document).ready(function() {
 				
 				
 		console.log(allwaiser_uno);
-		var result = confirm('친구를 삭제 하시겠습니까?');
+		var result = confirm('Follow 를 해제 하시겠습니까?');
 		if (result == true) {
 			$.ajax({
 				type: 'post',
@@ -772,11 +772,11 @@ $(document).ready(function() {
 				success: function(data) {
 							
 					if (data == 1) {
-						alert('삭제 성공');
+						alert('해제 되었습니다.');
 						getAllAllways();
 						getSearch();
 					} else {
-						alert('삭제 실패');
+						alert('해제 실패하였습니다. 관리자에게 문의 주세요.');
 					}
 							
 				}
@@ -1154,8 +1154,8 @@ $(document).ready(function() {
 		if("${userInfo.graduation}" !== null) {
 			$('#school').append("${userInfo.graduation}");
 		}
-		// 구독을 한 경우와 안한 경우
-		// 구독버튼을 누르면 버튼이 사라지고 취소버튼 생성
+		// Follow 인 경우와 안한 경우
+		// Follow 추가를 누르면 버튼이 사라지고 해제버튼 생성
 		var uno = ${check.uno};
 		var allwaiser_uno = ${userInfo.uno};
 		console.log(uno); 
@@ -1199,7 +1199,7 @@ $(document).ready(function() {
 				}),
 				success: function(data) {
 					if (data == 1) {
-						alert('구독성공');
+						alert('Follow 성공!');
 						$('.cancel').css("display", "inline");
 						$('.subscribe').css("display", "none");
 					} 
@@ -1225,7 +1225,7 @@ $(document).ready(function() {
 				}),
 				success: function(data) {
 					if (data == 1) {
-						alert('구독취소');
+						alert('Follow 해제');
 						$('.subscribe').css("display", "inline");
 						$('.cancel').css("display", "none");
 					} 

@@ -45,7 +45,7 @@
 				<form class="form-inline boardSearchForm" action="/allways/board/searchPage" method="get">
 					<select class="btn" id="searchBounds" name ="searchBounds" style="display: inline-block;">
 						<option value="1">내용 검색</option>
-						<option value="2">아이디 검색</option>
+						<option value="2">ID 검색</option>
 						<option value="3">태그검색</option>
 					</select>
 					
@@ -102,7 +102,7 @@
 				<a class="btn btn-default form-control left-menu-a" id ="allwaiserSearchForm" href="/allways/search/allwaysSearchPage" >Allwaiser 찾기</a>
 			</div>
 			<div class="left-menu">
-				<a class="btn btn-default form-control left-menu-a" href="">추천 친구</a>
+				<a class="btn btn-default form-control left-menu-a" href="">추천 Allwaiser</a>
 				<div id="add-recommended">
 				</div>
 			</div>
@@ -133,11 +133,11 @@
 		<!-- 오른쪽 메뉴바 -->
 		<div class="col-sm-3 sidenav">
 			<div style="font-size:large; background-color: #ffffff; margin-bottom: 1px; margin-left: 8px;">
-					친구 리스트
+					Following 리스트
 			</div>
 			
 			<form class="form-inline myAllayierSearch">
-				<input id="searchAllwaysName" class="form-control" type="text" placeholder="친구 이름">
+				<input id="searchAllwaysName" class="form-control" type="text" placeholder="Allwaiser 이름">
 				<button id="btnallwaysSearch" type="button"
 				class="btn btn-outline-light text-dark">
 				<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
@@ -414,7 +414,7 @@
 
 	<select id="privacyBounds">
 		<option value="0">전체 공개</option>
-		<option value="1">친구 공개</option>
+		<option value="1">Follower 공개</option>
 		<option value="2">나만 보기</option>
 	</select>	
 
@@ -555,7 +555,7 @@
 			</div>
 			<div class="insert" style="float: right;">	
 				<input id="uno" value="{{uno}}" type="hidden"/>
-				<a class="btn btn-default btnInsert">구독추가</a>
+				<a class="btn btn-default btnInsert">Follow 추가</a>
 			</div>
 		</div>		
 	</div>
@@ -568,7 +568,7 @@
 		<span style:"font-size: x-small; color: #f1f1f1">({{userId}})</span>
 		<div class="delete" style="float: right;">	
 				<input id="allways-uno" value="{{uno}}" type="hidden"/>
-				<button class="btn btn-default btnDelete">구독끊기</button>
+				<button class="btn btn-default btnDelete">Follow 해제</button>
 		</div>
 	</div>
 </script>
@@ -1158,11 +1158,11 @@ $(document).ready(function() {
 			}),
 			success : function(data) {
 				if (data == 1) {
-					alert('구독 추가 성공');
+					alert('Follow 되었습니다!');
 					getSearch();
 					getAllAllways();
 				} else {
-					alert('구독 중 입니다.');
+					alert('이미 Follow 중 입니다.');
 				}
 
 			}
@@ -1191,7 +1191,7 @@ $(document).ready(function() {
 				
 				
 		console.log(allwaiser_uno);
-		var result = confirm('친구를 삭제 하시겠습니까?');
+		var result = confirm('Follow 를 해제 하시겠습니까?');
 		if (result == true) {
 			$.ajax({
 				type: 'post',
@@ -1207,11 +1207,11 @@ $(document).ready(function() {
 				success: function(data) {
 							
 					if (data == 1) {
-						alert('삭제 성공');
+						alert('해제 되었습니다.');
 						getAllAllways();
 						getSearch();
 					} else {
-						alert('삭제 실패');
+						alert('해제 실패하였습니다. 관리자에게 문의 주세요.');
 					}
 							
 				}
