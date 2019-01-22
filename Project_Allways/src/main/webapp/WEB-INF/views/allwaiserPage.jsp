@@ -730,7 +730,11 @@ $(document).ready(function() {
 			var url = '/allways'+'${userInfo.pf_photo}';
 			$('#profileImage').attr("src",url);
 		}
-		
+		// 모달 댓글
+		if('${check.pf_photo}'){	
+			var url = '/allways'+'${check.pf_photo}';
+			$('#modalreplyInsertImg').attr('src', url);
+		}
 	}
 	
 	setUserImage();
@@ -746,8 +750,7 @@ $(document).ready(function() {
 		getAllAllwaysSearch();
 				
 	});
-			
-			
+					
 	allwaysDivision.on('click', '.allways-item .btnDelete', function() {
 				
 		var myUno = ${check.uno};
@@ -786,8 +789,6 @@ $(document).ready(function() {
 				
 	});
 			
-
-	
 	function getAllAllways() {
 				
 		var myUno = ${check.uno};
@@ -835,59 +836,7 @@ $(document).ready(function() {
 		});
 				
 	}
-			
-	function getSearch() {
 					
-		var myUno = ${check.uno};
-					
-		userName = $('#name').val();
-					
-		graduation = $('#graduation').val();
-					
-		division = $('#searchs');
-					
-		source = $('#search-template').html();
-					
-		template = Handlebars.compile(source);
-					
-		division.empty();
-					
-		$.ajax({
-			type: 'post',
-			url: '/allways/search/user',
-			headers: {
-				'Content-Type': 'application/json',
-				'X-HTTP-Method-Override': 'post'
-			},
-			data: JSON.stringify({
-				'uno': myUno,
-				'userName': userName,
-				'graduation': graduation
-			}),
-			success: function(users) {
-							
-				console.log(users);
-				$(users).each(function(index, value){
-					console.log(index, value);
-					var content = {
-						uno : value.uno,
-						userName: value.userName,
-						userId: value.userId,
-						graduation: value.graduation
-					}
-								
-					console.log(content);
-								
-					var searchItem = template(content);
-								
-					division.append(searchItem);
-				});
-							
-			}
-						
-		});
-	}	
-			
 	getAllAllways();
 	
 	function getAllAllwaysSearch() {
@@ -955,8 +904,7 @@ $(document).ready(function() {
 					
 			
 		});
-				
-				
+							
 	}
 	
 	$(document).on('change', '#bImg', function(){
@@ -1182,161 +1130,161 @@ $(document).ready(function() {
 		});
 	}
 	
-		$('.subscribe').click(function () {
-			var uno = ${check.uno};
-		
-			var allwaiser_uno = ${userInfo.uno};
-			$.ajax({
-				type: 'post',
-				url: '/allways/search/allwaysInsert',
-				headers: {
-					'Content-Type' : 'application/json',
-					'X-HTTP-Method-Override' : 'post'
-				},
-				data: JSON.stringify({
-					'uno' : uno,
-					'allwaiser_uno' : allwaiser_uno
-				}),
-				success: function(data) {
-					if (data == 1) {
-						alert('Follow 성공!');
-						$('.cancel').css("display", "inline");
-						$('.subscribe').css("display", "none");
-					} 
-				}
-			});
-		});
-
-
-		$('.cancel').click(function () {
-			var uno = ${check.uno};
-		
-			var allwaiser_uno = ${userInfo.uno};
-			$.ajax({
-				type: 'post',
-				url: '/allways/search/allwaysDelete',
-				headers: {
-					'Content-Type' : 'application/json',
-					'X-HTTP-Method-Override' : 'post'
-				},
-				data: JSON.stringify({
-					'uno' : uno,
-					'allwaiser_uno' : allwaiser_uno
-				}),
-				success: function(data) {
-					if (data == 1) {
-						alert('Follow 해제');
-						$('.subscribe').css("display", "inline");
-						$('.cancel').css("display", "none");
-					} 
-				}
-			});
-		});
-		
-		$('#checkLogout').click(function () {
-			alert('로그아웃 되었습니다!');
-			location.href='/allways/logout';
-		});
-		
-		$("#checkUser").on('click', function () {
-			var userId = $('#Id').val();
-			var userPwd = $('#pwd').val();
-			
-			$.ajax({
-				type : 'post',
-				url : '/allways/userCheck',
-				contentType: 'application/x-www-form-urlencoded',
-				data : {
-					'userId' : userId,
-					'userPwd' : userPwd,
-				},
-				success : function(result) {
-					if (result) {
-						alert('확인되었습니다!');
-						$('#update').modal('show');
-					} else {
-						alert('잘못입력하였습니다. 비밀번호를 다시 입력해주세요.');
-						$("#pwd").val('');
-					}
-				}
-			});
-		});
-		
-		$("#userCheck").on('click', function () {
-			var userId = $('#userId').val();
-			var userPwd = $('#userPwd').val();
-			
-			$.ajax({
-				type : 'post',
-				url : '/allways/userCheck',
-				contentType: 'application/x-www-form-urlencoded',
-				data : {
-					'userId' : userId,
-					'userPwd' : userPwd,
-				},
-				success : function(result) {
-					if (result) {
-						alert('확인되었습니다!');
-						$('#withdrawal').modal('show');
-					} else {
-						alert('잘못입력하였습니다. 비밀번호를 다시 입력해주세요.');
-						$("#userPwd").val('');
-					}
-				}
-			});
-		});
-		
-		
-		$('#nUpdate').click(function() {
-			var userPwd = $('#newPwd').val();
-			var userPwds = $('#newPwds').val();
-			
-			console.log('수정할 pw1 : ', userPwd);
-			console.log('수정할 pw2 : ', userPwds);
-			
-			if(userPwd.length < 8){	
-				alert('8자 이상으로 입력해주세요!');
-			} else if(userPwd != '' && userPwds != '' && userPwd !== userPwds){
-				alert('비밀번호가 같지 않습니다!');
-			} else {
-				updateUser(userPwd);
+	$('.subscribe').click(function () {
+		var uno = ${check.uno};
+	
+		var allwaiser_uno = ${userInfo.uno};
+		$.ajax({
+			type: 'post',
+			url: '/allways/search/allwaysInsert',
+			headers: {
+				'Content-Type' : 'application/json',
+				'X-HTTP-Method-Override' : 'post'
+			},
+			data: JSON.stringify({
+				'uno' : uno,
+				'allwaiser_uno' : allwaiser_uno
+			}),
+			success: function(data) {
+				if (data == 1) {
+					alert('Follow 성공!');
+					$('.cancel').css("display", "inline");
+					$('.subscribe').css("display", "none");
+				} 
 			}
 		});
+	});
+
+
+	$('.cancel').click(function () {
+		var uno = ${check.uno};
+	
+		var allwaiser_uno = ${userInfo.uno};
+		$.ajax({
+			type: 'post',
+			url: '/allways/search/allwaysDelete',
+			headers: {
+				'Content-Type' : 'application/json',
+				'X-HTTP-Method-Override' : 'post'
+			},
+			data: JSON.stringify({
+				'uno' : uno,
+				'allwaiser_uno' : allwaiser_uno
+			}),
+			success: function(data) {
+				if (data == 1) {
+					alert('Follow 해제');
+					$('.subscribe').css("display", "inline");
+					$('.cancel').css("display", "none");
+				} 
+			}
+		});
+	});
 		
-		function updateUser(userPwd) {
+	$('#checkLogout').click(function () {
+		alert('로그아웃 되었습니다!');
+		location.href='/allways/logout';
+	});
+		
+	$("#checkUser").on('click', function () {
+		var userId = $('#Id').val();
+		var userPwd = $('#pwd').val();
 			
-			var userEmail = $('#newEmail').val();
-			var graduation = $('#newGrad').val();
-			var uno = ${check.uno};			
-			
-			$.ajax({
-				type : 'post',
-				url : '/allways/userUpdate',
-				headers: {
-					'Content-Type' : 'application/json',
-					'X-HTTP-Method-Override' : 'post'
-				},
-				data : JSON.stringify({
-					'userPwd' : userPwd,
-					'userEmail' : userEmail,
-					'graduation' : graduation,
-					'uno' : uno
-				}),
-				success : function(data) {
-					if (data == 1) {
-						alert('회원정보 수정완료');
-						location.replace('/allways');
-					} else {
-						alert('회원정보 수정실패');
-					}
+		$.ajax({
+			type : 'post',
+			url : '/allways/userCheck',
+			contentType: 'application/x-www-form-urlencoded',
+			data : {
+				'userId' : userId,
+				'userPwd' : userPwd,
+			},
+			success : function(result) {
+				if (result) {
+					alert('확인되었습니다!');
+					$('#update').modal('show');
+				} else {
+					alert('잘못입력하였습니다. 비밀번호를 다시 입력해주세요.');
+					$("#pwd").val('');
 				}
-			});
-		}
+			}
+		});
+	});
 		
-		$('#checkDelete').click(function() {
-			alert('그 동안 Allways와 함께해 주셔서 감사합니다.');
-			location.href='/allways/deleteUser';
-			});
+	$("#userCheck").on('click', function () {
+		var userId = $('#userId').val();
+		var userPwd = $('#userPwd').val();
+		
+		$.ajax({
+			type : 'post',
+			url : '/allways/userCheck',
+			contentType: 'application/x-www-form-urlencoded',
+			data : {
+				'userId' : userId,
+				'userPwd' : userPwd,
+			},
+			success : function(result) {
+				if (result) {
+					alert('확인되었습니다!');
+					$('#withdrawal').modal('show');
+				} else {
+					alert('잘못입력하였습니다. 비밀번호를 다시 입력해주세요.');
+					$("#userPwd").val('');
+				}
+			}
+		});
+	});
+		
+		
+	$('#nUpdate').click(function() {
+		var userPwd = $('#newPwd').val();
+		var userPwds = $('#newPwds').val();
+		
+		console.log('수정할 pw1 : ', userPwd);
+		console.log('수정할 pw2 : ', userPwds);
+		
+		if(userPwd.length < 8){	
+			alert('8자 이상으로 입력해주세요!');
+		} else if(userPwd != '' && userPwds != '' && userPwd !== userPwds){
+			alert('비밀번호가 같지 않습니다!');
+		} else {
+			updateUser(userPwd);
+		}
+	});
+	
+	function updateUser(userPwd) {
+			
+		var userEmail = $('#newEmail').val();
+		var graduation = $('#newGrad').val();
+		var uno = ${check.uno};			
+		
+		$.ajax({
+			type : 'post',
+			url : '/allways/userUpdate',
+			headers: {
+				'Content-Type' : 'application/json',
+				'X-HTTP-Method-Override' : 'post'
+			},
+			data : JSON.stringify({
+				'userPwd' : userPwd,
+				'userEmail' : userEmail,
+				'graduation' : graduation,
+				'uno' : uno
+			}),
+			success : function(data) {
+				if (data == 1) {
+					alert('회원정보 수정완료');
+					location.replace('/allways');
+				} else {
+					alert('회원정보 수정실패');
+				}
+			}
+		});
+	}
+	
+	$('#checkDelete').click(function() {
+		alert('그 동안 Allways와 함께해 주셔서 감사합니다.');
+		location.href='/allways/deleteUser';
+	});
 	
 });
 
@@ -1422,9 +1370,9 @@ $(document).ready(function(){
 				drowFavoriteItems();
 			}
 			        
-	        var height = $(document).scrollTop();
+	  		var height = $(document).scrollTop();
 			$('html, body').animate({scrollTop : height+400}, 600);
-			}
+		}
 	
 	});//end of 무한스크롤
 		
@@ -1435,7 +1383,7 @@ $(document).ready(function(){
 		var privacyBounds = $("#privacyBounds").val();
 		
 		boardUpload(content, privacyBounds);
-	
+		
 	});
 	
 	$(document).on("click",'.boardDeleteBtn',function(event){
@@ -1486,60 +1434,60 @@ $(document).ready(function(){
 	var replyItemSource = $('#replyItem').html();
 	var replyItemTemplate = Handlebars.compile(replyItemSource);
 	
-function drowReply(event, bno){
+	function drowReply(event, bno){
 	
-	if(bno == undefined){	
-		bno = $(this).data('bno');
-	}
+		if(bno == undefined){	
+			bno = $(this).data('bno');
+		}
+			
+		var content = {
+			replyText: bno + "-replyText",
+			replyInsertBtn: bno + "-replyInsertBtn",
+			bno : bno
+		}
 		
-	var content = {
-		replyText: bno + "-replyText",
-		replyInsertBtn: bno + "-replyInsertBtn",
-		bno : bno
-	}
+		var replyInsert = replyInsertTemplate(content);
+			
+		$('#'+bno+'replyArea').empty(); 
 	
-	var replyInsert = replyInsertTemplate(content);
-		
-	$('#'+bno+'replyArea').empty(); 
-	
-	$('#'+bno+'replyArea').append(replyInsert);
+		$('#'+bno+'replyArea').append(replyInsert);
 
-	if('${check.pf_photo}'){	
-		var url = '/allways'+'${check.pf_photo}';
-		$('.replyProfileImg[data-bno='+bno+']').attr('src', url);
-	}
-	
-	$.getJSON('/allways/replies/all/' + bno, function(data) {
+		if('${check.pf_photo}'){	
+			var url = '/allways'+'${check.pf_photo}';
+			$('.replyProfileImg[data-bno='+bno+']').attr('src', url);
+		}
 		
-		$(data).each(function() {
-			var date = new Date(this.regDate);
-			var dateString = date.toLocaleDateString()
+		$.getJSON('/allways/replies/all/' + bno, function(data) {
+			
+			$(data).each(function() {
+				var date = new Date(this.regDate);
+				var dateString = date.toLocaleDateString()
+					
+				var content = {
+					rno: this.rno,
+					bno: bno,
+					replyContent: this.reply_content,
+					userId: this.userId,
+					regDate: dateString,
+					BRno : bno+'-'+this.rno+'-no'
+				};
+				var replyItem = replyItemTemplate(content);
+				$('#'+bno+'replyArea').append(replyItem);
 				
-			var content = {
-				rno: this.rno,
-				bno: bno,
-				replyContent: this.reply_content,
-				userId: this.userId,
-				regDate: dateString,
-				BRno : bno+'-'+this.rno+'-no'
-			};
-			var replyItem = replyItemTemplate(content);
-			$('#'+bno+'replyArea').append(replyItem);
-			
-			if(this.pf_photo){
-				var url = '/allways'+this.pf_photo;
-				$('.replyProfileImg[data-rno='+this.rno+']').attr('src', url);
-			}
-			
-			if(this.userId == '${check.userId}'){
-				$('#'+bno+'-'+this.rno+'-no').show();
-			}else{
-				$('#'+bno+'-'+this.rno+'-no').hide();
-			}
+				if(this.pf_photo){
+					var url = '/allways'+this.pf_photo;
+					$('.replyProfileImg[data-rno='+this.rno+']').attr('src', url);
+				}
+				
+				if(this.userId == '${check.userId}'){
+					$('#'+bno+'-'+this.rno+'-no').show();
+				}else{
+					$('#'+bno+'-'+this.rno+'-no').hide();
+				}
+			});
+		 
 		});
-	 
-	});
-}
+	}
 
 	$(document).on("click",'.reply', drowReply);	
 		
@@ -1615,7 +1563,8 @@ function drowReply(event, bno){
 			const fileEx = fileName.slice(fileName.indexOf(".") + 1).toLowerCase();
 			if (fileEx != "jpg"	&& fileEx != "png" && fileEx != "gif" && fileEx != "bmp") {
 					alert("파일은 (jpg, png, gif, bmp) 형식만 등록 가능합니다.");
-					resetFile();
+					fileBuffer = fileBuffer.slice(0,fileBuffer.length-1);
+					console.log(fileBuffer);
 					return false;
 			}
 
@@ -2057,42 +2006,42 @@ function drowFavoriteItems(){
 	
 	};
 	
-$(document).on('click', '.btnBookmarkDelete', function() {
+	$(document).on('click', '.btnBookmarkDelete', function() {
 		
-		var bno = $(this).prevAll('#bno').val();
-		var uno = ${check.uno};
-		
-		$.ajax({
-			type: 'post',
-			url: '/allways/favorite/delete',
-			headers : {
-				'Content-Type' : 'application/json',
-				'X-HTTP-Method-Override' : 'post'
-			},
-			data: JSON.stringify({
-				'uno' : uno,
-				'bno' : bno
-			}),
-			success: function(data) {
-				
-				if (data == 1) {
-					alert('삭제 성공');
-					
-					$('#boardMake').empty();
-					$('#boards').empty();
-					console.log("#option3" + "click");
-					page = 0;
-					drowFavoriteItems();
-				
-				} else {
-					alert('삭제 실패');
-				}
-				
-			}
+			var bno = $(this).prevAll('#bno').val();
+			var uno = ${check.uno};
 			
-		});
+			$.ajax({
+				type: 'post',
+				url: '/allways/favorite/delete',
+				headers : {
+					'Content-Type' : 'application/json',
+					'X-HTTP-Method-Override' : 'post'
+				},
+				data: JSON.stringify({
+					'uno' : uno,
+					'bno' : bno
+				}),
+				success: function(data) {
+				
+					if (data == 1) {
+						alert('삭제 성공');
+					
+						$('#boardMake').empty();
+						$('#boards').empty();
+						console.log("#option3" + "click");
+						page = 0;
+						drowFavoriteItems();
+				
+					} else {
+						alert('삭제 실패');
+					}
+				
+				}
+			
+			});
 		
-	});
+		});
 	
 });
 
@@ -2100,7 +2049,6 @@ $(document).on('click', '.btnBookmarkDelete', function() {
 
 <script>
 $(document).ready(function(){
-	
 	
 	$(document).on("click", '.bookMark', function () {
 		var bno = $(this).data('bno');

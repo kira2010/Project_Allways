@@ -603,7 +603,6 @@ $(document).ready(function(){
 	
 	};
 
-	
 	if('${check.pf_photo}'){	
 		var url = '/allways'+'${check.pf_photo}';
 		$('#modalreplyInsertImg').attr('src', url);

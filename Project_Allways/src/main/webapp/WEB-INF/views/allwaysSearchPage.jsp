@@ -40,8 +40,8 @@
 					height="px" width="140px"></a>
 			</div>
 			
-			<div class="col-sm-6">
-				<div style="padding: 13px">
+		<div class="col-sm-6">
+			<div style="padding: 13px">
 				<form class="form-inline boardSearchForm" action="/allways/board/searchPage" method="get">
 					<select class="btn" id="searchBounds" name ="searchBounds" style="display: inline-block;">
 						<option value="1">내용 검색</option>
@@ -50,13 +50,12 @@
 					</select>
 					
 					<input id="searchKeyword" name="searchKeyword" class="form-control" type="text" placeholder="search">
-					<button id="searchKeywordBtn" type="submit"
-					class="btn btn-outline-light text-dark">
-					<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+					<button id="searchKeywordBtn" type="submit" class="btn btn-outline-light text-dark">
+						<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 					</button>
 				</form>
-				</div>
-			</div>		
+			</div>
+		</div>		
 			
 			<div class = "col-sm-3">				
 				<div class="dropdown input-group" id="drop">
@@ -268,111 +267,6 @@
 			</div>
 		</div>
 </div>
-
-<!-- 게시믈 상세 페이지 -->
-<div class="modal fade" id="board-detail" role="dialog">
-	<div class="modal-dialog board-dialog">
-			<div class="modal-content">
-
-				<div class="row">
-					<div class="col-xs-7">
-						<div id="boardCarousel" class="carousel slide">
-
-							<ol class="carousel-indicators" id="carouselOl">
-							</ol>
-
-							<div class="carousel-inner" id="carouselDiv"></div>
-
-						</div>
-					</div>
-
-					<div class="col-xs-5">
-
-						<div class="modal-header">
-							<div>게시물 상세 페이지</div>
-						</div>
-
-						<div class="boardItemHead">
-
-							<img id="writer-img"
-								src="/allways/resources/images/default_profile_img.jpg"
-								height="45px" width="45px"
-								style="border-radius: 30px; float: left; padding: 8px"
-								onclick="location.href='/allways'">
-
-							<div style="display: inline-block;">
-								<a href="/allways" id="writer-userId"></a><br /> <span
-									style="font-size: x-small; color: gray;" id="writer-regDate"></span>
-							</div>
-
-							<div class="dropdown" style="float: right;">
-								<span
-									class="glyphicon glyphicon-align-justify dropdown-toggle btn"
-									id="menu1" data-toggle="dropdown"></span>
-
-								<ul class="dropdown-menu" role="menu" aria-labelledby="menu1"
-									style="right: 0; left: auto;">
-									<li role="presentation"><a role="menuitem" tabindex="-1"
-										href="#">북마크</a></li>
-									<li role="presentation" id="modalBoardUpdate"><a
-										role="menuitem" tabindex="-1" href="#">수정</a></li>
-									<li role="presentation" class="divider"></li>
-									<li role="presentation" id="modalBoardDelete"><a
-										role="menuitem" tabindex="-1" id="{{boardDeleteBtn}}"
-										class="boardDeleteBtn">삭제</a></li>
-								</ul>
-							</div>
-
-						</div>
-						<!-- BoardItemHead -->
-
-						<div>
-							<p id="writer-content"></p>
-						</div>
-
-						<div class="container-fluid boardTail">
-							<div class="row">
-								<div class="col-xs-6" style="text-align: center;">
-									<a id="{{bookMark}}" class="btn">북마크</a>
-								</div>
-								<div class="col-xs-6 " style="text-align: center;">
-									<a data-bno="{{bno}}" class="reply btn">댓글</a>
-								</div>
-							</div>
-						</div>
-
-						<div id="replyInsertForm" class="clearfix">
-							<div class="replyProfileImg">
-								<img id="modalreplyInsertImg"
-									src="/allways/resources/images/default_profile_img.jpg"
-									class="img-circle" onclick="location.href='/allways'"
-									height="45px" width="45px"/>
-							</div>
-
-							<div class="input-group replyInsertContent">
-								<textarea id="replyTextModal" class="autosize form-control"
-									rows="1" placeholder="내용 입력" style="resize: none; margin: 8px;"></textarea>
-
-								<div class="input-group-btn">
-									<button id="replyInsertModal" data-bno=""
-										class="replyInsertBtn btn btn-default ">
-										<i class="glyphicon glyphicon-edit"></i>
-									</button>
-								</div>
-							</div>
-						</div>
-						
-						<div id="modalReplyArea" class="replyArea"></div>
-
-					</div>
-				</div>
-
-
-			</div>
-		</div>
-</div>
-
-
 	
 <footer class="container-fluid text-center">
 	<p>Footer Text</p>
@@ -380,149 +274,6 @@
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.min.js"></script>
-
-<script  id="boardInsert" type="text/x-handlebars-template">
-
-<div class = "boardInsertForm">
-	<div class = "boardInsertTitle">게시물 작성하기</div>
-
-	<div class="clearfix boardHead">
-		<img id= "InsertprofileImg" src="/allways/resources/images/default_profile_img.jpg"
-			class = "img-circle"
-			onclick="location.href='/allways'">
-		<textarea id="boardInsertcontent" class="autosize" placeholder="내용 입력"></textarea>
-	</div>
-
-
-	<div id="fileList">
-	</div>
-
-<div class="boardTail">
-
-<form id="uploadForm" method="post" enctype="multipart/form-data">
-	<label class = "addImg" for="files">사진</label>
-	
-	<input id="files" type="file" class="files" style="display: none" />	
-
-	<span id="boardUploadBtn" class = "btn btn-default" >올리기</span>			
-
-	<select id="privacyBounds">
-		<option value="0">전체 공개</option>
-		<option value="1">Follower 공개</option>
-		<option value="2">나만 보기</option>
-	</select>	
-
-</form>
-</div>
-	
-</div>
-
-</script>
-
-<script id="boardItem" type="text/x-handlebars-template">
-<div class="boardItem">
-
-	<div class="boardItemHead clearfix" style="padding: 8px;">
-
-		<img class = "img-circle boardProfileImg" data-bno = "{{bno}}" src="/allways/resources/images/default_profile_img.jpg"
-			style="float: left;"
-			width="45px" height="45px"
-			onclick="location.href='/allways'">
-		<div style="display: inline-block; padding-left: 8px;">
-			<a href = "/allways">{{userId}}</a><br />
-			<span style="font-size: x-small; color: gray;">{{regDate}}</span>
-		</div>
-
-	
-		<div class="dropdown" style="float: right;">
-  	 	<span class="glyphicon glyphicon-align-justify dropdown-toggle btn" type="button" id="menu1" data-toggle="dropdown"></span>
-
-  	  	<ul class="dropdown-menu" role="menu" aria-labelledby="menu1" style="right: 0; left: auto;">
-    		<li role="presentation"><a role="menuitem" tabindex="-1" href="#">북마크</a></li>
-     	 	<li role="presentation" id="{{boardUpdate}}"><a role="menuitem" tabindex="-1" href="#">수정</a></li>
-     	 	<li role="presentation" class="divider"></li>
-     	 	<li role="presentation" id="{{boardDelete}}"><a role="menuitem" tabindex="-1"  id="{{boardDeleteBtn}}" class="boardDeleteBtn">삭제</a></li>
-    	</ul>
-		</div>
-
-
-	</div> <!-- BoardItemHead -->
-	
-	
-	<details>
-		<summary>{{content_T}}</summary>
-    	<p>{{content}}</p>
-	</details>
-	
-	<div class="imageArea" id="{{imageArea}}" data-bno="{{bno}}" style= "margin: 8px">
-					
-	</div>
-	
-
-<div class="container-fluid boardTail">
-	<div class="row">
-		<div class="col-xs-6" style="text-align: center;" >
-			<a data-bno="{{bno}}" class="bookMark btn" >북마크</a>
-		</div>
-		<div class="col-xs-6 " style="text-align: center;" >
-			<a data-bno="{{bno}}" class="reply btn" >댓글</a>
-		</div>
-	</div>
-
-</div>
-
-
-</div>
-
-<div id= "{{replyArea}}" class= "replyArea">
-</div>
-
-
-</script>
-
-<script id="replyInsert" type="text/x-handlebars-template">
-
-<div id="replyInsertForm" class="clearfix">
-	<img data-bno = "{{bno}}" class="replyProfileImg img-circle" src="/allways/resources/images/default_profile_img.jpg"
-		width="45px" height="45px"
-		onclick="location.href='/allways'" />
-
-	<div class="input-group replyInsertContent">
-		<textarea id="{{replyText}}" class="autosize form-control" rows="1" placeholder="내용 입력" style="resize: none; margin: 8px; width = 100%"></textarea>
-
-		<div class="input-group-btn">
-			<button id= {{replyInsertBtn}} class="replyInsertBtn btn btn-default ">
-			<i class="glyphicon glyphicon-edit"></i>
-			</button>
-		</div>
-	</div>	
-</div>
-	
-</script>
-
-<script id="replyItem" type="text/x-handlebars-template">
-
-<div class= "replyItem clearfix">	
-	<img src="/allways/resources/images/default_profile_img.jpg"
-		class = "img-circle replyProfileImg" data-rno="{{rno}}"
-		width="45px" height="45px"
-		onclick="location.href='/allways'">
-
-	<div class="replyContent">			
-		<div style="display: inline-block;">
-			<a href = "/allways">{{userId}}</a>
-			<span style="font-size: x-small; color: gray;">{{regDate}}</span>
-			<span class = "replayUpdate" id = {{BRno}}>
-			<span style="font-size: x-small" class="btn replyUpdate">수정</span>
-			<span style="font-size: x-small">|</span>
-			<span style="font-size: x-small" data-rno ="{{rno}}" data-bno ="{{bno}}" class="btn replyDelete" >삭제</span>
-			</span>
-		</div>
-	<textarea id="{{replyText}}" class="autosize form-control" rows="1" readonly style="resize: none; margin-right: 8px"">{{replyContent}}</textarea>
-	</div>
-</div>
-
-</script>
 
 <script id="search-condition-template" type="text/x-handlebars-template" >
 <nav class="search-condition">
@@ -776,154 +527,115 @@ $(document).ready(function() {
 				
 	}
 			
-			function getAllAllways() {
+	function getAllAllways() {
 				
-				var myUno = ${check.uno};
+		var myUno = ${check.uno};
 				
-				var allwaysDivision = $('#allways-searchs');
+		var allwaysDivision = $('#allways-searchs');
 
-				var allwaysSource = $('#all-allways-template').html();
+		var allwaysSource = $('#all-allways-template').html();
 
-				var allwaysTemplate = Handlebars.compile(allwaysSource);
+		var allwaysTemplate = Handlebars.compile(allwaysSource);
 				
-				allwaysDivision.empty();
-				$.ajax ({
-					type: 'post',
-					url: '/allways/search/allAllways',
-					headers: {
-						'Content-Type': 'application/json',
-						'X-HTTP-Method-Override': 'post'
-					},
-					data: JSON.stringify({
-						'uno' : myUno
-					}),
-					success: function(data) {
-						
-						$(data).each(function(index, value) {
-							
-									var content = {
-											uno : value.uno,
-											userId: value.userId,
-											allwaysName: value.userName
-									}
-									
-									var allwaysSearchItem = allwaysTemplate(content);
-									
-									allwaysDivision.append(allwaysSearchItem);
-									
-									if(this.pf_photo){
-										var url = '/allways'+this.pf_photo;
-										$('.myAllaiserProfile[data-uno='+this.uno+']').attr('src', url);
-									}
-							})
-						}
-							
-					})
-				
-				}
-			
-				function getSearch() {
-					
-					var myUno = ${check.uno};
-					
-					userName = $('#name').val();
-					
-					graduation = $('#graduation').val();
-					
-					division = $('#searchs');
-					
-					source = $('#search-template').html();
-					
-					template = Handlebars.compile(source);
-					
-					division.empty();
-					
-					$.ajax({
-						type: 'post',
-						url: '/allways/search/user',
-						headers: {
-							'Content-Type': 'application/json',
-							'X-HTTP-Method-Override': 'post'
-						},
-						data: JSON.stringify({
-							'uno': myUno,
-							'userName': userName,
-							'graduation': graduation
-						}),
-						success: function(users) {
-							
-							console.log(users);
-							$(users).each(function(index, value){
-								console.log(index, value);
-								var content = {
-										uno : value.uno,
-										userName: value.userName,
-										userId: value.userId,
-										graduation: value.graduation
-								}
-								
-								console.log(content);
-								
-								var searchItem = template(content);
-								
-								division.append(searchItem);
-								
-								if(this.pf_photo){
-									var url = '/allways'+this.pf_photo;
-									$('.myAllaiserProfile[data-uno='+this.uno+']').attr('src', url);
-								}
-								
-							});
-							
-							
-						}
-						
-					});
-				}	
-			
-			
-			getAllAllways();
-		
-		});
-	
-</script>
-
-<script>
-$(document).ready(function(){
-	
-	
-	$(document).on("click", '.bookMark', function () {
-		var bno = $(this).data('bno');
-		
-		$.ajax({
+		allwaysDivision.empty();
+		$.ajax ({
 			type: 'post',
-			url: '/allways/favorite/insert',
+			url: '/allways/search/allAllways',
 			headers: {
 				'Content-Type': 'application/json',
 				'X-HTTP-Method-Override': 'post'
 			},
 			data: JSON.stringify({
-				'bno' : bno
+				'uno' : myUno
 			}),
-			success: function(result) {
-				if(result == 1){
-					alert('성공');
-				}else{
-					alert('이미 북마크된 게시물 입니다.');					
-				}
+			success: function(data) {
 				
-			},
-			error : function(error) {
-				alert('이미 북마크된 게시물 입니다.');
+				$(data).each(function(index, value) {
+						
+					var content = {
+						uno : value.uno,
+						userId: value.userId,
+						allwaysName: value.userName
+					}
+									
+					var allwaysSearchItem = allwaysTemplate(content);
+									
+					allwaysDivision.append(allwaysSearchItem);
+									
+					if(this.pf_photo){
+						var url = '/allways'+this.pf_photo;
+						$('.myAllaiserProfile[data-uno='+this.uno+']').attr('src', url);
+					}
+				});
 			}
+							
 		});
+				
+	}
+			
+	function getSearch() {
+					
+		var myUno = ${check.uno};
+					
+		userName = $('#name').val();
+					
+		graduation = $('#graduation').val();
+					
+		division = $('#searchs');
+					
+		source = $('#search-template').html();
+					
+		template = Handlebars.compile(source);
+					
+		division.empty();
+					
+		$.ajax({
+			type: 'post',
+			url: '/allways/search/user',
+			headers: {
+				'Content-Type': 'application/json',
+				'X-HTTP-Method-Override': 'post'
+			},
+			data: JSON.stringify({
+				'uno': myUno,
+				'userName': userName,
+				'graduation': graduation
+			}),
+			success: function(users) {
+							
+				console.log(users);
+				$(users).each(function(index, value){
+				console.log(index, value);
+				var content = {
+					uno : value.uno,
+					userName: value.userName,
+					userId: value.userId,
+					graduation: value.graduation
+					}
+								
+					console.log(content);
+								
+					var searchItem = template(content);
+								
+					division.append(searchItem);
+								
+					if(this.pf_photo){
+						var url = '/allways'+this.pf_photo;
+						$('.myAllaiserProfile[data-uno='+this.uno+']').attr('src', url);
+					}
+							
+				});
+							
+							
+			}
+						
+		});
+	}	
+						
+	getAllAllways();
 		
-	});
-	
-	
 });
-
-
+	
 </script>
 
 <script>

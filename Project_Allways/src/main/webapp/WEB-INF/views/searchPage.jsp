@@ -41,15 +41,15 @@
 			
 			<div class="col-sm-6">
 				<div style="padding: 13px">
-				<form class="form-inline boardSearchForm">
-					<select class="btn" id="serchBounds" style="display: inline-block;">
-						<option value="0">내용 검색</option>
-						<option value="1">아이디 검색</option>
-						<option value="2">태그검색</option>
+				<form class="form-inline boardSearchForm" action="/allways/board/searchPage" method="get">
+					<select class="btn" id="searchBounds" name ="searchBounds" style="display: inline-block;">
+						<option value="1">내용 검색</option>
+						<option value="2">ID 검색</option>
+						<option value="3">태그검색</option>
 					</select>
 					
-					<input id="searchKeyword" class="form-control" type="text" placeholder="search">
-					<button id="searchKeywordBtn" type="button"
+					<input id="searchKeyword" name="searchKeyword" class="form-control" type="text" placeholder="search">
+					<button id="searchKeywordBtn" type="submit"
 					class="btn btn-outline-light text-dark">
 					<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 					</button>
@@ -392,15 +392,55 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.min.js"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.min.js"></script>
+
+<script  id="boardInsert" type="text/x-handlebars-template">
+
+<div class = "boardInsertForm">
+	<div class = "boardInsertTitle">게시물 작성하기</div>
+
+	<div class="clearfix boardHead">
+		<img id= "InsertprofileImg" src="/allways/resources/images/default_profile_img.jpg"
+			class = "img-circle"
+			onclick="location.href='/allways'">
+		<textarea id="boardInsertcontent" class="autosize" placeholder="내용 입력"></textarea>
+	</div>
+
+	<div id="fileList">
+	</div>
+
+<div class="boardTail">
+
+<form id="uploadForm" method="post" enctype="multipart/form-data">
+	<label class = "addImg" for="files">사진</label>
+	
+	<input id="files" type="file" class="files" style="display: none" />	
+
+	<span id="boardUploadBtn" class = "btn btn-default" >올리기</span>			
+
+	<select id="privacyBounds">
+		<option value="0">전체 공개</option>
+		<option value="1">Follower 공개</option>
+		<option value="2">나만 보기</option>
+	</select>	
+
+</form>
+</div>
+	
+</div>
+
+</script>
+
 <script id="boardItem" type="text/x-handlebars-template">
 <div class="boardItem">
 
-	<div class="boardItemHead clearfix">
+	<div class="boardItemHead clearfix" style="padding: 8px;">
 
 		<img class = "img-circle boardProfileImg" data-bno = "{{bno}}" src="/allways/resources/images/default_profile_img.jpg"
-			style="float: left; padding: 8px; width:70px; height:45px;"
+			style="float: left;"
+			width="45px" height="45px"
 			onclick="location.href='/allways'">
-		<div style="display: inline-block;">
+		<div style="display: inline-block; padding-left: 8px;">
 			<a href = "/allways">{{userId}}</a><br />
 			<span style="font-size: x-small; color: gray;">{{regDate}}</span>
 		</div>
@@ -455,7 +495,8 @@
 <script id="replyInsert" type="text/x-handlebars-template">
 
 <div id="replyInsertForm" class="clearfix">
-	<img data-bno="{{bno}}" class="replyProfileImg img-circle" src="/allways/resources/images/default_profile_img.jpg"
+	<img data-bno = "{{bno}}" class="replyProfileImg img-circle" src="/allways/resources/images/default_profile_img.jpg"
+		width="45px" height="45px"
 		onclick="location.href='/allways'" />
 
 	<div class="input-group replyInsertContent">
@@ -476,6 +517,7 @@
 <div class= "replyItem clearfix">	
 	<img src="/allways/resources/images/default_profile_img.jpg"
 		class = "img-circle replyProfileImg" data-rno="{{rno}}"
+		width="45px" height="45px"
 		onclick="location.href='/allways'">
 
 	<div class="replyContent">			
@@ -519,7 +561,7 @@
 			</div>
 			<div class="insert" style="float: right;">	
 				<input id="uno" value="{{uno}}" type="hidden"/>
-				<a class="btn btn-default btnInsert">구독추가</a>
+				<a class="btn btn-default btnInsert">Follow 추가</a>
 			</div>
 		</div>		
 	</div>
@@ -532,7 +574,7 @@
 		<span style:"font-size: x-small; color: #f1f1f1">({{userId}})</span>
 		<div class="delete" style="float: right;">	
 				<input id="allways-uno" value="{{uno}}" type="hidden"/>
-				<button class="btn btn-default btnDelete">구독끊기</button>
+				<button class="btn btn-default btnDelete">Follow 해제</button>
 		</div>
 	</div>
 </script>
@@ -554,14 +596,17 @@
 		<span style:"font-size: x-small; color: #f1f1f1;">({{userId}})</span>
 	</div>
 </script>
-		
-
 
 <script>
 
 $(document).ready(function(){
 
 	var fileBuffer = [];/*파일 리스트*/
+
+	if('${check.pf_photo}'){	
+		var url = '/allways'+'${check.pf_photo}';
+		$('#modalreplyInsertImg').attr('src', url);
+	}
 	
 	if('${check.pf_photo}'){	
 		var url = '/allways'+'${check.pf_photo}';
@@ -775,60 +820,60 @@ $(document).ready(function(){
 	var replyItemSource = $('#replyItem').html();
 	var replyItemTemplate = Handlebars.compile(replyItemSource);
 	
-function drowReply(event, bno){
+	function drowReply(event, bno){
 	
-	if(bno == undefined){	
-		bno = $(this).data('bno');
-	}
+		if(bno == undefined){	
+			bno = $(this).data('bno');
+		}
 		
-	var content = {
-		replyText: bno + "-replyText",
-		replyInsertBtn: bno + "-replyInsertBtn",
-		bno: bno
-	}
-	
-	var replyInsert = replyInsertTemplate(content);
+		var content = {
+			replyText: bno + "-replyText",
+			replyInsertBtn: bno + "-replyInsertBtn",
+			bno: bno
+		}
 		
-	$('#'+bno+'replyArea').empty(); 
+		var replyInsert = replyInsertTemplate(content);
+		
+		$('#'+bno+'replyArea').empty(); 
 	
-	$('#'+bno+'replyArea').append(replyInsert);
+		$('#'+bno+'replyArea').append(replyInsert);
 
-	if('${check.pf_photo}'){	
-		var url = '/allways'+'${check.pf_photo}';
-		$('.replyProfileImg[data-bno='+bno+']').attr('src', url);
-	}
+		if('${check.pf_photo}'){	
+			var url = '/allways'+'${check.pf_photo}';
+			$('.replyProfileImg[data-bno='+bno+']').attr('src', url);
+		}
 	
-	$.getJSON('/allways/replies/all/' + bno, function(data) {
+		$.getJSON('/allways/replies/all/' + bno, function(data) {
 		
-		$(data).each(function() {
-			var date = new Date(this.regDate);
-			var dateString = date.toLocaleDateString()
+			$(data).each(function() {
+				var date = new Date(this.regDate);
+				var dateString = date.toLocaleDateString()
 				
-			var content = {
-				rno: this.rno,
-				bno: bno,
-				replyContent: this.reply_content,
-				userId: this.userId,
-				regDate: dateString,
-				BRno : bno+'-'+this.rno+'-no'
-			};
-			var replyItem = replyItemTemplate(content);
-			$('#'+bno+'replyArea').append(replyItem);
+				var content = {
+					rno: this.rno,
+					bno: bno,
+					replyContent: this.reply_content,
+					userId: this.userId,
+					regDate: dateString,
+					BRno : bno+'-'+this.rno+'-no'
+				};
+				var replyItem = replyItemTemplate(content);
+				$('#'+bno+'replyArea').append(replyItem);
 			
-			if(this.pf_photo){
-				var url = '/allways'+this.pf_photo;
-				$('.replyProfileImg[data-rno='+this.rno+']').attr('src', url);
-			}
+				if(this.pf_photo){
+					var url = '/allways'+this.pf_photo;
+					$('.replyProfileImg[data-rno='+this.rno+']').attr('src', url);
+				}
 			
-			if(this.userId == '${check.userId}'){
-				$('#'+bno+'-'+this.rno+'-no').show();
-			}else{
-				$('#'+bno+'-'+this.rno+'-no').hide();
-			}
-		});
+				if(this.userId == '${check.userId}'){
+					$('#'+bno+'-'+this.rno+'-no').show();
+				}else{
+					$('#'+bno+'-'+this.rno+'-no').hide();
+				}
+			});
 	 
-	});
-}
+		});
+	}
 
 	$(document).on("click",'.reply', drowReply);	
 		
@@ -904,7 +949,8 @@ function drowReply(event, bno){
 			const fileEx = fileName.slice(fileName.indexOf(".") + 1).toLowerCase();
 			if (fileEx != "jpg"	&& fileEx != "png" && fileEx != "gif" && fileEx != "bmp") {
 					alert("파일은 (jpg, png, gif, bmp) 형식만 등록 가능합니다.");
-					resetFile();
+					fileBuffer = fileBuffer.slice(0,fileBuffer.length-1);
+					console.log(fileBuffer);
 					return false;
 			}
 
@@ -1070,36 +1116,11 @@ function drowReply(event, bno){
 	$("textarea.autosize").on('keydown keyup', function () {
 		  $(this).height(1).height( $(this).prop('scrollHeight')+12 );	
 	});
-
-//////////////////////////////////////////////////////////////////////////////////////////
-	
-	$('#searchKeywordBtn').on("click", function(){
-		var serchBounds = $('#serchBounds').val();
-		var searchKeyword = $('#searchKeyword').val();
-		
-		
-
-		
-	});
 	
 });
 
 </script>
 
-<script>
-$(document).ready(function(){
-	
-	var source = $('#search-condition-template').html();
-	var template = Handlebars.compile(source);
-
-	function drowSearchAllwaiserCondition(){
-		var templateItem = template();
-		$('#searchForm').empty();
-		$('#searchForm').append(templateItem);
-	};
-			
-});
-</script>
 
 <script>
 $(document).ready(function() {
@@ -1269,115 +1290,113 @@ $(document).ready(function() {
 				
 	}
 			
-			function getAllAllways() {
+	function getAllAllways() {
 				
-				var myUno = ${check.uno};
+		var myUno = ${check.uno};
 				
-				var allwaysDivision = $('#allways-searchs');
+		var allwaysDivision = $('#allways-searchs');
 
-				var allwaysSource = $('#all-allways-template').html();
+		var allwaysSource = $('#all-allways-template').html();
 
-				var allwaysTemplate = Handlebars.compile(allwaysSource);
+		var allwaysTemplate = Handlebars.compile(allwaysSource);
 				
-				allwaysDivision.empty();
-				$.ajax ({
-					type: 'post',
-					url: '/allways/search/allAllways',
-					headers: {
-						'Content-Type': 'application/json',
-						'X-HTTP-Method-Override': 'post'
-					},
-					data: JSON.stringify({
-						'uno' : myUno
-					}),
-					success: function(data) {
+		allwaysDivision.empty();
+		$.ajax ({
+			type: 'post',
+			url: '/allways/search/allAllways',
+			headers: {
+				'Content-Type': 'application/json',
+				'X-HTTP-Method-Override': 'post'
+			},
+			data: JSON.stringify({
+				'uno' : myUno
+			}),
+			success: function(data) {
 						
-						$(data).each(function(index, value) {
+				$(data).each(function(index, value) {
 							
-									var content = {
-											uno : value.uno,
-											userId: value.userId,
-											allwaysName: value.userName
-									}
+					var content = {
+						uno : value.uno,
+						userId: value.userId,
+						allwaysName: value.userName
+					}
 									
-									var allwaysSearchItem = allwaysTemplate(content);
+					var allwaysSearchItem = allwaysTemplate(content);
 									
-									allwaysDivision.append(allwaysSearchItem);
+					allwaysDivision.append(allwaysSearchItem);
 									
-									if(this.pf_photo){
-										var url = '/allways'+this.pf_photo;
-										$('.myAllaiserProfile[data-uno='+this.uno+']').attr('src', url);
-									}
-							})
-						}
+					if(this.pf_photo){
+						var url = '/allways'+this.pf_photo;
+						$('.myAllaiserProfile[data-uno='+this.uno+']').attr('src', url);
+					}
+				});
+			}
 							
-					})
-				
-				}
-			
-				function getSearch() {
-					
-					var myUno = ${check.uno};
-					
-					userName = $('#name').val();
-					
-					graduation = $('#graduation').val();
-					
-					division = $('#searchs');
-					
-					source = $('#search-template').html();
-					
-					template = Handlebars.compile(source);
-					
-					division.empty();
-					
-					$.ajax({
-						type: 'post',
-						url: '/allways/search/user',
-						headers: {
-							'Content-Type': 'application/json',
-							'X-HTTP-Method-Override': 'post'
-						},
-						data: JSON.stringify({
-							'uno': myUno,
-							'userName': userName,
-							'graduation': graduation
-						}),
-						success: function(users) {
-							
-							console.log(users);
-							$(users).each(function(index, value){
-								console.log(index, value);
-								var content = {
-										uno : value.uno,
-										userName: value.userName,
-										userId: value.userId,
-										graduation: value.graduation
-								}
-								
-								console.log(content);
-								
-								var searchItem = template(content);
-								
-								division.append(searchItem);
-								
-								if(this.pf_photo){
-									var url = '/allways'+this.pf_photo;
-									$('.myAllaiserProfile[data-uno='+this.uno+']').attr('src', url);
-								}
-								
-							});
-							
-							
-						}
-						
-					});
-				}	
-			
-			
-			getAllAllways();
-		
 		});
+				
+	}
+			
+	function getSearch() {
+					
+		var myUno = ${check.uno};
+					
+		userName = $('#name').val();
+					
+		graduation = $('#graduation').val();
+					
+		division = $('#searchs');
+					
+		source = $('#search-template').html();
+					
+		template = Handlebars.compile(source);
+					
+		division.empty();
+					
+		$.ajax({
+			type: 'post',
+			url: '/allways/search/user',
+			headers: {
+				'Content-Type': 'application/json',
+				'X-HTTP-Method-Override': 'post'
+			},
+			data: JSON.stringify({
+				'uno': myUno,
+				'userName': userName,
+				'graduation': graduation
+			}),
+			success: function(users) {
+							
+				console.log(users);
+				$(users).each(function(index, value){
+					console.log(index, value);
+					var content = {
+						uno : value.uno,
+						userName: value.userName,
+						userId: value.userId,
+						graduation: value.graduation
+					}
+								
+					console.log(content);
+									
+					var searchItem = template(content);
+								
+					division.append(searchItem);
+								
+					if(this.pf_photo){
+						var url = '/allways'+this.pf_photo;
+						$('.myAllaiserProfile[data-uno='+this.uno+']').attr('src', url);
+					}
+								
+				});
+											
+			}
+						
+		});
+	}	
+			
+	getAllAllways();
+		
+});
 	
 </script>
 
