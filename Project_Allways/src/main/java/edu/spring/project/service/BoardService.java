@@ -2,6 +2,7 @@ package edu.spring.project.service;
 
 import java.util.List;
 
+import edu.spring.project.domain.Allwaiser;
 import edu.spring.project.domain.Board;
 
 
@@ -13,8 +14,8 @@ public interface BoardService {
 	 * @return
 	 */
 	List<Board> select(int uno, int page);
-	List<Board> selectTimeLine(int uno, int page);
-	List<Board> selectPosting(int uno, int page);
+	List<Board> selectTimeLine(Allwaiser allwaiser, int page);
+	List<Board> selectPosting(Allwaiser allwaiser, int page);
 	List<Board> selectFavorite(int uno, int page);
 	List<Board> selectKeyword(String searchKeyword, int serchBounds, int page);
 	List<Board> selectMyPosting(int uno, int page);

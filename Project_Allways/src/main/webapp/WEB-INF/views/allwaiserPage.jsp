@@ -1769,7 +1769,7 @@ $(document).ready(function(){
 
 	function drowTimeLineItems(){
 		
-		$.getJSON('/allways/board/timeLine/'+page, function(data){
+		$.getJSON('/allways/board/timeLine/?page='+page+'&fno=${param.uno}', function(data){
 			console.log(page);
 			console.log(data);
 						
@@ -1848,7 +1848,7 @@ $(document).ready(function(){
 	
 function drowPostingItems(){
 		
-		$.getJSON('/allways/board/posting/'+page, function(data){
+		$.getJSON('/allways/board/posting/?page='+page+'&fno=${param.uno}', function(data){
 			console.log(data);
 						
 			$(data).each(function(){

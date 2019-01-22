@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import edu.spring.project.domain.Allwaiser;
 import edu.spring.project.domain.Board;
 import edu.spring.project.persistence.BoardDao;
 import edu.spring.project.persistence.UserDao;
@@ -23,15 +24,14 @@ public class BoardServiceImple implements BoardService {
 		return result;
 	}
 
-	public List<Board> selectTimeLine(int uno, int page) {
+	public List<Board> selectTimeLine(Allwaiser allwaiser, int page) {
 		
-		//return boardDao.readMyTimeLine(uno, page);
-		return null;
+		return boardDao.readTimeLine(allwaiser, page);
 	}
 
-	public List<Board> selectPosting(int uno, int page) {
+	public List<Board> selectPosting(Allwaiser allwaiser, int page) {
 		
-		return boardDao.readMyAllwaisersPost(uno, page);
+		return boardDao.readAllwaiserPost(allwaiser, page);
 	}
 
 	public List<Board> selectFavorite(int uno, int page) {

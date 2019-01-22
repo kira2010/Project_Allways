@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.google.gson.Gson;
 
+import edu.spring.project.domain.Allwaiser;
 import edu.spring.project.domain.Board;
 import edu.spring.project.domain.User;
 import edu.spring.project.service.BoardService;
@@ -112,9 +113,6 @@ public class BoardController {
 		
 	}
 	
-	
-	
-		
 	@RequestMapping(value = "selectBoard/{page}", method = RequestMethod.GET)
 	public ResponseEntity<List<Board>> select(@PathVariable(name="page") int page, HttpSession session) {
 		
@@ -147,12 +145,18 @@ public class BoardController {
 		return  entity;
 	}
 	
-	@RequestMapping(value = "timeLine/{page}", method = RequestMethod.GET)
-	public ResponseEntity<List<Board>> selectTimeLine(@PathVariable(name="page") int page, HttpSession session) {
+	@RequestMapping(value = "timeLine", method = RequestMethod.GET)
+	public ResponseEntity<List<Board>> selectTimeLine(int page, int fno, HttpSession session) {
 		
 		User user = (User)session.getAttribute("check");
 		
-		List<Board> result = boardService.selectTimeLine(user.getUno(), page);
+		System.out.println(page + "---------" + fno);
+		
+		Allwaiser allwaiser = new Allwaiser();
+		allwaiser.setUno(user.getUno());
+		allwaiser.setF_no(fno);
+		
+		List<Board> result = boardService.selectTimeLine(allwaiser, page);
 				
 		ResponseEntity<List<Board>> entity = null;
 		if(result != null) {
@@ -163,21 +167,18 @@ public class BoardController {
 		return  entity;
 	}
 	
-	@RequestMapping(value = "posting/{page}", method = RequestMethod.GET)
-	public ResponseEntity<List<Board>> selectPosting(@PathVariable(name="page") int page, HttpSession session) {
+	@RequestMapping(value = "posting", method = RequestMethod.GET)
+	public ResponseEntity<List<Board>> selectPosting(int page, int fno, HttpSession session) {
 		
 		User user = (User)session.getAttribute("check");
-		User pageUser = (User)session.getAttribute("userInfo");
+		
+		Allwaiser allwaiser = new Allwaiser();
+		allwaiser.setUno(user.getUno());
+		allwaiser.setF_no(fno);
 		
 		// 나 일때 하고 친구 일때가 다름 수정!!!
-		List<Board> result = null;
-	
-		if(user.getUno() == pageUser.getUno()) {
-			result = boardService.selectMyPosting(user.getUno(), page);
-		}else {
-			result = boardService.selectPosting(user.getUno(), page);
-		}
-			
+		List<Board> result = boardService.selectPosting(allwaiser, page);
+		
 		ResponseEntity<List<Board>> entity = null;
 		if(result != null) {
 			entity = new ResponseEntity<List<Board>>(result , HttpStatus.OK);
