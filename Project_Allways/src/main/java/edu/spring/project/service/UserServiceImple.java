@@ -60,9 +60,9 @@ public class UserServiceImple implements UserService {
 		return userDao.findUserId(user);
 	}
 	
-	// 비밀번호 찾기
-	public int findPwd(User user, HttpServletResponse response) throws Exception {
-		logger.info("findPwd() 호출");
+	// 비밀번호 찾기 위한 회원번호 얻기
+	public int findUno(User user) {
+		logger.info("findUno() 호출");
 		
 		return userDao.findUserPwd(user);
 	}

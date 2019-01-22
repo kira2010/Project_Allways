@@ -24,8 +24,8 @@ public interface UserService {
 	// 아이디 찾기
 	public String findId(User user);
 	
-	// 비밀번호 찾기
-	public int findPwd(User user, HttpServletResponse response) throws Exception;
+	// 비밀번호 찾기 위한 회원번호 얻기
+	public int findUno(User user);
 	
 	// 회원 정보 수정
 	public int updateUser(User user);

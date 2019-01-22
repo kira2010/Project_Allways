@@ -52,10 +52,16 @@ $(document).ready(function() {
 					$("#id_check").html("중복된 ID가 있습니다.");
 					$("#id_check").css('color', 'red');
 					$("#joinBtn").attr("disabled", "disabled");
-				} else {
+					$('#userId').focus();
+				} else if (result == 'not existed') {
 					$("#id_check").html("사용가능한 ID 입니다.");
 					$("#id_check").css('color', 'green');
 					$("#joinBtn").removeAttr("disabled");
+				} else {
+					$("#id_check").html("ID 입력이 잘못되었습니다.");
+					$("#id_check").css('color', 'red');
+					$("#joinBtn").attr("disabled", "disabled");
+					$('#userId').focus();
 				}
 			},
 		});
@@ -69,12 +75,12 @@ $(document).ready(function() {
 			$("#pwCheck").css('color', 'red');
 			$("#userPwd").val('');
 			$("#userPwd").focus();
-		} else if(first != '' && second != '' && first !== second){
+		} else if((first != '' || second != '') && first !== second){
 			$("#pw_check").html("비밀번호가 일치하지 않습니다.");
 			$("#pw_check").css('color', 'red');
 			$('#confirm').val('');
 			$('#confirm').focus();
-		} else {
+		} else  {
 			$('#pwCheck').html("");
 			$('#pw_check').html("확인 되었습니다.");
 			$("#pw_check").css('color', 'green');
@@ -91,13 +97,19 @@ $(document).ready(function() {
 			},
 			success : function(result) {
 				if (result == 'existed') {
-					$("#email_check").html("중복된 EMAIL이 있습니다");
-					$("#email_check").css('color', 'red');
-					$("#joinBtn").attr("disabled", "disabled");
+					$('#email_check').html("Email을 사용중인 User가 이미 존재합니다");
+					$('#email_check').css('color', 'red');
+					$('#joinBtn').attr("disabled", "disabled");
+					$('#userEmail').focus();
+				} else if (result == 'not existed') {
+					$('#email_check').html("사용 가능한 Email 입니다.");
+					$('#email_check').css('color', 'green');
+					$('#joinBtn').removeAttr("disabled");
 				} else {
-					$("#email_check").html("사용 가능한 EMAIL 입니다.");
-					$("#email_check").css('color', 'green');
-					$("#joinBtn").removeAttr("disabled");
+					$('#email_check').html("Email 입력이 잘못되었습니다.");
+					$('#email_check').css('color', 'red');
+					$('#joinBtn').attr("disabled", "disabled");
+					$('#userEmail').focus();
 				}
 			},
 		});

@@ -125,7 +125,7 @@ public class UserDaoImple implements UserDao {
 	public int findUserPwd(User user) {
 		logger.info("findUserPwd({}) 호출", user);
 		
-		return session.selectOne(USER_MAPPER + ".findUserPwd" + user);
+		return session.selectOne(USER_MAPPER + ".findUserPwd", user);
 	}
 
 	// 신규 회원가입

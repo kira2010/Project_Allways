@@ -105,11 +105,10 @@
 		INSTR(${user.useremail}, #{userEmail}) > 0
 	</select>
 	
-	<!-- 비밀번호 찾기 -->
+	<!-- 비밀번호 찾기위한 회원번호 얻기 -->
 	<select id="findUserPwd" resultType="java.lang.Integer">
-		SELECT ${user.uno}
-		FROM ${tbl_user}
-		WHERE 
+		SELECT ${user.uno} FROM ${tbl_user}
+		WHERE
 		INSTR(${user.username}, #{userName}) > 0
 		AND
 		INSTR(${user.userid}, #{userId}) > 0

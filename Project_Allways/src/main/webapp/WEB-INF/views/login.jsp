@@ -55,13 +55,14 @@ body {
 				<form action="/allways/users/login" method="post">
 					<p>
 						<input class="w3-input" type="text" id="userId" name="userId" placeholder="ID 입력" required /> 
-						<span id="id_check" class="w3-text-red"></span>
+						<span id="idcheck" ></span>
 					</p>
 					<p>
 						<input class="w3-input" id="userPwd" name="userPwd" type="password" placeholder="비밀번호 입력" required />
+						<div id="pwdcheck"></div>
 					</p>
 					<p class="w3-center"> 
-						<input class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round" type="submit" value="로그인" href=""/>	
+						<input class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round" id="loginBtn" type="button" value="로그인" href=""/>	
 					<input type="hidden" name="queryString" value="${targetUrl}" />
 					</p>
 				</form>
@@ -75,6 +76,40 @@ body {
 			<a href="/allways/users/signUp">회원가입</a>
 		</ul>
 </div>
+<script>
+$(document).ready(function(){
+	$('#loginBtn').on('click', function(){
+		var userId = $('#userId').val();
+		var userPwd = $('#userPwd').val();
+		
+		console.log('ID :', userId);
+		console.log('PASSWORD :', userPwd);
+		
+		$.ajax({
+			type: 'post',
+			url: '../users/logins',
+			headers: {
+				'Content-Type': 'application/json',
+				'X-HTTP-Method-Override': 'post'
+			},
+			data: JSON.stringify({
+				'userId' : userId,
+				'userPwd': userPwd
+			}),
+			success : function(result) {
+				console.log(result);
+				if (result != null) {
+					alert('로그인 성공');
+					location="/allways";
+				} 
+			},
+			error : function(error) {
+				alert('로그인 실패');
+			}
+		});
+	});
+});
+</script>
 	
 </body>
 </html>

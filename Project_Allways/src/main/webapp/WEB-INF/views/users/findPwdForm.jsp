@@ -40,12 +40,60 @@ body {
 					<input type="hidden" name="queryString" value="${targetUrl}" />
 				</p>
 				<p class="w3-center">
-					<button type="button" id=findBtn class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round">찾기</button>
+					<button type="submit" id=findBtn class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round">찾기</button>
 					<button type="button" onclick="history.go(-1);" class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-margin-bottom w3-round">취소</button>
 				</p>
 			</div>
 		</div>
 	</div>
+	<script>
+$(document).ready(function(){
+	$('#findBtn').on('click', function(){
+		var userName = $('#userName').val();
+		var userId = $('#userId').val();
+		var userEmail = $('#userEmail').val();
+		
+		console.log('이름 : ', userName);
+		console.log('ID : ', userId);
+		console.log('Email : ', userEmail);
+		
+		$.ajax({
+			type: 'post',
+			url: '../users/findPwd',
+			headers: {
+				'Content-Type': 'application/json',
+				'X-HTTP-Method-Override': 'post'
+			},
+			data: JSON.stringify({
+				'userName': userName,
+				'userId': userId,
+				'userEmail': userEmail
+			}),
+			success : function(result) {
+				if (result == 'success'){
+					alert('Email로 인증키를 발송하였습니다.');
+					location="../users/pwdConfirm";
+				} else if (result == 'ID not existed') {
+					alert('ID가 존재하지 않습니다.');
+					cleanInput();
+				} else if (result == 'Email not existed') {
+					alert('Email이 존재하지 않습니다.');
+					cleanInput();
+				} else if (result == 'Name not existed') {
+					alert('이름을 잘못 입력하였습니다.');
+					cleanInput();
+				}
+			}
+		});
+	});
+	
+	function cleanInput() {
+		$('#userName').val('');
+		$('#userId').val('');
+		$('#userEmail').val('');
+	}
+});
+</script>
 
 </body>
 </html>

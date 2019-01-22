@@ -9,32 +9,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script>
-$(document).ready(function() {
-	$('#findBtn').click(function() {
-		var userName = $('#userName').val();
-		var userEmail = $('#userEmail').val();
-		
-		$.ajax({
-			type: 'post',
-			url: '../users/findId',
-			data: {
-				userName : userName,
-				userEmail: userEmail
-			},	
-			contentType: 'application/x-www-form-urlencoded',
-			success: function(result) {
-				if(result != null && result != '') {
-					alert('찾으시는 ID는 ' + '"' + result + '"' + ' 입니다. \n' +'확인버튼 클릭시 "로그인" 페이지로 이동합니다.');
-					location="/allways/users/login";
-				} else {
-					alert('해당하는 ID가 존재하지 않습니다.');
-				}
-			}
-		});
-	});
-});
-</script>
 <style>
 body {
 	background-color: #f1f1f1;
@@ -72,6 +46,55 @@ body {
 			</form>
 		</div>
 	</div>
+<script>
+$(document).ready(function() {	
+	
+	$('#findBtn').click(function() {
+		var userName = $('#userName').val();
+		var userEmail = $('#userEmail').val();
+		
+		if(userEmail == '' || userName == '') {
+			alert('이름 또는 Email 을 입력해주세요');
+		} else {
+			getConfirm();
+		}
+	});
+	
+	function getConfirm() {
+		
+		var userName = $('#userName').val();
+		var userEmail = $('#userEmail').val();
+		
+		console.log('userName' + userName);
+		console.log('userEmail' + userEmail);
+		
+		$.ajax({
+			type: 'post',
+			url: '../users/findId',
+			headers: {
+				'Content-Type': 'application/json',
+				'X-HTTP-Method-Override': 'post'
+			},
+			data: JSON.stringify ({
+				'userName' : userName,
+				'userEmail': userEmail
+			}),	
+			success: function(result) {
+				if(result != '') {
+					alert('찾으시는 ID는 ' + '"' + result + '"' + ' 입니다. \n' +'확인버튼 클릭시 "로그인" 페이지로 이동합니다.');
+					location="../users/login";
+				} else {
+					alert('찾으시는 ID가 존재하지 않습니다!');
+					$('#userName').val('');
+					$('#userEmail').val('');
+				}
+			}
+		});
+	}
+	
+	
+});
+</script>
 </body>
 
 </html>
