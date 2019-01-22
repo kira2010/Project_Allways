@@ -67,7 +67,7 @@ public class UserDaoImple implements UserDao {
 		
 		logger.info("checkUserName() 호출"); 
 		
-		int checkResult = session.selectOne(USER_MAPPER, user);
+		int checkResult = session.selectOne(USER_MAPPER + ".existUserName", user);
 		
 		// 등록된 ID와 Email에 대한 이름이 일치할 경우 true 반환!!
 		if (checkResult == 1) {
