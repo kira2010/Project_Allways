@@ -117,6 +117,15 @@
 		INSTR(${user.useremail}, #{userEmail}) > 0
 	</select>
 	
+	<select id="existUserName" resultType="java.lang.Integer">
+		SELECT EXISTS(
+			SELECT ${user.name} FROM ${tbl_board}
+			WHERE ${user.userid} = #{userId}
+			AND
+			${user.useremail} = #{userEmail}
+		) AS isEXIST
+	</select>
+	
 	<!-- 회원가입 -->
 	<insert id="registUser">
 		INSERT INTO ${tbl_user}
