@@ -434,7 +434,7 @@
   	 	<span class="glyphicon glyphicon-align-justify dropdown-toggle btn" type="button" id="menu1" data-toggle="dropdown"></span>
 
   	  	<ul class="dropdown-menu" role="menu" aria-labelledby="menu1" style="right: 0; left: auto;">
-    		<li role="presentation"><a role="menuitem" tabindex="-1" href="#">북마크</a></li>
+    		<li role="presentation"><a data-bno="{{bno}}" class="bookMark" role="menuitem" tabindex="-1" >북마크</a></li>
      	 	<li role="presentation" id="{{boardUpdate}}"><a role="menuitem" tabindex="-1" href="#">수정</a></li>
      	 	<li role="presentation" class="divider"></li>
      	 	<li role="presentation" id="{{boardDelete}}"><a role="menuitem" tabindex="-1"  id="{{boardDeleteBtn}}" class="boardDeleteBtn">삭제</a></li>

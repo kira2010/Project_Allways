@@ -116,7 +116,7 @@
 							id="menubar">
 							
 							<label class="btn btn-secondary active" id="timeLine">
-							<input type="radio" name="options" autocomplete="off" />
+							<input type="radio" name="options" autocomplete="off" checked />
 							타임라인
 							</label>
 							
