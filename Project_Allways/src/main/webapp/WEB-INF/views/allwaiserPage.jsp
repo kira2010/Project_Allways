@@ -162,7 +162,7 @@
 										src="/allways/resources/images/dangerous.jpg"></li>
 								</ul>
 							</div>
-							<div>
+							<div> 
 								<c:choose>
 									<c:when test="${userInfo.emotion == '1'}">
 										<img id="emotion" src="/allways/resources/images/happy.jpg" style="width: auto;">
