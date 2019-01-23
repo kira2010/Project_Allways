@@ -47,7 +47,7 @@ $(document).ready(function() {
 			},
 			success : function(result) {
 				if (result == 'existed') {
-					$('#id_check').html('중복된 ID가 있습니다.');
+					$('#id_check').html('중복된 ID가 있습니다!');
 					$('#id_check').css('color', 'red');
 					$('#joinBtn').attr('disabled', 'disabled');
 					$('#userId').focus();
@@ -69,7 +69,7 @@ $(document).ready(function() {
 		var first = $('#userPwd').val();
 		
 		if(first.length < 8){	
-			$('#pwCheck1').html('비밀번호는 8자 이상으로 설정해야 합니다.')
+			$('#pwCheck1').html('비밀번호는 8자 이상으로 설정해야 합니다!!')
 			$('#pwCheck1').css('color', 'red');
 			$('#userPwd').val('');
 			$('#userPwd').focus();
@@ -84,7 +84,7 @@ $(document).ready(function() {
 		var second = $('#confirm').val();
 		
 		if((first != '' || second != '') && first !== second){
-			$('#pwcheck2').html('비밀번호가 일치하지 않습니다.');
+			$('#pwcheck2').html('비밀번호가 일치하지 않습니다!!');
 			$('#pwcheck2').css('color', 'red');
 			$('#confirm').val('');
 			$('#confirm').focus();
@@ -105,12 +105,12 @@ $(document).ready(function() {
 			},
 			success : function(result) {
 				if (result == 'existed') {
-					$('#email_check').html('Email을 사용중인 User가 이미 존재합니다');
+					$('#email_check').html('Email을 사용중인 User가 이미 존재합니다!!');
 					$('#email_check').css('color', 'red');
 					$('#joinBtn').attr('disabled', 'disabled');
 					$('#userEmail').focus();
 				} else if (result == 'not input') {
-					$('#email_check').html('반드시 입력해야 합니다.');
+					$('#email_check').html('반드시 입력해야 합니다!');
 					$('#email_check').css('color', 'red');
 					$('#joinBtn').attr('disabled', 'disabled');
 					$('#userEmail').focus();
