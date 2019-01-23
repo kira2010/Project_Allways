@@ -1394,7 +1394,7 @@ $(document).ready(function(){
 			}),
 			success: function(result) {
 				if(result == 1){
-					alert('성공');
+					alert('게시물이 북마크 되었습니다!');
 				}		
 			},
 			error : function(error) {

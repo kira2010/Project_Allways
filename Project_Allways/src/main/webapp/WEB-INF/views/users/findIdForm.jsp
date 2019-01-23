@@ -54,7 +54,7 @@ $(document).ready(function() {
 		var userEmail = $('#userEmail').val();
 		
 		if(userEmail == '' || userName == '') {
-			alert('이름 또는 Email 을 입력해주세요');
+			alert('이름과 Email 을 모두 입력해주세요.');
 		} else {
 			getConfirm();
 		}

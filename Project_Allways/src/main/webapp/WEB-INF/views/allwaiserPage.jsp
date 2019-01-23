@@ -54,10 +54,10 @@
 					<input type="text" class="form-control" style="width:auto; " value="${check.userId} 님 안녕하세요!" readonly>
 					<div class="input-group-btn" style="float: left;">
 					<button class="btn btn-default dropdown-toggle" type="button"
-								id="menu1" data-toggle="dropdown">
+								id="menu3" data-toggle="dropdown">
 					<span class="caret"></span>
 					</button>
-					<ul class="dropdown-menu" role="menu" aria-labelledby="menu1" style="right: 0; left: auto;">
+					<ul class="dropdown-menu" role="menu" aria-labelledby="menu3" style="right: 0; left: auto;">
 						<li role="presentation"><a role="menuitem" tabindex="-1"
 							data-toggle="modal" data-target="#logout">로그아웃</a></li>
 						<li role="presentation"><a role="menuitem" tabindex="-1"
@@ -148,7 +148,7 @@
 									data-toggle="dropdown">
 									내 상태 <span class="caret"></span>
 								</button>
-								<ul class="dropdown-menu" role="menu" aria-labelledby="menu1"
+								<ul class="dropdown-menu drMenu" role="menu" aria-labelledby="menu2"
 									style="float: right;" onselect="thisSelected()">
 									<li role="presentation" value="1" id="img1"><img
 										src="/allways/resources/images/happy.jpg"></li>
@@ -381,7 +381,7 @@
 									class="glyphicon glyphicon-align-justify dropdown-toggle btn"
 									id="menu1" data-toggle="dropdown"></span>
 
-								<ul class="dropdown-menu" role="menu" aria-labelledby="menu1"
+								<ul class="dropdown-menu drMenu" role="menu" aria-labelledby="menu1"
 									style="right: 0; left: auto;">
 									<li role="presentation"><a role="menuitem" tabindex="-1"
 										href="#">북마크</a></li>
@@ -506,7 +506,7 @@
 		<div class="dropdown" style="float: right;">
   	 	<span class="glyphicon glyphicon-align-justify dropdown-toggle btn" type="button" id="menu1" data-toggle="dropdown"></span>
 
-  	  	<ul class="dropdown-menu" role="menu" aria-labelledby="menu1" style="right: 0; left: auto;">
+  	  	<ul class="dropdown-menu drMenu" role="menu" aria-labelledby="menu1" style="right: 0; left: auto;">
     		<li role="presentation"><a role="menuitem" tabindex="-1" href="#">북마크</a></li>
      	 	<li role="presentation" id="{{boardUpdate}}"><a role="menuitem" tabindex="-1" href="#">수정</a></li>
      	 	<li role="presentation" class="divider"></li>
@@ -673,7 +673,7 @@
 		<div class="dropdown" style="float: right;">
   	 	<span class="glyphicon glyphicon-align-justify dropdown-toggle btn" type="button" id="menu1" data-toggle="dropdown"></span>
 
-  	  	<ul class="dropdown-menu" role="menu" aria-labelledby="menu1" style="right: 0; left: auto;">
+  	  	<ul class="dropdown-menu drMenu" role="menu" aria-labelledby="menu1" style="right: 0; left: auto;">
     		<li role="presentation"><a role="menuitem" tabindex="-1" href="#">북마크</a></li>
      	 	<li role="presentation" id="{{boardUpdate}}"><a role="menuitem" tabindex="-1" href="#">수정</a></li>
      	 	<li role="presentation" class="divider"></li>
@@ -1095,7 +1095,7 @@ $(document).ready(function() {
 		$('#birth').append("${birthDay}");
 		$('#email').append("${userInfo.userEmail}");
 		$('#menu2').html("<label>Allwaiser 상태</label>");
-		$('.dropdown-menu').css('display', 'none');
+		$('.drMenu').css('display', 'none');
 		$('.backImg').css('display', 'none');
 		$('.profileImg').css('display', 'none');
 		$('#option3').css("display", "none");
@@ -2065,7 +2065,7 @@ $(document).ready(function(){
 			}),
 			success: function(result) {
 				if(result == 1){
-					alert('성공');
+					alert('게시물이 북마크 되었습니다!');
 				}else{
 					alert('이미 북마크된 게시물 입니다.');					
 				}
