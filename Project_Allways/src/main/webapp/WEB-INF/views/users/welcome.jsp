@@ -11,6 +11,7 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <title>회원가입이 완료되었습니다.</title>
 <script type="text/javascript">
 //<![CDATA[
@@ -29,15 +30,22 @@
 			<div>
 				<form action="/allways/users/login" method="post">
 					<h1>환영합니다.</h1>
-					친구들과 친구를 맺고 다양한 소통과 일상을 공유해주세요!!<br />
-					이제 로그인하시면 회원 메뉴를 이용하실 수 있습니다.<br />
+					<p>친구들과 친구를 맺고 다양한 소통과 일상을 공유해주세요!!</p><br />
+					<p>이제 로그인하시면 회원 메뉴를 이용하실 수 있습니다.<p><br />
 					<p class="w3-center"> 
-						<input class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round" id="loginBtn" type="button" value="로그인" href=""/>	
-					<input type="hidden" name="queryString" value="${targetUrl}" />
+						<input class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round" id="loginBtn" type="button" value="로그인" />	
+						<input type="hidden" name="queryString" value="${targetUrl}" />
 					</p>
 				</form>
 			</div>
 		</div>
 	</div>
+<script>
+$(document).ready(function(){
+	$('#loginBtn').click(function(){
+		location.href='/allways/users/login';
+	});
+});
+</script>
 </body>
 </html>
